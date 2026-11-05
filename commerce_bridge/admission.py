@@ -36,6 +36,12 @@ class Bridge:
         require(len({e["basis"] for e in entries})>=p["f"]+1,"INSUFFICIENT_INDEPENDENT_BASES")
         return p
 
+    def manifest_hash(self,manifest):
+        # The immutable session's manifest object is constant; hash it once.
+        cached=getattr(self.sources,"manifest_digest",None)
+        if cached is not None and manifest is self.sources.manifest: return cached
+        return digest("commerce.bridge.sources.v1",manifest)
+
     @staticmethod
     def design_pins():
         return json.loads((Path(__file__).resolve().parent.parent/"design/SOURCE_PINS.json").read_text())["source_pins"]
@@ -109,7 +115,7 @@ class Bridge:
         if "qualified" in calculated: summary["qualified"]=calculated["qualified"]
         return {"schema":"commerce.bridge.assessment.v1","decision":"ALLOW_ISSUER_REQUEST_ONLY",
                 "mission_hash":mh,"intent_hash":ih,"observation_hash":oh,"policy_hash":digest("commerce.bridge.policy.v1",policy),
-                "epoch":control["epoch"],"core":summary,"source_manifest_hash":digest("commerce.bridge.sources.v1",source_manifest),
+                "epoch":control["epoch"],"core":summary,"source_manifest_hash":self.manifest_hash(source_manifest),
                 "authority_checked":["control","core","cage","veip"],"dispatch_authorized":False}
 
 
@@ -120,8 +126,18 @@ class BridgeAdmission(Admission):
         self.sources=sources
         self.policy_envelope=policy_envelope
         self.bundle_dir=Path(bundle_dir)
+        # WP3: under an immutable qualified session, readiness inputs are OS-locked
+        # once and every predicate is still evaluated per request (locked_readiness).
+        self.locked=None
+        if getattr(sources,"snapshot",None) is not None:
+            from .locked_readiness import LockedReadiness
+            self.locked=LockedReadiness(self,Path(__file__).resolve().parent.parent/"docs/ADMISSION_INTERFACE.md",FROZEN_INTERFACE_SHA256)
+
+    def close(self):
+        if self.locked is not None: self.locked.close()
 
     def ready(self):
+        if self.locked is not None: return self.locked.ready()
         a=super().ready()
         interface=Path(__file__).resolve().parent.parent/"docs/ADMISSION_INTERFACE.md"
         require(a["frozen_interface_sha256"]==hashlib.sha256(interface.read_bytes()).hexdigest()==FROZEN_INTERFACE_SHA256,"BRIDGE_INTERFACE_DRIFT")

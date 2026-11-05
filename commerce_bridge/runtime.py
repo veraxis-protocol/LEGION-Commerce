@@ -36,7 +36,7 @@ class CoreRuntime:
         with LeanWitness(self.sources.binary) as witness:
             return self.compare(result,policy,witness)
 
-    def compare(self,result,policy,witness):
+    def compare(self,result,policy,witness,trace_hash=True):
         checked=[]
         for fact in result["facts"]:
             seats=["T" if value else "F" for basis in sorted(fact["bases"]) for value in sorted(fact["bases"][basis])]
@@ -48,5 +48,7 @@ class CoreRuntime:
         result["differential"]=checked
         result["mismatches"]=0
         result["all_facts_true"]=bool(checked) and all(r["lean"]=="T" for r in checked)
-        result["calculation_hash"]=digest("commerce.core.calculation.v1",result)
+        # Trace-only identity: no require, permit or acceptance binding reads it.
+        # The qualified session skips it (WP3; it hashed the whole source manifest).
+        if trace_hash: result["calculation_hash"]=digest("commerce.core.calculation.v1",result)
         return result

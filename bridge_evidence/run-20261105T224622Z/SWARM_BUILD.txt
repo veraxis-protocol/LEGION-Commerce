@@ -1,0 +1,40 @@
+⚠ [2/6] Replayed ZSwarm
+warning: ZSwarm.lean:36:39: unused variable `L`
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+info: ZSwarm.lean:563:0: 'ZSwarm.box_earned' does not depend on any axioms
+info: ZSwarm.lean:564:0: 'ZSwarm.verdict_needs' does not depend on any axioms
+info: ZSwarm.lean:565:0: 'ZSwarm.safety' does not depend on any axioms
+info: ZSwarm.lean:566:0: 'ZSwarm.liveness' does not depend on any axioms
+info: ZSwarm.lean:567:0: 'ZSwarm.subtract_unsafe' does not depend on any axioms
+info: ZSwarm.lean:568:0: 'ZSwarm.count_sublist_le' does not depend on any axioms
+info: ZSwarm.lean:569:0: 'ZSwarm.safety_any_exclusion' does not depend on any axioms
+info: ZSwarm.lean:570:0: 'ZSwarm.threshold_minimal' does not depend on any axioms
+info: ZSwarm.lean:571:0: 'ZSwarm.verdict_is_threshold' does not depend on any axioms
+info: ZSwarm.lean:572:0: 'ZSwarm.trust_nonpromotion' does not depend on any axioms
+info: ZSwarm.lean:573:0: 'ZSwarm.reputation_independence' does not depend on any axioms
+info: ZSwarm.lean:574:0: 'ZSwarm.history_can_strengthen' does not depend on any axioms
+info: ZSwarm.lean:575:0: 'ZSwarm.exclusion_no_flip' does not depend on any axioms
+info: ZSwarm.lean:576:0: 'ZSwarm.subtract_lowers_burden' does not depend on any axioms
+info: ZSwarm.lean:577:0: 'ZSwarm.history_cannot_strengthen_within_bound' does not depend on any axioms
+info: ZSwarm.lean:578:0: 'ZSwarm.placement_matters' does not depend on any axioms
+info: ZSwarm.lean:579:0: 'ZSwarm.sym_ab' does not depend on any axioms
+info: ZSwarm.lean:580:0: 'ZSwarm.sym_bc' does not depend on any axioms
+info: ZSwarm.lean:581:0: 'ZSwarm.sym_t12' does not depend on any axioms
+info: ZSwarm.lean:582:0: 'ZSwarm.sym_t23' does not depend on any axioms
+info: ZSwarm.lean:583:0: 'ZSwarm.receivers_no_opposite' does not depend on any axioms
+info: ZSwarm.lean:584:0: 'ZSwarm.wrong_le_faulty' does not depend on any axioms
+info: ZSwarm.lean:585:0: 'ZSwarm.agents_safety' does not depend on any axioms
+info: ZSwarm.lean:586:0: 'ZSwarm.duplicate_report_breaks' does not depend on any axioms
+info: ZSwarm.lean:587:0: 'ZSwarm.faulty_after_exclusion' does not depend on any axioms
+info: ZSwarm.lean:588:0: 'ZSwarm.subtraction_sound' does not depend on any axioms
+info: ZSwarm.lean:589:0: 'ZSwarm.subtraction_unsound_honest_caught' does not depend on any axioms
+info: ZSwarm.lean:590:0: 'ZSwarm.multi_fact_safety' does not depend on any axioms
+info: ZSwarm.lean:591:0: 'ZSwarm.root_safety' does not depend on any axioms
+info: ZSwarm.lean:592:0: 'ZSwarm.sybil_one_root_two_ids' does not depend on any axioms
+info: ZSwarm.lean:593:0: 'ZSwarm.count_loss' does not depend on any axioms
+info: ZSwarm.lean:594:0: 'ZSwarm.lossy_liveness' does not depend on any axioms
+info: ZSwarm.lean:595:0: 'ZSwarm.nodes_agree' does not depend on any axioms
+info: ZSwarm.lean:596:0: 'ZSwarm.centralised_mode' does not depend on any axioms
+info: ZSwarm.lean:597:0: 'ZSwarm.ratio_exclusion_strengthens_lie' does not depend on any axioms
+Build completed successfully (6 jobs).

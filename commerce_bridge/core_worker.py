@@ -12,9 +12,21 @@ from datetime import datetime,timezone
 from pathlib import Path
 
 
+_LOOP=None
+
+
+def _run(coroutine):
+    """One event loop per worker process (asyncio.run built a new loop per fact)."""
+    global _LOOP
+    if _LOOP is None or _LOOP.is_closed(): _LOOP=asyncio.new_event_loop()
+    return _LOOP.run_until_complete(coroutine)
+
+
 def calculate(data,legion,swarm):
-    sys.path.insert(0,str(Path(swarm).resolve()))
-    sys.path.insert(0,str(Path(legion).resolve()))
+    # Idempotent: v2 prepended both paths on every request (unbounded sys.path growth).
+    for root in (str(Path(swarm).resolve()),str(Path(legion).resolve())):
+        if root in sys.path: sys.path.remove(root)
+        sys.path.insert(0,root)
     os.environ["LEGION_ZTL_SWARM_DIR"]=str(Path(swarm).resolve())
     from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PublicKey
     from tests.legion_overlay.ztl_service import ZtlEvidenceService
@@ -46,7 +58,7 @@ def calculate(data,legion,swarm):
     facts=[]
     predicate_truths=[]
     for fact_id,predicate in expected_facts:
-        facts.append(asyncio.run(service.verdict(fact_id)))
+        facts.append(_run(service.verdict(fact_id)))
         predicate_truths.append(controller._deps_closed_from(task,obs["records"]) if predicate is None
                                 else controller.world.predicate(obs["world_state"],predicate,action["params"]))
     return {"directive":controller._directive_locked(obs["task_id"]),

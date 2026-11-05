@@ -1,0 +1,211 @@
+{
+  "by_category": {
+    "authority_epoch_changed": {
+      "actual": {
+        "DENY:CURRENT_AUTHORITY_DENIED": 40
+      },
+      "cases": 40,
+      "matched": 40
+    },
+    "authority_inactive": {
+      "actual": {
+        "DENY:CURRENT_AUTHORITY_DENIED": 40
+      },
+      "cases": 40,
+      "matched": 40
+    },
+    "budget_violation": {
+      "actual": {
+        "DENY:CORE_NUMERICAL_BUDGET": 40
+      },
+      "cases": 40,
+      "matched": 40
+    },
+    "changed_action_amount": {
+      "actual": {
+        "DENY:CORE_ACTION_BINDING": 40
+      },
+      "cases": 40,
+      "matched": 40
+    },
+    "changed_intent_amount": {
+      "actual": {
+        "DENY:ORIGINAL_INTENT_MISMATCH": 40
+      },
+      "cases": 40,
+      "matched": 40
+    },
+    "changed_intent_merchant": {
+      "actual": {
+        "DENY:ORIGINAL_INTENT_MISMATCH": 40
+      },
+      "cases": 40,
+      "matched": 40
+    },
+    "contradictory_reports": {
+      "actual": {
+        "DENY:CORE_NOT_EARNED_TRUE": 40
+      },
+      "cases": 40,
+      "matched": 40
+    },
+    "core_fenced_command": {
+      "actual": {
+        "DENY:QUALIFIED_CORE_NOT_T": 40
+      },
+      "cases": 40,
+      "matched": 40
+    },
+    "core_permit_not_verified": {
+      "actual": {
+        "DENY:QUALIFIED_CORE_NOT_T": 40
+      },
+      "cases": 40,
+      "matched": 40
+    },
+    "core_replayed_nonce": {
+      "actual": {
+        "DENY:QUALIFIED_CORE_NOT_T": 40
+      },
+      "cases": 40,
+      "matched": 40
+    },
+    "core_stale_permit_epoch": {
+      "actual": {
+        "DENY:QUALIFIED_CORE_NOT_T": 40
+      },
+      "cases": 40,
+      "matched": 40
+    },
+    "decider_unavailable_or_timeout": {
+      "actual": {
+        "DENY:QUALIFIED_WORKER_TIMEOUT": 5,
+        "DENY:QUALIFIED_WORKER_TIMEOUT_OR_PROTOCOL": 16,
+        "DENY:QUALIFIED_WORKER_UNAVAILABLE": 19
+      },
+      "cases": 40,
+      "matched": 40
+    },
+    "duplicate_financial_effect": {
+      "actual": {
+        "ONE_EFFECT;CAPTURES=1": 40
+      },
+      "cases": 40,
+      "matched": 40
+    },
+    "empty_obligations": {
+      "actual": {
+        "DENY:EMPTY_OR_DUPLICATE_OBLIGATIONS": 40
+      },
+      "cases": 40,
+      "matched": 40
+    },
+    "equivocation": {
+      "actual": {
+        "DENY:REPORTER_EQUIVOCATION": 40
+      },
+      "cases": 40,
+      "matched": 40
+    },
+    "forged_observation_envelope": {
+      "actual": {
+        "DENY:INVALID_SIGNATURE": 40
+      },
+      "cases": 40,
+      "matched": 40
+    },
+    "forged_report_signature": {
+      "actual": {
+        "DENY:CORE_REPORT_SIGNATURE_OR_IDENTITY": 40
+      },
+      "cases": 40,
+      "matched": 40
+    },
+    "missing_evidence": {
+      "actual": {
+        "DENY:CORE_NOT_EARNED_TRUE": 40
+      },
+      "cases": 40,
+      "matched": 40
+    },
+    "missing_prerequisite_record": {
+      "actual": {
+        "DENY:PREREQUISITE_RECORDS_MISMATCH": 40
+      },
+      "cases": 40,
+      "matched": 40
+    },
+    "reports_permuted": {
+      "actual": {
+        "ALLOW": 40
+      },
+      "cases": 40,
+      "matched": 40
+    },
+    "revoked_after_reserve": {
+      "actual": {
+        "DENY:REVOKED_PERMIT;PROVIDER_CALLS=0": 40
+      },
+      "cases": 40,
+      "matched": 40
+    },
+    "spoofed_report_root": {
+      "actual": {
+        "DENY:CORE_REPORT_SIGNATURE_OR_IDENTITY": 40
+      },
+      "cases": 40,
+      "matched": 40
+    },
+    "stale_observation": {
+      "actual": {
+        "DENY:STALE_CORE_OBSERVATION": 40
+      },
+      "cases": 40,
+      "matched": 40
+    },
+    "stale_reports": {
+      "actual": {
+        "DENY:CORE_NOT_EARNED_TRUE": 40
+      },
+      "cases": 40,
+      "matched": 40
+    },
+    "sybil_shared_source": {
+      "actual": {
+        "DENY:SHARED_SOURCE_FAKE_INDEPENDENCE": 40
+      },
+      "cases": 40,
+      "matched": 40
+    },
+    "unknown_state": {
+      "actual": {
+        "DENY:UNKNOWN_OR_MALFORMED_CORE_STATE": 40
+      },
+      "cases": 40,
+      "matched": 40
+    },
+    "valid": {
+      "actual": {
+        "ALLOW": 40
+      },
+      "cases": 40,
+      "matched": 40
+    },
+    "witness_timeout_or_unavailable": {
+      "actual": {
+        "DENY:LEAN_TIMEOUT": 21,
+        "DENY:LEAN_UNAVAILABLE": 19
+      },
+      "cases": 40,
+      "matched": 40
+    }
+  },
+  "cases": 1120,
+  "categories": 28,
+  "false_admissions": 0,
+  "matched": 1120,
+  "mismatches": 0,
+  "profile_sha256": "a689e626652ba3dfccd3362cc83d34b9ce8a94c6b40f57692ab801b3609d8031",
+  "python": "3.14.7 (tags/v3.14.7:823f032, Aug  5 2026, 10:51:32) [MSC v.1944 64 bit (AMD64)]",
+  "scope": "CONFORMANCE_ONLY_TEST_KEYS_NO_NETWORK"
+}

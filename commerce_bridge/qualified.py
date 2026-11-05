@@ -123,6 +123,8 @@ class QualifiedSources:
         self.hot_files[self.decider]=self.manifest["legion_decide_sha256"]
         self.hot_files[ROOT/PROFILE]=self.profile_hash
         self.snapshot=WindowsSnapshot(self.hot_files) if immutable else None
+        # WP3: the manifest object is final here; under the snapshot it cannot change.
+        self.manifest_digest=digest("commerce.bridge.sources.v1",self.manifest) if immutable else None
         self.session=QualifiedSession(self)
 
     def verify(self):
@@ -159,7 +161,7 @@ class QualifiedSession:
         result["qualified"]={"lean":lean,"runtime":runtime,"payload_hash":digest("commerce.qualified.alpha.v2",payload),
                              "binding":debug["binding"],"profile_sha256":self.sources.profile_hash}
         result["source_manifest"]=manifest
-        answer=CoreRuntime(self.sources).compare(result,policy,witness or self.witness)
+        answer=CoreRuntime(self.sources).compare(result,policy,witness or self.witness,trace_hash=False)
         ended=time.perf_counter_ns()
         self.last_profile={"source_integrity_ms":(validated-start)/1e6,"core_alpha_ms":(evaluated-validated)/1e6,
             "legion_lean_ms":(decided-evaluated)/1e6,"quorum_and_hash_ms":(ended-decided)/1e6}

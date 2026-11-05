@@ -1,0 +1,17 @@
+{
+  "authority": "Test signatures only; no operational authority or acceptance installation",
+  "budget": "No PayPal transaction calls, no model/GPU calls",
+  "clock": "time.perf_counter_ns for elapsed; fixture clock=1000",
+  "counted_tests": 13,
+  "mode": "CONFORMANCE_ONLY",
+  "platform": "Windows-11-10.0.26300-SP0",
+  "python": "3.14.7 (tags/v3.14.7:823f032, Aug  5 2026, 10:51:32) [MSC v.1944 64 bit (AMD64)]",
+  "real_execution": [
+    "Pinned Core methods",
+    "Compiled upstream Lean zverdict",
+    "SQLite A04 seam"
+  ],
+  "repeat_N": 10,
+  "stop": "Any false allow or mismatch => FAIL; unavailable operational evidence => BLOCKED",
+  "work_order": "WO-COM-A03-BRIDGE-001"
+}

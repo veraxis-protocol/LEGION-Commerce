@@ -1,0 +1,64 @@
+test_approved_callback_captures_and_reads_back (tests.test_approval.ApprovalTests.test_approved_callback_captures_and_reads_back) ... ok
+test_callback_does_not_replace_buyer_approval (tests.test_approval.ApprovalTests.test_callback_does_not_replace_buyer_approval) ... ok
+test_foreign_host_rejected (tests.test_approval.ApprovalTests.test_foreign_host_rejected) ... ok
+test_forged_callback_no_capture (tests.test_approval.ApprovalTests.test_forged_callback_no_capture) ... ok
+test_acceptance_missing_bad_signature_or_hash (tests.test_gateway.GatewayTests.test_acceptance_missing_bad_signature_or_hash) ... ok
+test_control_replay (tests.test_gateway.GatewayTests.test_control_replay) ... ok
+test_duplicate_provider_capture_rejected (tests.test_gateway.GatewayTests.test_duplicate_provider_capture_rejected) ... ok
+test_empty_original_obligations (tests.test_gateway.GatewayTests.test_empty_original_obligations) ... ok
+test_expired_after_reserve_no_calls (tests.test_gateway.GatewayTests.test_expired_after_reserve_no_calls) ... ok
+test_fake_stored_receipt_not_ground_truth (tests.test_gateway.GatewayTests.test_fake_stored_receipt_not_ground_truth) ... ok
+test_provider_amount_change_pre_capture (tests.test_gateway.GatewayTests.test_provider_amount_change_pre_capture) ... ok
+test_recover_unknown_create_by_independent_get (tests.test_gateway.GatewayTests.test_recover_unknown_create_by_independent_get) ... ok
+test_refund_does_not_restore_spend (tests.test_gateway.GatewayTests.test_refund_does_not_restore_spend) ... ok
+test_stale_quote_epoch_expiry (tests.test_gateway.GatewayTests.test_stale_quote_epoch_expiry) ... ok
+test_t01_approved_capture_requires_two_gets (tests.test_gateway.GatewayTests.test_t01_approved_capture_requires_two_gets)
+A04-T01 mechanism only; A05 no mission closure from payment. ... ok
+test_t02_denied_no_calls (tests.test_gateway.GatewayTests.test_t02_denied_no_calls)
+A04-T02 all independent authority gates, including UNKNOWN. ... ok
+test_t03_parallel_320_260 (tests.test_gateway.GatewayTests.test_t03_parallel_320_260)
+A04-T03 actual SQLite concurrent writer contention (single host). ... ok
+test_t03_separate_process_reservations (tests.test_gateway.GatewayTests.test_t03_separate_process_reservations)
+A04-T03 competing OS processes, both bound to the same signed mission. ... ok
+test_t04_same_effect_retry_after_timeout (tests.test_gateway.GatewayTests.test_t04_same_effect_retry_after_timeout)
+A04-T04 timeout retains identity and does not blindly retry create. ... ok
+test_t05_lost_success_reconcile_no_second_capture (tests.test_gateway.GatewayTests.test_t05_lost_success_reconcile_no_second_capture)
+A04-T05 mock lost reply after success; live required separately. ... ok
+test_t06_created_is_not_paid (tests.test_gateway.GatewayTests.test_t06_created_is_not_paid)
+A04-T06 no buyer approval: no capture POST. ... ok
+test_t07_declined (tests.test_gateway.GatewayTests.test_t07_declined)
+A04-T07 DECLINED never counts completed. ... ok
+test_t07_pending (tests.test_gateway.GatewayTests.test_t07_pending)
+A04-T07 PENDING holds reservation, never confirms. ... ok
+test_t08_unsigned_changed_amount_merchant (tests.test_gateway.GatewayTests.test_t08_unsigned_changed_amount_merchant)
+A04-T08 tampering rejected before any network. ... ok
+test_t09_revoke_after_reserve (tests.test_gateway.GatewayTests.test_t09_revoke_after_reserve)
+A04-T09 revocation committed before capture => zero further calls. ... ok
+test_t10_same_permit_concurrent (tests.test_gateway.GatewayTests.test_t10_same_permit_concurrent)
+A04-T10 idempotent same-effect join; exactly one create/capture. ... ok
+test_t10_same_permit_for_different_effect_refused (tests.test_gateway.GatewayTests.test_t10_same_permit_for_different_effect_refused) ... ok
+test_t11_process_crash_restart_wal (tests.test_gateway.GatewayTests.test_t11_process_crash_restart_wal)
+A04-T11 abrupt separate-process exit preserves committed reserve. ... ok
+test_t12_altered_readback (tests.test_gateway.GatewayTests.test_t12_altered_readback)
+A04-T12 mismatch is discrepancy and no completed payment. ... ok
+test_t12_missing_readback (tests.test_gateway.GatewayTests.test_t12_missing_readback)
+A04-T12 missing provider truth cannot close payment. ... ok
+test_t13_exact_boundaries (tests.test_gateway.GatewayTests.test_t13_exact_boundaries)
+A04-T13 exact 1 / 49999 accepted in isolation, 50001 rejected. ... ok
+test_t14_errors (tests.test_gateway.GatewayTests.test_t14_errors)
+A04-T14 401/403/500 fail closed, classified, reservation retained. ... ok
+test_tampered_capture_readback (tests.test_gateway.GatewayTests.test_tampered_capture_readback) ... ok
+test_unknown_capture_approved_readback_does_not_retry (tests.test_gateway.GatewayTests.test_unknown_capture_approved_readback_does_not_retry) ... ok
+test_wrong_capture_order_rejected (tests.test_gateway.GatewayTests.test_wrong_capture_order_rejected) ... ok
+test_401_invalidates_without_post_retry (tests.test_transport.TransportTests.test_401_invalidates_without_post_retry) ... ok
+test_cli_preflight_missing_config_no_network (tests.test_transport.TransportTests.test_cli_preflight_missing_config_no_network) ... ok
+test_http_errors_redacted (tests.test_transport.TransportTests.test_http_errors_redacted) ... ok
+test_oauth_cache_and_renewal (tests.test_transport.TransportTests.test_oauth_cache_and_renewal) ... ok
+test_path_injection_disallowed (tests.test_transport.TransportTests.test_path_injection_disallowed) ... ok
+test_read_only_disallows_post_before_credentials (tests.test_transport.TransportTests.test_read_only_disallows_post_before_credentials) ... ok
+test_redirect_never_forwards_auth (tests.test_transport.TransportTests.test_redirect_never_forwards_auth) ... ok
+
+----------------------------------------------------------------------
+Ran 42 tests in 7.422s
+
+OK

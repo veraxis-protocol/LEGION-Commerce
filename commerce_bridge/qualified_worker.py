@@ -51,6 +51,21 @@ def frozen_imports(legion,swarm):
     sys.meta_path.insert(0,Frozen())
 
 
+_ORACLES={}
+
+
+def _oracle(legion):
+    """Load the qualified oracle once per worker, like every other imported Core
+    module. The parent holds the source locked (or rehashes it) for the session,
+    so a once-loaded module is the hashed bytes; v2 recompiled it per request."""
+    if legion not in _ORACLES:
+        import importlib.util
+        spec=importlib.util.spec_from_file_location("qualified_oracle",Path(legion)/"formal/differential/diff_generated.py")
+        oracle=importlib.util.module_from_spec(spec); spec.loader.exec_module(oracle)
+        _ORACLES[legion]=oracle
+    return _ORACLES[legion]
+
+
 def qualified(data,legion,swarm):
     result=calculate(data,legion,swarm)
     folder=Path(legion)/"tests/legion_struct/causal_007"
@@ -75,9 +90,7 @@ def qualified(data,legion,swarm):
     result["qualified_payload"]=payload
     result["qualified_debug"]=debug
     # Actual qualified Python specification oracle, applied to the same alpha.
-    import importlib.util
-    spec=importlib.util.spec_from_file_location("qualified_oracle",Path(legion)/"formal/differential/diff_generated.py")
-    oracle=importlib.util.module_from_spec(spec); spec.loader.exec_module(oracle)
+    oracle=_oracle(legion)
     import copy
     runtime_input=copy.deepcopy(payload)
     runtime_input["state"]["closed"]=[int(k) for k,v in debug["unintern"].items() if v[0]=="task" and v[1] in debug["py_closed"]]
