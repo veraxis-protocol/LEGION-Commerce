@@ -1,0 +1,19 @@
+[
+  {
+    "repository": "ztl-swarm",
+    "targets": [
+      "zverdict"
+    ],
+    "exit_code": 0,
+    "duration_seconds": 0.24488500005099922
+  },
+  {
+    "repository": "ZTL",
+    "targets": [
+      "ZLegion",
+      "ZRuntimeGate"
+    ],
+    "exit_code": 0,
+    "duration_seconds": 0.18284750008024275
+  }
+]

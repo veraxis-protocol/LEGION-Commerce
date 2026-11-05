@@ -1,0 +1,16 @@
+{
+  "dependencies": "Actual #print axioms output in AXIOM_AUDIT.txt",
+  "required_external_premises": [
+    "Authenticated independent reporters and bounded faults",
+    "Original authorized mission and current authority",
+    "Accepted A01/A02 and independent A03 reviewer"
+  ],
+  "runtime_rule": "ZSwarm.verdict via upstream zverdict; count-based, not ZLegion.merge",
+  "scope": "Source-checked upstream theorem premises only; not proof of Python, authority, report independence or PayPal effects",
+  "theorems": [
+    "ZSwarm.safety",
+    "ZSwarm.root_safety",
+    "ZSwarm.verdict_is_threshold",
+    "ZRuntimeGate.gate_sound"
+  ]
+}

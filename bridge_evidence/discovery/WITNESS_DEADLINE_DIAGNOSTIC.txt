@@ -1,0 +1,7 @@
+test_t11_witness_absence_timeout_error_mismatch (bridge_tests.test_conformance.Conformance.test_t11_witness_absence_timeout_error_mismatch)
+A03-T11: injected witness failures never fall back to Python allow. ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 1.703s
+
+OK

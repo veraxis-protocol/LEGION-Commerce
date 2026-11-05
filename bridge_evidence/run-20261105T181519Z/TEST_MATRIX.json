@@ -1,0 +1,80 @@
+[
+  {
+    "action": "Compile pinned formal artefacts",
+    "fail": "Proof source/mismatch not reproducible",
+    "id": "A03-T01",
+    "pass": "Lean kernel acceptance and axiom audit documented"
+  },
+  {
+    "action": "Matched valid evidence T",
+    "fail": "Different verdicts or unbound permit",
+    "id": "A03-T02",
+    "pass": "Lean and controller agree; current scoped permit"
+  },
+  {
+    "action": "Missing evidence / Z",
+    "fail": "Z treated as T",
+    "id": "A03-T03",
+    "pass": "No payment permit or PayPal network call"
+  },
+  {
+    "action": "Contradictory roots / equivocation",
+    "fail": "Contradiction promoted",
+    "id": "A03-T04",
+    "pass": "No false ACCEPTED_TRUE"
+  },
+  {
+    "action": "Reordered evidence [T,F,T]/[F,T,T]",
+    "fail": "Order-sensitive false admission",
+    "id": "A03-T05",
+    "pass": "Actual aggregation invariant or conservative no-promotion"
+  },
+  {
+    "action": "Stale observation > max_age",
+    "fail": "Stale witness reused",
+    "id": "A03-T06",
+    "pass": "Deferred/denied until fresh source"
+  },
+  {
+    "action": "Wrong signer / root / spoofing",
+    "fail": "Forged actor admitted",
+    "id": "A03-T07",
+    "pass": "Reject with explicit reason, no permit"
+  },
+  {
+    "action": "Revocation or new epoch after proposal",
+    "fail": "TOCTOU financial effect",
+    "id": "A03-T08",
+    "pass": "Prior permit invalid at action boundary"
+  },
+  {
+    "action": "Switch amount/merchant after permission",
+    "fail": "Permit covers altered transaction",
+    "id": "A03-T09",
+    "pass": "Digest mismatch => no effect"
+  },
+  {
+    "action": "Controller ACT but numerical budget fails",
+    "fail": "Independent safeguards conflated",
+    "id": "A03-T10",
+    "pass": "Refuse; zero payment"
+  },
+  {
+    "action": "Lean unavailable / timeout / error",
+    "fail": "Fallback silently grants permission",
+    "id": "A03-T11",
+    "pass": "FAIL-CLOSED, report UNKNOWN and abort"
+  },
+  {
+    "action": "Missing/empty obligations",
+    "fail": "Vacuous completion",
+    "id": "A03-T12",
+    "pass": "No DONE or capture"
+  },
+  {
+    "action": "Repeat valid frozen case N times",
+    "fail": "Nondeterministic ungrounded decision",
+    "id": "A03-T13",
+    "pass": "Zero Lean/Python verdict mismatches, exact policy scope"
+  }
+]

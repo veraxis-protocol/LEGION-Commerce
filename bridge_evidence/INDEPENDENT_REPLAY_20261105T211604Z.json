@@ -1,0 +1,1 @@
+{"verification": "REPLAY_MATCH", "evidence_files_checked": 22, "real_core_lean_attempts_replayed": 39, "expected_fault_injections_preserved": 3, "mode": "CONFORMANCE_ONLY", "independent_process": true, "independent_institutional_acceptance": false, "native_payment_dispatches": 0}

@@ -1,0 +1,9 @@
+{
+  "pins": {
+    "LEGION": "d083c44af2526e38068e0220891cd0bb5fce52af",
+    "ztl-swarm": "7d2a8265926aecab9a838b09059bd106941b5c18",
+    "ZTL": "e1141c6893af6cf49f363620432ca6aaa0b06301"
+  },
+  "toolchain": "leanprover/lean4:v4.29.1",
+  "lake_sha256": "b4c30743fe673c091aee6fd80b6505d3dd3d83e367625be9de438026d92fac2e"
+}

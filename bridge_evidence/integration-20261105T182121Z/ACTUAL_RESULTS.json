@@ -1,0 +1,42 @@
+[
+  {
+    "test": "bridge_integration_tests.test_packages.PackageTests.test_existing_installation_never_overwritten",
+    "description": null,
+    "result": "PASS",
+    "duration_ms": 3611.974,
+    "evidence_mode": "MECHANISM_ONLY",
+    "detail": null
+  },
+  {
+    "test": "bridge_integration_tests.test_packages.PackageTests.test_external_manifest_and_trust_substitution_rejected",
+    "description": null,
+    "result": "PASS",
+    "duration_ms": 3424.571,
+    "evidence_mode": "MECHANISM_ONLY",
+    "detail": null
+  },
+  {
+    "test": "bridge_integration_tests.test_packages.PackageTests.test_private_key_file_not_installable",
+    "description": null,
+    "result": "PASS",
+    "duration_ms": 3492.032,
+    "evidence_mode": "MECHANISM_ONLY",
+    "detail": null
+  },
+  {
+    "test": "bridge_integration_tests.test_packages.PackageTests.test_upstream_receipt_tamper_rejected",
+    "description": null,
+    "result": "PASS",
+    "duration_ms": 2110.208,
+    "evidence_mode": "MECHANISM_ONLY",
+    "detail": null
+  },
+  {
+    "test": "bridge_integration_tests.test_packages.PackageTests.test_verified_install_and_repeated_preflight_with_ledger",
+    "description": null,
+    "result": "PASS",
+    "duration_ms": 13422.853,
+    "evidence_mode": "MECHANISM_ONLY",
+    "detail": null
+  }
+]

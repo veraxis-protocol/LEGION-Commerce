@@ -1,0 +1,11 @@
+test_existing_installation_never_overwritten (bridge_integration_tests.test_packages.PackageTests.test_existing_installation_never_overwritten) ... ok
+test_external_manifest_and_trust_substitution_rejected (bridge_integration_tests.test_packages.PackageTests.test_external_manifest_and_trust_substitution_rejected) ... ok
+test_private_key_file_not_installable (bridge_integration_tests.test_packages.PackageTests.test_private_key_file_not_installable) ... ok
+test_revocation_independent_of_stale_acceptance_or_lean (bridge_integration_tests.test_packages.PackageTests.test_revocation_independent_of_stale_acceptance_or_lean) ... ok
+test_upstream_receipt_tamper_rejected (bridge_integration_tests.test_packages.PackageTests.test_upstream_receipt_tamper_rejected) ... ok
+test_verified_install_and_repeated_preflight_with_ledger (bridge_integration_tests.test_packages.PackageTests.test_verified_install_and_repeated_preflight_with_ledger) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 34.616s
+
+OK

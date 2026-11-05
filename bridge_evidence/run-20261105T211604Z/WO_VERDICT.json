@@ -1,0 +1,16 @@
+{
+  "acceptance": "NOT_SIGNED_NOT_SELF_ATTESTED",
+  "conformance": "PASS",
+  "go_to_a04_native": false,
+  "next_action": "Validate operator-supplied roots and signed evidence; external reviewer verifies and signs manifest; install only after all checks. If unavailable retain BLOCKED and zero native dispatches.",
+  "operational_gaps": [
+    "Existing operator key paths/IDs pending",
+    "Genuine signed Core/CAGE/VEIP observations and original mission absent",
+    "Independent A03 acceptance and A01/A02 accepted evidence absent",
+    "Authenticated buyer approval and native capture/readback not run"
+  ],
+  "overall": "BLOCKED",
+  "performance": "FUNCTIONAL_PASS_PERFORMANCE_FAIL",
+  "source_unchanged_during_run": true,
+  "work_order": "WO-COM-A03-BRIDGE-001"
+}

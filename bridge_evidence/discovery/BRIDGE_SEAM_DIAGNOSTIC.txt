@@ -1,0 +1,7 @@
+test_t02_real_core_lean_agree_and_a04_seam (bridge_tests.test_conformance.Conformance.test_t02_real_core_lean_agree_and_a04_seam)
+A03-T02: real methods and compiled witness, test signatures only. ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 13.274s
+
+OK

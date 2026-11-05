@@ -1,0 +1,50 @@
+[
+  {
+    "test": "bridge_integration_tests.test_packages.PackageTests.test_existing_installation_never_overwritten",
+    "description": null,
+    "result": "PASS",
+    "duration_ms": 3690.265,
+    "evidence_mode": "MECHANISM_ONLY",
+    "detail": null
+  },
+  {
+    "test": "bridge_integration_tests.test_packages.PackageTests.test_external_manifest_and_trust_substitution_rejected",
+    "description": null,
+    "result": "PASS",
+    "duration_ms": 3474.551,
+    "evidence_mode": "MECHANISM_ONLY",
+    "detail": null
+  },
+  {
+    "test": "bridge_integration_tests.test_packages.PackageTests.test_private_key_file_not_installable",
+    "description": null,
+    "result": "PASS",
+    "duration_ms": 3504.31,
+    "evidence_mode": "MECHANISM_ONLY",
+    "detail": null
+  },
+  {
+    "test": "bridge_integration_tests.test_packages.PackageTests.test_revocation_independent_of_stale_acceptance_or_lean",
+    "description": null,
+    "result": "PASS",
+    "duration_ms": 7481.095,
+    "evidence_mode": "MECHANISM_ONLY",
+    "detail": null
+  },
+  {
+    "test": "bridge_integration_tests.test_packages.PackageTests.test_upstream_receipt_tamper_rejected",
+    "description": null,
+    "result": "PASS",
+    "duration_ms": 1851.133,
+    "evidence_mode": "MECHANISM_ONLY",
+    "detail": null
+  },
+  {
+    "test": "bridge_integration_tests.test_packages.PackageTests.test_verified_install_and_repeated_preflight_with_ledger",
+    "description": null,
+    "result": "PASS",
+    "duration_ms": 14614.294,
+    "evidence_mode": "MECHANISM_ONLY",
+    "detail": null
+  }
+]

@@ -1,0 +1,31 @@
+test_t01_compile_pinned_and_axiom_audit (bridge_tests.test_conformance.Conformance.test_t01_compile_pinned_and_axiom_audit)
+A03-T01: real pinned Lean kernel builds and axiom transcripts. ... ok
+test_t02_real_core_lean_agree_and_a04_seam (bridge_tests.test_conformance.Conformance.test_t02_real_core_lean_agree_and_a04_seam)
+A03-T02: real methods and compiled witness, test signatures only. ... ok
+test_t03_unknown_missing_evidence (bridge_tests.test_conformance.Conformance.test_t03_unknown_missing_evidence)
+A03-T03: no report set is not T. ... ok
+test_t04_contradiction_equivocation_and_fake_independence (bridge_tests.test_conformance.Conformance.test_t04_contradiction_equivocation_and_fake_independence)
+A03-T04: contradictory roots, equivocation, one-source Sybils denied. ... ok
+test_t05_permutations (bridge_tests.test_conformance.Conformance.test_t05_permutations)
+A03-T05: [T,F,T]/[F,T,T] and all report order permutations. ... ok
+test_t06_stale_observations_and_reports (bridge_tests.test_conformance.Conformance.test_t06_stale_observations_and_reports)
+A03-T06: both signed snapshot and individual report freshness. ... ok
+test_t07_forged_signers_roots_actor (bridge_tests.test_conformance.Conformance.test_t07_forged_signers_roots_actor)
+A03-T07: forged envelope/report, spoofed root and actor denied. ... ok
+test_t08_revocation_epoch_and_current_boundary (bridge_tests.test_conformance.Conformance.test_t08_revocation_epoch_and_current_boundary)
+A03-T08: revoke after reserve; zero further calls. ... ok
+test_t09_changed_amount_merchant_and_action (bridge_tests.test_conformance.Conformance.test_t09_changed_amount_merchant_and_action)
+A03-T09: immutable mission/intent/action digests bind exact terms. ... ok
+test_t10_act_but_budget_fails (bridge_tests.test_conformance.Conformance.test_t10_act_but_budget_fails)
+A03-T10: numerical Core budget is an independent conjunct. ... ok
+test_t11_witness_absence_timeout_error_mismatch (bridge_tests.test_conformance.Conformance.test_t11_witness_absence_timeout_error_mismatch)
+A03-T11: injected witness failures never fall back to Python allow. ... ok
+test_t12_empty_inventory_missing_dependency_no_done (bridge_tests.test_conformance.Conformance.test_t12_empty_inventory_missing_dependency_no_done)
+A03-T12: original obligations and required causal records cannot vanish. ... ok
+test_t13_repeat_identical_evidence (bridge_tests.test_conformance.Conformance.test_t13_repeat_identical_evidence)
+A03-T13: N=10 repeated real Core/Lean decisions, exact stable binding. ... ok
+
+----------------------------------------------------------------------
+Ran 13 tests in 65.644s
+
+OK

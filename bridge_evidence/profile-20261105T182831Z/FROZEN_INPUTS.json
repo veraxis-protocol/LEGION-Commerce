@@ -1,0 +1,10 @@
+{
+  "mode": "CONFORMANCE_ONLY",
+  "repetitions": 5,
+  "phases": [
+    "pinned_source_check",
+    "isolated_core_worker_and_witness",
+    "persistent_native_witness_only"
+  ],
+  "purpose": "Attribution only; no optimization or operational authority"
+}

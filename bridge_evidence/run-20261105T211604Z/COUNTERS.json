@@ -1,0 +1,15 @@
+{
+  "conformance_cases": 13,
+  "deliberately_injected_mismatch_tests": 1,
+  "errors": 0,
+  "failures": 0,
+  "latency_scope": "Full local check including worker startup/source validation; excludes PayPal/model/stand",
+  "native_captures": 0,
+  "native_payment_dispatches": 0,
+  "observed_core_runtime_mismatches": 0,
+  "operational_acceptance_signatures_created": 0,
+  "operational_permits_issued": 0,
+  "p95_full_gate_ms": 1105.3761,
+  "passed": 13,
+  "performance_gate": "PERFORMANCE_FAIL_OR_NOT_MEASURED"
+}

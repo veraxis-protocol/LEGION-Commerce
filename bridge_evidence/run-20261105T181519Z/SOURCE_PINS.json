@@ -1,0 +1,30 @@
+{
+  "LEGION": {
+    "commit": "d083c44af2526e38068e0220891cd0bb5fce52af",
+    "files": {
+      "tests/legion_overlay/ztl_service.py": "0e0334cf4d8e8a96c1dadf21d747a8c72d84d83a22a809b5579dc06c81740f1c",
+      "tests/legion_struct/struct_controller.py": "a3d00eb868ffd85676a8fa47de92c1e55d08b51ef52e7278e4c93c382001d236",
+      "tests/legion_struct/world_engine.py": "aa8242d844e1d81f40edb7d40466fcd9e24a1e0e5dfa6d227f26ec38f98094c5"
+    }
+  },
+  "ZTL": {
+    "commit": "e1141c6893af6cf49f363620432ca6aaa0b06301",
+    "files": {
+      "lean/ZLegion.lean": "d2442d90e62c9558916bc9ca21ab56a80fa2530ed3ee1a3b76578d8ed5ac896a",
+      "lean/ZRuntimeGate.lean": "02519ac68bf1f45ca1d949f26a6cd1e3fa1d00c7003846555ca4c4e9954832e1",
+      "lean/lakefile.toml": "90b8bca9acc1c78e1f2b420b568651b5934c5bcc66301d5f5047e6d6818e4506",
+      "lean/lean-toolchain": "7dc000621e0046d1aada809e2b7177e64454645cf4c741e9daaf79c99ec2e7a2"
+    }
+  },
+  "ztl-swarm": {
+    "commit": "7d2a8265926aecab9a838b09059bd106941b5c18",
+    "files": {
+      "lean/VerdictMain.lean": "f633de43296c7cebe6065bf5115103a35deea83449c6f5d63cc6e295cea85bce",
+      "lean/ZSwarm.lean": "2ff684ffca33ff579fb810d74412e7e161fcf6e6436ad779d8551497344ffa12",
+      "lean/lakefile.toml": "9a7fc01879b5a152b5d88711c46a2eb97a70b6dfe0d5c2c7d67ed0c25b0b3cfe",
+      "lean/lean-toolchain": "7dc000621e0046d1aada809e2b7177e64454645cf4c741e9daaf79c99ec2e7a2",
+      "ztlswarm/ztlrule.py": "08a9ba1c8445f978b08552d27f219776dea6bbc1e67226ad8c4c9aa47be5f2eb"
+    }
+  },
+  "zverdict_exe_sha256": "5a9a815bf96ebc60ad3e1c519861ed785dd5f3b42523e0b424cb79b5eb2cfd76"
+}
