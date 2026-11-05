@@ -20,6 +20,9 @@ import unittest
 from pathlib import Path
 
 ROOT=Path(__file__).resolve().parent.parent
+# v3: the oracle module is loaded from hashed source, never from a bytecode cache.
+sys.dont_write_bytecode=True
+sys.pycache_prefix=str(Path(tempfile.gettempdir())/("legion-nopyc-"+str(time.time_ns())))
 sys.path.insert(0,str(ROOT))
 from commerce_adapter.contracts import Denied,digest
 from commerce_bridge.qualified import QualifiedSources,JsonProcess,QUALIFIED
@@ -126,7 +129,9 @@ def main():
                 try:
                     calculated=sources.session.calculate(row["observation"],row["policy"],row["now"])
                     q=calculated["qualified"]
-                    alpha_results.append({"id":row["id"],"category":row["category"],"qualified":q,"match":True,
+                    # v3: match also asserts the specified verdict (T only for valid), not merely no exception.
+                    alpha_results.append({"id":row["id"],"category":row["category"],"qualified":q,
+                        "match":(q["lean"]["verdict"]=="T")==(row["category"]=="valid"),
                         "false_authorization":row["category"]!="valid" and q["lean"]["verdict"]=="T"})
                 except Denied as error:
                     alpha_results.append({"id":row["id"],"category":row["category"],"match":False,"error":str(error),"false_authorization":False})

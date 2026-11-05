@@ -1,0 +1,715 @@
+{
+  "N": 100,
+  "after_p95_ms": 68.1933,
+  "after_scope": "Gateway.check including current control signature and complete BridgeAdmission.check; SQLite transaction already open",
+  "baseline_assess_p95_ms": 1105.3761,
+  "baseline_scope": "Bridge.assess N=10, cold Core/source checks",
+  "cold_readiness_ms": 1839.3647,
+  "gate": "FUNCTIONAL_PASS_PERFORMANCE_FAIL",
+  "phases": [
+    {
+      "core_alpha_ms": 17.9208,
+      "legion_lean_ms": 1.3529,
+      "quorum_and_hash_ms": 3.7629,
+      "source_integrity_ms": 0.0025
+    },
+    {
+      "core_alpha_ms": 15.7662,
+      "legion_lean_ms": 1.22,
+      "quorum_and_hash_ms": 3.6731,
+      "source_integrity_ms": 0.0021
+    },
+    {
+      "core_alpha_ms": 17.7075,
+      "legion_lean_ms": 1.3079,
+      "quorum_and_hash_ms": 2.3411,
+      "source_integrity_ms": 0.003
+    },
+    {
+      "core_alpha_ms": 17.0295,
+      "legion_lean_ms": 1.2889,
+      "quorum_and_hash_ms": 3.4215,
+      "source_integrity_ms": 0.0024
+    },
+    {
+      "core_alpha_ms": 14.3632,
+      "legion_lean_ms": 1.534,
+      "quorum_and_hash_ms": 3.8144,
+      "source_integrity_ms": 0.002
+    },
+    {
+      "core_alpha_ms": 14.8283,
+      "legion_lean_ms": 1.2188,
+      "quorum_and_hash_ms": 4.2929,
+      "source_integrity_ms": 0.0038
+    },
+    {
+      "core_alpha_ms": 16.2195,
+      "legion_lean_ms": 0.8048,
+      "quorum_and_hash_ms": 2.9153,
+      "source_integrity_ms": 0.0024
+    },
+    {
+      "core_alpha_ms": 17.8095,
+      "legion_lean_ms": 1.2277,
+      "quorum_and_hash_ms": 3.8351,
+      "source_integrity_ms": 0.0015
+    },
+    {
+      "core_alpha_ms": 18.3601,
+      "legion_lean_ms": 1.3203,
+      "quorum_and_hash_ms": 2.0984,
+      "source_integrity_ms": 0.0011
+    },
+    {
+      "core_alpha_ms": 14.2863,
+      "legion_lean_ms": 1.064,
+      "quorum_and_hash_ms": 3.6738,
+      "source_integrity_ms": 0.0015
+    },
+    {
+      "core_alpha_ms": 18.8015,
+      "legion_lean_ms": 1.3067,
+      "quorum_and_hash_ms": 3.6812,
+      "source_integrity_ms": 0.0025
+    },
+    {
+      "core_alpha_ms": 17.7919,
+      "legion_lean_ms": 1.2978,
+      "quorum_and_hash_ms": 4.0661,
+      "source_integrity_ms": 0.0024
+    },
+    {
+      "core_alpha_ms": 15.5953,
+      "legion_lean_ms": 1.007,
+      "quorum_and_hash_ms": 2.3872,
+      "source_integrity_ms": 0.0016
+    },
+    {
+      "core_alpha_ms": 17.2531,
+      "legion_lean_ms": 0.5885,
+      "quorum_and_hash_ms": 2.7028,
+      "source_integrity_ms": 0.002
+    },
+    {
+      "core_alpha_ms": 13.4211,
+      "legion_lean_ms": 0.8566,
+      "quorum_and_hash_ms": 7.2663,
+      "source_integrity_ms": 0.0012
+    },
+    {
+      "core_alpha_ms": 8.5989,
+      "legion_lean_ms": 0.6668,
+      "quorum_and_hash_ms": 2.1706,
+      "source_integrity_ms": 0.0015
+    },
+    {
+      "core_alpha_ms": 19.9803,
+      "legion_lean_ms": 1.4393,
+      "quorum_and_hash_ms": 3.5939,
+      "source_integrity_ms": 0.0024
+    },
+    {
+      "core_alpha_ms": 18.8226,
+      "legion_lean_ms": 0.9214,
+      "quorum_and_hash_ms": 1.7131,
+      "source_integrity_ms": 0.0028
+    },
+    {
+      "core_alpha_ms": 9.16,
+      "legion_lean_ms": 0.8151,
+      "quorum_and_hash_ms": 3.605,
+      "source_integrity_ms": 0.0025
+    },
+    {
+      "core_alpha_ms": 10.9198,
+      "legion_lean_ms": 0.6552,
+      "quorum_and_hash_ms": 2.1373,
+      "source_integrity_ms": 0.0019
+    },
+    {
+      "core_alpha_ms": 16.1464,
+      "legion_lean_ms": 0.9723,
+      "quorum_and_hash_ms": 3.0631,
+      "source_integrity_ms": 0.0025
+    },
+    {
+      "core_alpha_ms": 19.6577,
+      "legion_lean_ms": 1.4704,
+      "quorum_and_hash_ms": 3.989,
+      "source_integrity_ms": 0.0023
+    },
+    {
+      "core_alpha_ms": 16.3736,
+      "legion_lean_ms": 1.3906,
+      "quorum_and_hash_ms": 3.056,
+      "source_integrity_ms": 0.002
+    },
+    {
+      "core_alpha_ms": 8.0313,
+      "legion_lean_ms": 1.1017,
+      "quorum_and_hash_ms": 3.027,
+      "source_integrity_ms": 0.0015
+    },
+    {
+      "core_alpha_ms": 17.8264,
+      "legion_lean_ms": 1.4094,
+      "quorum_and_hash_ms": 3.8134,
+      "source_integrity_ms": 0.0014
+    },
+    {
+      "core_alpha_ms": 17.7725,
+      "legion_lean_ms": 1.3092,
+      "quorum_and_hash_ms": 2.4146,
+      "source_integrity_ms": 0.0023
+    },
+    {
+      "core_alpha_ms": 19.3064,
+      "legion_lean_ms": 1.1114,
+      "quorum_and_hash_ms": 2.6485,
+      "source_integrity_ms": 0.0029
+    },
+    {
+      "core_alpha_ms": 16.1814,
+      "legion_lean_ms": 1.2859,
+      "quorum_and_hash_ms": 2.2204,
+      "source_integrity_ms": 0.0016
+    },
+    {
+      "core_alpha_ms": 16.761,
+      "legion_lean_ms": 1.0072,
+      "quorum_and_hash_ms": 3.2446,
+      "source_integrity_ms": 0.0012
+    },
+    {
+      "core_alpha_ms": 17.8535,
+      "legion_lean_ms": 1.5366,
+      "quorum_and_hash_ms": 3.5941,
+      "source_integrity_ms": 0.0016
+    },
+    {
+      "core_alpha_ms": 14.4856,
+      "legion_lean_ms": 0.8616,
+      "quorum_and_hash_ms": 4.0264,
+      "source_integrity_ms": 0.0027
+    },
+    {
+      "core_alpha_ms": 18.213,
+      "legion_lean_ms": 1.4173,
+      "quorum_and_hash_ms": 4.0815,
+      "source_integrity_ms": 0.0023
+    },
+    {
+      "core_alpha_ms": 16.8587,
+      "legion_lean_ms": 1.0588,
+      "quorum_and_hash_ms": 3.4537,
+      "source_integrity_ms": 0.0008
+    },
+    {
+      "core_alpha_ms": 17.7674,
+      "legion_lean_ms": 1.3622,
+      "quorum_and_hash_ms": 3.7799,
+      "source_integrity_ms": 0.0025
+    },
+    {
+      "core_alpha_ms": 12.3624,
+      "legion_lean_ms": 1.2476,
+      "quorum_and_hash_ms": 3.8866,
+      "source_integrity_ms": 0.0015
+    },
+    {
+      "core_alpha_ms": 17.4295,
+      "legion_lean_ms": 1.2577,
+      "quorum_and_hash_ms": 4.4339,
+      "source_integrity_ms": 0.0017
+    },
+    {
+      "core_alpha_ms": 18.5441,
+      "legion_lean_ms": 1.2845,
+      "quorum_and_hash_ms": 3.1905,
+      "source_integrity_ms": 0.0028
+    },
+    {
+      "core_alpha_ms": 8.3841,
+      "legion_lean_ms": 0.6881,
+      "quorum_and_hash_ms": 2.8344,
+      "source_integrity_ms": 0.0014
+    },
+    {
+      "core_alpha_ms": 8.4296,
+      "legion_lean_ms": 0.9254,
+      "quorum_and_hash_ms": 1.9506,
+      "source_integrity_ms": 0.0012
+    },
+    {
+      "core_alpha_ms": 18.2183,
+      "legion_lean_ms": 1.2529,
+      "quorum_and_hash_ms": 2.7856,
+      "source_integrity_ms": 0.002
+    },
+    {
+      "core_alpha_ms": 17.7839,
+      "legion_lean_ms": 1.3714,
+      "quorum_and_hash_ms": 3.8068,
+      "source_integrity_ms": 0.0021
+    },
+    {
+      "core_alpha_ms": 9.2989,
+      "legion_lean_ms": 0.5639,
+      "quorum_and_hash_ms": 1.341,
+      "source_integrity_ms": 0.0015
+    },
+    {
+      "core_alpha_ms": 14.7534,
+      "legion_lean_ms": 1.3255,
+      "quorum_and_hash_ms": 3.7306,
+      "source_integrity_ms": 0.0011
+    },
+    {
+      "core_alpha_ms": 8.1956,
+      "legion_lean_ms": 0.736,
+      "quorum_and_hash_ms": 2.7319,
+      "source_integrity_ms": 0.002
+    },
+    {
+      "core_alpha_ms": 16.7388,
+      "legion_lean_ms": 1.2675,
+      "quorum_and_hash_ms": 2.6877,
+      "source_integrity_ms": 0.0024
+    },
+    {
+      "core_alpha_ms": 9.7657,
+      "legion_lean_ms": 0.6544,
+      "quorum_and_hash_ms": 1.5208,
+      "source_integrity_ms": 0.0013
+    },
+    {
+      "core_alpha_ms": 17.8714,
+      "legion_lean_ms": 1.3178,
+      "quorum_and_hash_ms": 3.0518,
+      "source_integrity_ms": 0.0015
+    },
+    {
+      "core_alpha_ms": 17.337,
+      "legion_lean_ms": 1.0478,
+      "quorum_and_hash_ms": 2.9453,
+      "source_integrity_ms": 0.0027
+    },
+    {
+      "core_alpha_ms": 18.0199,
+      "legion_lean_ms": 0.9389,
+      "quorum_and_hash_ms": 3.6192,
+      "source_integrity_ms": 0.0028
+    },
+    {
+      "core_alpha_ms": 18.1887,
+      "legion_lean_ms": 0.9867,
+      "quorum_and_hash_ms": 1.9718,
+      "source_integrity_ms": 0.0012
+    },
+    {
+      "core_alpha_ms": 17.9852,
+      "legion_lean_ms": 1.4284,
+      "quorum_and_hash_ms": 2.7566,
+      "source_integrity_ms": 0.0024
+    },
+    {
+      "core_alpha_ms": 17.7706,
+      "legion_lean_ms": 1.41,
+      "quorum_and_hash_ms": 3.833,
+      "source_integrity_ms": 0.0015
+    },
+    {
+      "core_alpha_ms": 17.6223,
+      "legion_lean_ms": 1.2966,
+      "quorum_and_hash_ms": 2.2933,
+      "source_integrity_ms": 0.0013
+    },
+    {
+      "core_alpha_ms": 18.793,
+      "legion_lean_ms": 1.3849,
+      "quorum_and_hash_ms": 3.706,
+      "source_integrity_ms": 0.0024
+    },
+    {
+      "core_alpha_ms": 15.8646,
+      "legion_lean_ms": 1.5537,
+      "quorum_and_hash_ms": 4.1042,
+      "source_integrity_ms": 0.0012
+    },
+    {
+      "core_alpha_ms": 17.6772,
+      "legion_lean_ms": 1.2562,
+      "quorum_and_hash_ms": 2.5668,
+      "source_integrity_ms": 0.0024
+    },
+    {
+      "core_alpha_ms": 17.604,
+      "legion_lean_ms": 1.2541,
+      "quorum_and_hash_ms": 4.1154,
+      "source_integrity_ms": 0.0025
+    },
+    {
+      "core_alpha_ms": 19.687,
+      "legion_lean_ms": 1.3591,
+      "quorum_and_hash_ms": 3.0901,
+      "source_integrity_ms": 0.0021
+    },
+    {
+      "core_alpha_ms": 17.1729,
+      "legion_lean_ms": 1.0175,
+      "quorum_and_hash_ms": 4.0152,
+      "source_integrity_ms": 0.0023
+    },
+    {
+      "core_alpha_ms": 17.4946,
+      "legion_lean_ms": 1.241,
+      "quorum_and_hash_ms": 3.6028,
+      "source_integrity_ms": 0.0011
+    },
+    {
+      "core_alpha_ms": 17.6389,
+      "legion_lean_ms": 1.3137,
+      "quorum_and_hash_ms": 3.1478,
+      "source_integrity_ms": 0.002
+    },
+    {
+      "core_alpha_ms": 16.9577,
+      "legion_lean_ms": 1.1768,
+      "quorum_and_hash_ms": 3.9895,
+      "source_integrity_ms": 0.0013
+    },
+    {
+      "core_alpha_ms": 17.1224,
+      "legion_lean_ms": 1.3598,
+      "quorum_and_hash_ms": 3.8081,
+      "source_integrity_ms": 0.0012
+    },
+    {
+      "core_alpha_ms": 9.4863,
+      "legion_lean_ms": 1.0331,
+      "quorum_and_hash_ms": 3.8113,
+      "source_integrity_ms": 0.0013
+    },
+    {
+      "core_alpha_ms": 13.4,
+      "legion_lean_ms": 1.0005,
+      "quorum_and_hash_ms": 2.1874,
+      "source_integrity_ms": 0.0009
+    },
+    {
+      "core_alpha_ms": 12.0412,
+      "legion_lean_ms": 0.9101,
+      "quorum_and_hash_ms": 3.5319,
+      "source_integrity_ms": 0.002
+    },
+    {
+      "core_alpha_ms": 18.2216,
+      "legion_lean_ms": 1.2957,
+      "quorum_and_hash_ms": 3.9855,
+      "source_integrity_ms": 0.0013
+    },
+    {
+      "core_alpha_ms": 11.066,
+      "legion_lean_ms": 1.0598,
+      "quorum_and_hash_ms": 3.9517,
+      "source_integrity_ms": 0.0025
+    },
+    {
+      "core_alpha_ms": 17.5867,
+      "legion_lean_ms": 1.276,
+      "quorum_and_hash_ms": 4.0485,
+      "source_integrity_ms": 0.0029
+    },
+    {
+      "core_alpha_ms": 19.1649,
+      "legion_lean_ms": 1.1764,
+      "quorum_and_hash_ms": 2.0827,
+      "source_integrity_ms": 0.0008
+    },
+    {
+      "core_alpha_ms": 17.4049,
+      "legion_lean_ms": 1.2692,
+      "quorum_and_hash_ms": 2.6519,
+      "source_integrity_ms": 0.0013
+    },
+    {
+      "core_alpha_ms": 8.2233,
+      "legion_lean_ms": 0.6237,
+      "quorum_and_hash_ms": 2.7542,
+      "source_integrity_ms": 0.0014
+    },
+    {
+      "core_alpha_ms": 30.3385,
+      "legion_lean_ms": 1.3577,
+      "quorum_and_hash_ms": 3.4007,
+      "source_integrity_ms": 0.0019
+    },
+    {
+      "core_alpha_ms": 18.0385,
+      "legion_lean_ms": 1.3205,
+      "quorum_and_hash_ms": 3.8174,
+      "source_integrity_ms": 0.0025
+    },
+    {
+      "core_alpha_ms": 17.7765,
+      "legion_lean_ms": 1.3086,
+      "quorum_and_hash_ms": 3.1703,
+      "source_integrity_ms": 0.0021
+    },
+    {
+      "core_alpha_ms": 18.1974,
+      "legion_lean_ms": 1.4134,
+      "quorum_and_hash_ms": 3.8541,
+      "source_integrity_ms": 0.0023
+    },
+    {
+      "core_alpha_ms": 16.8223,
+      "legion_lean_ms": 1.2437,
+      "quorum_and_hash_ms": 3.8588,
+      "source_integrity_ms": 0.0011
+    },
+    {
+      "core_alpha_ms": 11.8116,
+      "legion_lean_ms": 1.1535,
+      "quorum_and_hash_ms": 3.576,
+      "source_integrity_ms": 0.0014
+    },
+    {
+      "core_alpha_ms": 18.1166,
+      "legion_lean_ms": 1.406,
+      "quorum_and_hash_ms": 3.9769,
+      "source_integrity_ms": 0.0025
+    },
+    {
+      "core_alpha_ms": 21.1863,
+      "legion_lean_ms": 1.2173,
+      "quorum_and_hash_ms": 3.2063,
+      "source_integrity_ms": 0.0025
+    },
+    {
+      "core_alpha_ms": 12.0727,
+      "legion_lean_ms": 1.2381,
+      "quorum_and_hash_ms": 2.3353,
+      "source_integrity_ms": 0.0015
+    },
+    {
+      "core_alpha_ms": 18.1243,
+      "legion_lean_ms": 1.2222,
+      "quorum_and_hash_ms": 2.5548,
+      "source_integrity_ms": 0.0024
+    },
+    {
+      "core_alpha_ms": 17.4196,
+      "legion_lean_ms": 1.3816,
+      "quorum_and_hash_ms": 3.8353,
+      "source_integrity_ms": 0.0019
+    },
+    {
+      "core_alpha_ms": 15.6675,
+      "legion_lean_ms": 0.9167,
+      "quorum_and_hash_ms": 2.8196,
+      "source_integrity_ms": 0.0023
+    },
+    {
+      "core_alpha_ms": 17.2358,
+      "legion_lean_ms": 1.4247,
+      "quorum_and_hash_ms": 3.7248,
+      "source_integrity_ms": 0.002
+    },
+    {
+      "core_alpha_ms": 8.9409,
+      "legion_lean_ms": 0.9436,
+      "quorum_and_hash_ms": 2.5059,
+      "source_integrity_ms": 0.0013
+    },
+    {
+      "core_alpha_ms": 17.2949,
+      "legion_lean_ms": 1.164,
+      "quorum_and_hash_ms": 4.1468,
+      "source_integrity_ms": 0.0013
+    },
+    {
+      "core_alpha_ms": 16.7387,
+      "legion_lean_ms": 1.5424,
+      "quorum_and_hash_ms": 3.7446,
+      "source_integrity_ms": 0.0023
+    },
+    {
+      "core_alpha_ms": 16.077,
+      "legion_lean_ms": 0.8245,
+      "quorum_and_hash_ms": 2.4951,
+      "source_integrity_ms": 0.002
+    },
+    {
+      "core_alpha_ms": 14.5575,
+      "legion_lean_ms": 1.3856,
+      "quorum_and_hash_ms": 2.709,
+      "source_integrity_ms": 0.0011
+    },
+    {
+      "core_alpha_ms": 17.6221,
+      "legion_lean_ms": 0.8096,
+      "quorum_and_hash_ms": 2.8938,
+      "source_integrity_ms": 0.0025
+    },
+    {
+      "core_alpha_ms": 14.9178,
+      "legion_lean_ms": 1.202,
+      "quorum_and_hash_ms": 3.7954,
+      "source_integrity_ms": 0.0017
+    },
+    {
+      "core_alpha_ms": 18.4247,
+      "legion_lean_ms": 1.2114,
+      "quorum_and_hash_ms": 3.1624,
+      "source_integrity_ms": 0.0021
+    },
+    {
+      "core_alpha_ms": 18.2304,
+      "legion_lean_ms": 1.3825,
+      "quorum_and_hash_ms": 3.6917,
+      "source_integrity_ms": 0.0019
+    },
+    {
+      "core_alpha_ms": 17.3187,
+      "legion_lean_ms": 1.333,
+      "quorum_and_hash_ms": 2.5258,
+      "source_integrity_ms": 0.0019
+    },
+    {
+      "core_alpha_ms": 16.7177,
+      "legion_lean_ms": 1.2902,
+      "quorum_and_hash_ms": 2.9638,
+      "source_integrity_ms": 0.0013
+    },
+    {
+      "core_alpha_ms": 18.3504,
+      "legion_lean_ms": 1.0939,
+      "quorum_and_hash_ms": 3.0397,
+      "source_integrity_ms": 0.0024
+    },
+    {
+      "core_alpha_ms": 18.8678,
+      "legion_lean_ms": 1.3218,
+      "quorum_and_hash_ms": 2.8852,
+      "source_integrity_ms": 0.0012
+    },
+    {
+      "core_alpha_ms": 17.8178,
+      "legion_lean_ms": 1.4378,
+      "quorum_and_hash_ms": 3.7808,
+      "source_integrity_ms": 0.0018
+    },
+    {
+      "core_alpha_ms": 19.3943,
+      "legion_lean_ms": 1.3442,
+      "quorum_and_hash_ms": 4.2104,
+      "source_integrity_ms": 0.0022
+    }
+  ],
+  "samples_ms": [
+    57.0553,
+    63.1536,
+    71.8196,
+    64.45,
+    55.219,
+    71.8488,
+    58.1875,
+    52.2082,
+    56.509,
+    51.6771,
+    66.8091,
+    53.6284,
+    58.5042,
+    56.9184,
+    53.9407,
+    51.4066,
+    63.6046,
+    62.5224,
+    49.4493,
+    54.3974,
+    58.8297,
+    66.5604,
+    62.1374,
+    45.4118,
+    59.2585,
+    61.1666,
+    69.0301,
+    50.1726,
+    41.2719,
+    57.6515,
+    60.3752,
+    57.5411,
+    59.9513,
+    66.1588,
+    50.2255,
+    56.4249,
+    65.2642,
+    43.4694,
+    34.5111,
+    60.8395,
+    61.9051,
+    48.8927,
+    56.9711,
+    49.8303,
+    59.7864,
+    30.9233,
+    40.2038,
+    60.5851,
+    64.3879,
+    48.2638,
+    58.4261,
+    54.143,
+    54.3604,
+    68.1933,
+    63.2018,
+    59.8076,
+    60.3122,
+    65.4847,
+    64.7037,
+    59.165,
+    55.088,
+    49.2343,
+    65.0265,
+    48.8404,
+    54.9772,
+    55.9289,
+    62.2142,
+    57.8405,
+    64.3827,
+    58.8491,
+    60.963,
+    42.877,
+    74.4967,
+    60.8149,
+    61.8247,
+    59.4265,
+    61.4307,
+    58.2058,
+    64.3341,
+    69.2587,
+    48.8873,
+    62.0206,
+    64.9905,
+    58.7826,
+    63.1831,
+    53.3832,
+    53.6818,
+    62.6304,
+    59.7732,
+    52.9054,
+    62.2979,
+    52.745,
+    65.566,
+    61.3537,
+    61.019,
+    60.5314,
+    64.2362,
+    54.4241,
+    59.9136,
+    65.1034
+  ],
+  "transaction_reservation_not_in_admission_metric": true,
+  "warmup": 10
+}

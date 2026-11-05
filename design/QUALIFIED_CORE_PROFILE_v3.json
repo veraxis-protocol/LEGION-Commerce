@@ -1,0 +1,20 @@
+{
+  "schema": "commerce.qualified-core-profile.v3",
+  "status": "PROPOSED_REQUIRES_EXTERNAL_ACCEPTANCE",
+  "work_order": "WO-COM-A03-QUALIFY-002",
+  "supersedes": "design/QUALIFIED_CORE_PROFILE_v2.json (retained unchanged)",
+  "previous_core": "d083c44af2526e38068e0220891cd0bb5fce52af",
+  "qualified_core": "d9d38cd6fd9e93e002b0b5d5135377ce1d33d8c8",
+  "qualified_decider_sha256": "99cda684f29afba33e69b8f4811d754c499987c30c07ac1c67f19ec250ade73a",
+  "qualified_decider_source": "FORMAL_CORE_001/G4_QUALIFICATION/bin/legion_decide.exe (sealed; identical to LEGION_R2 build)",
+  "bytecode_policy": "worker never reads or writes bytecode caches; every Core/ztlswarm module compiles from the hashed, locked .py source",
+  "frozen_interface_sha256": "adc2ff7f83d642b75ac5baf0865025369312891edda06a29ca0949e580086127",
+  "dispatch": "DISABLED_UNTIL_SEPARATE_SIGNED_PROFILE_ACCEPTANCE_AND_OPERATIONAL_PACKAGE",
+  "boundary": "actual lean_admission.build_payload plus compiled LegionCore Main (qualified binary)",
+  "v2_to_v3_changes": [
+    "executed legion_decide pinned to the qualified binary 99cda684...; v2 executed an unqualified local rebuild 10d664b6...",
+    "bytecode caches excluded from the executed closure (v2 loaded __pycache__/*.pyc outside the hashed inventory)"
+  ],
+  "premises": ["Authenticated Core producer attests actual permit verification", "Current signed authority checked on every request", "Commerce ledger independently enforces real monetary budget"],
+  "model_limits": ["single world-state origin f=0", "capacity guard vacuous in runtime alpha", "Python alpha and content verdict trusted", "No proof of Python refinement, crypto custody or PayPal effects"]
+}

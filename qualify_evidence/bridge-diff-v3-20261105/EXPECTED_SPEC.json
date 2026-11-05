@@ -1,0 +1,39 @@
+{
+  "expected": {
+    "authority_epoch_changed": "DENY:CURRENT_AUTHORITY_DENIED",
+    "authority_inactive": "DENY:CURRENT_AUTHORITY_DENIED",
+    "budget_violation": "DENY:CORE_NUMERICAL_BUDGET",
+    "changed_action_amount": "DENY:CORE_ACTION_BINDING",
+    "changed_intent_amount": "DENY:ORIGINAL_INTENT_MISMATCH",
+    "changed_intent_merchant": "DENY:ORIGINAL_INTENT_MISMATCH",
+    "contradictory_reports": "DENY:CORE_NOT_EARNED_TRUE",
+    "core_fenced_command": "DENY:QUALIFIED_CORE_NOT_T",
+    "core_permit_not_verified": "DENY:QUALIFIED_CORE_NOT_T",
+    "core_replayed_nonce": "DENY:QUALIFIED_CORE_NOT_T",
+    "core_stale_permit_epoch": "DENY:QUALIFIED_CORE_NOT_T",
+    "decider_unavailable_or_timeout": "DENY:QUALIFIED_DECIDER_FAILURE",
+    "duplicate_financial_effect": "ONE_EFFECT;CAPTURES=1",
+    "empty_obligations": "DENY:EMPTY_OR_DUPLICATE_OBLIGATIONS",
+    "equivocation": "DENY:REPORTER_EQUIVOCATION",
+    "forged_observation_envelope": "DENY:SIGNATURE",
+    "forged_report_signature": "DENY:CORE_REPORT_SIGNATURE_OR_IDENTITY",
+    "missing_evidence": "DENY:CORE_NOT_EARNED_TRUE",
+    "missing_prerequisite_record": "DENY:PREREQUISITE_RECORDS_MISMATCH",
+    "reports_permuted": "ALLOW",
+    "revoked_after_reserve": "DENY:REVOKED_PERMIT;PROVIDER_CALLS=0",
+    "spoofed_report_root": "DENY:CORE_REPORT_SIGNATURE_OR_IDENTITY",
+    "stale_observation": "DENY:STALE_CORE_OBSERVATION",
+    "stale_reports": "DENY:CORE_NOT_EARNED_TRUE",
+    "sybil_shared_source": "DENY:SHARED_SOURCE_FAKE_INDEPENDENCE",
+    "unknown_state": "DENY:UNKNOWN_OR_MALFORMED_CORE_STATE",
+    "valid": "ALLOW",
+    "witness_timeout_or_unavailable": "DENY:LEAN_WITNESS_FAILURE"
+  },
+  "families": {
+    "DENY:LEAN_WITNESS_FAILURE": "see tools/bridge_differential.py FAMILIES",
+    "DENY:QUALIFIED_DECIDER_FAILURE": "see tools/bridge_differential.py FAMILIES",
+    "DENY:SIGNATURE": "see tools/bridge_differential.py FAMILIES"
+  },
+  "per_category": 40,
+  "seed": 20261106
+}

@@ -4,8 +4,17 @@ The parent authenticates the observation. permit_verified is a signed producer
 premise, never a buyer input or a replacement for a genuine Core receipt.
 """
 import json
+import os
 import sys
+import tempfile
+import uuid
 from pathlib import Path
+
+# v3: executed code must be the hashed, locked source. Never read or write a
+# bytecode cache (a stale/foreign __pycache__/*.pyc is validated only by
+# mtime/size and lies outside the source inventory).
+sys.dont_write_bytecode=True
+sys.pycache_prefix=os.path.join(tempfile.gettempdir(),"legion-nopyc-"+uuid.uuid4().hex)
 import importlib.abc
 import importlib.util
 import importlib.machinery

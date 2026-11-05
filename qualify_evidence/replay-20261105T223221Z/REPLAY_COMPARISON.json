@@ -1,0 +1,18 @@
+{
+  "A03_RESULTS.json": {
+    "differences": 0,
+    "tests": 13
+  },
+  "ALPHA_RESULTS.jsonl": {
+    "cases": 1000,
+    "differences": 0,
+    "first": []
+  },
+  "MATCHED_RESULTS.jsonl": {
+    "cases": 1200,
+    "differences": 0,
+    "first": []
+  },
+  "inputs_identical": true,
+  "verdict": "REPLAY_MATCH"
+}

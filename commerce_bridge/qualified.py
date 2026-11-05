@@ -20,6 +20,8 @@ from .witness import LeanWitness
 
 ROOT=Path(__file__).resolve().parent.parent
 QUALIFIED="d9d38cd6fd9e93e002b0b5d5135377ce1d33d8c8"
+QUALIFIED_DECIDE_SHA256="99cda684f29afba33e69b8f4811d754c499987c30c07ac1c67f19ec250ade73a"
+PROFILE="design/QUALIFIED_CORE_PROFILE_v3.json"
 
 
 class JsonProcess:
@@ -92,8 +94,10 @@ class QualifiedSources:
     def __init__(self,root,immutable=False):
         self.root=Path(root).resolve(); self.binary=self.root/"ztl-swarm/lean/.lake/build/bin/zverdict.exe"
         self.core=self.root/"LEGION_QUALIFIED"
-        self.decider=self.core/"formal/LegionCore/.lake/build/bin/legion_decide.exe"
-        self.profile_hash=hashlib.sha256((ROOT/"design/QUALIFIED_CORE_PROFILE_v2.json").read_bytes()).hexdigest()
+        # v3: execute the qualified binary itself (FORMAL_CORE_001 sealed hash), never a local rebuild.
+        self.decider=self.root/"qualified_bin/legion_decide.exe"
+        require(self.decider.is_file() and hashlib.sha256(self.decider.read_bytes()).hexdigest()==QUALIFIED_DECIDE_SHA256,"QUALIFIED_DECIDER_BINARY")
+        self.profile_hash=hashlib.sha256((ROOT/PROFILE).read_bytes()).hexdigest()
         self.policy_pins=json.loads((ROOT/"design/SOURCE_PINS.json").read_text())["source_pins"]
         self.policy_pins=dict(self.policy_pins); self.policy_pins["LEGION"]=QUALIFIED
         self.manifest=Sources(self.root).verify()  # preserve old pinned witnesses too
@@ -117,7 +121,7 @@ class QualifiedSources:
             self.hot_files.update({self.root/name/n:h for n,h in self.manifest[name]["files"].items()})
         self.hot_files[self.binary]=self.manifest["zverdict_exe_sha256"]
         self.hot_files[self.decider]=self.manifest["legion_decide_sha256"]
-        self.hot_files[ROOT/"design/QUALIFIED_CORE_PROFILE_v2.json"]=self.profile_hash
+        self.hot_files[ROOT/PROFILE]=self.profile_hash
         self.snapshot=WindowsSnapshot(self.hot_files) if immutable else None
         self.session=QualifiedSession(self)
 
