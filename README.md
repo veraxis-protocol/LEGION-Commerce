@@ -1,4 +1,4 @@
-# LEGION-Commerce — WO-COM-A04
+# LEGION-Commerce 
 
 External Windows-hosted PayPal Sandbox Orders v2 adapter, isolated from LEGION Core.
 No Core files or proof sources are copied, modified or relicensed here.
