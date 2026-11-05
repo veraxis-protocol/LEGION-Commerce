@@ -1,5 +1,9 @@
 # LEGION-Commerce — WO-COM-A04
 
+The separate A03 integration bridge is documented in
+[BRIDGE_README.md](BRIDGE_README.md). Its conformance calculations do not sign
+their own acceptance or substitute for operator authority.
+
 External Windows-hosted PayPal Sandbox Orders v2 adapter, isolated from LEGION Core.
 No Core files or proof sources are copied, modified or relicensed here.
 
