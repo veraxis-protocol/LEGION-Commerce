@@ -13,6 +13,8 @@ class CoreRuntime:
         self.witness=witness
 
     def calculate(self,observation,policy,now):
+        if hasattr(self.sources,"session"):
+            return self.sources.session.calculate(observation,policy,now,self.witness)
         # Source correspondence is a precondition of executing the imported Core.
         source_manifest=self.sources.verify()
         env={k:v for k,v in os.environ.items() if not k.startswith(("STRUCT_","ZTL_","ZVERDICT"))}

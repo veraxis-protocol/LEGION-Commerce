@@ -22,7 +22,9 @@ class Bridge:
         require(p["schema"]=="commerce.bridge.policy.v1" and p["mission_hash"]==mission_hash,"POLICY_BINDING")
         require(p["expires_at"]>self.clock() and type(p["f"]) is int and 0<=p["f"]<=1000
                 and type(p["max_age_seconds"]) is int and 0<p["max_age_seconds"]<=300,"POLICY_BOUNDS")
-        require(p["source_pins"]==self.design_pins(),"POLICY_SOURCE_PINS")
+        require(p["source_pins"]==getattr(self.sources,"policy_pins",self.design_pins()),"POLICY_SOURCE_PINS")
+        if hasattr(self.sources,"profile_hash"):
+            require(p.get("qualification_profile_sha256")==self.sources.profile_hash,"QUALIFIED_PROFILE_BINDING")
         entries=p["reporters"]
         require(entries and all(e["agent"] and e["root"] and e["basis"] and e["source_id"] for e in entries),"REPORTER_REGISTRY")
         for field in ("agent","root","public_key"):
@@ -97,11 +99,14 @@ class Bridge:
                 and calculated["parameter_status"]==200 and calculated["native_preconditions_ok"],"CORE_TOOL_PRECONDITIONS")
         require(calculated["all_facts_true"] and all(calculated["predicate_truths"]),"CORE_NOT_EARNED_TRUE")
         require(observation["claimed_directive"]==calculated["directive"],"CORE_DIRECTIVE_MISMATCH")
+        if hasattr(self.sources,"profile_hash"):
+            require(calculated["qualified"]["lean"]["verdict"]=="T","QUALIFIED_CORE_NOT_T")
         source_manifest=calculated["source_manifest"]
         # Exclude evaluation clock/digests from the permit binding. Every dispatch
         # still recomputes freshness; only stable derived facts are hash-bound.
         summary={k:calculated[k] for k in ("directive","task_actor","task_dependencies","task_write_tool","world_id","task_ids",
                  "parameter_status","native_preconditions_ok","predicate_truths","differential","mismatches","all_facts_true")}
+        if "qualified" in calculated: summary["qualified"]=calculated["qualified"]
         return {"schema":"commerce.bridge.assessment.v1","decision":"ALLOW_ISSUER_REQUEST_ONLY",
                 "mission_hash":mh,"intent_hash":ih,"observation_hash":oh,"policy_hash":digest("commerce.bridge.policy.v1",policy),
                 "epoch":control["epoch"],"core":summary,"source_manifest_hash":digest("commerce.bridge.sources.v1",source_manifest),

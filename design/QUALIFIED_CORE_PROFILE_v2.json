@@ -1,0 +1,12 @@
+{
+  "schema": "commerce.qualified-core-profile.v2",
+  "status": "PROPOSED_REQUIRES_EXTERNAL_ACCEPTANCE",
+  "work_order": "WO-COM-A03-QUALIFY-002",
+  "previous_core": "d083c44af2526e38068e0220891cd0bb5fce52af",
+  "qualified_core": "d9d38cd6fd9e93e002b0b5d5135377ce1d33d8c8",
+  "frozen_interface_sha256": "adc2ff7f83d642b75ac5baf0865025369312891edda06a29ca0949e580086127",
+  "dispatch": "DISABLED_UNTIL_SEPARATE_SIGNED_PROFILE_ACCEPTANCE_AND_OPERATIONAL_PACKAGE",
+  "boundary": "actual lean_admission.build_payload plus compiled LegionCore Main",
+  "premises": ["Authenticated Core producer attests actual permit verification", "Current signed authority checked on every request", "Commerce ledger independently enforces real monetary budget"],
+  "model_limits": ["single world-state origin f=0", "capacity guard vacuous in runtime alpha", "Python alpha and content verdict trusted", "No proof of Python refinement, crypto custody or PayPal effects"]
+}

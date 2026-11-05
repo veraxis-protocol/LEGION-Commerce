@@ -1,0 +1,43 @@
+         2980204 function calls (2470868 primitive calls) in 3.529 seconds
+
+   Ordered by: cumulative time
+   List reduced from 213 to 35 due to restriction <35>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+      100    0.003    0.000    4.072    0.041 admission.py:145(check)
+  300/295    0.004    0.000    2.326    0.008 threading.py:1030(_bootstrap)
+  300/295    0.013    0.000    2.203    0.007 threading.py:1065(_bootstrap_inner)
+      100    0.004    0.000    2.013    0.020 contracts.py:104(check)
+      100    0.012    0.000    1.952    0.020 admission.py:43(assess)
+      100    0.007    0.000    1.877    0.019 admission.py:124(ready)
+     1600    0.006    0.000    1.865    0.001 contracts.py:33(digest)
+      100    0.015    0.000    1.246    0.012 contracts.py:77(ready)
+      200    0.004    0.000    1.207    0.006 qualified.py:38(call)
+      300    0.002    0.000    1.166    0.004 queue.py:177(get)
+     5400    0.049    0.000    1.071    0.000 {built-in method _hashlib.openssl_sha256}
+     2700    0.006    0.000    1.057    0.000 contracts.py:19(canonical)
+      100    0.005    0.000    1.052    0.011 runtime.py:15(calculate)
+      100    0.001    0.000    1.005    0.010 qualified.py:148(calculate)
+      100    0.002    0.000    1.002    0.010 runtime.py:39(compare)
+     1900    0.003    0.000    0.992    0.001 __init__.py:932(resolve)
+     1900    0.012    0.000    0.927    0.000 <frozen ntpath>:663(realpath)
+503000/2700    0.569    0.000    0.841    0.000 contracts.py:20(check)
+  300/295    0.008    0.000    0.559    0.002 {method 'run' of '_contextvars.Context' objects}
+  300/295    0.003    0.000    0.396    0.001 threading.py:1382(run)
+  600/111    0.007    0.000    0.363    0.003 threading.py:651(wait)
+     3800    0.265    0.000    0.324    0.000 {built-in method nt._getfinalpathname}
+     3800    0.008    0.000    0.296    0.000 __init__.py:773(read_bytes)
+     1100    0.006    0.000    0.250    0.000 contracts.py:37(verify)
+     2900    0.008    0.000    0.222    0.000 __init__.py:185(dumps)
+     4200    0.003    0.000    0.221    0.000 __init__.py:763(open)
+     4200    0.208    0.000    0.218    0.000 {built-in method _io.open}
+     2900    0.006    0.000    0.212    0.000 encoder.py:185(encode)
+     2800    0.196    0.000    0.200    0.000 encoder.py:207(iterencode)
+  899/111    0.006    0.000    0.168    0.002 threading.py:337(wait)
+      100    0.006    0.000    0.143    0.001 sources.py:49(bridge_hashes)
+     1100    0.122    0.000    0.122    0.000 {method 'verify' of 'cryptography.hazmat.bindings._rust.openssl.ed25519.Ed25519PublicKey' objects}
+      100    0.004    0.000    0.114    0.001 sources.py:44(adapter_hashes)
+  1022100    0.110    0.000    0.110    0.000 {built-in method builtins.isinstance}
+      300    0.000    0.000    0.094    0.000 subprocess.py:1248(poll)
+
+

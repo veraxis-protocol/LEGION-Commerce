@@ -37,10 +37,10 @@ class TracedBridge(Bridge):
 
 
 class Fixture:
-    def __init__(self,root):
+    def __init__(self,root,qualified_sources=None):
         self.root=Path(root)
         self.now=1000
-        self.sources=Sources(ROOT/"runtime_sources")
+        self.sources=qualified_sources or Sources(ROOT/"runtime_sources")
         self.keys={role:Ed25519PrivateKey.generate() for role in ("control","admission","acceptance","core","cage","veip","reporter0","reporter1","reporter2","reporter3")}
         self.public={role:base64.b64encode(key.public_key().public_bytes_raw()).decode() for role,key in self.keys.items()}
         self.trust={role:self.public[role] for role in ("control","admission","acceptance")}
@@ -76,6 +76,26 @@ class Fixture:
             "action":{"tool":"paypal.capture","target":"MERCHANT1","params":{"amount_cents":100,"merchant_id":"MERCHANT1"}},"reports":[]}
         command=digest_dummy_command(self.mission["mission_id"],"pay",1)
         self.observation["claimed_directive"]={"directive":"ACT","task_id":"pay","epoch":1,"command_id":command}
+        if qualified_sources is not None:
+            # v2 input adapter: real record contents and contract-declared terms.
+            # Only these test fixtures create keys or a permit premise.
+            task=self.world["roles"][0]["tasks"][-1]
+            task.update(target="MERCHANT1",expected_args=copy.deepcopy(self.observation["action"]["params"]))
+            self.records[0].update(observation_id="obs-1",facts={"available_cents":50000})
+            self.records[1].update(record_id="analysis-1",facts={"amount_cents":100},evidence_refs=["obs-1"])
+            self.intent["prerequisites_hash"]=digest("commerce.prerequisites.v1",self.records)
+            self.mission["contract_hash"]=digest("fixture.contract",self.world)
+            self.mh=digest("commerce.mission.v1",self.mission)
+            self.control["mission_hash"]=self.mh
+            self.policy.update(mission_hash=self.mh,world_hash=digest("commerce.core.world.v1",self.world),
+                source_pins=qualified_sources.policy_pins,qualification_profile_sha256=qualified_sources.profile_hash)
+            self.observation.update(mission_hash=self.mh,intent_hash=digest("commerce.intent.v1",self.intent),contract_hash=self.mission["contract_hash"])
+            core_sha=hashlib.sha256(b"LEGION-MISSION-CONTRACT-v1\0"+json.dumps(self.world,sort_keys=True,separators=(",",":"),ensure_ascii=False).encode()).hexdigest()
+            status={"state":"RUNNING","attempt_uid":"CONFORMANCE-ATTEMPT","world_instance_id":"CONFORMANCE-WORLD", "epoch":1,"contract_sha256":core_sha,"contract_version":0}
+            self.observation["core_boundary"]={"status":status,"permit_verified":True,
+                "permit":{"permit_id":"CONFORMANCE-CORE-PERMIT","attempt_uid":status["attempt_uid"],"world_instance_id":status["world_instance_id"],
+                    "mission":core_sha,"epoch":1,"task_id":"pay","command_id":command,"actor":"actor-1","target":"MERCHANT1","nonce":"CONFORMANCE-NONCE"},
+                "used_nonces":[],"fenced":[],"gate_records":[],"readback_records":[]}
         self.set_reports([True,True,True])
         self.bridge=TracedBridge(self.trust,self.sources,lambda:self.now)
         self.last=None
@@ -116,6 +136,7 @@ class Fixture:
                   "RUNTIME_VERDICTS.jsonl","MISMATCHES.jsonl","PERMIT_TRACE.jsonl","NEGATIVE_RESULTS.json"]
         for name in required: (evidence/name).write_text("CONFORMANCE_ONLY; NOT INDEPENDENT ACCEPTANCE")
         pins=json.loads((ROOT/"design/SOURCE_PINS.json").read_text())
+        if hasattr(self.sources,"policy_pins"): pins["source_pins"]=self.sources.policy_pins
         for order,tdd in (("A01","eac9c274f62ba0ca7c7b4c1b109fb5e69ecbc53a09d29efb96cc98af3378551d"),
                           ("A02","6ceacae3da2e6acb4bc010db67a0cfc03ac50c6236a77c9f8e66f9eacc93782f")):
             result_name=f"{order}_RESULT.json"

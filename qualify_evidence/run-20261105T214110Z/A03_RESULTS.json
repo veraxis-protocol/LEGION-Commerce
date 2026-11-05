@@ -1,0 +1,106 @@
+[
+  {
+    "description": "A03-T01: real pinned Lean kernel builds and axiom transcripts.",
+    "detail": null,
+    "duration_ms": 37.287,
+    "evidence_mode": "MECHANISM_ONLY",
+    "result": "PASS",
+    "test": "bridge_tests.test_conformance.Conformance.test_t01_compile_pinned_and_axiom_audit"
+  },
+  {
+    "description": "A03-T02: real methods and compiled witness, test signatures only.",
+    "detail": null,
+    "duration_ms": 444.348,
+    "evidence_mode": "MECHANISM_ONLY",
+    "result": "PASS",
+    "test": "bridge_tests.test_conformance.Conformance.test_t02_real_core_lean_agree_and_a04_seam"
+  },
+  {
+    "description": "A03-T03: no report set is not T.",
+    "detail": null,
+    "duration_ms": 22.048,
+    "evidence_mode": "MECHANISM_ONLY",
+    "result": "PASS",
+    "test": "bridge_tests.test_conformance.Conformance.test_t03_unknown_missing_evidence"
+  },
+  {
+    "description": "A03-T04: contradictory roots, equivocation, one-source Sybils denied.",
+    "detail": null,
+    "duration_ms": 51.052,
+    "evidence_mode": "MECHANISM_ONLY",
+    "result": "PASS",
+    "test": "bridge_tests.test_conformance.Conformance.test_t04_contradiction_equivocation_and_fake_independence"
+  },
+  {
+    "description": "A03-T05: [T,F,T]/[F,T,T] and all report order permutations.",
+    "detail": null,
+    "duration_ms": 96.419,
+    "evidence_mode": "MECHANISM_ONLY",
+    "result": "PASS",
+    "test": "bridge_tests.test_conformance.Conformance.test_t05_permutations"
+  },
+  {
+    "description": "A03-T06: both signed snapshot and individual report freshness.",
+    "detail": null,
+    "duration_ms": 38.354,
+    "evidence_mode": "MECHANISM_ONLY",
+    "result": "PASS",
+    "test": "bridge_tests.test_conformance.Conformance.test_t06_stale_observations_and_reports"
+  },
+  {
+    "description": "A03-T07: forged envelope/report, spoofed root and actor denied.",
+    "detail": null,
+    "duration_ms": 179.316,
+    "evidence_mode": "MECHANISM_ONLY",
+    "result": "PASS",
+    "test": "bridge_tests.test_conformance.Conformance.test_t07_forged_signers_roots_actor"
+  },
+  {
+    "description": "A03-T08: revoke after reserve; zero further calls.",
+    "detail": null,
+    "duration_ms": 158.519,
+    "evidence_mode": "MECHANISM_ONLY",
+    "result": "PASS",
+    "test": "bridge_tests.test_conformance.Conformance.test_t08_revocation_epoch_and_current_boundary"
+  },
+  {
+    "description": "A03-T09: immutable mission/intent/action digests bind exact terms.",
+    "detail": null,
+    "duration_ms": 6.412,
+    "evidence_mode": "MECHANISM_ONLY",
+    "result": "PASS",
+    "test": "bridge_tests.test_conformance.Conformance.test_t09_changed_amount_merchant_and_action"
+  },
+  {
+    "description": "A03-T10: numerical Core budget is an independent conjunct.",
+    "detail": null,
+    "duration_ms": 11.462,
+    "evidence_mode": "MECHANISM_ONLY",
+    "result": "PASS",
+    "test": "bridge_tests.test_conformance.Conformance.test_t10_act_but_budget_fails"
+  },
+  {
+    "description": "A03-T11: injected witness failures never fall back to Python allow.",
+    "detail": null,
+    "duration_ms": 109.224,
+    "evidence_mode": "MECHANISM_ONLY",
+    "result": "PASS",
+    "test": "bridge_tests.test_conformance.Conformance.test_t11_witness_absence_timeout_error_mismatch"
+  },
+  {
+    "description": "A03-T12: original obligations and required causal records cannot vanish.",
+    "detail": null,
+    "duration_ms": 6.438,
+    "evidence_mode": "MECHANISM_ONLY",
+    "result": "PASS",
+    "test": "bridge_tests.test_conformance.Conformance.test_t12_empty_inventory_missing_dependency_no_done"
+  },
+  {
+    "description": "A03-T13: N=10 repeated real Core/Lean decisions, exact stable binding.",
+    "detail": null,
+    "duration_ms": 278.194,
+    "evidence_mode": "MECHANISM_ONLY",
+    "result": "PASS",
+    "test": "bridge_tests.test_conformance.Conformance.test_t13_repeat_identical_evidence"
+  }
+]

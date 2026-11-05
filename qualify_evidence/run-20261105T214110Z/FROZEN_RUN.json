@@ -1,0 +1,13 @@
+{
+  "cases": 1200,
+  "clock": "perf_counter_ns",
+  "cold_readiness_ms": 1559.79,
+  "core": "d9d38cd6fd9e93e002b0b5d5135377ce1d33d8c8",
+  "excluded": "PayPal network, model inference, ztl-stand search only",
+  "platform": "Windows-11-10.0.26300-SP0",
+  "profile_sha256": "b91b8b6d397567f66193379b17ad93c77b6092bc32d1d01557f3cd7a028e6d5f",
+  "python": "3.14.7 (tags/v3.14.7:823f032, Aug  5 2026, 10:51:32) [MSC v.1944 64 bit (AMD64)]",
+  "scope": "CONFORMANCE_ONLY_NO_OPERATIONAL_AUTHORITY",
+  "seed": 20261105,
+  "stop": "Any unexpected mismatch or false allow => FAIL; no production keys or native dispatch"
+}
