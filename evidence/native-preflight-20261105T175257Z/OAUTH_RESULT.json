@@ -1,0 +1,10 @@
+{
+  "capture_calls": 0,
+  "credential_copy": false,
+  "duration_ms": 306.876,
+  "oauth": "PASS",
+  "orders_calls": 0,
+  "secret_output": false,
+  "token_output": false,
+  "token_ttl_seconds": 31257
+}

@@ -1,0 +1,61 @@
+{
+  "api_errors": [
+    {
+      "code": "NETWORK_UNCERTAIN",
+      "debug_id": null,
+      "duration_ms": 0,
+      "http_status": 0,
+      "issues": [],
+      "method": "POST",
+      "provider_name": null
+    },
+    {
+      "code": "NETWORK_UNCERTAIN",
+      "debug_id": null,
+      "duration_ms": 0,
+      "http_status": 0,
+      "issues": [],
+      "method": "POST",
+      "provider_name": null
+    },
+    {
+      "code": "NETWORK_UNCERTAIN",
+      "debug_id": null,
+      "duration_ms": 0,
+      "http_status": 0,
+      "issues": [],
+      "method": "POST",
+      "provider_name": null
+    },
+    {
+      "code": "HTTP_UNCERTAIN",
+      "debug_id": null,
+      "duration_ms": 0,
+      "http_status": 500,
+      "issues": [],
+      "method": "GET",
+      "provider_name": null
+    },
+    {
+      "code": "HTTP_UNCERTAIN",
+      "debug_id": null,
+      "duration_ms": 0,
+      "http_status": 500,
+      "issues": [],
+      "method": "GET",
+      "provider_name": null
+    }
+  ],
+  "approved": 12,
+  "budget_violation_count": 0,
+  "captures_confirmed": 9,
+  "duplicate_outbound_capture_attempts": 0,
+  "native_budget_violation_count": 0,
+  "native_duplicate_effects": 0,
+  "native_reconciled_unknowns": 0,
+  "native_scope": "No native Orders/capture attempts; zero counts are not evidence about a live campaign",
+  "network_attempts": 87,
+  "orders_created": 17,
+  "reconciled_unknowns": 1,
+  "scope": "Recorded primary gateway fixtures only; MOCK_ONLY"
+}

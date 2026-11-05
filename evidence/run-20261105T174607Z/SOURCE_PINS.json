@@ -1,0 +1,16 @@
+{
+  "source_pins": {
+    "LEGION": "d083c44af2526e38068e0220891cd0bb5fce52af",
+    "ZTL": "e1141c6893af6cf49f363620432ca6aaa0b06301",
+    "ztl-swarm": "7d2a8265926aecab9a838b09059bd106941b5c18",
+    "ztl-stand": "f604e071bb0cf929269338d6769c9ab3ec8cc497"
+  },
+  "a03_tdd_sha256": "a5e9ae9cb123592e787bac678eabe59818daec03050163b776e35dab62bff14a",
+  "tdd_sha256": {
+    "WO-COM-A03_TECHNICAL_DESIGN_v1.1.md": "a5e9ae9cb123592e787bac678eabe59818daec03050163b776e35dab62bff14a",
+    "WO-COM-A04_TECHNICAL_DESIGN_v1.1.md": "53654c7d251eb9cd7d94a854bcd29e4511731560b55e502525dad3f7a62b5f93",
+    "WO-COM-A05_TECHNICAL_DESIGN_v1.1.md": "2ab62c9282b268db7ba226ee5427126c5d05427a50a4ed4977fc546aa0e83591"
+  },
+  "core_policy": "NO_CORE_MODIFICATIONS",
+  "freeze_verified_against": "SHA256SUMS_v1.2.txt"
+}

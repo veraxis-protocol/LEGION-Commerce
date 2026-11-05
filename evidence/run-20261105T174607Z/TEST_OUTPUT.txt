@@ -1,0 +1,1056 @@
+test_acceptance_missing_bad_signature_or_hash (tests.test_gateway.GatewayTests.test_acceptance_missing_bad_signature_or_hash) ... ERROR
+test_control_replay (tests.test_gateway.GatewayTests.test_control_replay) ... ERROR
+test_empty_original_obligations (tests.test_gateway.GatewayTests.test_empty_original_obligations) ... ERROR
+test_fake_stored_receipt_not_ground_truth (tests.test_gateway.GatewayTests.test_fake_stored_receipt_not_ground_truth) ... ERROR
+test_provider_amount_change_pre_capture (tests.test_gateway.GatewayTests.test_provider_amount_change_pre_capture) ... ERROR
+test_recover_unknown_create_by_independent_get (tests.test_gateway.GatewayTests.test_recover_unknown_create_by_independent_get) ... ERROR
+test_refund_does_not_restore_spend (tests.test_gateway.GatewayTests.test_refund_does_not_restore_spend) ... ERROR
+test_stale_quote_epoch_expiry (tests.test_gateway.GatewayTests.test_stale_quote_epoch_expiry) ... ERROR
+test_t01_approved_capture_requires_two_gets (tests.test_gateway.GatewayTests.test_t01_approved_capture_requires_two_gets)
+A04-T01 mechanism only; A05 no mission closure from payment. ... ERROR
+test_t02_denied_no_calls (tests.test_gateway.GatewayTests.test_t02_denied_no_calls)
+A04-T02 all independent authority gates, including UNKNOWN. ... ERROR
+test_t03_parallel_320_260 (tests.test_gateway.GatewayTests.test_t03_parallel_320_260)
+A04-T03 actual SQLite concurrent writer contention (single host). ... ERROR
+test_t04_same_effect_retry_after_timeout (tests.test_gateway.GatewayTests.test_t04_same_effect_retry_after_timeout)
+A04-T04 timeout retains identity and does not blindly retry create. ... ERROR
+test_t05_lost_success_reconcile_no_second_capture (tests.test_gateway.GatewayTests.test_t05_lost_success_reconcile_no_second_capture)
+A04-T05 mock lost reply after success; live required separately. ... ERROR
+test_t06_created_is_not_paid (tests.test_gateway.GatewayTests.test_t06_created_is_not_paid)
+A04-T06 no buyer approval: no capture POST. ... ERROR
+test_t07_declined (tests.test_gateway.GatewayTests.test_t07_declined)
+A04-T07 DECLINED never counts completed. ... ERROR
+test_t07_pending (tests.test_gateway.GatewayTests.test_t07_pending)
+A04-T07 PENDING holds reservation, never confirms. ... ERROR
+test_t08_unsigned_changed_amount_merchant (tests.test_gateway.GatewayTests.test_t08_unsigned_changed_amount_merchant)
+A04-T08 tampering rejected before any network. ... ERROR
+test_t09_revoke_after_reserve (tests.test_gateway.GatewayTests.test_t09_revoke_after_reserve)
+A04-T09 revocation committed before capture => zero further calls. ... ERROR
+test_t10_same_permit_concurrent (tests.test_gateway.GatewayTests.test_t10_same_permit_concurrent)
+A04-T10 idempotent same-effect join; exactly one create/capture. ... ERROR
+test_t11_process_crash_restart_wal (tests.test_gateway.GatewayTests.test_t11_process_crash_restart_wal)
+A04-T11 abrupt separate-process exit preserves committed reserve. ... ERROR
+test_t12_altered_readback (tests.test_gateway.GatewayTests.test_t12_altered_readback)
+A04-T12 mismatch is discrepancy and no completed payment. ... ERROR
+test_t12_missing_readback (tests.test_gateway.GatewayTests.test_t12_missing_readback)
+A04-T12 missing provider truth cannot close payment. ... ERROR
+test_t13_exact_boundaries (tests.test_gateway.GatewayTests.test_t13_exact_boundaries)
+A04-T13 exact 1 / 49999 accepted in isolation, 50001 rejected. ... ERROR
+test_t13_exact_boundaries (tests.test_gateway.GatewayTests.test_t13_exact_boundaries)
+A04-T13 exact 1 / 49999 accepted in isolation, 50001 rejected. ... ERROR
+test_t14_errors (tests.test_gateway.GatewayTests.test_t14_errors)
+A04-T14 401/403/500 fail closed, classified, reservation retained. ... 
+  test_t14_errors (tests.test_gateway.GatewayTests.test_t14_errors) (code=401)
+A04-T14 401/403/500 fail closed, classified, reservation retained. ... ERROR
+  test_t14_errors (tests.test_gateway.GatewayTests.test_t14_errors) (code=403)
+A04-T14 401/403/500 fail closed, classified, reservation retained. ... ERROR
+  test_t14_errors (tests.test_gateway.GatewayTests.test_t14_errors) (code=500)
+A04-T14 401/403/500 fail closed, classified, reservation retained. ... ERROR
+test_t14_errors (tests.test_gateway.GatewayTests.test_t14_errors)
+A04-T14 401/403/500 fail closed, classified, reservation retained. ... ERROR
+test_tampered_capture_readback (tests.test_gateway.GatewayTests.test_tampered_capture_readback) ... ERROR
+test_unknown_capture_approved_readback_does_not_retry (tests.test_gateway.GatewayTests.test_unknown_capture_approved_readback_does_not_retry) ... ERROR
+test_401_invalidates_without_post_retry (tests.test_transport.TransportTests.test_401_invalidates_without_post_retry) ... ok
+test_cli_preflight_missing_config_no_network (tests.test_transport.TransportTests.test_cli_preflight_missing_config_no_network) ... ok
+test_http_errors_redacted (tests.test_transport.TransportTests.test_http_errors_redacted) ... ok
+test_oauth_cache_and_renewal (tests.test_transport.TransportTests.test_oauth_cache_and_renewal) ... ok
+test_path_injection_disallowed (tests.test_transport.TransportTests.test_path_injection_disallowed) ... ok
+test_read_only_disallows_post_before_credentials (tests.test_transport.TransportTests.test_read_only_disallows_post_before_credentials) ... ok
+test_redirect_never_forwards_auth (tests.test_transport.TransportTests.test_redirect_never_forwards_auth) ... ok
+
+======================================================================
+ERROR: test_acceptance_missing_bad_signature_or_hash (tests.test_gateway.GatewayTests.test_acceptance_missing_bad_signature_or_hash)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\shutil.py", line 701, in _rmtree_unsafe
+    os.unlink(fullname)
+    ~~~~~~~~~^^^^^^^^^^
+PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmpj4_nebs1\\ledger.db'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Administrator\Documents\ChatGPT\Hackathons\LEGION-Commerce-A04\tests\test_gateway.py", line 32, in tearDown
+    self.tmp.cleanup()
+    ~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\tempfile.py", line 976, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\tempfile.py", line 956, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\shutil.py", line 852, in rmtree
+    _rmtree_impl(path, dir_fd, onexc)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\shutil.py", line 705, in _rmtree_unsafe
+    onexc(os.unlink, fullname, err)
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\tempfile.py", line 931, in onexc
+    _os.unlink(path)
+    ~~~~~~~~~~^^^^^^
+PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmpj4_nebs1\\ledger.db'
+
+======================================================================
+ERROR: test_control_replay (tests.test_gateway.GatewayTests.test_control_replay)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\shutil.py", line 701, in _rmtree_unsafe
+    os.unlink(fullname)
+    ~~~~~~~~~^^^^^^^^^^
+PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmpzse3rftn\\ledger.db'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Administrator\Documents\ChatGPT\Hackathons\LEGION-Commerce-A04\tests\test_gateway.py", line 32, in tearDown
+    self.tmp.cleanup()
+    ~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\tempfile.py", line 976, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\tempfile.py", line 956, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\shutil.py", line 852, in rmtree
+    _rmtree_impl(path, dir_fd, onexc)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\shutil.py", line 705, in _rmtree_unsafe
+    onexc(os.unlink, fullname, err)
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\tempfile.py", line 931, in onexc
+    _os.unlink(path)
+    ~~~~~~~~~~^^^^^^
+PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmpzse3rftn\\ledger.db'
+
+======================================================================
+ERROR: test_empty_original_obligations (tests.test_gateway.GatewayTests.test_empty_original_obligations)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\shutil.py", line 701, in _rmtree_unsafe
+    os.unlink(fullname)
+    ~~~~~~~~~^^^^^^^^^^
+PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmpvlga2uu5\\ledger.db'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Administrator\Documents\ChatGPT\Hackathons\LEGION-Commerce-A04\tests\test_gateway.py", line 32, in tearDown
+    self.tmp.cleanup()
+    ~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\tempfile.py", line 976, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\tempfile.py", line 956, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\shutil.py", line 852, in rmtree
+    _rmtree_impl(path, dir_fd, onexc)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\shutil.py", line 705, in _rmtree_unsafe
+    onexc(os.unlink, fullname, err)
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\tempfile.py", line 931, in onexc
+    _os.unlink(path)
+    ~~~~~~~~~~^^^^^^
+PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmpvlga2uu5\\ledger.db'
+
+======================================================================
+ERROR: test_fake_stored_receipt_not_ground_truth (tests.test_gateway.GatewayTests.test_fake_stored_receipt_not_ground_truth)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\shutil.py", line 701, in _rmtree_unsafe
+    os.unlink(fullname)
+    ~~~~~~~~~^^^^^^^^^^
+PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmpnpmiw7fl\\ledger.db'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Administrator\Documents\ChatGPT\Hackathons\LEGION-Commerce-A04\tests\test_gateway.py", line 32, in tearDown
+    self.tmp.cleanup()
+    ~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\tempfile.py", line 976, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\tempfile.py", line 956, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\shutil.py", line 852, in rmtree
+    _rmtree_impl(path, dir_fd, onexc)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\shutil.py", line 705, in _rmtree_unsafe
+    onexc(os.unlink, fullname, err)
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\tempfile.py", line 931, in onexc
+    _os.unlink(path)
+    ~~~~~~~~~~^^^^^^
+PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmpnpmiw7fl\\ledger.db'
+
+======================================================================
+ERROR: test_provider_amount_change_pre_capture (tests.test_gateway.GatewayTests.test_provider_amount_change_pre_capture)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\shutil.py", line 701, in _rmtree_unsafe
+    os.unlink(fullname)
+    ~~~~~~~~~^^^^^^^^^^
+PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmp4mg1ill1\\ledger.db'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Administrator\Documents\ChatGPT\Hackathons\LEGION-Commerce-A04\tests\test_gateway.py", line 32, in tearDown
+    self.tmp.cleanup()
+    ~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\tempfile.py", line 976, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\tempfile.py", line 956, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\shutil.py", line 852, in rmtree
+    _rmtree_impl(path, dir_fd, onexc)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\shutil.py", line 705, in _rmtree_unsafe
+    onexc(os.unlink, fullname, err)
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\tempfile.py", line 931, in onexc
+    _os.unlink(path)
+    ~~~~~~~~~~^^^^^^
+PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmp4mg1ill1\\ledger.db'
+
+======================================================================
+ERROR: test_recover_unknown_create_by_independent_get (tests.test_gateway.GatewayTests.test_recover_unknown_create_by_independent_get)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\shutil.py", line 701, in _rmtree_unsafe
+    os.unlink(fullname)
+    ~~~~~~~~~^^^^^^^^^^
+PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmpdrvjrsu1\\ledger.db'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Administrator\Documents\ChatGPT\Hackathons\LEGION-Commerce-A04\tests\test_gateway.py", line 32, in tearDown
+    self.tmp.cleanup()
+    ~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\tempfile.py", line 976, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\tempfile.py", line 956, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\shutil.py", line 852, in rmtree
+    _rmtree_impl(path, dir_fd, onexc)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\shutil.py", line 705, in _rmtree_unsafe
+    onexc(os.unlink, fullname, err)
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\tempfile.py", line 931, in onexc
+    _os.unlink(path)
+    ~~~~~~~~~~^^^^^^
+PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmpdrvjrsu1\\ledger.db'
+
+======================================================================
+ERROR: test_refund_does_not_restore_spend (tests.test_gateway.GatewayTests.test_refund_does_not_restore_spend)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\shutil.py", line 701, in _rmtree_unsafe
+    os.unlink(fullname)
+    ~~~~~~~~~^^^^^^^^^^
+PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmpfb3uq24z\\ledger.db'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Administrator\Documents\ChatGPT\Hackathons\LEGION-Commerce-A04\tests\test_gateway.py", line 32, in tearDown
+    self.tmp.cleanup()
+    ~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\tempfile.py", line 976, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\tempfile.py", line 956, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\shutil.py", line 852, in rmtree
+    _rmtree_impl(path, dir_fd, onexc)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\shutil.py", line 705, in _rmtree_unsafe
+    onexc(os.unlink, fullname, err)
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\tempfile.py", line 931, in onexc
+    _os.unlink(path)
+    ~~~~~~~~~~^^^^^^
+PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmpfb3uq24z\\ledger.db'
+
+======================================================================
+ERROR: test_stale_quote_epoch_expiry (tests.test_gateway.GatewayTests.test_stale_quote_epoch_expiry)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\shutil.py", line 701, in _rmtree_unsafe
+    os.unlink(fullname)
+    ~~~~~~~~~^^^^^^^^^^
+PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmpg2_aiv20\\ledger.db'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Administrator\Documents\ChatGPT\Hackathons\LEGION-Commerce-A04\tests\test_gateway.py", line 32, in tearDown
+    self.tmp.cleanup()
+    ~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\tempfile.py", line 976, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\tempfile.py", line 956, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\shutil.py", line 852, in rmtree
+    _rmtree_impl(path, dir_fd, onexc)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\shutil.py", line 705, in _rmtree_unsafe
+    onexc(os.unlink, fullname, err)
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\tempfile.py", line 931, in onexc
+    _os.unlink(path)
+    ~~~~~~~~~~^^^^^^
+PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmpg2_aiv20\\ledger.db'
+
+======================================================================
+ERROR: test_t01_approved_capture_requires_two_gets (tests.test_gateway.GatewayTests.test_t01_approved_capture_requires_two_gets)
+A04-T01 mechanism only; A05 no mission closure from payment.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\shutil.py", line 701, in _rmtree_unsafe
+    os.unlink(fullname)
+    ~~~~~~~~~^^^^^^^^^^
+PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmpetu4l6_n\\ledger.db'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Administrator\Documents\ChatGPT\Hackathons\LEGION-Commerce-A04\tests\test_gateway.py", line 32, in tearDown
+    self.tmp.cleanup()
+    ~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\tempfile.py", line 976, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\tempfile.py", line 956, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\shutil.py", line 852, in rmtree
+    _rmtree_impl(path, dir_fd, onexc)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\shutil.py", line 705, in _rmtree_unsafe
+    onexc(os.unlink, fullname, err)
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\tempfile.py", line 931, in onexc
+    _os.unlink(path)
+    ~~~~~~~~~~^^^^^^
+PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmpetu4l6_n\\ledger.db'
+
+======================================================================
+ERROR: test_t02_denied_no_calls (tests.test_gateway.GatewayTests.test_t02_denied_no_calls)
+A04-T02 all independent authority gates, including UNKNOWN.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\shutil.py", line 701, in _rmtree_unsafe
+    os.unlink(fullname)
+    ~~~~~~~~~^^^^^^^^^^
+PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmpxs89cvth\\ledger.db'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Administrator\Documents\ChatGPT\Hackathons\LEGION-Commerce-A04\tests\test_gateway.py", line 32, in tearDown
+    self.tmp.cleanup()
+    ~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\tempfile.py", line 976, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\tempfile.py", line 956, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\shutil.py", line 852, in rmtree
+    _rmtree_impl(path, dir_fd, onexc)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\shutil.py", line 705, in _rmtree_unsafe
+    onexc(os.unlink, fullname, err)
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\tempfile.py", line 931, in onexc
+    _os.unlink(path)
+    ~~~~~~~~~~^^^^^^
+PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmpxs89cvth\\ledger.db'
+
+======================================================================
+ERROR: test_t03_parallel_320_260 (tests.test_gateway.GatewayTests.test_t03_parallel_320_260)
+A04-T03 actual SQLite concurrent writer contention (single host).
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\shutil.py", line 701, in _rmtree_unsafe
+    os.unlink(fullname)
+    ~~~~~~~~~^^^^^^^^^^
+PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmphmcu8yb1\\ledger.db'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Administrator\Documents\ChatGPT\Hackathons\LEGION-Commerce-A04\tests\test_gateway.py", line 32, in tearDown
+    self.tmp.cleanup()
+    ~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\tempfile.py", line 976, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\tempfile.py", line 956, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\shutil.py", line 852, in rmtree
+    _rmtree_impl(path, dir_fd, onexc)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\shutil.py", line 705, in _rmtree_unsafe
+    onexc(os.unlink, fullname, err)
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\tempfile.py", line 931, in onexc
+    _os.unlink(path)
+    ~~~~~~~~~~^^^^^^
+PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmphmcu8yb1\\ledger.db'
+
+======================================================================
+ERROR: test_t04_same_effect_retry_after_timeout (tests.test_gateway.GatewayTests.test_t04_same_effect_retry_after_timeout)
+A04-T04 timeout retains identity and does not blindly retry create.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\shutil.py", line 701, in _rmtree_unsafe
+    os.unlink(fullname)
+    ~~~~~~~~~^^^^^^^^^^
+PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmpbkgi7dkt\\ledger.db'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Administrator\Documents\ChatGPT\Hackathons\LEGION-Commerce-A04\tests\test_gateway.py", line 32, in tearDown
+    self.tmp.cleanup()
+    ~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\tempfile.py", line 976, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\tempfile.py", line 956, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\shutil.py", line 852, in rmtree
+    _rmtree_impl(path, dir_fd, onexc)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\shutil.py", line 705, in _rmtree_unsafe
+    onexc(os.unlink, fullname, err)
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\tempfile.py", line 931, in onexc
+    _os.unlink(path)
+    ~~~~~~~~~~^^^^^^
+PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmpbkgi7dkt\\ledger.db'
+
+======================================================================
+ERROR: test_t05_lost_success_reconcile_no_second_capture (tests.test_gateway.GatewayTests.test_t05_lost_success_reconcile_no_second_capture)
+A04-T05 mock lost reply after success; live required separately.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\shutil.py", line 701, in _rmtree_unsafe
+    os.unlink(fullname)
+    ~~~~~~~~~^^^^^^^^^^
+PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmpm80wjco8\\ledger.db'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Administrator\Documents\ChatGPT\Hackathons\LEGION-Commerce-A04\tests\test_gateway.py", line 32, in tearDown
+    self.tmp.cleanup()
+    ~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\tempfile.py", line 976, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\tempfile.py", line 956, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\shutil.py", line 852, in rmtree
+    _rmtree_impl(path, dir_fd, onexc)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\shutil.py", line 705, in _rmtree_unsafe
+    onexc(os.unlink, fullname, err)
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\tempfile.py", line 931, in onexc
+    _os.unlink(path)
+    ~~~~~~~~~~^^^^^^
+PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmpm80wjco8\\ledger.db'
+
+======================================================================
+ERROR: test_t06_created_is_not_paid (tests.test_gateway.GatewayTests.test_t06_created_is_not_paid)
+A04-T06 no buyer approval: no capture POST.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\shutil.py", line 701, in _rmtree_unsafe
+    os.unlink(fullname)
+    ~~~~~~~~~^^^^^^^^^^
+PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmpd2mxeq0n\\ledger.db'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Administrator\Documents\ChatGPT\Hackathons\LEGION-Commerce-A04\tests\test_gateway.py", line 32, in tearDown
+    self.tmp.cleanup()
+    ~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\tempfile.py", line 976, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\tempfile.py", line 956, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\shutil.py", line 852, in rmtree
+    _rmtree_impl(path, dir_fd, onexc)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\shutil.py", line 705, in _rmtree_unsafe
+    onexc(os.unlink, fullname, err)
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\tempfile.py", line 931, in onexc
+    _os.unlink(path)
+    ~~~~~~~~~~^^^^^^
+PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmpd2mxeq0n\\ledger.db'
+
+======================================================================
+ERROR: test_t07_declined (tests.test_gateway.GatewayTests.test_t07_declined)
+A04-T07 DECLINED never counts completed.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\shutil.py", line 701, in _rmtree_unsafe
+    os.unlink(fullname)
+    ~~~~~~~~~^^^^^^^^^^
+PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmpjn_itn5q\\ledger.db'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Administrator\Documents\ChatGPT\Hackathons\LEGION-Commerce-A04\tests\test_gateway.py", line 32, in tearDown
+    self.tmp.cleanup()
+    ~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\tempfile.py", line 976, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\tempfile.py", line 956, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\shutil.py", line 852, in rmtree
+    _rmtree_impl(path, dir_fd, onexc)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\shutil.py", line 705, in _rmtree_unsafe
+    onexc(os.unlink, fullname, err)
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\tempfile.py", line 931, in onexc
+    _os.unlink(path)
+    ~~~~~~~~~~^^^^^^
+PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmpjn_itn5q\\ledger.db'
+
+======================================================================
+ERROR: test_t07_pending (tests.test_gateway.GatewayTests.test_t07_pending)
+A04-T07 PENDING holds reservation, never confirms.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\shutil.py", line 701, in _rmtree_unsafe
+    os.unlink(fullname)
+    ~~~~~~~~~^^^^^^^^^^
+PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmp601y0i01\\ledger.db'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Administrator\Documents\ChatGPT\Hackathons\LEGION-Commerce-A04\tests\test_gateway.py", line 32, in tearDown
+    self.tmp.cleanup()
+    ~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\tempfile.py", line 976, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\tempfile.py", line 956, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\shutil.py", line 852, in rmtree
+    _rmtree_impl(path, dir_fd, onexc)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\shutil.py", line 705, in _rmtree_unsafe
+    onexc(os.unlink, fullname, err)
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\tempfile.py", line 931, in onexc
+    _os.unlink(path)
+    ~~~~~~~~~~^^^^^^
+PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmp601y0i01\\ledger.db'
+
+======================================================================
+ERROR: test_t08_unsigned_changed_amount_merchant (tests.test_gateway.GatewayTests.test_t08_unsigned_changed_amount_merchant)
+A04-T08 tampering rejected before any network.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\shutil.py", line 701, in _rmtree_unsafe
+    os.unlink(fullname)
+    ~~~~~~~~~^^^^^^^^^^
+PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmpwuzr9s0i\\ledger.db'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Administrator\Documents\ChatGPT\Hackathons\LEGION-Commerce-A04\tests\test_gateway.py", line 32, in tearDown
+    self.tmp.cleanup()
+    ~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\tempfile.py", line 976, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\tempfile.py", line 956, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\shutil.py", line 852, in rmtree
+    _rmtree_impl(path, dir_fd, onexc)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\shutil.py", line 705, in _rmtree_unsafe
+    onexc(os.unlink, fullname, err)
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\tempfile.py", line 931, in onexc
+    _os.unlink(path)
+    ~~~~~~~~~~^^^^^^
+PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmpwuzr9s0i\\ledger.db'
+
+======================================================================
+ERROR: test_t09_revoke_after_reserve (tests.test_gateway.GatewayTests.test_t09_revoke_after_reserve)
+A04-T09 revocation committed before capture => zero further calls.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\shutil.py", line 701, in _rmtree_unsafe
+    os.unlink(fullname)
+    ~~~~~~~~~^^^^^^^^^^
+PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmpb18t23xz\\ledger.db'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Administrator\Documents\ChatGPT\Hackathons\LEGION-Commerce-A04\tests\test_gateway.py", line 32, in tearDown
+    self.tmp.cleanup()
+    ~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\tempfile.py", line 976, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\tempfile.py", line 956, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\shutil.py", line 852, in rmtree
+    _rmtree_impl(path, dir_fd, onexc)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\shutil.py", line 705, in _rmtree_unsafe
+    onexc(os.unlink, fullname, err)
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\tempfile.py", line 931, in onexc
+    _os.unlink(path)
+    ~~~~~~~~~~^^^^^^
+PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmpb18t23xz\\ledger.db'
+
+======================================================================
+ERROR: test_t10_same_permit_concurrent (tests.test_gateway.GatewayTests.test_t10_same_permit_concurrent)
+A04-T10 idempotent same-effect join; exactly one create/capture.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\shutil.py", line 701, in _rmtree_unsafe
+    os.unlink(fullname)
+    ~~~~~~~~~^^^^^^^^^^
+PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmpylpkmezi\\ledger.db'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Administrator\Documents\ChatGPT\Hackathons\LEGION-Commerce-A04\tests\test_gateway.py", line 32, in tearDown
+    self.tmp.cleanup()
+    ~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\tempfile.py", line 976, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\tempfile.py", line 956, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\shutil.py", line 852, in rmtree
+    _rmtree_impl(path, dir_fd, onexc)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\shutil.py", line 705, in _rmtree_unsafe
+    onexc(os.unlink, fullname, err)
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\tempfile.py", line 931, in onexc
+    _os.unlink(path)
+    ~~~~~~~~~~^^^^^^
+PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmpylpkmezi\\ledger.db'
+
+======================================================================
+ERROR: test_t11_process_crash_restart_wal (tests.test_gateway.GatewayTests.test_t11_process_crash_restart_wal)
+A04-T11 abrupt separate-process exit preserves committed reserve.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\shutil.py", line 701, in _rmtree_unsafe
+    os.unlink(fullname)
+    ~~~~~~~~~^^^^^^^^^^
+PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmpxxn48et0\\crashed\\ledger.db'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Administrator\Documents\ChatGPT\Hackathons\LEGION-Commerce-A04\tests\test_gateway.py", line 32, in tearDown
+    self.tmp.cleanup()
+    ~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\tempfile.py", line 976, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\tempfile.py", line 956, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\shutil.py", line 852, in rmtree
+    _rmtree_impl(path, dir_fd, onexc)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\shutil.py", line 705, in _rmtree_unsafe
+    onexc(os.unlink, fullname, err)
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\tempfile.py", line 931, in onexc
+    _os.unlink(path)
+    ~~~~~~~~~~^^^^^^
+PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmpxxn48et0\\crashed\\ledger.db'
+
+======================================================================
+ERROR: test_t12_altered_readback (tests.test_gateway.GatewayTests.test_t12_altered_readback)
+A04-T12 mismatch is discrepancy and no completed payment.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\shutil.py", line 701, in _rmtree_unsafe
+    os.unlink(fullname)
+    ~~~~~~~~~^^^^^^^^^^
+PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmpqc05v6cq\\ledger.db'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Administrator\Documents\ChatGPT\Hackathons\LEGION-Commerce-A04\tests\test_gateway.py", line 32, in tearDown
+    self.tmp.cleanup()
+    ~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\tempfile.py", line 976, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\tempfile.py", line 956, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\shutil.py", line 852, in rmtree
+    _rmtree_impl(path, dir_fd, onexc)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\shutil.py", line 705, in _rmtree_unsafe
+    onexc(os.unlink, fullname, err)
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\tempfile.py", line 931, in onexc
+    _os.unlink(path)
+    ~~~~~~~~~~^^^^^^
+PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmpqc05v6cq\\ledger.db'
+
+======================================================================
+ERROR: test_t12_missing_readback (tests.test_gateway.GatewayTests.test_t12_missing_readback)
+A04-T12 missing provider truth cannot close payment.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\shutil.py", line 701, in _rmtree_unsafe
+    os.unlink(fullname)
+    ~~~~~~~~~^^^^^^^^^^
+PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmpxaqn6o3x\\ledger.db'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Administrator\Documents\ChatGPT\Hackathons\LEGION-Commerce-A04\tests\test_gateway.py", line 32, in tearDown
+    self.tmp.cleanup()
+    ~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\tempfile.py", line 976, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\tempfile.py", line 956, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\shutil.py", line 852, in rmtree
+    _rmtree_impl(path, dir_fd, onexc)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\shutil.py", line 705, in _rmtree_unsafe
+    onexc(os.unlink, fullname, err)
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\tempfile.py", line 931, in onexc
+    _os.unlink(path)
+    ~~~~~~~~~~^^^^^^
+PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmpxaqn6o3x\\ledger.db'
+
+======================================================================
+ERROR: test_t13_exact_boundaries (tests.test_gateway.GatewayTests.test_t13_exact_boundaries)
+A04-T13 exact 1 / 49999 accepted in isolation, 50001 rejected.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\shutil.py", line 701, in _rmtree_unsafe
+    os.unlink(fullname)
+    ~~~~~~~~~^^^^^^^^^^
+PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmphlcgbjwq\\ledger.db'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Administrator\Documents\ChatGPT\Hackathons\LEGION-Commerce-A04\tests\test_gateway.py", line 181, in test_t13_exact_boundaries
+    with tempfile.TemporaryDirectory() as root:
+         ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\tempfile.py", line 972, in __exit__
+    self.cleanup()
+    ~~~~~~~~~~~~^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\tempfile.py", line 976, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\tempfile.py", line 956, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\shutil.py", line 852, in rmtree
+    _rmtree_impl(path, dir_fd, onexc)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\shutil.py", line 705, in _rmtree_unsafe
+    onexc(os.unlink, fullname, err)
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\tempfile.py", line 931, in onexc
+    _os.unlink(path)
+    ~~~~~~~~~~^^^^^^
+PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmphlcgbjwq\\ledger.db'
+
+======================================================================
+ERROR: test_t13_exact_boundaries (tests.test_gateway.GatewayTests.test_t13_exact_boundaries)
+A04-T13 exact 1 / 49999 accepted in isolation, 50001 rejected.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\shutil.py", line 701, in _rmtree_unsafe
+    os.unlink(fullname)
+    ~~~~~~~~~^^^^^^^^^^
+PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmpk7f8v7eu\\ledger.db'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Administrator\Documents\ChatGPT\Hackathons\LEGION-Commerce-A04\tests\test_gateway.py", line 32, in tearDown
+    self.tmp.cleanup()
+    ~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\tempfile.py", line 976, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\tempfile.py", line 956, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\shutil.py", line 852, in rmtree
+    _rmtree_impl(path, dir_fd, onexc)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\shutil.py", line 705, in _rmtree_unsafe
+    onexc(os.unlink, fullname, err)
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\tempfile.py", line 931, in onexc
+    _os.unlink(path)
+    ~~~~~~~~~~^^^^^^
+PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmpk7f8v7eu\\ledger.db'
+
+======================================================================
+ERROR: test_t14_errors (tests.test_gateway.GatewayTests.test_t14_errors) (code=401)
+A04-T14 401/403/500 fail closed, classified, reservation retained.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\shutil.py", line 701, in _rmtree_unsafe
+    os.unlink(fullname)
+    ~~~~~~~~~^^^^^^^^^^
+PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmprs_3m76_\\ledger.db'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Administrator\Documents\ChatGPT\Hackathons\LEGION-Commerce-A04\tests\test_gateway.py", line 188, in test_t14_errors
+    with self.subTest(code=code), tempfile.TemporaryDirectory() as root:
+                                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\tempfile.py", line 972, in __exit__
+    self.cleanup()
+    ~~~~~~~~~~~~^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\tempfile.py", line 976, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\tempfile.py", line 956, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\shutil.py", line 852, in rmtree
+    _rmtree_impl(path, dir_fd, onexc)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\shutil.py", line 705, in _rmtree_unsafe
+    onexc(os.unlink, fullname, err)
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\tempfile.py", line 931, in onexc
+    _os.unlink(path)
+    ~~~~~~~~~~^^^^^^
+PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmprs_3m76_\\ledger.db'
+
+======================================================================
+ERROR: test_t14_errors (tests.test_gateway.GatewayTests.test_t14_errors) (code=403)
+A04-T14 401/403/500 fail closed, classified, reservation retained.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\shutil.py", line 701, in _rmtree_unsafe
+    os.unlink(fullname)
+    ~~~~~~~~~^^^^^^^^^^
+PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmp2ud2rfum\\ledger.db'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Administrator\Documents\ChatGPT\Hackathons\LEGION-Commerce-A04\tests\test_gateway.py", line 188, in test_t14_errors
+    with self.subTest(code=code), tempfile.TemporaryDirectory() as root:
+                                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\tempfile.py", line 972, in __exit__
+    self.cleanup()
+    ~~~~~~~~~~~~^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\tempfile.py", line 976, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\tempfile.py", line 956, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\shutil.py", line 852, in rmtree
+    _rmtree_impl(path, dir_fd, onexc)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\shutil.py", line 705, in _rmtree_unsafe
+    onexc(os.unlink, fullname, err)
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\tempfile.py", line 931, in onexc
+    _os.unlink(path)
+    ~~~~~~~~~~^^^^^^
+PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmp2ud2rfum\\ledger.db'
+
+======================================================================
+ERROR: test_t14_errors (tests.test_gateway.GatewayTests.test_t14_errors) (code=500)
+A04-T14 401/403/500 fail closed, classified, reservation retained.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\shutil.py", line 701, in _rmtree_unsafe
+    os.unlink(fullname)
+    ~~~~~~~~~^^^^^^^^^^
+PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmpyiwl5ga5\\ledger.db'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Administrator\Documents\ChatGPT\Hackathons\LEGION-Commerce-A04\tests\test_gateway.py", line 188, in test_t14_errors
+    with self.subTest(code=code), tempfile.TemporaryDirectory() as root:
+                                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\tempfile.py", line 972, in __exit__
+    self.cleanup()
+    ~~~~~~~~~~~~^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\tempfile.py", line 976, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\tempfile.py", line 956, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\shutil.py", line 852, in rmtree
+    _rmtree_impl(path, dir_fd, onexc)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\shutil.py", line 705, in _rmtree_unsafe
+    onexc(os.unlink, fullname, err)
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\tempfile.py", line 931, in onexc
+    _os.unlink(path)
+    ~~~~~~~~~~^^^^^^
+PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmpyiwl5ga5\\ledger.db'
+
+======================================================================
+ERROR: test_t14_errors (tests.test_gateway.GatewayTests.test_t14_errors)
+A04-T14 401/403/500 fail closed, classified, reservation retained.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\shutil.py", line 701, in _rmtree_unsafe
+    os.unlink(fullname)
+    ~~~~~~~~~^^^^^^^^^^
+PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmpwer_7ryc\\ledger.db'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Administrator\Documents\ChatGPT\Hackathons\LEGION-Commerce-A04\tests\test_gateway.py", line 32, in tearDown
+    self.tmp.cleanup()
+    ~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\tempfile.py", line 976, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\tempfile.py", line 956, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\shutil.py", line 852, in rmtree
+    _rmtree_impl(path, dir_fd, onexc)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\shutil.py", line 705, in _rmtree_unsafe
+    onexc(os.unlink, fullname, err)
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\tempfile.py", line 931, in onexc
+    _os.unlink(path)
+    ~~~~~~~~~~^^^^^^
+PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmpwer_7ryc\\ledger.db'
+
+======================================================================
+ERROR: test_tampered_capture_readback (tests.test_gateway.GatewayTests.test_tampered_capture_readback)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\shutil.py", line 701, in _rmtree_unsafe
+    os.unlink(fullname)
+    ~~~~~~~~~^^^^^^^^^^
+PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmpjwz332uo\\ledger.db'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Administrator\Documents\ChatGPT\Hackathons\LEGION-Commerce-A04\tests\test_gateway.py", line 32, in tearDown
+    self.tmp.cleanup()
+    ~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\tempfile.py", line 976, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\tempfile.py", line 956, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\shutil.py", line 852, in rmtree
+    _rmtree_impl(path, dir_fd, onexc)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\shutil.py", line 705, in _rmtree_unsafe
+    onexc(os.unlink, fullname, err)
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\tempfile.py", line 931, in onexc
+    _os.unlink(path)
+    ~~~~~~~~~~^^^^^^
+PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmpjwz332uo\\ledger.db'
+
+======================================================================
+ERROR: test_unknown_capture_approved_readback_does_not_retry (tests.test_gateway.GatewayTests.test_unknown_capture_approved_readback_does_not_retry)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\shutil.py", line 701, in _rmtree_unsafe
+    os.unlink(fullname)
+    ~~~~~~~~~^^^^^^^^^^
+PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmpys6waic_\\ledger.db'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Administrator\Documents\ChatGPT\Hackathons\LEGION-Commerce-A04\tests\test_gateway.py", line 32, in tearDown
+    self.tmp.cleanup()
+    ~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\tempfile.py", line 976, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\tempfile.py", line 956, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\shutil.py", line 852, in rmtree
+    _rmtree_impl(path, dir_fd, onexc)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\shutil.py", line 705, in _rmtree_unsafe
+    onexc(os.unlink, fullname, err)
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\tempfile.py", line 931, in onexc
+    _os.unlink(path)
+    ~~~~~~~~~~^^^^^^
+PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmpys6waic_\\ledger.db'
+
+----------------------------------------------------------------------
+Ran 33 tests in 4.406s
+
+FAILED (errors=30)

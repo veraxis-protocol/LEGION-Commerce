@@ -1,0 +1,15 @@
+{
+  "acceptance": "PASS only all A04 mandatory cases, native T01/T05/T06/T07 where supported, zero forbidden/duplicate/overbudget effects, exact ledger and readback joins",
+  "blockers": [
+    "Accepted A03 T01-T13 evidence and independently provisioned authority roots absent",
+    "No current signed mission/control/permit installed",
+    "No authenticated buyer approval for an admitted order"
+  ],
+  "go_to_a05": false,
+  "mechanism_checks": "PASS",
+  "native_capture": "NOT_RUN",
+  "next_action": "Obtain and verify A03 acceptance and scoped signed inputs, run preflight, then create+buyer approval+capture+separate readback. If unavailable keep external writes disabled.",
+  "overall": "BLOCKED",
+  "source_unchanged_during_run": true,
+  "work_order": "WO-COM-A04"
+}

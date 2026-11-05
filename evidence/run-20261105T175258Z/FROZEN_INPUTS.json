@@ -1,0 +1,11 @@
+{
+  "authority": "SYNTHETIC_TEST_KEYS",
+  "mode": "SCRIPTED_MECHANISM_ONLY",
+  "original_tdd": "design/WO-COM-A04_TECHNICAL_DESIGN_v1.1.md",
+  "platform": "Windows-11-10.0.26300-SP0",
+  "predeclared_rule": "Any failed assertion/error => local check FAIL. No mock result satisfies mandatory real Sandbox evidence.",
+  "provider": "FakePayPal",
+  "python": "3.14.7 (tags/v3.14.7:823f032, Aug  5 2026, 10:51:32) [MSC v.1944 64 bit (AMD64)]",
+  "run_authority": "User WO-COM-A04 request 2026-11-05",
+  "source_manifest_sha256": "852368024d9aa2ec1e5a5d198952d9d04b62f577cbd117dbe05adc3de3d7e7d8"
+}

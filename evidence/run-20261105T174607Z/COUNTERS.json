@@ -1,0 +1,14 @@
+{
+  "errors": 30,
+  "failures": 0,
+  "mock_network_attempts_recorded": 70,
+  "mock_scope": "Per-case provider traces; nested subtest fixtures not included in event counters",
+  "native_approved": 0,
+  "native_captures_confirmed": 0,
+  "native_orders_created": 0,
+  "native_transaction_network_attempts": 0,
+  "p95_native_latency_ms": null,
+  "p95_test_duration_ms": 312.041,
+  "passed": 7,
+  "tests_run": 33
+}

@@ -1,0 +1,11 @@
+{
+  "acceptance": "PASS all frozen A04 cases with required native effect; FAIL forbidden/duplicate/overspend/false complete; BLOCKED missing gate evidence",
+  "acquisition": "A03 owner acceptance package into Windows a04 runtime folder, then documented CLI and buyer Sandbox checkout",
+  "evidence_gap": "Accepted A03 T01-T13, installed trust roots and current signed mission/control/permit; buyer approval and native readbacks",
+  "go_to_a05": false,
+  "immediate_execution": "This native OAuth+ACL probe and local mechanism suite; zero Orders calls",
+  "next_action": "Install and verify genuine A03 acceptance, run preflight then scoped create and authenticated buyer approval. If missing, retain write hold; do not mint substitute authority.",
+  "oauth": "PASS",
+  "required_evidence": "A03 signed acceptance with exact adapter source hashes + evidence files; signed original mission, one-time permit, current control; PayPal approved order and completed capture GETs",
+  "status": "BLOCKED"
+}

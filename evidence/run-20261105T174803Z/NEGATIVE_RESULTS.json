@@ -1,0 +1,298 @@
+[
+  {
+    "description": null,
+    "detail": null,
+    "duration_ms": 107.295,
+    "evidence_mode": "MECHANISM_ONLY",
+    "result": "PASS",
+    "test": "tests.test_gateway.GatewayTests.test_acceptance_missing_bad_signature_or_hash"
+  },
+  {
+    "description": null,
+    "detail": null,
+    "duration_ms": 48.983,
+    "evidence_mode": "MECHANISM_ONLY",
+    "result": "PASS",
+    "test": "tests.test_gateway.GatewayTests.test_control_replay"
+  },
+  {
+    "description": null,
+    "detail": null,
+    "duration_ms": 153.832,
+    "evidence_mode": "MECHANISM_ONLY",
+    "result": "PASS",
+    "test": "tests.test_gateway.GatewayTests.test_duplicate_provider_capture_rejected"
+  },
+  {
+    "description": null,
+    "detail": null,
+    "duration_ms": 68.149,
+    "evidence_mode": "MECHANISM_ONLY",
+    "result": "PASS",
+    "test": "tests.test_gateway.GatewayTests.test_empty_original_obligations"
+  },
+  {
+    "description": null,
+    "detail": null,
+    "duration_ms": 106.884,
+    "evidence_mode": "MECHANISM_ONLY",
+    "result": "PASS",
+    "test": "tests.test_gateway.GatewayTests.test_expired_after_reserve_no_calls"
+  },
+  {
+    "description": null,
+    "detail": null,
+    "duration_ms": 114.797,
+    "evidence_mode": "MECHANISM_ONLY",
+    "result": "PASS",
+    "test": "tests.test_gateway.GatewayTests.test_fake_stored_receipt_not_ground_truth"
+  },
+  {
+    "description": null,
+    "detail": null,
+    "duration_ms": 120.321,
+    "evidence_mode": "MECHANISM_ONLY",
+    "result": "PASS",
+    "test": "tests.test_gateway.GatewayTests.test_provider_amount_change_pre_capture"
+  },
+  {
+    "description": null,
+    "detail": null,
+    "duration_ms": 163.052,
+    "evidence_mode": "MECHANISM_ONLY",
+    "result": "PASS",
+    "test": "tests.test_gateway.GatewayTests.test_recover_unknown_create_by_independent_get"
+  },
+  {
+    "description": null,
+    "detail": null,
+    "duration_ms": 153.99,
+    "evidence_mode": "MECHANISM_ONLY",
+    "result": "PASS",
+    "test": "tests.test_gateway.GatewayTests.test_refund_does_not_restore_spend"
+  },
+  {
+    "description": null,
+    "detail": null,
+    "duration_ms": 82.452,
+    "evidence_mode": "MECHANISM_ONLY",
+    "result": "PASS",
+    "test": "tests.test_gateway.GatewayTests.test_stale_quote_epoch_expiry"
+  },
+  {
+    "description": "A04-T02 all independent authority gates, including UNKNOWN.",
+    "detail": null,
+    "duration_ms": 129.085,
+    "evidence_mode": "MECHANISM_ONLY",
+    "result": "PASS",
+    "test": "tests.test_gateway.GatewayTests.test_t02_denied_no_calls"
+  },
+  {
+    "description": "A04-T03 actual SQLite concurrent writer contention (single host).",
+    "detail": null,
+    "duration_ms": 101.574,
+    "evidence_mode": "MECHANISM_ONLY",
+    "result": "PASS",
+    "test": "tests.test_gateway.GatewayTests.test_t03_parallel_320_260"
+  },
+  {
+    "description": "A04-T03 competing OS processes, both bound to the same signed mission.",
+    "detail": null,
+    "duration_ms": 375.393,
+    "evidence_mode": "MECHANISM_ONLY",
+    "result": "PASS",
+    "test": "tests.test_gateway.GatewayTests.test_t03_separate_process_reservations"
+  },
+  {
+    "description": "A04-T04 timeout retains identity and does not blindly retry create.",
+    "detail": null,
+    "duration_ms": 127.065,
+    "evidence_mode": "MECHANISM_ONLY",
+    "result": "PASS",
+    "test": "tests.test_gateway.GatewayTests.test_t04_same_effect_retry_after_timeout"
+  },
+  {
+    "description": "A04-T05 mock lost reply after success; live required separately.",
+    "detail": null,
+    "duration_ms": 153.28,
+    "evidence_mode": "MECHANISM_ONLY",
+    "result": "PASS",
+    "test": "tests.test_gateway.GatewayTests.test_t05_lost_success_reconcile_no_second_capture"
+  },
+  {
+    "description": "A04-T06 no buyer approval: no capture POST.",
+    "detail": null,
+    "duration_ms": 121.938,
+    "evidence_mode": "MECHANISM_ONLY",
+    "result": "PASS",
+    "test": "tests.test_gateway.GatewayTests.test_t06_created_is_not_paid"
+  },
+  {
+    "description": "A04-T07 DECLINED never counts completed.",
+    "detail": null,
+    "duration_ms": 159.524,
+    "evidence_mode": "MECHANISM_ONLY",
+    "result": "PASS",
+    "test": "tests.test_gateway.GatewayTests.test_t07_declined"
+  },
+  {
+    "description": "A04-T07 PENDING holds reservation, never confirms.",
+    "detail": null,
+    "duration_ms": 171.055,
+    "evidence_mode": "MECHANISM_ONLY",
+    "result": "PASS",
+    "test": "tests.test_gateway.GatewayTests.test_t07_pending"
+  },
+  {
+    "description": "A04-T08 tampering rejected before any network.",
+    "detail": null,
+    "duration_ms": 113.3,
+    "evidence_mode": "MECHANISM_ONLY",
+    "result": "PASS",
+    "test": "tests.test_gateway.GatewayTests.test_t08_unsigned_changed_amount_merchant"
+  },
+  {
+    "description": "A04-T09 revocation committed before capture => zero further calls.",
+    "detail": null,
+    "duration_ms": 134.207,
+    "evidence_mode": "MECHANISM_ONLY",
+    "result": "PASS",
+    "test": "tests.test_gateway.GatewayTests.test_t09_revoke_after_reserve"
+  },
+  {
+    "description": "A04-T10 idempotent same-effect join; exactly one create/capture.",
+    "detail": null,
+    "duration_ms": 308.973,
+    "evidence_mode": "MECHANISM_ONLY",
+    "result": "PASS",
+    "test": "tests.test_gateway.GatewayTests.test_t10_same_permit_concurrent"
+  },
+  {
+    "description": null,
+    "detail": null,
+    "duration_ms": 155.291,
+    "evidence_mode": "MECHANISM_ONLY",
+    "result": "PASS",
+    "test": "tests.test_gateway.GatewayTests.test_t10_same_permit_for_different_effect_refused"
+  },
+  {
+    "description": "A04-T11 abrupt separate-process exit preserves committed reserve.",
+    "detail": null,
+    "duration_ms": 322.103,
+    "evidence_mode": "MECHANISM_ONLY",
+    "result": "PASS",
+    "test": "tests.test_gateway.GatewayTests.test_t11_process_crash_restart_wal"
+  },
+  {
+    "description": "A04-T12 mismatch is discrepancy and no completed payment.",
+    "detail": null,
+    "duration_ms": 129.299,
+    "evidence_mode": "MECHANISM_ONLY",
+    "result": "PASS",
+    "test": "tests.test_gateway.GatewayTests.test_t12_altered_readback"
+  },
+  {
+    "description": "A04-T12 missing provider truth cannot close payment.",
+    "detail": null,
+    "duration_ms": 159.616,
+    "evidence_mode": "MECHANISM_ONLY",
+    "result": "PASS",
+    "test": "tests.test_gateway.GatewayTests.test_t12_missing_readback"
+  },
+  {
+    "description": "A04-T13 exact 1 / 49999 accepted in isolation, 50001 rejected.",
+    "detail": null,
+    "duration_ms": 281.304,
+    "evidence_mode": "MECHANISM_ONLY",
+    "result": "PASS",
+    "test": "tests.test_gateway.GatewayTests.test_t13_exact_boundaries"
+  },
+  {
+    "description": "A04-T14 401/403/500 fail closed, classified, reservation retained.",
+    "detail": null,
+    "duration_ms": 397.037,
+    "evidence_mode": "MECHANISM_ONLY",
+    "result": "PASS",
+    "test": "tests.test_gateway.GatewayTests.test_t14_errors"
+  },
+  {
+    "description": null,
+    "detail": null,
+    "duration_ms": 174.367,
+    "evidence_mode": "MECHANISM_ONLY",
+    "result": "PASS",
+    "test": "tests.test_gateway.GatewayTests.test_tampered_capture_readback"
+  },
+  {
+    "description": null,
+    "detail": null,
+    "duration_ms": 160.248,
+    "evidence_mode": "MECHANISM_ONLY",
+    "result": "PASS",
+    "test": "tests.test_gateway.GatewayTests.test_unknown_capture_approved_readback_does_not_retry"
+  },
+  {
+    "description": null,
+    "detail": null,
+    "duration_ms": 171.362,
+    "evidence_mode": "MECHANISM_ONLY",
+    "result": "PASS",
+    "test": "tests.test_gateway.GatewayTests.test_wrong_capture_order_rejected"
+  },
+  {
+    "description": null,
+    "detail": null,
+    "duration_ms": 15.46,
+    "evidence_mode": "MECHANISM_ONLY",
+    "result": "PASS",
+    "test": "tests.test_transport.TransportTests.test_401_invalidates_without_post_retry"
+  },
+  {
+    "description": null,
+    "detail": null,
+    "duration_ms": 3.597,
+    "evidence_mode": "MECHANISM_ONLY",
+    "result": "PASS",
+    "test": "tests.test_transport.TransportTests.test_cli_preflight_missing_config_no_network"
+  },
+  {
+    "description": null,
+    "detail": null,
+    "duration_ms": 8.985,
+    "evidence_mode": "MECHANISM_ONLY",
+    "result": "PASS",
+    "test": "tests.test_transport.TransportTests.test_http_errors_redacted"
+  },
+  {
+    "description": null,
+    "detail": null,
+    "duration_ms": 8.933,
+    "evidence_mode": "MECHANISM_ONLY",
+    "result": "PASS",
+    "test": "tests.test_transport.TransportTests.test_oauth_cache_and_renewal"
+  },
+  {
+    "description": null,
+    "detail": null,
+    "duration_ms": 7.729,
+    "evidence_mode": "MECHANISM_ONLY",
+    "result": "PASS",
+    "test": "tests.test_transport.TransportTests.test_path_injection_disallowed"
+  },
+  {
+    "description": null,
+    "detail": null,
+    "duration_ms": 9.73,
+    "evidence_mode": "MECHANISM_ONLY",
+    "result": "PASS",
+    "test": "tests.test_transport.TransportTests.test_read_only_disallows_post_before_credentials"
+  },
+  {
+    "description": null,
+    "detail": null,
+    "duration_ms": 0.022,
+    "evidence_mode": "MECHANISM_ONLY",
+    "result": "PASS",
+    "test": "tests.test_transport.TransportTests.test_redirect_never_forwards_auth"
+  }
+]

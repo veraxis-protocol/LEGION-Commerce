@@ -1,0 +1,21 @@
+{
+  "commerce_adapter/__init__.py": "f4b5a6451c984786b82936c80f1a08bfe977219a1d9efd5674b089b166abb536",
+  "commerce_adapter/__main__.py": "8e72c9b3391fe6d79a9658ee42f6e1ebbcc1b6f10ea0b97137e568cb4a25dec5",
+  "commerce_adapter/approval.py": "ed6b6a566d80f84f473468b795d81a3cdec5ccba6397bd4461a44c41e2e5a307",
+  "commerce_adapter/contracts.py": "ed44966830509ee97a28765eefd23a0f68f49be7b82129ad6dc49e8056c6fbac",
+  "commerce_adapter/gateway.py": "5a1c8c9d5eb017ddfdfcbe2b9d2297523d36522524169ff627cda2d81bd2554a",
+  "commerce_adapter/paypal.py": "4346b9000ffaec9bfa1884c33e1b4f1fa75035205ae21f5a9fbe44819c34d5d8",
+  "commerce_adapter/readback.py": "66c38645f5aadaa7447800b14d3245e8a4657d63ec0944643460ef0a09c5a5e7",
+  "design/REQUIREMENTS.json": "e2e2d291ccde7d3350048b434e3eff9b726675f48589d6b678219d0b2285a77f",
+  "design/SOURCE_PINS.json": "ecf8df3b6bbd437a848f1bf945623269c36e165035419951bb3629fd38563d49",
+  "design/TEST_MATRIX.json": "e20d1b42bcb20d43f578ef21480dd7a9eeb25aa1be3171544fed6d2e5f281961",
+  "design/WO-COM-A03_TECHNICAL_DESIGN_v1.1.md": "a5e9ae9cb123592e787bac678eabe59818daec03050163b776e35dab62bff14a",
+  "design/WO-COM-A04_TECHNICAL_DESIGN_v1.1.md": "53654c7d251eb9cd7d94a854bcd29e4511731560b55e502525dad3f7a62b5f93",
+  "design/WO-COM-A05_TECHNICAL_DESIGN_v1.1.md": "2ab62c9282b268db7ba226ee5427126c5d05427a50a4ed4977fc546aa0e83591",
+  "tests/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "tests/helpers.py": "8c65677fbd9b6333aa9c1b16e1977483ce09f9fa29449fbfef445d7063b62e04",
+  "tests/test_gateway.py": "b6935fb20ee6036032d50ce023e86c445b95c6d6d4ea0af148b48c82ee81ebb9",
+  "tests/test_transport.py": "37ca8891819049ee6093cbf673dc3b2c8deaff52c68ef6cfb3e4252d126ec563",
+  "tools/freeze_sources.py": "6827ac34fa553d4dd7ba7fcad331854975b8fed7047a127eec26a3806f9785ba",
+  "tools/run_checks.py": "eda29a1027f7b854a77452332f9fb16ff83da36fcb44d9316db6226c4226df34"
+}

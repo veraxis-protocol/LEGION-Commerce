@@ -1,0 +1,22 @@
+{
+  "work_order": "WO-COM-A04",
+  "tdd_sha256": {
+    "WO-COM-A03_TECHNICAL_DESIGN_v1.1.md": "a5e9ae9cb123592e787bac678eabe59818daec03050163b776e35dab62bff14a",
+    "WO-COM-A04_TECHNICAL_DESIGN_v1.1.md": "53654c7d251eb9cd7d94a854bcd29e4511731560b55e502525dad3f7a62b5f93",
+    "WO-COM-A05_TECHNICAL_DESIGN_v1.1.md": "2ab62c9282b268db7ba226ee5427126c5d05427a50a4ed4977fc546aa0e83591"
+  },
+  "invariants": [
+    "**G0 \u2014 original authority**: mission contract, required obligations, currency/budget, vendor eligibility, epoch and deadline are frozen before an episode; only separately authorized updates may change them.",
+    "**G1 \u2014 proposal != authority**: an agent, optimizer or model may suggest; only independently evaluated, current T verdict and policy-scoped admission can enable a consequential command.",
+    "**G2 \u2014 source of truth**: payment success = provider-confirmed final effect, never an LLM claim, simulated world transition, or an HTTP request alone.",
+    "**G3 \u2014 no overspend**: captured net outstanding + unreleased reservations <= authorized budget, in integer minor units. Concurrent contenders must serialize their reservations.",
+    "**G4 \u2014 no duplicate**: unique mission_effect_id binds exactly one authorized financial effect; retries preserve identity; unknown effect must reconcile before a new attempt.",
+    "**G5 \u2014 completion closure**: DONE requires a nonempty exact original obligation inventory and authoritative readback for every consequential obligation, plus independent Judge pass.",
+    "**G6 \u2014 formal scope**: kernel-proof, Python/Lean differential, world effects, PayPal sandbox and independent Judge are separate evidence layers; none silently substitutes for another.",
+    "**G7 \u2014 intellectual property**: LEGION Core unchanged under PolyForm Noncommercial; ztl-stand \u00a9 Vitaly Reznik, Apache-2.0 OR MIT; new demo files under independent approved licence. No copied Core file is relicensed.",
+    "**G8 \u2014 VCC@1**: first *bounded episode* includes internal agent proposals/replanning; any manual repair, restart, hidden oracle intervention or changed scorer creates another attempt. Missing/unknown outcome is 0, not a PASS."
+  ],
+  "stop": "Any forbidden/duplicate/overbudget financial effect, false completion, stale authority or blind uncertain retry",
+  "native_gate": "A03 complete accepted evidence + current signed mission/permit/control + reserve + authenticated buyer approval",
+  "acceptance": "All frozen mandatory cases, separately labelled native and mock evidence; no mock substitutes for real capture"
+}
