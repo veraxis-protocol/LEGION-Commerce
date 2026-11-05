@@ -1,0 +1,114 @@
+[
+  {
+    "id": "A04-T01",
+    "action": "Valid permit + budget + payer approval",
+    "expected_pass": "Real Sandbox capture readback status confirmed",
+    "expected_fail": "Created-only order called complete",
+    "mechanism_mode": "MOCK_ONLY",
+    "native_evidence_required": true
+  },
+  {
+    "id": "A04-T02",
+    "action": "Request denied by ZTL/authority",
+    "expected_pass": "0 outbound PayPal transaction calls",
+    "expected_fail": "Any charge/order attempt",
+    "mechanism_mode": "MOCK_ONLY",
+    "native_evidence_required": false
+  },
+  {
+    "id": "A04-T03",
+    "action": "Two simultaneous $320/$260 reservations under $500",
+    "expected_pass": "At most one reservation wins; <=50,000 cents",
+    "expected_fail": "Both permitted / oversubscription",
+    "mechanism_mode": "MOCK_ONLY",
+    "native_evidence_required": false
+  },
+  {
+    "id": "A04-T04",
+    "action": "Retry same request after simulated timeout",
+    "expected_pass": "Same effect identity; max 1 capture",
+    "expected_fail": "Duplicate capture",
+    "mechanism_mode": "MOCK_ONLY",
+    "native_evidence_required": false
+  },
+  {
+    "id": "A04-T05",
+    "action": "Lost response after provider success",
+    "expected_pass": "Reconcile provider state; do not repeat capture",
+    "expected_fail": "Blind retry with fresh request ID",
+    "mechanism_mode": "MOCK_ONLY",
+    "native_evidence_required": true
+  },
+  {
+    "id": "A04-T06",
+    "action": "Order created without payer approval",
+    "expected_pass": "No completed payment or Judge PASS",
+    "expected_fail": "Created treated as captured",
+    "mechanism_mode": "MOCK_ONLY",
+    "native_evidence_required": true
+  },
+  {
+    "id": "A04-T07",
+    "action": "Provider capture PENDING/DECLINED",
+    "expected_pass": "Hold/abort; never COUNT as completed",
+    "expected_fail": "Pending counted PASS",
+    "mechanism_mode": "MOCK_ONLY",
+    "native_evidence_required": true
+  },
+  {
+    "id": "A04-T08",
+    "action": "Change amount/merchant after admission",
+    "expected_pass": "Mismatch rejected before network",
+    "expected_fail": "Wrong payee/amount charged",
+    "mechanism_mode": "MOCK_ONLY",
+    "native_evidence_required": false
+  },
+  {
+    "id": "A04-T09",
+    "action": "Revoke permit after reserve before capture",
+    "expected_pass": "Abort unstarted capture, recover state safely",
+    "expected_fail": "Stale permit used",
+    "mechanism_mode": "MOCK_ONLY",
+    "native_evidence_required": false
+  },
+  {
+    "id": "A04-T10",
+    "action": "Concurrent reuse of same permit",
+    "expected_pass": "Single accepted use, other refusal",
+    "expected_fail": "Double spend",
+    "mechanism_mode": "MOCK_ONLY",
+    "native_evidence_required": false
+  },
+  {
+    "id": "A04-T11",
+    "action": "Crash/restart local ledger process",
+    "expected_pass": "Durable reserved state and effect join intact",
+    "expected_fail": "Lost local idempotency state",
+    "mechanism_mode": "MOCK_ONLY",
+    "native_evidence_required": false
+  },
+  {
+    "id": "A04-T12",
+    "action": "Provider readback altered or missing",
+    "expected_pass": "No verified completion; discrepancy logged",
+    "expected_fail": "Untrusted fabricated receipt accepted",
+    "mechanism_mode": "MOCK_ONLY",
+    "native_evidence_required": false
+  },
+  {
+    "id": "A04-T13",
+    "action": "Amount 0.01 / 499.99 / 500.01",
+    "expected_pass": "Exact cents and boundary acceptance",
+    "expected_fail": "Float or rounding overflow",
+    "mechanism_mode": "MOCK_ONLY",
+    "native_evidence_required": false
+  },
+  {
+    "id": "A04-T14",
+    "action": "Force auth / network 401, 403, 500",
+    "expected_pass": "Correct fail closed and classified retryability",
+    "expected_fail": "Leaks secret or treats failure as success",
+    "mechanism_mode": "MOCK_ONLY",
+    "native_evidence_required": false
+  }
+]
