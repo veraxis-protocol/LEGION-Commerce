@@ -1,0 +1,546 @@
+{
+ "N": 1000,
+ "arch": "A_existing",
+ "boundary": "Gateway.check(db,mission,permit) inside open SQLite transaction",
+ "components": {
+  "auth.canonicalize": {
+   "calls_per_request": 11,
+   "cpu_mean_ms": 1.2366,
+   "wall": {
+    "max": 2.7426,
+    "mean": 1.2371,
+    "p50": 1.2232,
+    "p95": 1.5304,
+    "p99": 1.8829
+   }
+  },
+  "auth.ed25519_verify": {
+   "calls_per_request": 11,
+   "cpu_mean_ms": 4.0634,
+   "wall": {
+    "max": 7.6395,
+    "mean": 4.0626,
+    "p50": 4.0481,
+    "p95": 4.7132,
+    "p99": 6.0749
+   }
+  },
+  "auth.key_and_signature_decode": {
+   "calls_per_request": 11,
+   "cpu_mean_ms": 0.3697,
+   "wall": {
+    "max": 0.781,
+    "mean": 0.3626,
+    "p50": 0.3569,
+    "p95": 0.458,
+    "p99": 0.5503
+   }
+  },
+  "auth.verify_glue": {
+   "calls_per_request": 11,
+   "cpu_mean_ms": 0.3285,
+   "wall": {
+    "max": 0.8083,
+    "mean": 0.371,
+    "p50": 0.3579,
+    "p95": 0.4918,
+    "p99": 0.5692
+   }
+  },
+  "authority.a04_check_predicates": {
+   "calls_per_request": 1,
+   "cpu_mean_ms": 0.1024,
+   "wall": {
+    "max": 0.5126,
+    "mean": 0.1062,
+    "p50": 0.1009,
+    "p95": 0.1491,
+    "p99": 0.2042
+   }
+  },
+  "authority.control_predicates": {
+   "calls_per_request": 1,
+   "cpu_mean_ms": 0.0203,
+   "wall": {
+    "max": 0.0961,
+    "mean": 0.0211,
+    "p50": 0.0221,
+    "p95": 0.0293,
+    "p99": 0.0379
+   }
+  },
+  "authority.readiness_predicates": {
+   "calls_per_request": 1,
+   "cpu_mean_ms": 0.2088,
+   "wall": {
+    "max": 0.6226,
+    "mean": 0.21,
+    "p50": 0.2013,
+    "p95": 0.2805,
+    "p99": 0.3883
+   }
+  },
+  "bridge.assess_predicates": {
+   "calls_per_request": 1,
+   "cpu_mean_ms": 0.3068,
+   "wall": {
+    "max": 0.9631,
+    "mean": 0.3436,
+    "p50": 0.3393,
+    "p95": 0.4339,
+    "p99": 0.5117
+   }
+  },
+  "bridge.bundle_load_and_bindings": {
+   "calls_per_request": 1,
+   "cpu_mean_ms": 1.7156,
+   "wall": {
+    "max": 4.0948,
+    "mean": 1.7213,
+    "p50": 1.7203,
+    "p95": 2.0779,
+    "p99": 2.5097
+   }
+  },
+  "bridge.construct": {
+   "calls_per_request": 1,
+   "cpu_mean_ms": 0.0108,
+   "wall": {
+    "max": 0.095,
+    "mean": 0.011,
+    "p50": 0.0107,
+    "p95": 0.0154,
+    "p99": 0.0188
+   }
+  },
+  "bridge.design_pins_file_read": {
+   "calls_per_request": 1,
+   "cpu_mean_ms": 1.209,
+   "wall": {
+    "max": 3.4409,
+    "mean": 1.1977,
+    "p50": 1.1908,
+    "p95": 1.468,
+    "p99": 1.8433
+   }
+  },
+  "bridge.policy_predicates": {
+   "calls_per_request": 1,
+   "cpu_mean_ms": 0.0913,
+   "wall": {
+    "max": 0.373,
+    "mean": 0.1032,
+    "p50": 0.1036,
+    "p95": 0.1322,
+    "p99": 0.1843
+   }
+  },
+  "core.session_glue": {
+   "calls_per_request": 1,
+   "cpu_mean_ms": 0.4662,
+   "wall": {
+    "max": 4.747,
+    "mean": 0.6079,
+    "p50": 0.62,
+    "p95": 0.7324,
+    "p99": 0.8694
+   }
+  },
+  "core.source_integrity": {
+   "calls_per_request": 2,
+   "cpu_mean_ms": 0.0168,
+   "wall": {
+    "max": 0.1258,
+    "mean": 0.0177,
+    "p50": 0.0167,
+    "p95": 0.0228,
+    "p99": 0.0495
+   }
+  },
+  "core.worker.lock_wait": {
+   "calls_per_request": 1,
+   "cpu_mean_ms": 0.0079,
+   "wall": {
+    "max": 0.1559,
+    "mean": 0.0081,
+    "p50": 0.0077,
+    "p95": 0.0114,
+    "p99": 0.0178
+   }
+  },
+  "core.worker.parent_wait_cpu_residual": {
+   "calls_per_request": 1,
+   "cpu_mean_ms": 0.0805,
+   "wall": {
+    "max": 0.0004,
+    "mean": -0.0125,
+    "p50": -0.0116,
+    "p95": -0.0082,
+    "p99": -0.0021
+   }
+  },
+  "core.worker.parse_response": {
+   "calls_per_request": 1,
+   "cpu_mean_ms": 0.2155,
+   "wall": {
+    "max": 0.4952,
+    "mean": 0.213,
+    "p50": 0.2079,
+    "p95": 0.2949,
+    "p99": 0.351
+   }
+  },
+  "core.worker.pipe_write": {
+   "calls_per_request": 1,
+   "cpu_mean_ms": 0.1548,
+   "wall": {
+    "max": 2.7913,
+    "mean": 0.1575,
+    "p50": 0.1516,
+    "p95": 0.2116,
+    "p99": 0.3874
+   }
+  },
+  "core.worker.serialize_request": {
+   "calls_per_request": 1,
+   "cpu_mean_ms": 0.1914,
+   "wall": {
+    "max": 0.5367,
+    "mean": 0.1901,
+    "p50": 0.1896,
+    "p95": 0.2612,
+    "p99": 0.3197
+   }
+  },
+  "core.worker.transit_and_wake_to_parent": {
+   "calls_per_request": 1,
+   "cpu_mean_ms": 0.0,
+   "wall": {
+    "max": 1.1007,
+    "mean": 0.3269,
+    "p50": 0.3272,
+    "p95": 0.3877,
+    "p99": 0.5016
+   }
+  },
+  "core.worker.transit_and_wake_to_worker": {
+   "calls_per_request": 1,
+   "cpu_mean_ms": 0.0,
+   "wall": {
+    "max": 0.2811,
+    "mean": 0.0948,
+    "p50": 0.1023,
+    "p95": 0.121,
+    "p99": 0.1652
+   }
+  },
+  "core.worker.watchdog_thread_start": {
+   "calls_per_request": 1,
+   "cpu_mean_ms": 0.262,
+   "wall": {
+    "max": 2.8318,
+    "mean": 0.5563,
+    "p50": 0.5514,
+    "p95": 0.6981,
+    "p99": 0.8874
+   }
+  },
+  "core.worker.worker_compute": {
+   "calls_per_request": 1,
+   "cpu_mean_ms": 0.0,
+   "wall": {
+    "max": 9.6701,
+    "mean": 6.1298,
+    "p50": 6.069,
+    "p95": 6.9855,
+    "p99": 8.6147
+   }
+  },
+  "core.worker.worker_json_parse": {
+   "calls_per_request": 1,
+   "cpu_mean_ms": 0.0,
+   "wall": {
+    "max": 0.5073,
+    "mean": 0.243,
+    "p50": 0.2452,
+    "p95": 0.3042,
+    "p99": 0.3683
+   }
+  },
+  "core.worker.worker_serialize": {
+   "calls_per_request": 1,
+   "cpu_mean_ms": 0.0,
+   "wall": {
+    "max": 0.5991,
+    "mean": 0.3034,
+    "p50": 0.2959,
+    "p95": 0.412,
+    "p99": 0.5014
+   }
+  },
+  "digest.canonicalize": {
+   "calls_per_request": 13,
+   "cpu_mean_ms": 2.3191,
+   "wall": {
+    "max": 3.9265,
+    "mean": 2.3834,
+    "p50": 2.3733,
+    "p95": 2.8768,
+    "p99": 3.3692
+   }
+  },
+  "digest.sha256": {
+   "calls_per_request": 13,
+   "cpu_mean_ms": 0.2539,
+   "wall": {
+    "max": 0.8663,
+    "mean": 0.2532,
+    "p50": 0.2474,
+    "p95": 0.3285,
+    "p99": 0.3965
+   }
+  },
+  "lean.legion_decide.lock_wait": {
+   "calls_per_request": 1,
+   "cpu_mean_ms": 0.018,
+   "wall": {
+    "max": 0.3727,
+    "mean": 0.0312,
+    "p50": 0.0108,
+    "p95": 0.1369,
+    "p99": 0.1718
+   }
+  },
+  "lean.legion_decide.parse_response": {
+   "calls_per_request": 1,
+   "cpu_mean_ms": 0.0617,
+   "wall": {
+    "max": 2.3359,
+    "mean": 0.0609,
+    "p50": 0.0338,
+    "p95": 0.0632,
+    "p99": 0.7395
+   }
+  },
+  "lean.legion_decide.pipe_write": {
+   "calls_per_request": 1,
+   "cpu_mean_ms": 0.0599,
+   "wall": {
+    "max": 0.7184,
+    "mean": 0.0601,
+    "p50": 0.073,
+    "p95": 0.0939,
+    "p99": 0.1595
+   }
+  },
+  "lean.legion_decide.roundtrip_wait": {
+   "calls_per_request": 1,
+   "cpu_mean_ms": 0.0578,
+   "wall": {
+    "max": 2.5899,
+    "mean": 0.3492,
+    "p50": 0.381,
+    "p95": 0.4971,
+    "p99": 0.648
+   }
+  },
+  "lean.legion_decide.serialize_request": {
+   "calls_per_request": 1,
+   "cpu_mean_ms": 0.0815,
+   "wall": {
+    "max": 0.484,
+    "mean": 0.0806,
+    "p50": 0.0874,
+    "p95": 0.1397,
+    "p99": 0.1975
+   }
+  },
+  "lean.legion_decide.watchdog_thread_start": {
+   "calls_per_request": 1,
+   "cpu_mean_ms": 0.2648,
+   "wall": {
+    "max": 1.66,
+    "mean": 0.4765,
+    "p50": 0.4631,
+    "p95": 0.6901,
+    "p99": 0.8816
+   }
+  },
+  "lean.zverdict.compare_glue": {
+   "calls_per_request": 1,
+   "cpu_mean_ms": 0.1209,
+   "wall": {
+    "max": 0.5195,
+    "mean": 0.1384,
+    "p50": 0.1438,
+    "p95": 0.1913,
+    "p99": 0.2717
+   }
+  },
+  "lean.zverdict.lock_wait": {
+   "calls_per_request": 1,
+   "cpu_mean_ms": 0.0068,
+   "wall": {
+    "max": 0.2091,
+    "mean": 0.0087,
+    "p50": 0.0059,
+    "p95": 0.0113,
+    "p99": 0.1683
+   }
+  },
+  "lean.zverdict.pipe_write": {
+   "calls_per_request": 1,
+   "cpu_mean_ms": 0.0457,
+   "wall": {
+    "max": 0.2217,
+    "mean": 0.0457,
+    "p50": 0.0477,
+    "p95": 0.0648,
+    "p99": 0.1308
+   }
+  },
+  "lean.zverdict.roundtrip_wait": {
+   "calls_per_request": 1,
+   "cpu_mean_ms": 0.0518,
+   "wall": {
+    "max": 0.2814,
+    "mean": 0.1418,
+    "p50": 0.1555,
+    "p95": 0.1715,
+    "p99": 0.2104
+   }
+  },
+  "lean.zverdict.watchdog_thread_start": {
+   "calls_per_request": 1,
+   "cpu_mean_ms": 0.1905,
+   "wall": {
+    "max": 1.3272,
+    "mean": 0.3838,
+    "p50": 0.4135,
+    "p95": 0.5225,
+    "p99": 0.717
+   }
+  },
+  "python.gc_pause(overlapping)": {
+   "calls_per_request": 0.047,
+   "cpu_mean_ms": 0.0,
+   "wall": {
+    "max": 4.1178,
+    "mean": 0.0398,
+    "p50": 0.0,
+    "p95": 0.0,
+    "p99": 0.7126
+   }
+  },
+  "verdict.gateway_sqlite_and_dispatch": {
+   "calls_per_request": 1,
+   "cpu_mean_ms": 0.1009,
+   "wall": {
+    "max": 0.4049,
+    "mean": 0.1004,
+    "p50": 0.1062,
+    "p95": 0.1245,
+    "p99": 0.1788
+   }
+  }
+ },
+ "end_to_end": {
+  "max": 32.6535,
+  "mean": 23.1103,
+  "p50": 23.0075,
+  "p95": 26.2912,
+  "p99": 29.5907
+ },
+ "end_to_end_main_thread_cpu": {
+  "max": 21.3868,
+  "mean": 14.7041,
+  "p50": 14.6662,
+  "p95": 17.0431,
+  "p99": 19.8872
+ },
+ "first_request": {
+  "components": {
+   "auth.canonicalize": 1.3111,
+   "auth.ed25519_verify": 4.4343,
+   "auth.key_and_signature_decode": 0.4547,
+   "auth.verify_glue": 0.4434,
+   "authority.a04_check_predicates": 0.1402,
+   "authority.control_predicates": 0.0421,
+   "authority.readiness_predicates": 0.2811,
+   "bridge.assess_predicates": 0.4222,
+   "bridge.bundle_load_and_bindings": 29.1517,
+   "bridge.construct": 0.017,
+   "bridge.design_pins_file_read": 1.3517,
+   "bridge.policy_predicates": 0.1195,
+   "core.session_glue": 0.6821,
+   "core.source_integrity": 0.0194,
+   "core.worker.lock_wait": 0.0082,
+   "core.worker.parent_wait_cpu_residual": -0.0115,
+   "core.worker.parse_response": 0.2113,
+   "core.worker.pipe_write": 0.1678,
+   "core.worker.serialize_request": 0.2003,
+   "core.worker.transit_and_wake_to_parent": 0.3318,
+   "core.worker.transit_and_wake_to_worker": 0.1272,
+   "core.worker.watchdog_thread_start": 0.6842,
+   "core.worker.worker_compute": 7.8066,
+   "core.worker.worker_json_parse": 0.2815,
+   "core.worker.worker_serialize": 0.3814,
+   "digest.canonicalize": 2.5269,
+   "digest.sha256": 0.3428,
+   "lean.legion_decide.lock_wait": 0.1378,
+   "lean.legion_decide.parse_response": 0.0388,
+   "lean.legion_decide.pipe_write": 0.0939,
+   "lean.legion_decide.roundtrip_wait": 0.4696,
+   "lean.legion_decide.serialize_request": 0.1127,
+   "lean.legion_decide.watchdog_thread_start": 0.6012,
+   "lean.zverdict.compare_glue": 0.171,
+   "lean.zverdict.lock_wait": 0.0072,
+   "lean.zverdict.pipe_write": 0.0651,
+   "lean.zverdict.roundtrip_wait": 0.21,
+   "lean.zverdict.watchdog_thread_start": 0.4336,
+   "verdict.gateway_sqlite_and_dispatch": 0.3054
+  },
+  "first_request_ms": 54.6238
+ },
+ "gc": {
+  "pause_ms_total": 44.3213,
+  "pauses": 54
+ },
+ "git_head": "ed8b3e135ec2bfc911b56b58ca38b455a9946c1d",
+ "host": {
+  "ac_line": "OFFLINE_BATTERY",
+  "at_unix": 1793924717.9296837,
+  "battery_percent": 88,
+  "battery_saver_on": false,
+  "cpu": "Intel64 Family 6 Model 140 Stepping 1, GenuineIntel",
+  "logical_cpus": 8,
+  "power_scheme": "Power Scheme GUID: 381b4222-f694-41f0-9685-ff5bb260df2e  (Balanced)",
+  "python_speed_index_ms_2e6_loop": 234.78
+ },
+ "import_ms": 616.8161,
+ "mode": "warm",
+ "python": "3.14.7 (tags/v3.14.7:823f032, Aug  5 2026, 10:51:32) [MSC v.1944 64 bit (AMD64)]",
+ "reconstruction": {
+  "explained_fraction_of_mean": 0.9994,
+  "sum_of_exclusive_components": {
+   "max": 32.6419,
+   "mean": 23.0975,
+   "p50": 22.9932,
+   "p95": 26.2748,
+   "p99": 29.5768
+  },
+  "unattributed_residual": {
+   "max": 0.0585,
+   "mean": 0.0128,
+   "p50": 0.0137,
+   "p95": 0.0172,
+   "p99": 0.0248
+  }
+ },
+ "setup": {
+  "fixture_gateway_ms": 3251.2603,
+  "sources_and_session_spawn_ms": 5839.1592
+ },
+ "tsc_hz": 1475245303.2439117,
+ "warmup": 100
+}

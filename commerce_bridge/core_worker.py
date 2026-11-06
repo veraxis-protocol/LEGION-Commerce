@@ -12,22 +12,41 @@ from datetime import datetime,timezone
 from pathlib import Path
 
 
-_LOOP=None
+_RESOLVED={}
 
 
 def _run(coroutine):
-    """One event loop per worker process (asyncio.run built a new loop per fact)."""
-    global _LOOP
-    if _LOOP is None or _LOOP.is_closed(): _LOOP=asyncio.new_event_loop()
-    return _LOOP.run_until_complete(coroutine)
+    """Drive a Core coroutine to completion.
+
+    LATENCY-004: ZtlEvidenceService.verdict completes without suspending unless its
+    TIMEOUT fault is injected (never in this worker). Such a coroutine is completed by
+    its first send(), the same step a Task would execute, without a Proactor event-loop
+    iteration (~0.9 ms on battery). If it ever suspends, it is closed and the
+    calculation fails closed (worker error -> parent denial).
+    """
+    try:
+        coroutine.send(None)
+    except StopIteration as done:
+        return done.value
+    coroutine.close()
+    raise RuntimeError("CORE_COROUTINE_SUSPENDED")
+
+
+def _resolved(path):
+    # LATENCY-004: Path.resolve() walked the filesystem 3x per request; the worker's
+    # argv paths are fixed for its lifetime, so they are resolved once.
+    value=_RESOLVED.get(path)
+    if value is None: value=_RESOLVED[path]=str(Path(path).resolve())
+    return value
 
 
 def calculate(data,legion,swarm):
     # Idempotent: v2 prepended both paths on every request (unbounded sys.path growth).
-    for root in (str(Path(swarm).resolve()),str(Path(legion).resolve())):
+    # sys.path is still re-ordered per request exactly as before.
+    for root in (_resolved(swarm),_resolved(legion)):
         if root in sys.path: sys.path.remove(root)
         sys.path.insert(0,root)
-    os.environ["LEGION_ZTL_SWARM_DIR"]=str(Path(swarm).resolve())
+    os.environ["LEGION_ZTL_SWARM_DIR"]=_resolved(swarm)
     from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PublicKey
     from tests.legion_overlay.ztl_service import ZtlEvidenceService
     from tests.legion_struct.struct_controller import StructMissionController

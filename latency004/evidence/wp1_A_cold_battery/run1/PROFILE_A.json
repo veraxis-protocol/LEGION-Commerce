@@ -1,0 +1,535 @@
+{
+ "N": 1,
+ "arch": "A_existing",
+ "boundary": "Gateway.check(db,mission,permit) inside open SQLite transaction",
+ "components": {
+  "auth.canonicalize": {
+   "calls_per_request": 11,
+   "cpu_mean_ms": 1.2651,
+   "wall": {
+    "max": 1.252,
+    "mean": 1.252,
+    "p50": 1.252,
+    "p95": 1.252,
+    "p99": 1.252
+   }
+  },
+  "auth.ed25519_verify": {
+   "calls_per_request": 11,
+   "cpu_mean_ms": 4.0552,
+   "wall": {
+    "max": 4.038,
+    "mean": 4.038,
+    "p50": 4.038,
+    "p95": 4.038,
+    "p99": 4.038
+   }
+  },
+  "auth.key_and_signature_decode": {
+   "calls_per_request": 11,
+   "cpu_mean_ms": 0.4323,
+   "wall": {
+    "max": 0.4222,
+    "mean": 0.4222,
+    "p50": 0.4222,
+    "p95": 0.4222,
+    "p99": 0.4222
+   }
+  },
+  "auth.verify_glue": {
+   "calls_per_request": 11,
+   "cpu_mean_ms": 0.3355,
+   "wall": {
+    "max": 0.3701,
+    "mean": 0.3701,
+    "p50": 0.3701,
+    "p95": 0.3701,
+    "p99": 0.3701
+   }
+  },
+  "authority.a04_check_predicates": {
+   "calls_per_request": 1,
+   "cpu_mean_ms": 0.1214,
+   "wall": {
+    "max": 0.1233,
+    "mean": 0.1233,
+    "p50": 0.1233,
+    "p95": 0.1233,
+    "p99": 0.1233
+   }
+  },
+  "authority.control_predicates": {
+   "calls_per_request": 1,
+   "cpu_mean_ms": 0.0349,
+   "wall": {
+    "max": 0.0419,
+    "mean": 0.0419,
+    "p50": 0.0419,
+    "p95": 0.0419,
+    "p99": 0.0419
+   }
+  },
+  "authority.readiness_predicates": {
+   "calls_per_request": 1,
+   "cpu_mean_ms": 0.2539,
+   "wall": {
+    "max": 0.2529,
+    "mean": 0.2529,
+    "p50": 0.2529,
+    "p95": 0.2529,
+    "p99": 0.2529
+   }
+  },
+  "bridge.assess_predicates": {
+   "calls_per_request": 1,
+   "cpu_mean_ms": 0.3915,
+   "wall": {
+    "max": 0.4101,
+    "mean": 0.4101,
+    "p50": 0.4101,
+    "p95": 0.4101,
+    "p99": 0.4101
+   }
+  },
+  "bridge.bundle_load_and_bindings": {
+   "calls_per_request": 1,
+   "cpu_mean_ms": 8.8016,
+   "wall": {
+    "max": 19.3529,
+    "mean": 19.3529,
+    "p50": 19.3529,
+    "p95": 19.3529,
+    "p99": 19.3529
+   }
+  },
+  "bridge.construct": {
+   "calls_per_request": 1,
+   "cpu_mean_ms": 0.0182,
+   "wall": {
+    "max": 0.0186,
+    "mean": 0.0186,
+    "p50": 0.0186,
+    "p95": 0.0186,
+    "p99": 0.0186
+   }
+  },
+  "bridge.design_pins_file_read": {
+   "calls_per_request": 1,
+   "cpu_mean_ms": 1.3955,
+   "wall": {
+    "max": 1.387,
+    "mean": 1.387,
+    "p50": 1.387,
+    "p95": 1.387,
+    "p99": 1.387
+   }
+  },
+  "bridge.policy_predicates": {
+   "calls_per_request": 1,
+   "cpu_mean_ms": 0.1152,
+   "wall": {
+    "max": 0.1223,
+    "mean": 0.1223,
+    "p50": 0.1223,
+    "p95": 0.1223,
+    "p99": 0.1223
+   }
+  },
+  "core.session_glue": {
+   "calls_per_request": 1,
+   "cpu_mean_ms": 0.503,
+   "wall": {
+    "max": 0.646,
+    "mean": 0.646,
+    "p50": 0.646,
+    "p95": 0.646,
+    "p99": 0.646
+   }
+  },
+  "core.source_integrity": {
+   "calls_per_request": 2,
+   "cpu_mean_ms": 0.0167,
+   "wall": {
+    "max": 0.0172,
+    "mean": 0.0172,
+    "p50": 0.0172,
+    "p95": 0.0172,
+    "p99": 0.0172
+   }
+  },
+  "core.worker.lock_wait": {
+   "calls_per_request": 1,
+   "cpu_mean_ms": 0.0074,
+   "wall": {
+    "max": 0.0076,
+    "mean": 0.0076,
+    "p50": 0.0076,
+    "p95": 0.0076,
+    "p99": 0.0076
+   }
+  },
+  "core.worker.parent_wait_cpu_residual": {
+   "calls_per_request": 1,
+   "cpu_mean_ms": 0.1308,
+   "wall": {
+    "max": -0.0095,
+    "mean": -0.0095,
+    "p50": -0.0095,
+    "p95": -0.0095,
+    "p99": -0.0095
+   }
+  },
+  "core.worker.parse_response": {
+   "calls_per_request": 1,
+   "cpu_mean_ms": 0.2359,
+   "wall": {
+    "max": 0.2342,
+    "mean": 0.2342,
+    "p50": 0.2342,
+    "p95": 0.2342,
+    "p99": 0.2342
+   }
+  },
+  "core.worker.pipe_write": {
+   "calls_per_request": 1,
+   "cpu_mean_ms": 0.169,
+   "wall": {
+    "max": 0.1657,
+    "mean": 0.1657,
+    "p50": 0.1657,
+    "p95": 0.1657,
+    "p99": 0.1657
+   }
+  },
+  "core.worker.serialize_request": {
+   "calls_per_request": 1,
+   "cpu_mean_ms": 0.1868,
+   "wall": {
+    "max": 0.1855,
+    "mean": 0.1855,
+    "p50": 0.1855,
+    "p95": 0.1855,
+    "p99": 0.1855
+   }
+  },
+  "core.worker.transit_and_wake_to_parent": {
+   "calls_per_request": 1,
+   "cpu_mean_ms": 0.0,
+   "wall": {
+    "max": 0.3709,
+    "mean": 0.3709,
+    "p50": 0.3709,
+    "p95": 0.3709,
+    "p99": 0.3709
+   }
+  },
+  "core.worker.transit_and_wake_to_worker": {
+   "calls_per_request": 1,
+   "cpu_mean_ms": 0.0,
+   "wall": {
+    "max": 0.1085,
+    "mean": 0.1085,
+    "p50": 0.1085,
+    "p95": 0.1085,
+    "p99": 0.1085
+   }
+  },
+  "core.worker.watchdog_thread_start": {
+   "calls_per_request": 1,
+   "cpu_mean_ms": 0.2934,
+   "wall": {
+    "max": 0.6453,
+    "mean": 0.6453,
+    "p50": 0.6453,
+    "p95": 0.6453,
+    "p99": 0.6453
+   }
+  },
+  "core.worker.worker_compute": {
+   "calls_per_request": 1,
+   "cpu_mean_ms": 0.0,
+   "wall": {
+    "max": 6.1677,
+    "mean": 6.1677,
+    "p50": 6.1677,
+    "p95": 6.1677,
+    "p99": 6.1677
+   }
+  },
+  "core.worker.worker_json_parse": {
+   "calls_per_request": 1,
+   "cpu_mean_ms": 0.0,
+   "wall": {
+    "max": 0.2433,
+    "mean": 0.2433,
+    "p50": 0.2433,
+    "p95": 0.2433,
+    "p99": 0.2433
+   }
+  },
+  "core.worker.worker_serialize": {
+   "calls_per_request": 1,
+   "cpu_mean_ms": 0.0,
+   "wall": {
+    "max": 0.2931,
+    "mean": 0.2931,
+    "p50": 0.2931,
+    "p95": 0.2931,
+    "p99": 0.2931
+   }
+  },
+  "digest.canonicalize": {
+   "calls_per_request": 13,
+   "cpu_mean_ms": 2.496,
+   "wall": {
+    "max": 2.5857,
+    "mean": 2.5857,
+    "p50": 2.5857,
+    "p95": 2.5857,
+    "p99": 2.5857
+   }
+  },
+  "digest.sha256": {
+   "calls_per_request": 13,
+   "cpu_mean_ms": 0.2995,
+   "wall": {
+    "max": 0.2967,
+    "mean": 0.2967,
+    "p50": 0.2967,
+    "p95": 0.2967,
+    "p99": 0.2967
+   }
+  },
+  "lean.legion_decide.lock_wait": {
+   "calls_per_request": 1,
+   "cpu_mean_ms": 0.0583,
+   "wall": {
+    "max": 0.1384,
+    "mean": 0.1384,
+    "p50": 0.1384,
+    "p95": 0.1384,
+    "p99": 0.1384
+   }
+  },
+  "lean.legion_decide.parse_response": {
+   "calls_per_request": 1,
+   "cpu_mean_ms": 0.0356,
+   "wall": {
+    "max": 0.0353,
+    "mean": 0.0353,
+    "p50": 0.0353,
+    "p95": 0.0353,
+    "p99": 0.0353
+   }
+  },
+  "lean.legion_decide.pipe_write": {
+   "calls_per_request": 1,
+   "cpu_mean_ms": 0.092,
+   "wall": {
+    "max": 0.0891,
+    "mean": 0.0891,
+    "p50": 0.0891,
+    "p95": 0.0891,
+    "p99": 0.0891
+   }
+  },
+  "lean.legion_decide.roundtrip_wait": {
+   "calls_per_request": 1,
+   "cpu_mean_ms": 0.0649,
+   "wall": {
+    "max": 0.4652,
+    "mean": 0.4652,
+    "p50": 0.4652,
+    "p95": 0.4652,
+    "p99": 0.4652
+   }
+  },
+  "lean.legion_decide.serialize_request": {
+   "calls_per_request": 1,
+   "cpu_mean_ms": 0.1503,
+   "wall": {
+    "max": 0.1495,
+    "mean": 0.1495,
+    "p50": 0.1495,
+    "p95": 0.1495,
+    "p99": 0.1495
+   }
+  },
+  "lean.legion_decide.watchdog_thread_start": {
+   "calls_per_request": 1,
+   "cpu_mean_ms": 0.3272,
+   "wall": {
+    "max": 0.5599,
+    "mean": 0.5599,
+    "p50": 0.5599,
+    "p95": 0.5599,
+    "p99": 0.5599
+   }
+  },
+  "lean.zverdict.compare_glue": {
+   "calls_per_request": 1,
+   "cpu_mean_ms": 0.1509,
+   "wall": {
+    "max": 0.1689,
+    "mean": 0.1689,
+    "p50": 0.1689,
+    "p95": 0.1689,
+    "p99": 0.1689
+   }
+  },
+  "lean.zverdict.lock_wait": {
+   "calls_per_request": 1,
+   "cpu_mean_ms": 0.0071,
+   "wall": {
+    "max": 0.0074,
+    "mean": 0.0074,
+    "p50": 0.0074,
+    "p95": 0.0074,
+    "p99": 0.0074
+   }
+  },
+  "lean.zverdict.pipe_write": {
+   "calls_per_request": 1,
+   "cpu_mean_ms": 0.059,
+   "wall": {
+    "max": 0.0566,
+    "mean": 0.0566,
+    "p50": 0.0566,
+    "p95": 0.0566,
+    "p99": 0.0566
+   }
+  },
+  "lean.zverdict.roundtrip_wait": {
+   "calls_per_request": 1,
+   "cpu_mean_ms": 0.0636,
+   "wall": {
+    "max": 0.1704,
+    "mean": 0.1704,
+    "p50": 0.1704,
+    "p95": 0.1704,
+    "p99": 0.1704
+   }
+  },
+  "lean.zverdict.watchdog_thread_start": {
+   "calls_per_request": 1,
+   "cpu_mean_ms": 0.2211,
+   "wall": {
+    "max": 0.4656,
+    "mean": 0.4656,
+    "p50": 0.4656,
+    "p95": 0.4656,
+    "p99": 0.4656
+   }
+  },
+  "verdict.gateway_sqlite_and_dispatch": {
+   "calls_per_request": 1,
+   "cpu_mean_ms": 0.2994,
+   "wall": {
+    "max": 0.3012,
+    "mean": 0.3012,
+    "p50": 0.3012,
+    "p95": 0.3012,
+    "p99": 0.3012
+   }
+  }
+ },
+ "end_to_end": {
+  "max": 42.4081,
+  "mean": 42.4081,
+  "p50": 42.4081,
+  "p95": 42.4081,
+  "p99": 42.4081
+ },
+ "end_to_end_main_thread_cpu": {
+  "max": 23.1177,
+  "mean": 23.1177,
+  "p50": 23.1177,
+  "p95": 23.1177,
+  "p99": 23.1177
+ },
+ "first_request": {
+  "components": {
+   "auth.canonicalize": 1.252,
+   "auth.ed25519_verify": 4.038,
+   "auth.key_and_signature_decode": 0.4222,
+   "auth.verify_glue": 0.3701,
+   "authority.a04_check_predicates": 0.1233,
+   "authority.control_predicates": 0.0419,
+   "authority.readiness_predicates": 0.2529,
+   "bridge.assess_predicates": 0.4101,
+   "bridge.bundle_load_and_bindings": 19.3529,
+   "bridge.construct": 0.0186,
+   "bridge.design_pins_file_read": 1.387,
+   "bridge.policy_predicates": 0.1223,
+   "core.session_glue": 0.646,
+   "core.source_integrity": 0.0172,
+   "core.worker.lock_wait": 0.0076,
+   "core.worker.parent_wait_cpu_residual": -0.0095,
+   "core.worker.parse_response": 0.2342,
+   "core.worker.pipe_write": 0.1657,
+   "core.worker.serialize_request": 0.1855,
+   "core.worker.transit_and_wake_to_parent": 0.3709,
+   "core.worker.transit_and_wake_to_worker": 0.1085,
+   "core.worker.watchdog_thread_start": 0.6453,
+   "core.worker.worker_compute": 6.1677,
+   "core.worker.worker_json_parse": 0.2433,
+   "core.worker.worker_serialize": 0.2931,
+   "digest.canonicalize": 2.5857,
+   "digest.sha256": 0.2967,
+   "lean.legion_decide.lock_wait": 0.1384,
+   "lean.legion_decide.parse_response": 0.0353,
+   "lean.legion_decide.pipe_write": 0.0891,
+   "lean.legion_decide.roundtrip_wait": 0.4652,
+   "lean.legion_decide.serialize_request": 0.1495,
+   "lean.legion_decide.watchdog_thread_start": 0.5599,
+   "lean.zverdict.compare_glue": 0.1689,
+   "lean.zverdict.lock_wait": 0.0074,
+   "lean.zverdict.pipe_write": 0.0566,
+   "lean.zverdict.roundtrip_wait": 0.1704,
+   "lean.zverdict.watchdog_thread_start": 0.4656,
+   "verdict.gateway_sqlite_and_dispatch": 0.3012
+  },
+  "first_request_ms": 42.4081
+ },
+ "gc": {
+  "pause_ms_total": 2.3696,
+  "pauses": 4
+ },
+ "git_head": "ed8b3e135ec2bfc911b56b58ca38b455a9946c1d",
+ "host": {
+  "ac_line": "OFFLINE_BATTERY",
+  "at_unix": 1793924749.7684553,
+  "battery_percent": 88,
+  "battery_saver_on": false,
+  "cpu": "Intel64 Family 6 Model 140 Stepping 1, GenuineIntel",
+  "logical_cpus": 8,
+  "power_scheme": "Power Scheme GUID: 381b4222-f694-41f0-9685-ff5bb260df2e  (Balanced)",
+  "python_speed_index_ms_2e6_loop": 252.04
+ },
+ "import_ms": 610.6705,
+ "mode": "warm",
+ "python": "3.14.7 (tags/v3.14.7:823f032, Aug  5 2026, 10:51:32) [MSC v.1944 64 bit (AMD64)]",
+ "reconstruction": {
+  "explained_fraction_of_mean": 0.9988,
+  "sum_of_exclusive_components": {
+   "max": 42.3567,
+   "mean": 42.3567,
+   "p50": 42.3567,
+   "p95": 42.3567,
+   "p99": 42.3567
+  },
+  "unattributed_residual": {
+   "max": 0.0514,
+   "mean": 0.0514,
+   "p50": 0.0514,
+   "p95": 0.0514,
+   "p99": 0.0514
+  }
+ },
+ "setup": {
+  "fixture_gateway_ms": 3333.1016,
+  "sources_and_session_spawn_ms": 5770.3674
+ },
+ "tsc_hz": 1490369599.4618194,
+ "warmup": 0
+}

@@ -1,0 +1,28 @@
+{
+ "mode": "alloc",
+ "N": 300,
+ "peak_bytes_per_request": {
+  "p50": 159134.0,
+  "p95": 159971.0,
+  "p99": 160089.0,
+  "mean": 158614.8233,
+  "max": 161113.0
+ },
+ "retained_bytes_per_request_mean": 2148.12,
+ "note": "stats() units here are bytes (values scaled by 1e6 before /1e6)",
+ "top_files": [
+  "C:\\Users\\Administrator\\Documents\\ChatGPT\\Hackathons\\LEGION-Commerce-Q002\\latency004\\profile_wp1.py:0: size=430 KiB, count=7757, average=57 B",
+  "C:\\Users\\Administrator\\Documents\\ChatGPT\\Hackathons\\LEGION-Commerce-Q002\\commerce_adapter\\contracts.py:0: size=112 KiB, count=935, average=122 B",
+  "C:\\Users\\Administrator\\AppData\\Local\\Python\\pythoncore-3.14-64\\Lib\\json\\decoder.py:0: size=32.5 KiB, count=1017, average=33 B",
+  "C:\\Users\\Administrator\\Documents\\ChatGPT\\Hackathons\\LEGION-Commerce-Q002\\commerce_bridge\\qualified.py:0: size=21.6 KiB, count=13, average=1704 B",
+  "C:\\Users\\Administrator\\AppData\\Local\\Python\\pythoncore-3.14-64\\Lib\\pathlib\\__init__.py:0: size=15.7 KiB, count=273, average=59 B",
+  "C:\\Users\\Administrator\\Documents\\ChatGPT\\Hackathons\\LEGION-Commerce-Q002\\commerce_adapter\\gateway.py:0: size=9080 B, count=104, average=87 B",
+  "C:\\Users\\Administrator\\Documents\\ChatGPT\\Hackathons\\LEGION-Commerce-Q002\\commerce_bridge\\witness.py:0: size=8565 B, count=4, average=2141 B",
+  "C:\\Users\\Administrator\\AppData\\Local\\Python\\pythoncore-3.14-64\\Lib\\threading.py:0: size=1832 B, count=22, average=83 B",
+  "C:\\Users\\Administrator\\AppData\\Local\\Python\\pythoncore-3.14-64\\Lib\\json\\encoder.py:0: size=464 B, count=8, average=58 B",
+  "C:\\Users\\Administrator\\AppData\\Local\\Python\\pythoncore-3.14-64\\Lib\\encodings\\cp1252.py:0: size=322 B, count=2, average=161 B",
+  "C:\\Users\\Administrator\\Documents\\ChatGPT\\Hackathons\\LEGION-Commerce-Q002\\commerce_bridge\\admission.py:0: size=248 B, count=4, average=62 B",
+  "C:\\Users\\Administrator\\Documents\\ChatGPT\\Hackathons\\LEGION-Commerce-Q002\\commerce_bridge\\runtime.py:0: size=232 B, count=4, average=58 B",
+  "C:\\Users\\Administrator\\Documents\\ChatGPT\\Hackathons\\LEGION-Commerce-Q002\\latency004\\latency004_cpu.py:0: size=72 B, count=1, average=72 B"
+ ]
+}
