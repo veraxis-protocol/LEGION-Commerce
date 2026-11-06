@@ -1,0 +1,76 @@
+{
+ "arch": "BCh",
+ "checks": {
+  "closed_session_denies": true,
+  "concurrency_zero_mismatch": true,
+  "crash_during_request_denied": true,
+  "hang_denied_within_bound": true,
+  "restart_after_crash_serves": true,
+  "restart_after_hang_serves": true,
+  "unauthorized_effects_zero": true
+ },
+ "host": {
+  "ac_line": "ONLINE_AC",
+  "at_unix": 1793940014.723291,
+  "battery_percent": 100,
+  "battery_saver_on": false,
+  "cpu": "Intel64 Family 6 Model 140 Stepping 1, GenuineIntel",
+  "logical_cpus": 8,
+  "power_scheme": "Power Scheme GUID: 381b4222-f694-41f0-9685-ff5bb260df2e  (Balanced)",
+  "python_speed_index_ms_2e6_loop": 101.02
+ },
+ "pass": true,
+ "trials": {
+  "baseline": [
+   "ALLOW",
+   "ALLOW",
+   "ALLOW"
+  ],
+  "concurrency": {
+   "by_kind": {
+    "forged_permit": {
+     "DENY:INVALID_SIGNATURE": 400
+    },
+    "revoked_control": {
+     "DENY:REVOKED_PERMIT": 400
+    },
+    "valid": {
+     "ALLOW": 400
+    }
+   },
+   "false_admission": 0,
+   "mismatch": 0,
+   "seconds": 3.99,
+   "threads": 8,
+   "total": 1200
+  },
+  "crash_during_request": {
+   "crashed_request": "DENY:QUALIFIED_WORKER_TIMEOUT_OR_PROTOCOL",
+   "next": "ALLOW",
+   "provider_calls": 0,
+   "restarts": 1
+  },
+  "crash_while_idle": {
+   "next": "ALLOW",
+   "restarts": 1
+  },
+  "hang_timeout": {
+   "bound_seconds": 0.5,
+   "hung_request": "DENY:QUALIFIED_WORKER_TIMEOUT",
+   "next": "ALLOW",
+   "restarts": 1,
+   "seconds_to_denial": 0.512,
+   "suspended_pids": [
+    3780,
+    15020,
+    21304,
+    23092,
+    24244,
+    29032,
+    29916
+   ]
+  },
+  "provider_calls_total": 0,
+  "restart_refused_after_session_close": "DENY:QUALIFIED_SESSION_CLOSED"
+ }
+}

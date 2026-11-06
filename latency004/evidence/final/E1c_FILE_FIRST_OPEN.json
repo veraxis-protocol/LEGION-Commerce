@@ -1,0 +1,22 @@
+{
+ "no_readback_gateway_first_open": {
+  "p50": 0.824,
+  "p95": 1.302,
+  "max": 25.628
+ },
+ "no_readback_gateway_second_open": {
+  "p50": 0.233,
+  "p95": 0.284,
+  "max": 0.606
+ },
+ "writer_readback_gateway_first_open": {
+  "p50": 0.237,
+  "p95": 0.339,
+  "max": 1.306
+ },
+ "writer_readback_gateway_second_open": {
+  "p50": 0.231,
+  "p95": 0.288,
+  "max": 0.611
+ }
+}

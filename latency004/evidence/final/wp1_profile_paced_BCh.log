@@ -1,0 +1,23 @@
+﻿BCh paced 20.0 {'p50': 2.9394, 'p95': 3.4136, 'p99': 4.0599, 'mean': 2.9944, 'max': 6.077}
+  timeline.worker_critical_path_dispatch_to_answer           mean   1.7865 p95   2.0880
+  timeline.worker_cpu                                        mean   1.5416 p95   1.8090
+  core.worker.exposed_wait                                   mean   1.2322 p95   1.5444
+  timeline.worker_core_alpha_oracle                          mean   1.1522 p95   1.3224
+  verdict.gateway_sqlite_and_dispatch                        mean   0.6687 p95   0.8320
+  timeline.parent_work_overlapped_after_dispatch             mean   0.5543 p95   0.6569
+  canonicalize                                               mean   0.4450 p95   0.5362
+  timeline.worker_checks_glue                                mean   0.2411 p95   0.4152
+  timeline.worker_decider_and_witness_wait                   mean   0.1989 p95   0.2761
+  core.dispatch_serialize_write                              mean   0.1623 p95   0.2387
+  digest.sha256_glue                                         mean   0.1025 p95   0.1318
+  timeline.transit_and_wake_to_parent                        mean   0.0992 p95   0.1495
+  timeline.worker_json_parse                                 mean   0.0940 p95   0.1706
+  auth.verify_memo_glue                                      mean   0.0899 p95   0.1123
+  authority.a04_and_bundle_predicates                        mean   0.0673 p95   0.0812
+  bridge.assess_post_dispatch                                mean   0.0629 p95   0.0912
+  core.collect_parse_glue                                    mean   0.0606 p95   0.1070
+  authority.readiness_predicates                             mean   0.0499 p95   0.0607
+  timeline.worker_serialize                                  mean   0.0404 p95   0.0899
+  bridge.assess_pre_dispatch                                 mean   0.0224 p95   0.0264
+  bridge.policy_predicates                                   mean   0.0129 p95   0.0141
+  authority.control_predicates                               mean   0.0092 p95   0.0146

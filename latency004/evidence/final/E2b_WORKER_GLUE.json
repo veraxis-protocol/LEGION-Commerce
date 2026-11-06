@@ -1,0 +1,36 @@
+{
+ "delta_mean_ms": 0.5395,
+ "first_differences": [],
+ "host": {
+  "ac_line": "ONLINE_AC",
+  "at_unix": 1793939520.068951,
+  "battery_percent": 91,
+  "battery_saver_on": false,
+  "cpu": "Intel64 Family 6 Model 140 Stepping 1, GenuineIntel",
+  "logical_cpus": 8,
+  "power_scheme": "Power Scheme GUID: 381b4222-f694-41f0-9685-ff5bb260df2e  (Balanced)",
+  "python_speed_index_ms_2e6_loop": 67.18
+ },
+ "hypothesis": "SUPPORTED",
+ "inputs": 1200,
+ "negative_suspending_coroutine": "FAIL_CLOSED:no running event loop",
+ "new_ms": {
+  "N": 1200,
+  "max": 2.0485,
+  "mean": 0.6365,
+  "min": 0.2271,
+  "p50": 0.6363,
+  "p95": 0.757,
+  "p99": 1.0385
+ },
+ "old_ms": {
+  "N": 1200,
+  "max": 3.548,
+  "mean": 1.176,
+  "min": 0.7065,
+  "p50": 1.1553,
+  "p95": 1.3591,
+  "p99": 1.7908
+ },
+ "output_differences": 0
+}

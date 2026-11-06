@@ -1,0 +1,62 @@
+﻿{
+ "baseline": [
+  "ALLOW",
+  "ALLOW",
+  "ALLOW"
+ ],
+ "crash_during_request": {
+  "crashed_request": "DENY:QUALIFIED_WORKER_TIMEOUT_OR_PROTOCOL",
+  "next": "ALLOW",
+  "restarts": 1,
+  "provider_calls": 0
+ },
+ "crash_while_idle": {
+  "next": "ALLOW",
+  "restarts": 1
+ },
+ "hang_timeout": {
+  "suspended_pids": [
+   3780,
+   15020,
+   21304,
+   23092,
+   24244,
+   29032,
+   29916
+  ],
+  "hung_request": "DENY:QUALIFIED_WORKER_TIMEOUT",
+  "seconds_to_denial": 0.512,
+  "bound_seconds": 0.5,
+  "next": "ALLOW",
+  "restarts": 1
+ },
+ "concurrency": {
+  "total": 1200,
+  "mismatch": 0,
+  "false_admission": 0,
+  "by_kind": {
+   "forged_permit": {
+    "DENY:INVALID_SIGNATURE": 400
+   },
+   "valid": {
+    "ALLOW": 400
+   },
+   "revoked_control": {
+    "DENY:REVOKED_PERMIT": 400
+   }
+  },
+  "threads": 8,
+  "seconds": 3.99
+ },
+ "provider_calls_total": 0,
+ "restart_refused_after_session_close": "DENY:QUALIFIED_SESSION_CLOSED"
+}
+{
+ "crash_during_request_denied": true,
+ "restart_after_crash_serves": true,
+ "hang_denied_within_bound": true,
+ "restart_after_hang_serves": true,
+ "closed_session_denies": true,
+ "concurrency_zero_mismatch": true,
+ "unauthorized_effects_zero": true
+} PASS

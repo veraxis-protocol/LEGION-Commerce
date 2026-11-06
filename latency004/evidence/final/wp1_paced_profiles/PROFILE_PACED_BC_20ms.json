@@ -1,0 +1,259 @@
+{
+ "N": 1000,
+ "arch": "BC",
+ "components": {
+  "auth.verify_memo_glue": {
+   "wall": {
+    "max": 0.9357,
+    "mean": 0.1972,
+    "p50": 0.1643,
+    "p95": 0.3984,
+    "p99": 0.4734
+   }
+  },
+  "authority.a04_and_bundle_predicates": {
+   "wall": {
+    "max": 1.3429,
+    "mean": 0.1468,
+    "p50": 0.1197,
+    "p95": 0.2999,
+    "p99": 0.3941
+   }
+  },
+  "authority.control_predicates": {
+   "wall": {
+    "max": 0.1069,
+    "mean": 0.0192,
+    "p50": 0.0165,
+    "p95": 0.0377,
+    "p99": 0.0492
+   }
+  },
+  "authority.readiness_predicates": {
+   "wall": {
+    "max": 0.6225,
+    "mean": 0.1034,
+    "p50": 0.0839,
+    "p95": 0.2091,
+    "p99": 0.2724
+   }
+  },
+  "bridge.assess_post_dispatch": {
+   "wall": {
+    "max": 0.5405,
+    "mean": 0.1164,
+    "p50": 0.1018,
+    "p95": 0.217,
+    "p99": 0.3011
+   }
+  },
+  "bridge.assess_pre_dispatch": {
+   "wall": {
+    "max": 0.8444,
+    "mean": 0.0534,
+    "p50": 0.0407,
+    "p95": 0.1129,
+    "p99": 0.1787
+   }
+  },
+  "bridge.policy_predicates": {
+   "wall": {
+    "max": 0.2541,
+    "mean": 0.0297,
+    "p50": 0.0228,
+    "p95": 0.0679,
+    "p99": 0.0804
+   }
+  },
+  "canonicalize": {
+   "wall": {
+    "max": 4.9786,
+    "mean": 0.9213,
+    "p50": 0.7887,
+    "p95": 1.8462,
+    "p99": 2.0759
+   }
+  },
+  "core.collect_parse_glue": {
+   "wall": {
+    "max": 0.7003,
+    "mean": 0.089,
+    "p50": 0.0791,
+    "p95": 0.1584,
+    "p99": 0.2269
+   }
+  },
+  "core.dispatch_serialize_write": {
+   "wall": {
+    "max": 3.8941,
+    "mean": 0.1387,
+    "p50": 0.115,
+    "p95": 0.262,
+    "p99": 0.3458
+   }
+  },
+  "core.source_integrity": {
+   "wall": {
+    "max": 0.5693,
+    "mean": 0.0115,
+    "p50": 0.0089,
+    "p95": 0.0244,
+    "p99": 0.0303
+   }
+  },
+  "core.worker.exposed_wait": {
+   "wall": {
+    "max": 6.7489,
+    "mean": 2.113,
+    "p50": 1.8967,
+    "p95": 3.8398,
+    "p99": 4.8647
+   }
+  },
+  "digest.sha256_glue": {
+   "wall": {
+    "max": 2.2171,
+    "mean": 0.2374,
+    "p50": 0.2013,
+    "p95": 0.4754,
+    "p99": 0.5349
+   }
+  },
+  "python.gc_pause(overlapping)": {
+   "wall": {
+    "max": 4.5318,
+    "mean": 0.0118,
+    "p50": 0.0,
+    "p95": 0.0,
+    "p99": 0.2995
+   }
+  },
+  "timeline.parent_work_overlapped_after_dispatch": {
+   "wall": {
+    "max": 5.4289,
+    "mean": 1.2739,
+    "p50": 1.0265,
+    "p95": 2.8544,
+    "p99": 3.1594
+   }
+  },
+  "timeline.transit_and_wake_to_parent": {
+   "wall": {
+    "max": 1.2425,
+    "mean": 0.0702,
+    "p50": 0.0571,
+    "p95": 0.128,
+    "p99": 0.2395
+   }
+  },
+  "timeline.transit_and_wake_to_worker": {
+   "wall": {
+    "max": 0.9497,
+    "mean": 0.0809,
+    "p50": 0.0741,
+    "p95": 0.1555,
+    "p99": 0.1885
+   }
+  },
+  "timeline.worker_checks_glue": {
+   "wall": {
+    "max": 1.2003,
+    "mean": 0.3647,
+    "p50": 0.3301,
+    "p95": 0.6612,
+    "p99": 0.8486
+   }
+  },
+  "timeline.worker_core_alpha_oracle": {
+   "wall": {
+    "max": 6.2104,
+    "mean": 2.3799,
+    "p50": 2.0317,
+    "p95": 4.7093,
+    "p99": 5.2399
+   }
+  },
+  "timeline.worker_cpu": {
+   "wall": {
+    "max": 7.5957,
+    "mean": 2.9616,
+    "p50": 2.6103,
+    "p95": 5.6111,
+    "p99": 6.21
+   }
+  },
+  "timeline.worker_critical_path_dispatch_to_answer": {
+   "wall": {
+    "max": 8.5055,
+    "mean": 3.3869,
+    "p50": 2.9994,
+    "p95": 6.1817,
+    "p99": 6.9169
+   }
+  },
+  "timeline.worker_decider_and_witness_wait": {
+   "wall": {
+    "max": 1.2279,
+    "mean": 0.2409,
+    "p50": 0.2135,
+    "p95": 0.414,
+    "p99": 0.5479
+   }
+  },
+  "timeline.worker_json_parse": {
+   "wall": {
+    "max": 1.0212,
+    "mean": 0.1953,
+    "p50": 0.168,
+    "p95": 0.3631,
+    "p99": 0.4326
+   }
+  },
+  "timeline.worker_serialize": {
+   "wall": {
+    "max": 1.0197,
+    "mean": 0.055,
+    "p50": 0.0457,
+    "p95": 0.0978,
+    "p99": 0.1586
+   }
+  },
+  "verdict.gateway_sqlite_and_dispatch": {
+   "wall": {
+    "max": 5.3599,
+    "mean": 1.2409,
+    "p50": 1.1135,
+    "p95": 2.1049,
+    "p99": 2.5158
+   }
+  }
+ },
+ "end_to_end": {
+  "max": 11.9673,
+  "mean": 5.4256,
+  "p50": 5.0422,
+  "p95": 9.1107,
+  "p99": 10.21
+ },
+ "host_end": {
+  "ac_line": "ONLINE_AC",
+  "at_unix": 1793939334.9571388,
+  "battery_percent": 91,
+  "battery_saver_on": false,
+  "cpu": "Intel64 Family 6 Model 140 Stepping 1, GenuineIntel",
+  "logical_cpus": 8,
+  "power_scheme": "Power Scheme GUID: 381b4222-f694-41f0-9685-ff5bb260df2e  (Balanced)",
+  "python_speed_index_ms_2e6_loop": 71.75
+ },
+ "host_start": {
+  "ac_line": "ONLINE_AC",
+  "at_unix": 1793939308.6152542,
+  "battery_percent": 91,
+  "battery_saver_on": false,
+  "cpu": "Intel64 Family 6 Model 140 Stepping 1, GenuineIntel",
+  "logical_cpus": 8,
+  "power_scheme": "Power Scheme GUID: 381b4222-f694-41f0-9685-ff5bb260df2e  (Balanced)",
+  "python_speed_index_ms_2e6_loop": 65.77
+ },
+ "pace_ms": 20.0
+}

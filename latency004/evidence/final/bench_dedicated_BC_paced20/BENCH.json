@@ -1,0 +1,165 @@
+{
+ "meta": {
+  "N_per_arch_per_protocol": 2000,
+  "boundary": "Gateway.check(db,mission,permit), SQLite transaction open",
+  "git_dirty": false,
+  "git_head": "ca897f7badeea4f2b66a52bc684df18008bc4f4d",
+  "host_end": {
+   "ac_line": "ONLINE_AC",
+   "at_unix": 1793938596.6993906,
+   "battery_percent": 88,
+   "battery_saver_on": false,
+   "cpu": "Intel64 Family 6 Model 140 Stepping 1, GenuineIntel",
+   "logical_cpus": 8,
+   "power_scheme": "Power Scheme GUID: 381b4222-f694-41f0-9685-ff5bb260df2e  (Balanced)",
+   "python_speed_index_ms_2e6_loop": 63.75
+  },
+  "host_start": {
+   "ac_line": "ONLINE_AC",
+   "at_unix": 1793938491.8330617,
+   "battery_percent": 87,
+   "battery_saver_on": false,
+   "cpu": "Intel64 Family 6 Model 140 Stepping 1, GenuineIntel",
+   "logical_cpus": 8,
+   "power_scheme": "Power Scheme GUID: 381b4222-f694-41f0-9685-ff5bb260df2e  (Balanced)",
+   "python_speed_index_ms_2e6_loop": 66.27
+  },
+  "p95_definition": "ceil(0.95N)-th smallest",
+  "pace_ms": 20.0,
+  "python": "3.14.7 (tags/v3.14.7:823f032, Aug  5 2026, 10:51:32) [MSC v.1944 64 bit (AMD64)]",
+  "rounds": 10,
+  "warmup_per_arch": 100
+ },
+ "results": {
+  "BC/fresh": {
+   "fast_host_state": {
+    "N": 2000,
+    "max": 8.803,
+    "mean": 5.6284,
+    "min": 2.6408,
+    "p50": 5.6639,
+    "p95": 7.5978,
+    "p99": 8.0113
+   },
+   "outcomes": {
+    "ALLOW": 2000
+   },
+   "stats_ms": {
+    "N": 2000,
+    "max": 8.803,
+    "mean": 5.6284,
+    "min": 2.6408,
+    "p50": 5.6639,
+    "p95": 7.5978,
+    "p99": 8.0113
+   },
+   "throttled_host_state": null
+  },
+  "BC/repeat": {
+   "fast_host_state": {
+    "N": 2000,
+    "max": 10.6907,
+    "mean": 5.7046,
+    "min": 2.5379,
+    "p50": 5.8146,
+    "p95": 7.6497,
+    "p99": 8.1415
+   },
+   "outcomes": {
+    "ALLOW": 2000
+   },
+   "stats_ms": {
+    "N": 2000,
+    "max": 10.6907,
+    "mean": 5.7046,
+    "min": 2.5379,
+    "p50": 5.8146,
+    "p95": 7.6497,
+    "p99": 8.1415
+   },
+   "throttled_host_state": null
+  }
+ },
+ "rounds": [
+  {
+   "block_speed": {},
+   "order": [
+    "BC"
+   ],
+   "round": 0,
+   "speed_index_ms": 65.15
+  },
+  {
+   "block_speed": {},
+   "order": [
+    "BC"
+   ],
+   "round": 1,
+   "speed_index_ms": 68.14
+  },
+  {
+   "block_speed": {},
+   "order": [
+    "BC"
+   ],
+   "round": 2,
+   "speed_index_ms": 63.45
+  },
+  {
+   "block_speed": {},
+   "order": [
+    "BC"
+   ],
+   "round": 3,
+   "speed_index_ms": 65.51
+  },
+  {
+   "block_speed": {},
+   "order": [
+    "BC"
+   ],
+   "round": 4,
+   "speed_index_ms": 65.73
+  },
+  {
+   "block_speed": {},
+   "order": [
+    "BC"
+   ],
+   "round": 5,
+   "speed_index_ms": 66.81
+  },
+  {
+   "block_speed": {},
+   "order": [
+    "BC"
+   ],
+   "round": 6,
+   "speed_index_ms": 65.31
+  },
+  {
+   "block_speed": {},
+   "order": [
+    "BC"
+   ],
+   "round": 7,
+   "speed_index_ms": 64.91
+  },
+  {
+   "block_speed": {},
+   "order": [
+    "BC"
+   ],
+   "round": 8,
+   "speed_index_ms": 67.25
+  },
+  {
+   "block_speed": {},
+   "order": [
+    "BC"
+   ],
+   "round": 9,
+   "speed_index_ms": 65.23
+  }
+ ]
+}

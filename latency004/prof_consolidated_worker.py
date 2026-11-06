@@ -50,8 +50,25 @@ def main():
     child_timeout = float(sys.argv[7]) if len(sys.argv) > 7 else 2.0   # A: JsonProcess/LeanWitness default 2 s
     decider = cw.Child(command(decider_exe), child_timeout, cw.DECIDER_CODES, spin_seconds=spin)
     witness = cw.Child(command(zverdict_exe), child_timeout, cw.WITNESS_CODES, spin_seconds=spin)
-    out = sys.stdout.buffer
-    for line in sys.stdin.buffer:
+    # Same hot-standby wait as consolidated_worker.main (argv[8]); profiling shim only.
+    hot_ns = int(float(sys.argv[8]) * 1e9) if len(sys.argv) > 8 else 0
+    out = sys.stdout.buffer; stdin = sys.stdin.buffer
+    pipe = None
+    if hot_ns and os.name == "nt":
+        import msvcrt
+        pipe = msvcrt.get_osfhandle(stdin.fileno())
+    while True:
+        if pipe is not None:
+            import _winapi
+            end = pc() + hot_ns
+            try:
+                while _winapi.PeekNamedPipe(pipe, 0)[0] == 0 and pc() < end:
+                    pass
+            except OSError:
+                pass
+        line = stdin.readline()
+        if not line:
+            break
         t_recv = pc(); STAMP.clear(); c0 = tc(); t_parsed = t_recv
         healthy = True
         try:
@@ -75,6 +92,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
 

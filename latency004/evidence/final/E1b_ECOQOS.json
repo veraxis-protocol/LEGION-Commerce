@@ -1,0 +1,38 @@
+{
+ "loop_1e6_ms_min_of_5": {
+  "system_default": [
+   31.07,
+   31.04,
+   31.13,
+   31.2,
+   30.93,
+   31.12
+  ],
+  "ecoqos_off": [
+   31.22,
+   31.24,
+   31.14,
+   31.2,
+   31.05,
+   31.04
+  ],
+  "ecoqos_off+high_priority": [
+   31.21,
+   31.01,
+   31.13,
+   31.14,
+   31.09,
+   31.03
+  ]
+ },
+ "host": {
+  "ac_line": "ONLINE_AC",
+  "battery_percent": 100,
+  "battery_saver_on": false,
+  "power_scheme": "Power Scheme GUID: 381b4222-f694-41f0-9685-ff5bb260df2e  (Balanced)",
+  "cpu": "Intel64 Family 6 Model 140 Stepping 1, GenuineIntel",
+  "logical_cpus": 8,
+  "python_speed_index_ms_2e6_loop": 68.47,
+  "at_unix": 1793939841.0941842
+ }
+}

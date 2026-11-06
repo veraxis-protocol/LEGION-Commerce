@@ -30,12 +30,37 @@ from hoststate import host_state  # noqa: E402
 import commerce_bridge.consolidated as consolidated  # noqa: E402
 
 
+def descendants(pid):
+    """The venv python.exe is a launcher that runs the real interpreter as its child: return the
+    whole process tree (worker launcher, interpreter, and the interpreter's decider/witness)."""
+    import subprocess
+    rows = subprocess.run(["powershell", "-NoProfile", "-Command",
+                           "Get-CimInstance Win32_Process | ForEach-Object { \"$($_.ProcessId) $($_.ParentProcessId)\" }"],
+                          capture_output=True, text=True, timeout=60).stdout.split()
+    parent = {int(rows[i]): int(rows[i + 1]) for i in range(0, len(rows) - 1, 2)}
+    tree, grown = {pid}, True
+    while grown:
+        grown = False
+        for c, p in parent.items():
+            if p in tree and c not in tree: tree.add(c); grown = True
+    return sorted(tree)
+
+
 def suspend(pid):
     ntdll = ctypes.WinDLL("ntdll"); k = ctypes.WinDLL("kernel32")
     k.OpenProcess.restype = ctypes.c_void_p
-    h = k.OpenProcess(0x0800, False, pid)  # PROCESS_SUSPEND_RESUME
     ntdll.NtSuspendProcess.argtypes = [ctypes.c_void_p]
-    ntdll.NtSuspendProcess(h); k.CloseHandle(ctypes.c_void_p(h))
+    done = []
+    for p in descendants(pid):
+        h = k.OpenProcess(0x0800, False, p)  # PROCESS_SUSPEND_RESUME
+        if h:
+            ntdll.NtSuspendProcess(ctypes.c_void_p(h)); k.CloseHandle(ctypes.c_void_p(h)); done.append(p)
+    SUSPENDED.extend(done); SUSPEND_DONE.append(time.perf_counter())
+    return done
+
+
+SUSPENDED = []
+SUSPEND_DONE = []
 
 
 def check(g, m, pe):
@@ -79,10 +104,10 @@ def main():
                 # (Suspending after the write raced the ~2 ms calculation and let it finish first.)
                 suspend(self.child.process.pid); return orig(self, *a)
             S.dispatch = hanging
-            t0 = time.perf_counter(); hung = outcome(lambda: check(g, m, pe)); waited = time.perf_counter() - t0
+            hung = outcome(lambda: check(g, m, pe)); waited = time.perf_counter() - SUSPEND_DONE[-1]  # from suspension to denial
             S.dispatch = orig
             session.child.timeout = consolidated.PARENT_TIMEOUT; r0 = session.restarts
-            T["hang_timeout"] = {"hung_request": hung, "seconds_to_denial": round(waited, 3), "bound_seconds": 0.5,
+            T["hang_timeout"] = {"suspended_pids": list(SUSPENDED), "hung_request": hung, "seconds_to_denial": round(waited, 3), "bound_seconds": 0.5,
                                  "next": outcome(lambda: check(g, m, pe)), "restarts": session.restarts - r0}
             # 5. concurrency on one prepared admission object (direct admission calls; the ledger lock is bypassed
             #    on purpose so requests truly overlap inside the admission code)
@@ -143,5 +168,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
 
 

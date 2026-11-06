@@ -1,0 +1,367 @@
+{
+ "archs": [
+  "A",
+  "BCh"
+ ],
+ "by_category": {
+  "acceptance_expired": {
+   "cases": 40,
+   "equivalent": 40,
+   "false_admissions": 0,
+   "reference_outcomes": {
+    "DENY:A03_ACCEPTANCE_EXPIRED | DENY:A03_ACCEPTANCE_EXPIRED": 40
+   }
+  },
+  "actor_revoked_after_allow": {
+   "cases": 40,
+   "equivalent": 40,
+   "false_admissions": 0,
+   "reference_outcomes": {
+    "ALLOW | ALLOW | ALLOW | DENY:CURRENT_AUTHORITY_DENIED | DENY:CURRENT_AUTHORITY_DENIED": 40
+   }
+  },
+  "authority_epoch_changed": {
+   "cases": 40,
+   "equivalent": 40,
+   "false_admissions": 0,
+   "reference_outcomes": {
+    "DENY:STALE_EPOCH | DENY:STALE_EPOCH": 40
+   }
+  },
+  "authority_inactive": {
+   "cases": 40,
+   "equivalent": 40,
+   "false_admissions": 0,
+   "reference_outcomes": {
+    "DENY:CONTROL_INACTIVE | DENY:CONTROL_INACTIVE": 40
+   }
+  },
+  "budget_violation": {
+   "cases": 40,
+   "equivalent": 40,
+   "false_admissions": 0,
+   "reference_outcomes": {
+    "DENY:CORE_NUMERICAL_BUDGET | DENY:CORE_NUMERICAL_BUDGET": 40
+   }
+  },
+  "bundle_missing": {
+   "cases": 40,
+   "equivalent": 40,
+   "false_admissions": 0,
+   "reference_outcomes": {
+    "DENY:CORE_EVIDENCE_BUNDLE_MISSING | DENY:CORE_EVIDENCE_BUNDLE_MISSING": 40
+   }
+  },
+  "bundle_tampered_on_disk": {
+   "cases": 40,
+   "equivalent": 40,
+   "false_admissions": 0,
+   "reference_outcomes": {
+    "DENY:CORE_EVIDENCE_BUNDLE_HASH | DENY:CORE_EVIDENCE_BUNDLE_HASH": 40
+   }
+  },
+  "changed_action_amount": {
+   "cases": 40,
+   "equivalent": 40,
+   "false_admissions": 0,
+   "reference_outcomes": {
+    "DENY:CORE_ACTION_BINDING | DENY:CORE_ACTION_BINDING": 40
+   }
+  },
+  "changed_intent_amount": {
+   "cases": 40,
+   "equivalent": 40,
+   "false_admissions": 0,
+   "reference_outcomes": {
+    "DENY:ORIGINAL_INTENT_MISMATCH | DENY:ORIGINAL_INTENT_MISMATCH": 40
+   }
+  },
+  "changed_intent_merchant": {
+   "cases": 40,
+   "equivalent": 40,
+   "false_admissions": 0,
+   "reference_outcomes": {
+    "DENY:ORIGINAL_INTENT_MISMATCH | DENY:ORIGINAL_INTENT_MISMATCH": 40
+   }
+  },
+  "contradictory_reports": {
+   "cases": 40,
+   "equivalent": 40,
+   "false_admissions": 0,
+   "reference_outcomes": {
+    "DENY:CORE_NOT_EARNED_TRUE | DENY:CORE_NOT_EARNED_TRUE": 40
+   }
+  },
+  "control_deactivated_after_allow": {
+   "cases": 40,
+   "equivalent": 40,
+   "false_admissions": 0,
+   "reference_outcomes": {
+    "ALLOW | ALLOW | ALLOW | DENY:CONTROL_INACTIVE | DENY:CONTROL_INACTIVE": 40
+   }
+  },
+  "core_fenced_command": {
+   "cases": 40,
+   "equivalent": 40,
+   "false_admissions": 0,
+   "reference_outcomes": {
+    "DENY:QUALIFIED_CORE_NOT_T | DENY:QUALIFIED_CORE_NOT_T": 40
+   }
+  },
+  "core_permit_not_verified": {
+   "cases": 40,
+   "equivalent": 40,
+   "false_admissions": 0,
+   "reference_outcomes": {
+    "DENY:QUALIFIED_CORE_NOT_T | DENY:QUALIFIED_CORE_NOT_T": 40
+   }
+  },
+  "core_replayed_nonce": {
+   "cases": 40,
+   "equivalent": 40,
+   "false_admissions": 0,
+   "reference_outcomes": {
+    "DENY:QUALIFIED_CORE_NOT_T | DENY:QUALIFIED_CORE_NOT_T": 40
+   }
+  },
+  "core_stale_permit_epoch": {
+   "cases": 40,
+   "equivalent": 40,
+   "false_admissions": 0,
+   "reference_outcomes": {
+    "DENY:QUALIFIED_CORE_NOT_T | DENY:QUALIFIED_CORE_NOT_T": 40
+   }
+  },
+  "decider_unavailable_or_timeout": {
+   "cases": 40,
+   "equivalent": 40,
+   "false_admissions": 0,
+   "reference_outcomes": {
+    "DENY:QUALIFIED_WORKER_TIMEOUT | ALLOW": 4,
+    "DENY:QUALIFIED_WORKER_TIMEOUT_OR_PROTOCOL | ALLOW": 17,
+    "DENY:QUALIFIED_WORKER_UNAVAILABLE | ALLOW": 19
+   }
+  },
+  "duplicate_financial_effect": {
+   "cases": 40,
+   "equivalent": 40,
+   "false_admissions": 0,
+   "reference_outcomes": {
+    "ONE_EFFECT;CAPTURES=1": 40
+   }
+  },
+  "empty_obligations": {
+   "cases": 40,
+   "equivalent": 40,
+   "false_admissions": 0,
+   "reference_outcomes": {
+    "DENY:CONTROL_INACTIVE | DENY:CONTROL_INACTIVE": 40
+   }
+  },
+  "epoch_transition_after_allow": {
+   "cases": 40,
+   "equivalent": 40,
+   "false_admissions": 0,
+   "reference_outcomes": {
+    "ALLOW | ALLOW | ALLOW | DENY:STALE_EPOCH | DENY:STALE_EPOCH": 40
+   }
+  },
+  "equivocation": {
+   "cases": 40,
+   "equivalent": 40,
+   "false_admissions": 0,
+   "reference_outcomes": {
+    "DENY:REPORTER_EQUIVOCATION | DENY:REPORTER_EQUIVOCATION": 40
+   }
+  },
+  "forged_mission_signature": {
+   "cases": 40,
+   "equivalent": 40,
+   "false_admissions": 0,
+   "reference_outcomes": {
+    "DENY:INVALID_SIGNATURE | DENY:INVALID_SIGNATURE": 40
+   }
+  },
+  "forged_observation_envelope": {
+   "cases": 40,
+   "equivalent": 40,
+   "false_admissions": 0,
+   "reference_outcomes": {
+    "DENY:INVALID_SIGNATURE | DENY:INVALID_SIGNATURE": 40
+   }
+  },
+  "forged_permit_signature": {
+   "cases": 40,
+   "equivalent": 40,
+   "false_admissions": 0,
+   "reference_outcomes": {
+    "DENY:INVALID_SIGNATURE | DENY:INVALID_SIGNATURE": 40
+   }
+  },
+  "forged_report_signature": {
+   "cases": 40,
+   "equivalent": 40,
+   "false_admissions": 0,
+   "reference_outcomes": {
+    "DENY:CORE_REPORT_SIGNATURE_OR_IDENTITY | DENY:CORE_REPORT_SIGNATURE_OR_IDENTITY": 40
+   }
+  },
+  "intent_amount_resigned": {
+   "cases": 40,
+   "equivalent": 40,
+   "false_admissions": 0,
+   "reference_outcomes": {
+    "DENY:ORIGINAL_INTENT_MISMATCH | DENY:ORIGINAL_INTENT_MISMATCH": 40
+   }
+  },
+  "missing_evidence": {
+   "cases": 40,
+   "equivalent": 40,
+   "false_admissions": 0,
+   "reference_outcomes": {
+    "DENY:CORE_NOT_EARNED_TRUE | DENY:CORE_NOT_EARNED_TRUE": 40
+   }
+  },
+  "missing_prerequisite_record": {
+   "cases": 40,
+   "equivalent": 40,
+   "false_admissions": 0,
+   "reference_outcomes": {
+    "DENY:PREREQUISITE_RECORDS_MISMATCH | DENY:PREREQUISITE_RECORDS_MISMATCH": 40
+   }
+  },
+  "noncanonical_float_evidence": {
+   "cases": 40,
+   "equivalent": 40,
+   "false_admissions": 0,
+   "reference_outcomes": {
+    "DENY:NONCANONICAL_TYPE | DENY:NONCANONICAL_TYPE": 40
+   }
+  },
+  "permit_expired": {
+   "cases": 40,
+   "equivalent": 40,
+   "false_admissions": 0,
+   "reference_outcomes": {
+    "DENY:EXPIRED_PERMIT | DENY:EXPIRED_PERMIT": 40
+   }
+  },
+  "permit_signed_by_wrong_key": {
+   "cases": 40,
+   "equivalent": 40,
+   "false_admissions": 0,
+   "reference_outcomes": {
+    "DENY:INVALID_SIGNATURE | DENY:INVALID_SIGNATURE": 40
+   }
+  },
+  "reports_permuted": {
+   "cases": 40,
+   "equivalent": 40,
+   "false_admissions": 0,
+   "reference_outcomes": {
+    "ALLOW | ALLOW": 40
+   }
+  },
+  "revocation_after_allow": {
+   "cases": 40,
+   "equivalent": 40,
+   "false_admissions": 0,
+   "reference_outcomes": {
+    "ALLOW | ALLOW | ALLOW | DENY:REVOKED_PERMIT | DENY:REVOKED_PERMIT": 40
+   }
+  },
+  "revoked_after_reserve": {
+   "cases": 40,
+   "equivalent": 40,
+   "false_admissions": 0,
+   "reference_outcomes": {
+    "DENY:REVOKED_PERMIT;PROVIDER_CALLS=0": 40
+   }
+  },
+  "spoofed_report_root": {
+   "cases": 40,
+   "equivalent": 40,
+   "false_admissions": 0,
+   "reference_outcomes": {
+    "DENY:CORE_REPORT_SIGNATURE_OR_IDENTITY | DENY:CORE_REPORT_SIGNATURE_OR_IDENTITY": 40
+   }
+  },
+  "stale_observation": {
+   "cases": 40,
+   "equivalent": 40,
+   "false_admissions": 0,
+   "reference_outcomes": {
+    "DENY:STALE_CORE_OBSERVATION | DENY:STALE_CORE_OBSERVATION": 40
+   }
+  },
+  "stale_reports": {
+   "cases": 40,
+   "equivalent": 40,
+   "false_admissions": 0,
+   "reference_outcomes": {
+    "DENY:CORE_NOT_EARNED_TRUE | DENY:CORE_NOT_EARNED_TRUE": 40
+   }
+  },
+  "sybil_shared_source": {
+   "cases": 40,
+   "equivalent": 40,
+   "false_admissions": 0,
+   "reference_outcomes": {
+    "DENY:SHARED_SOURCE_FAKE_INDEPENDENCE | DENY:SHARED_SOURCE_FAKE_INDEPENDENCE": 40
+   }
+  },
+  "trust_key_rotated_after_allow": {
+   "cases": 40,
+   "equivalent": 40,
+   "false_admissions": 0,
+   "reference_outcomes": {
+    "ALLOW | ALLOW | DENY:INVALID_SIGNATURE | DENY:INVALID_SIGNATURE": 40
+   }
+  },
+  "unknown_state": {
+   "cases": 40,
+   "equivalent": 40,
+   "false_admissions": 0,
+   "reference_outcomes": {
+    "DENY:UNKNOWN_OR_MALFORMED_CORE_STATE | DENY:UNKNOWN_OR_MALFORMED_CORE_STATE": 40
+   }
+  },
+  "valid": {
+   "cases": 40,
+   "equivalent": 40,
+   "false_admissions": 0,
+   "reference_outcomes": {
+    "ALLOW | ALLOW": 40
+   }
+  },
+  "witness_timeout_or_unavailable": {
+   "cases": 40,
+   "equivalent": 40,
+   "false_admissions": 0,
+   "reference_outcomes": {
+    "DENY:LEAN_TIMEOUT | ALLOW": 20,
+    "DENY:LEAN_UNAVAILABLE | ALLOW": 20
+   }
+  }
+ },
+ "cases": 1680,
+ "categories": 42,
+ "equivalent_cases": 1680,
+ "false_admissions": 0,
+ "gate_evaluations": 7680,
+ "git_head": "ca897f7badeea4f2b66a52bc684df18008bc4f4d",
+ "host": {
+  "ac_line": "ONLINE_AC",
+  "at_unix": 1793939955.8193038,
+  "battery_percent": 100,
+  "battery_saver_on": false,
+  "cpu": "Intel64 Family 6 Model 140 Stepping 1, GenuineIntel",
+  "logical_cpus": 8,
+  "power_scheme": "Power Scheme GUID: 381b4222-f694-41f0-9685-ff5bb260df2e  (Balanced)",
+  "python_speed_index_ms_2e6_loop": 82.31
+ },
+ "python": "3.14.7 (tags/v3.14.7:823f032, Aug  5 2026, 10:51:32) [MSC v.1944 64 bit (AMD64)]",
+ "scope": "CONFORMANCE_ONLY_TEST_KEYS_NO_NETWORK",
+ "seconds": 720.8,
+ "verdict_mismatches": 0
+}

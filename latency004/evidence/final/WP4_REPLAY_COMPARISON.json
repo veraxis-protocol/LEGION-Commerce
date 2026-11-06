@@ -1,0 +1,18 @@
+{
+ "cases": 1680,
+ "frozen_cases_identical": true,
+ "family_level_outcome_differences": 0,
+ "raw_string_differences": 5,
+ "raw_difference_ids": [
+  1003,
+  1008,
+  1016,
+  1017,
+  1028
+ ],
+ "BCh_raw_string_differences": 0,
+ "raw_difference_explanation": "A only: decider timeout code races QUALIFIED_WORKER_TIMEOUT vs QUALIFIED_WORKER_TIMEOUT_OR_PROTOCOL (A JsonProcess timer vs queue); one spec family (bridge_differential FAILURE family)",
+ "first": [],
+ "verdict": "REPLAY_MATCH",
+ "note": "separate processes, same frozen seed; outcomes compared exactly (all 4-8 gate evaluations per case)"
+}
