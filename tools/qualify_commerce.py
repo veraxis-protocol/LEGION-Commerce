@@ -72,11 +72,21 @@ def run_models(rows,module,binary):
 
 
 def main():
-    parser=argparse.ArgumentParser(); parser.add_argument("--replay",type=Path); args=parser.parse_args()
-    out=ROOT/"qualify_evidence"/time.strftime("replay-%Y%m%dT%H%M%SZ" if args.replay else "run-%Y%m%dT%H%M%SZ",time.gmtime())
+    parser=argparse.ArgumentParser(); parser.add_argument("--replay",type=Path)
+    # LATENCY-004: --arch BC runs every frozen assertion against the consolidated worker and the
+    # prepared admission context (overlap). Default A is the QUALIFY-002 configuration, unchanged.
+    parser.add_argument("--arch",choices=("A","BC"),default="A"); args=parser.parse_args()
+    out=ROOT/"qualify_evidence"/(time.strftime("replay-%Y%m%dT%H%M%SZ" if args.replay else "run-%Y%m%dT%H%M%SZ",time.gmtime())+("" if args.arch=="A" else "-"+args.arch))
     out.mkdir(parents=True)
     started=time.perf_counter_ns()
     sources=QualifiedSources(ROOT/"runtime_sources",immutable=True)
+    if args.arch=="BC":
+        import functools
+        import bridge_tests.fixtures as fixtures_module
+        from commerce_bridge.consolidated import install
+        from commerce_bridge.prepared import PreparedAdmission
+        install(sources)
+        fixtures_module.BridgeAdmission=functools.partial(PreparedAdmission,overlap=True)
     ready_ms=(time.perf_counter_ns()-started)/1e6
     try:
         source_files=[p for folder in ("commerce_adapter","commerce_bridge","bridge_tests","tools","design") for p in (ROOT/folder).rglob("*") if p.is_file() and "__pycache__" not in p.parts]
@@ -174,7 +184,7 @@ def main():
             "performance":"PASS" if pct(durations)<=5 else "FUNCTIONAL_PASS_PERFORMANCE_FAIL",
             "source_unchanged":all(sha(ROOT/n)==h for n,h in source_hashes.items()),
             "operational_acceptance":"BLOCKED_OWNER_KEYS_AND_INDEPENDENT_ACCEPTANCE_ABSENT",
-            "native_dispatches":0,"captures":0,"go_to_a05":False,"overall":"BLOCKED"}
+            "native_dispatches":0,"captures":0,"go_to_a05":False,"overall":"BLOCKED","architecture":args.arch}
         write(out/"SUMMARY.json",summary)
         write(out/"EVIDENCE_HASHES.json",{p.name:sha(p) for p in out.iterdir() if p.is_file()})
         print(json.dumps({"directory":str(out),**summary}))

@@ -91,7 +91,13 @@ class ConsolidatedSession:
 
     # --- QualifiedSession-compatible API -------------------------------------------------
     def calculate(self, observation, policy, now, witness=None):
-        return self.collect(self.dispatch(observation, policy, now))
+        result = self.collect(self.dispatch(observation, policy, now))
+        if witness is not None:
+            # Test seam kept from QualifiedSession: an explicitly injected witness (A03-T11 fault
+            # injection) must ALSO agree; production passes witness=None (the worker's own zverdict).
+            from .runtime import CoreRuntime
+            result = CoreRuntime(self.sources).compare(result, policy, witness, trace_hash=False)
+        return result
 
     def close(self):
         if self.closed: return
@@ -105,6 +111,7 @@ def install(sources, **kwargs):
     sources.session = ConsolidatedSession(sources, **kwargs)
     old.close()
     return sources.session
+
 
 
 

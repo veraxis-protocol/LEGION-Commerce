@@ -12,10 +12,12 @@ What changes is only how the cryptographic and canonical work is obtained:
    of signed content, key, signature, domain, authority (key) or epoch (part of the content)
    is a different entry and is verified from scratch. Failures are never remembered.
    Canonicalization (and therefore its type checks) still runs on every presented payload.
-2. Request-scoped canonical reuse. Within one request the same payload object is canonicalized
-   once and the bytes are reused for its signature message and its digests. Bundle digests are
-   composed from the canonical bytes of their parts (json.dumps sort_keys composition), with
-   the type checks applied in the original order.
+2. Request-scoped canonical reuse. Within one request the same object is canonicalized once and
+   the bytes are reused for its signature message and its digests. The evidence bundle is parsed
+   by json.loads (same objects) while recording whether the document contains a float/NaN/Infinity;
+   for dicts of a float-free json.loads tree canonical()'s type check cannot fail (only
+   dict/list/str/int/bool/None with str keys exist), so their canonical bytes are produced by the
+   same json.dumps call canonical() makes, without the Python type walk. Any float -> full canonical().
 3. Immutable session context, bound to the sources/profile/trust at preparation: private
    deep copies of the operator-loaded acceptance, upstream acceptances and accepted policy
    (A loads these once too) are verified once; their per-request predicates (status, pins,
@@ -56,7 +58,6 @@ class PreparedAdmission(BridgeAdmission):
         self._memo = OrderedDict(); self._memo_lock = threading.Lock()
         self._keys = {}
         self._frozen = {}
-        self._kenc = {}
         self.stats = {"verify_memo_hits": 0, "verify_full": 0}
         # Private, immutable session inputs (A also loads them once, at construction).
         self.acceptance = copy.deepcopy(self.acceptance)
@@ -81,9 +82,9 @@ class PreparedAdmission(BridgeAdmission):
         return r
 
     def _begin(self):
-        self._tl.req = {}
+        self._tl.req = {}; self._tl.native = None
 
-    def canon(self, value, depth=0):
+    def canon(self, value):
         hit = self._frozen.get(id(value))
         if hit is not None and hit[0] is value:
             return hit[1]
@@ -91,27 +92,33 @@ class PreparedAdmission(BridgeAdmission):
         hit = r.get(id(value))
         if hit is not None and hit[0] is value:
             return hit[1]
-        if depth > 0 and type(value) is dict:
-            require(all(type(k) is str for k in value), "NONSTRING_KEY")
-            for item in value.values():          # original check order: insertion order
-                self.canon(item, depth - 1)
-            keys = self._kenc
-            parts = []
-            for k in sorted(value):
-                enc = keys.get(k)
-                if enc is None:
-                    enc = json.dumps(k, ensure_ascii=True).encode("ascii") + b":"
-                    if len(keys) < 4096: keys[k] = enc
-                parts.append(enc + self.canon(value[k], depth - 1))
-            body = b"{" + b",".join(parts) + b"}"
+        native = getattr(self._tl, "native", None)
+        if native is not None and id(value) in native and native[id(value)] is value:
+            # A dict produced by json.loads of a float-free document: only dict/list/str/int/bool/None
+            # with str keys can occur, so canonical()'s type check cannot fail and its bytes are exactly
+            # this json.dumps call (the one canonical() itself makes).
+            body = json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=True).encode("ascii")
         else:
             body = canonical(value)
         if isinstance(value, (dict, list)):
             r[id(value)] = (value, body)
         return body
 
-    def digest(self, domain, value, depth=0):
-        return hashlib.sha256(domain.encode("ascii") + b"\x00" + self.canon(value, depth)).hexdigest()
+    def load_native(self, text):
+        """json.loads(text) (same objects) that also records whether the document is float-free."""
+        nodes = {}; floats = []
+        def hook(d):
+            nodes[id(d)] = d; return d
+        def pf(s):
+            floats.append(s); return float(s)
+        constants = {"-Infinity": float("-inf"), "Infinity": float("inf"), "NaN": float("nan")}
+        def pc(s):
+            floats.append(s); return constants[s]
+        value = json.loads(text, object_hook=hook, parse_float=pf, parse_constant=pc)
+        self._tl.native = {} if floats else nodes   # request scope; cleared with the request cache
+        return value
+    def digest(self, domain, value):
+        return hashlib.sha256(domain.encode("ascii") + b"\x00" + self.canon(value)).hexdigest()
 
     def _key(self, public_key):
         key = self._keys.get(public_key)
@@ -124,8 +131,7 @@ class PreparedAdmission(BridgeAdmission):
         try:
             payload = envelope["payload"]
             signature = envelope["signature"]
-            # depth 1: each top-level field is cached too (intent, world, records digests reuse it).
-            message = domain.encode("ascii") + b"\x00" + self.canon(payload, 1)
+            message = domain.encode("ascii") + b"\x00" + self.canon(payload)
             entry = (public_key, signature, message)
             if entry in self._memo:
                 self.stats["verify_memo_hits"] += 1
@@ -183,7 +189,7 @@ class PreparedAdmission(BridgeAdmission):
         try:
             return self._check(mission_envelope, permit_envelope, control)
         finally:
-            self._tl.req = {}
+            self._tl.req = {}; self._tl.native = None
 
     def _check(self, mission_envelope, permit_envelope, control):
         # --- commerce_adapter.contracts.Admission.check, predicate for predicate ---
@@ -218,9 +224,8 @@ class PreparedAdmission(BridgeAdmission):
         locator = self.digest("commerce.permit.locator.v1", permit["permit_id"]) + ".json"
         path = self.bundle_dir / locator
         require(path.is_file(), "CORE_EVIDENCE_BUNDLE_MISSING")
-        bundle = json.loads(path.read_text(encoding="utf-8-sig"))
-        # depth 3: bundle -> envelopes -> payloads -> fields; reused by assess.
-        require(self.digest("commerce.bridge.bundle.v1", bundle, depth=3) == permit["bridge_evidence_hash"], "CORE_EVIDENCE_BUNDLE_HASH")
+        bundle = self.load_native(path.read_text(encoding="utf-8-sig"))
+        require(self.digest("commerce.bridge.bundle.v1", bundle) == permit["bridge_evidence_hash"], "CORE_EVIDENCE_BUNDLE_HASH")
         require(bundle["policy"] == self.policy_envelope, "CURRENT_BRIDGE_POLICY_MISMATCH")
         assessment = self.assess(mission_envelope, control, bundle, intent)
         require(self.digest("commerce.bridge.assessment.v1", assessment) == permit["bridge_assessment_hash"], "BRIDGE_ASSESSMENT_BINDING")
@@ -332,4 +337,6 @@ class PreparedAdmission(BridgeAdmission):
                 "mission_hash": mh, "intent_hash": ih, "observation_hash": oh, "policy_hash": self.digest("commerce.bridge.policy.v1", policy),
                 "epoch": control["epoch"], "core": summary, "source_manifest_hash": manifest_hash,
                 "authority_checked": ["control", "core", "cage", "veip"], "dispatch_authorized": False}
+
+
 

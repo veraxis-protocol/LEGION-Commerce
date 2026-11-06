@@ -35,7 +35,7 @@ DECIDER_CODES = {"unavailable": "QUALIFIED_WORKER_UNAVAILABLE", "timeout": "QUAL
 WITNESS_CODES = {"unavailable": "LEAN_UNAVAILABLE", "timeout": "LEAN_TIMEOUT", "protocol": "LEAN_UNAVAILABLE"}
 FIELDS = ("directive", "task_actor", "task_dependencies", "task_write_tool", "world_id", "task_ids",
           "parameter_status", "native_preconditions_ok", "predicate_truths", "differential", "mismatches",
-          "all_facts_true", "qualified", "submissions")
+          "all_facts_true", "qualified", "submissions", "facts")
 
 
 def require(condition, code):
@@ -123,6 +123,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
 
