@@ -19,6 +19,7 @@ import json
 import os
 import sys
 import tempfile
+import time
 import uuid
 
 sys.dont_write_bytecode = True
@@ -103,8 +104,27 @@ def main():
     child_timeout = float(sys.argv[7]) if len(sys.argv) > 7 else 2.0   # A: JsonProcess/LeanWitness default 2 s
     decider = Child(command(decider_exe), child_timeout, DECIDER_CODES, spin_seconds=spin)
     witness = Child(command(zverdict_exe), child_timeout, WITNESS_CODES, spin_seconds=spin)
-    out = sys.stdout.buffer
-    for line in sys.stdin.buffer:
+    # Hot standby (opt-in, argv[8] seconds, default 0): busy-poll the request pipe for up to that long
+    # before blocking, so the core is not idle when a request arrives (experiment E1g). Requests are
+    # strictly one at a time, so after readline() nothing is left in the buffer and the pipe check is exact.
+    hot_ns = int(float(sys.argv[8]) * 1e9) if len(sys.argv) > 8 else 0
+    out = sys.stdout.buffer; stdin = sys.stdin.buffer
+    pipe = None
+    if hot_ns and os.name == "nt":
+        import msvcrt
+        pipe = msvcrt.get_osfhandle(stdin.fileno())
+    while True:
+        if pipe is not None:
+            import _winapi
+            end = time.perf_counter_ns() + hot_ns
+            try:
+                while _winapi.PeekNamedPipe(pipe, 0)[0] == 0 and time.perf_counter_ns() < end:
+                    pass
+            except OSError:
+                pass
+        line = stdin.readline()
+        if not line:
+            break
         healthy = True
         try:
             answer = evaluate(json.loads(line), legion, swarm, decider, witness, profile)
@@ -123,6 +143,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
 

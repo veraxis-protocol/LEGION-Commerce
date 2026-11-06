@@ -32,13 +32,13 @@ class Ticket:
 
 
 class ConsolidatedSession:
-    def __init__(self, sources, decider=None, zverdict=None, timeout=PARENT_TIMEOUT, spin_seconds=0.0, child_timeout=2.0):
+    def __init__(self, sources, decider=None, zverdict=None, timeout=PARENT_TIMEOUT, spin_seconds=0.0, child_timeout=2.0, hot_standby_seconds=0.0):
         self.sources = sources; self.closed = False; self.restarts = 0; self.last_profile = {}
         env = {k: v for k, v in os.environ.items() if not k.startswith(("STRUCT_", "ZTL_", "ZVERDICT", "PYTHONPATH"))}
         env["PYTHONDONTWRITEBYTECODE"] = "1"
         arg = lambda v, default: json.dumps([str(x) for x in v]) if isinstance(v, (list, tuple)) else str(v or default)
         self.command = [sys.executable, "-B", Path(__file__).with_name("consolidated_worker.py"), sources.core,
-                        sources.root / "ztl-swarm", arg(decider, sources.decider), arg(zverdict, sources.binary), sources.profile_hash, str(spin_seconds), str(child_timeout)]
+                        sources.root / "ztl-swarm", arg(decider, sources.decider), arg(zverdict, sources.binary), sources.profile_hash, str(spin_seconds), str(child_timeout), str(hot_standby_seconds)]
         self.child = Child(self.command, timeout, WORKER_CODES, env, spin_seconds=spin_seconds)
 
     # --- split API ---------------------------------------------------------------------
@@ -111,6 +111,7 @@ def install(sources, **kwargs):
     sources.session = ConsolidatedSession(sources, **kwargs)
     old.close()
     return sources.session
+
 
 
 

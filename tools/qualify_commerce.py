@@ -75,17 +75,17 @@ def main():
     parser=argparse.ArgumentParser(); parser.add_argument("--replay",type=Path)
     # LATENCY-004: --arch BC runs every frozen assertion against the consolidated worker and the
     # prepared admission context (overlap). Default A is the QUALIFY-002 configuration, unchanged.
-    parser.add_argument("--arch",choices=("A","BC"),default="A"); args=parser.parse_args()
+    parser.add_argument("--arch",choices=("A","BC","BCh"),default="A"); args=parser.parse_args()
     out=ROOT/"qualify_evidence"/(time.strftime("replay-%Y%m%dT%H%M%SZ" if args.replay else "run-%Y%m%dT%H%M%SZ",time.gmtime())+("" if args.arch=="A" else "-"+args.arch))
     out.mkdir(parents=True)
     started=time.perf_counter_ns()
     sources=QualifiedSources(ROOT/"runtime_sources",immutable=True)
-    if args.arch=="BC":
+    if args.arch in ("BC","BCh"):
         import functools
         import bridge_tests.fixtures as fixtures_module
         from commerce_bridge.consolidated import install
         from commerce_bridge.prepared import PreparedAdmission
-        install(sources)
+        install(sources,hot_standby_seconds=60.0 if args.arch=="BCh" else 0.0)
         fixtures_module.BridgeAdmission=functools.partial(PreparedAdmission,overlap=True)
     ready_ms=(time.perf_counter_ns()-started)/1e6
     try:

@@ -33,17 +33,19 @@ from bridge_tests.fixtures import Fixture  # noqa: E402
 from tests.helpers import FakePayPal  # noqa: E402
 
 ARCHS = ("A", "B", "C", "BC")
-SPIN_SECONDS = 0.02   # variant suffix "s": bounded spin-wait (experiment E1)
+SPIN_SECONDS = 0.02   # variant suffix "s": bounded spin-wait for answers (experiment E1)
+HOT_SECONDS = 60.0    # variant suffix "h": worker hot standby, busy-polls its request pipe (experiment E1g)
 
 
 def base(arch):
-    return arch[:-1] if arch.endswith("s") else arch
+    return arch[:-1] if arch.endswith(("s", "h")) else arch
 
 
 def sources_for(arch, **session_kwargs):
     src = QualifiedSources(ROOT / "runtime_sources", immutable=True)
     if base(arch) in ("B", "BC"):
         if arch.endswith("s"): session_kwargs.setdefault("spin_seconds", SPIN_SECONDS)
+        if arch.endswith("h"): session_kwargs.setdefault("hot_standby_seconds", HOT_SECONDS)
         install_consolidated(src, **session_kwargs)
     return src
 
@@ -120,5 +122,6 @@ def outcome(fn):
 def check_once(g, mission, permit):
     with g.transaction() as db:
         return g.check(db, mission, permit)
+
 
 

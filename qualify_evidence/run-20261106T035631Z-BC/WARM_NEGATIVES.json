@@ -1,0 +1,26 @@
+[
+  {
+    "case": "revoked",
+    "denial": "REVOKED_PERMIT",
+    "pass": true
+  },
+  {
+    "case": "epoch",
+    "denial": "STALE_EPOCH",
+    "pass": true
+  },
+  {
+    "case": "inactive",
+    "denial": "CONTROL_INACTIVE",
+    "pass": true
+  },
+  {
+    "case": "expired",
+    "denial": "EXPIRED_PERMIT",
+    "pass": true
+  },
+  {
+    "case": "immutable_source_write",
+    "pass": true
+  }
+]

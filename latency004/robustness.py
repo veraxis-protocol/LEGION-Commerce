@@ -11,7 +11,7 @@
                           expectation (no cross-request cache contamination).
 Invariants recorded: unauthorized effects (provider calls) = 0, false admissions = 0, verdict mismatches = 0.
 
-Usage: python latency004/robustness.py <out_dir> [threads=8] [per_thread=150]
+Usage: python latency004/robustness.py <out_dir> [threads=8] [per_thread=150] [arch=BCh]
 """
 import base64
 import copy
@@ -48,12 +48,13 @@ def main():
     threads = int(sys.argv[2]) if len(sys.argv) > 2 else 8
     per = int(sys.argv[3]) if len(sys.argv) > 3 else 150
     res = {"host": host_state(), "trials": {}}
-    src = sources_for("BC")
+    arch = sys.argv[4] if len(sys.argv) > 4 else "BCh"; res["arch"] = arch
+    src = sources_for(arch)
     S = consolidated.ConsolidatedSession
     try:
         with tempfile.TemporaryDirectory() as tmp:
             f = Fixture(tmp + "/fx", qualified_sources=src)
-            g, provider, m, pe = build_gateway(f, tmp + "/g", "BC", src)
+            g, provider, m, pe = build_gateway(f, tmp + "/g", arch, src)
             session = src.session
             T = res["trials"]
             T["baseline"] = [outcome(lambda: check(g, m, pe)) for _ in range(3)]
@@ -74,7 +75,9 @@ def main():
             session.child.timeout = 0.5
             orig = S.dispatch
             def hanging(self, *a):
-                t = orig(self, *a); suspend(self.child.process.pid); return t
+                # Suspend BEFORE the request is written: the worker can never read or answer it.
+                # (Suspending after the write raced the ~2 ms calculation and let it finish first.)
+                suspend(self.child.process.pid); return orig(self, *a)
             S.dispatch = hanging
             t0 = time.perf_counter(); hung = outcome(lambda: check(g, m, pe)); waited = time.perf_counter() - t0
             S.dispatch = orig
@@ -140,4 +143,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
