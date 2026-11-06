@@ -2,8 +2,9 @@ $ErrorActionPreference = "Continue"
 Set-Location C:\Users\Administrator\Documents\ChatGPT\Hackathons\LEGION-Commerce-Q002
 $py = ".\.venv\Scripts\python.exe"; $E = "latency004\evidence\final"
 New-Item -ItemType Directory -Force $E | Out-Null
-"START timing $(Get-Date -Format o)"
-& $py -B latency004\bench.py "$E\bench_backtoback" 1000 10 "A,B,C,BC,BCs" "repeat,fresh,fresh_cold" *> "$E\bench_backtoback.log"; "bench b2b exit $LASTEXITCODE $(Get-Date -Format o)"
+"START $(git rev-parse HEAD) $(Get-Date -Format o)"
+& $py -B latency004\bench.py "$E\bench_interleaved_b2b" 1000 10 "A,B,C,BC" "repeat,fresh,fresh_cold" *> "$E\bench_interleaved_b2b.log"; "bench interleaved exit $LASTEXITCODE $(Get-Date -Format o)"
+& $py -B latency004\bench.py "$E\bench_dedicated_BC_b2b" 2000 10 "BC" "repeat,fresh" *> "$E\bench_dedicated_BC_b2b.log"; "bench dedicated exit $LASTEXITCODE"
 $env:PACE_MS = "20"; & $py -B latency004\bench.py "$E\bench_paced20" 1000 10 "A,BC" "repeat,fresh" *> "$E\bench_paced20.log"; Remove-Item Env:PACE_MS; "bench paced exit $LASTEXITCODE $(Get-Date -Format o)"
 foreach ($a in "A","B","C","BC") { & $py -B latency004\profile_arch.py "$E\wp2_profiles" $a repeat 1000 100 *> "$E\wp2_profile_$a.log"; "profile $a exit $LASTEXITCODE" }
 & $py -B latency004\profile_arch.py "$E\wp2_profiles" BC fresh 1000 100 *> "$E\wp2_profile_BC_fresh.log"; "profile BC fresh exit $LASTEXITCODE"
@@ -14,5 +15,6 @@ foreach ($a in "A","B","C","BC") { & $py -B latency004\profile_arch.py "$E\wp2_p
 "TIMING DONE $(Get-Date -Format o)"
 & $py -B tools\qualify_commerce.py --arch BC *> "$E\wp4_qualify_BC.log"; "qualify exit $LASTEXITCODE"
 & $py -B latency004\robustness.py "$E\wp4_robustness" 8 150 *> "$E\wp4_robustness.log"; "robustness exit $LASTEXITCODE"
-& $py -B latency004\equivalence.py "$E\wp4_equivalence_replay" 40 *> "$E\wp4_equivalence_replay.log"; "replay exit $LASTEXITCODE"
+& $py -B latency004\equivalence.py "$E\wp4_equivalence_run" 40 "A,B,C,BC" *> "$E\wp4_equivalence_run.log"; "equivalence exit $LASTEXITCODE $(Get-Date -Format o)"
+& $py -B latency004\equivalence.py "$E\wp4_equivalence_replay" 40 "A,BC" *> "$E\wp4_equivalence_replay.log"; "replay exit $LASTEXITCODE"
 "DONE $(Get-Date -Format o)"
