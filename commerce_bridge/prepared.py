@@ -50,8 +50,9 @@ MEMO_SIZE = 4096
 
 
 class PreparedAdmission(BridgeAdmission):
-    def __init__(self, *args, overlap=False, **kwargs):
+    def __init__(self, *args, overlap=False, early=True, **kwargs):
         super().__init__(*args, **kwargs)
+        self.early = early
         require(self.locked is not None, "PREPARED_CONTEXT_REQUIRES_IMMUTABLE_SESSION")
         self.overlap = overlap
         self._tl = threading.local()
@@ -186,10 +187,79 @@ class PreparedAdmission(BridgeAdmission):
         return a
 
     def check(self, mission_envelope, permit_envelope, control):
+        self._tl.spec = None
         try:
+            if self.overlap and self.early:
+                self._tl.spec = self._speculate(permit_envelope)
             return self._check(mission_envelope, permit_envelope, control)
         finally:
+            spec = self._tl.spec; self._tl.spec = None
+            if spec is not None and spec.get("ticket") is not None:
+                spec["session"].abandon(spec.pop("ticket"))
             self._tl.req = {}; self._tl.native = None
+
+    # ------------------------------------------------------------------ speculative early dispatch (BC)
+    def _speculate(self, permit_envelope):
+        """Read the evidence bundle and, if its policy and observation AUTHENTICATE, start the pure Core
+        calculation before the authority checks run. Never raises and never decides: every check is
+        still evaluated afterwards in A's order (a failure here is silent and re-raised by the real check
+        at its original position). The bundle file is read once, here; its presence and content are
+        evaluated at A's position. The result is used only if Bridge.assess later authenticates the very
+        same objects and the evaluation instant is equivalent (_same_freshness)."""
+        spec = {}
+        try:
+            payload = permit_envelope["payload"]                      # unverified: used only to locate a file
+            path = self.bundle_dir / (self.digest("commerce.permit.locator.v1", payload["permit_id"]) + ".json")
+            spec["path"] = path; spec["is_file"] = path.is_file()
+            if not spec["is_file"]:
+                return spec
+            spec["bundle"] = self.load_native(path.read_text(encoding="utf-8-sig"))
+        except Exception:
+            return None                                                 # A's own read happens at its position
+        try:
+            session = getattr(self.sources, "session", None)
+            if not hasattr(session, "dispatch"):
+                return spec
+            bundle = spec["bundle"]
+            policy = self.verify(bundle["policy"], self.trust["control"], "commerce.bridge.policy.v1")
+            observation = self.verify(bundle["observation"], policy["core_public_key"], "commerce.core.observation.v1")
+            now = self.clock()
+            spec.update(session=session, policy=policy, observation=observation, now=now,
+                        ticket=session.dispatch(observation, policy, now))
+        except Exception:
+            pass
+        return spec
+
+    @staticmethod
+    def _same_freshness(observation, policy, t0, t1):
+        """True iff evaluating Core at t0 instead of t1 cannot change its output used here.
+        The worker reads ``now`` only as ZtlEvidenceService's clock: report age classification
+        0 <= now - observed_at <= max_age_seconds (core_worker/ztl_service). Identical instants, or every
+        report classified identically at both instants, give identical decisions; anything unparsable
+        -> False (recompute at A's instant)."""
+        if t0 == t1:
+            return True
+        try:
+            from datetime import datetime, timezone
+            a, b = datetime.fromtimestamp(t0, timezone.utc), datetime.fromtimestamp(t1, timezone.utc)
+            m = policy["max_age_seconds"]
+            for rep in observation["reports"]:
+                at = datetime.fromisoformat(rep["observed_at"].replace("Z", "+00:00"))
+                x, y = (a - at).total_seconds(), (b - at).total_seconds()
+                if (0 <= x <= m) != (0 <= y <= m):
+                    return False
+            return True
+        except Exception:
+            return False
+
+    def _take_speculation(self, observation, policy, now):
+        spec = getattr(self._tl, "spec", None)
+        if not spec or spec.get("ticket") is None:
+            return None
+        if spec["observation"] is observation and spec["policy"] is policy and self._same_freshness(observation, policy, spec["now"], now):
+            return spec.pop("ticket")
+        spec["session"].abandon(spec.pop("ticket"))
+        return None
 
     def _check(self, mission_envelope, permit_envelope, control):
         # --- commerce_adapter.contracts.Admission.check, predicate for predicate ---
@@ -223,8 +293,13 @@ class PreparedAdmission(BridgeAdmission):
         # --- BridgeAdmission.check ---
         locator = self.digest("commerce.permit.locator.v1", permit["permit_id"]) + ".json"
         path = self.bundle_dir / locator
-        require(path.is_file(), "CORE_EVIDENCE_BUNDLE_MISSING")
-        bundle = self.load_native(path.read_text(encoding="utf-8-sig"))
+        spec = getattr(self._tl, "spec", None)
+        if spec and spec.get("path") == path:
+            require(spec["is_file"], "CORE_EVIDENCE_BUNDLE_MISSING")
+            bundle = spec["bundle"]
+        else:
+            require(path.is_file(), "CORE_EVIDENCE_BUNDLE_MISSING")
+            bundle = self.load_native(path.read_text(encoding="utf-8-sig"))
         require(self.digest("commerce.bridge.bundle.v1", bundle) == permit["bridge_evidence_hash"], "CORE_EVIDENCE_BUNDLE_HASH")
         require(bundle["policy"] == self.policy_envelope, "CURRENT_BRIDGE_POLICY_MISMATCH")
         assessment = self.assess(mission_envelope, control, bundle, intent)
@@ -270,7 +345,9 @@ class PreparedAdmission(BridgeAdmission):
                 and set(policy["obligation_task_map"]) == set(mission["obligations"]), "ORIGINAL_OBLIGATION_MAPPING")
         observation = self.verify(bundle["observation"], policy["core_public_key"], "commerce.core.observation.v1")
         session = getattr(self.sources, "session", None)
-        ticket = session.dispatch(observation, policy, now) if self.overlap and hasattr(session, "dispatch") else None
+        ticket = None
+        if self.overlap and hasattr(session, "dispatch"):
+            ticket = self._take_speculation(observation, policy, now) or session.dispatch(observation, policy, now)
         try:
             calculated = self._assess_rest(mission, mh, intent, control, policy, observation, bundle, now, session, ticket)
             ticket = None
@@ -337,6 +414,7 @@ class PreparedAdmission(BridgeAdmission):
                 "mission_hash": mh, "intent_hash": ih, "observation_hash": oh, "policy_hash": self.digest("commerce.bridge.policy.v1", policy),
                 "epoch": control["epoch"], "core": summary, "source_manifest_hash": manifest_hash,
                 "authority_checked": ["control", "core", "cage", "veip"], "dispatch_authorized": False}
+
 
 
 

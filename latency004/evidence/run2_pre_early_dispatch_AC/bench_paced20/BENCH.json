@@ -1,0 +1,223 @@
+{
+ "meta": {
+  "N_per_arch_per_protocol": 1000,
+  "boundary": "Gateway.check(db,mission,permit), SQLite transaction open",
+  "git_dirty": false,
+  "git_head": "f20e179912a3f7c24cdb4a32882221eaa67c24f6",
+  "host_end": {
+   "ac_line": "ONLINE_AC",
+   "at_unix": 1793935713.048259,
+   "battery_percent": 58,
+   "battery_saver_on": false,
+   "cpu": "Intel64 Family 6 Model 140 Stepping 1, GenuineIntel",
+   "logical_cpus": 8,
+   "power_scheme": "Power Scheme GUID: 381b4222-f694-41f0-9685-ff5bb260df2e  (Balanced)",
+   "python_speed_index_ms_2e6_loop": 65.25
+  },
+  "host_start": {
+   "ac_line": "ONLINE_AC",
+   "at_unix": 1793935604.7639103,
+   "battery_percent": 57,
+   "battery_saver_on": false,
+   "cpu": "Intel64 Family 6 Model 140 Stepping 1, GenuineIntel",
+   "logical_cpus": 8,
+   "power_scheme": "Power Scheme GUID: 381b4222-f694-41f0-9685-ff5bb260df2e  (Balanced)",
+   "python_speed_index_ms_2e6_loop": 77.51
+  },
+  "p95_definition": "ceil(0.95N)-th smallest",
+  "pace_ms": 20.0,
+  "python": "3.14.7 (tags/v3.14.7:823f032, Aug  5 2026, 10:51:32) [MSC v.1944 64 bit (AMD64)]",
+  "rounds": 10,
+  "warmup_per_arch": 100
+ },
+ "results": {
+  "A/fresh": {
+   "fast_host_state": {
+    "N": 1000,
+    "max": 17.5947,
+    "mean": 7.043,
+    "min": 5.9356,
+    "p50": 6.77,
+    "p95": 8.8117,
+    "p99": 10.9843
+   },
+   "outcomes": {
+    "ALLOW": 1000
+   },
+   "stats_ms": {
+    "N": 1000,
+    "max": 17.5947,
+    "mean": 7.043,
+    "min": 5.9356,
+    "p50": 6.77,
+    "p95": 8.8117,
+    "p99": 10.9843
+   },
+   "throttled_host_state": null
+  },
+  "A/repeat": {
+   "fast_host_state": {
+    "N": 1000,
+    "max": 17.1225,
+    "mean": 6.9103,
+    "min": 6.0541,
+    "p50": 6.7679,
+    "p95": 8.0754,
+    "p99": 8.8933
+   },
+   "outcomes": {
+    "ALLOW": 1000
+   },
+   "stats_ms": {
+    "N": 1000,
+    "max": 17.1225,
+    "mean": 6.9103,
+    "min": 6.0541,
+    "p50": 6.7679,
+    "p95": 8.0754,
+    "p99": 8.8933
+   },
+   "throttled_host_state": null
+  },
+  "BC/fresh": {
+   "fast_host_state": {
+    "N": 1000,
+    "max": 10.5047,
+    "mean": 4.0693,
+    "min": 3.0723,
+    "p50": 3.8837,
+    "p95": 5.5457,
+    "p99": 6.1551
+   },
+   "outcomes": {
+    "ALLOW": 1000
+   },
+   "stats_ms": {
+    "N": 1000,
+    "max": 10.5047,
+    "mean": 4.0693,
+    "min": 3.0723,
+    "p50": 3.8837,
+    "p95": 5.5457,
+    "p99": 6.1551
+   },
+   "throttled_host_state": null
+  },
+  "BC/repeat": {
+   "fast_host_state": {
+    "N": 1000,
+    "max": 10.6358,
+    "mean": 3.8415,
+    "min": 2.9365,
+    "p50": 3.6263,
+    "p95": 5.1189,
+    "p99": 6.0224
+   },
+   "outcomes": {
+    "ALLOW": 1000
+   },
+   "stats_ms": {
+    "N": 1000,
+    "max": 10.6358,
+    "mean": 3.8415,
+    "min": 2.9365,
+    "p50": 3.6263,
+    "p95": 5.1189,
+    "p99": 6.0224
+   },
+   "throttled_host_state": null
+  }
+ },
+ "rounds": [
+  {
+   "block_speed": {},
+   "order": [
+    "A",
+    "BC"
+   ],
+   "round": 0,
+   "speed_index_ms": 74.62
+  },
+  {
+   "block_speed": {},
+   "order": [
+    "BC",
+    "A"
+   ],
+   "round": 1,
+   "speed_index_ms": 66.91
+  },
+  {
+   "block_speed": {},
+   "order": [
+    "A",
+    "BC"
+   ],
+   "round": 2,
+   "speed_index_ms": 67.71
+  },
+  {
+   "block_speed": {},
+   "order": [
+    "BC",
+    "A"
+   ],
+   "round": 3,
+   "speed_index_ms": 66.77
+  },
+  {
+   "block_speed": {},
+   "order": [
+    "A",
+    "BC"
+   ],
+   "round": 4,
+   "speed_index_ms": 67.61
+  },
+  {
+   "block_speed": {},
+   "order": [
+    "BC",
+    "A"
+   ],
+   "round": 5,
+   "speed_index_ms": 66.71
+  },
+  {
+   "block_speed": {},
+   "order": [
+    "A",
+    "BC"
+   ],
+   "round": 6,
+   "speed_index_ms": 66.83
+  },
+  {
+   "block_speed": {},
+   "order": [
+    "BC",
+    "A"
+   ],
+   "round": 7,
+   "speed_index_ms": 67.28
+  },
+  {
+   "block_speed": {},
+   "order": [
+    "A",
+    "BC"
+   ],
+   "round": 8,
+   "speed_index_ms": 66.64
+  },
+  {
+   "block_speed": {},
+   "order": [
+    "BC",
+    "A"
+   ],
+   "round": 9,
+   "speed_index_ms": 67.63
+  }
+ ]
+}
