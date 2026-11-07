@@ -38,9 +38,20 @@ def main():
     parser.add_argument("--output")
     parser.add_argument("--effect")
     parser.add_argument("--port",type=int,default=8765)
+    # AUTHORITY-005: operational admission runs the qualified BCh runtime by default
+    # (QualifiedSources immutable snapshot + consolidated worker + PreparedAdmission with overlap).
+    parser.add_argument("--runtime",choices=("bch","v1"),default="bch")
     args=parser.parse_args()
+    qualified=None; admission_class=None
     try:
         sources=Sources(args.sources)
+        if args.runtime=="bch" and args.command in ("preflight","install","create","capture","serve-approval") and args.trust:
+            import functools
+            from .qualified import QualifiedSources
+            from .consolidated import install as consolidated
+            from .prepared import PreparedAdmission
+            qualified=QualifiedSources(args.sources,immutable=True); consolidated(qualified)
+            sources=qualified; admission_class=functools.partial(PreparedAdmission,overlap=True)
         if args.command=="source-check":
             result={"source_check":"PASS","manifest":sources.verify(),"operational_authority":False}
         elif args.command=="preflight" and (not args.trust or not args.trust_sha256):
@@ -61,7 +72,7 @@ def main():
             result={"assessment_hash":digest("commerce.bridge.assessment.v1",result),"dispatch_authorized":False,
                     "signature":"EXTERNAL_ADMISSION_ISSUER_REQUIRED","output_written":bool(args.output)}
         elif args.command=="install":
-            target=install_package(args.package,credential_dir()/"a04",sources,args.trust,args.trust_sha256)
+            target=install_package(args.package,credential_dir()/"a04",sources,args.trust,args.trust_sha256,admission_class)
             result={"installation":"VERIFIED_AND_INSTALLED","destination":str(target),"transaction_calls":0}
         elif args.command=="apply-control":
             result=apply_external_control(credential_dir()/"a04",args.trust,args.trust_sha256,read(args.control))
@@ -81,9 +92,9 @@ def main():
         else:
             root=credential_dir()/"a04"
             # Validate all signatures/evidence before creating any writer.
-            gateway,mission,permit=gateway_for(root,sources,args.trust,args.trust_sha256,None)
+            gateway,mission,permit=gateway_for(root,sources,args.trust,args.trust_sha256,None,admission_class=admission_class)
             if args.command=="preflight":
-                result={"preflight":"PASS","all_six_a04_prerequisites_valid":True,"bridge_evidence_valid":True,"transaction_calls":0}
+                result={"preflight":"PASS","all_six_a04_prerequisites_valid":True,"bridge_evidence_valid":True,"transaction_calls":0,"runtime":args.runtime}
             else:
                 gateway.provider=PayPalSandbox(read_only=args.command in ("reconcile","independent-readback"))
                 if args.command=="create":
@@ -106,6 +117,10 @@ def main():
         result={"status":"BLOCKED","command":args.command,"code":"MISSING_OR_INVALID_OPERATOR_ARTIFACT","mission_complete":False}
     except subprocess.SubprocessError:
         result={"status":"BLOCKED","command":args.command,"code":"SOURCE_OR_CONTROL_SUBPROCESS_FAILURE","mission_complete":False}
+    finally:
+        if qualified is not None:
+            try: qualified.close()
+            except Exception: pass
     audit(result)
     print(json.dumps(result))
     return 2

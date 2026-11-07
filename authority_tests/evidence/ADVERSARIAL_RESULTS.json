@@ -1,0 +1,604 @@
+{
+ "summary": {
+  "tests": 73,
+  "passed": 73,
+  "failed": [],
+  "attacks": 58,
+  "unauthorized_admissions": 0,
+  "cross_role_substitutions_accepted": 0,
+  "revoked_permissions_accepted": 0,
+  "incorrect_monetary_terms_accepted": 0,
+  "by_category": {
+   "custody": {
+    "tests": 6,
+    "pass": 6
+   },
+   "signing": {
+    "tests": 4,
+    "pass": 4
+   },
+   "trust": {
+    "tests": 6,
+    "pass": 6
+   },
+   "separation": {
+    "tests": 1,
+    "pass": 1
+   },
+   "cross_role": {
+    "tests": 12,
+    "pass": 12
+   },
+   "admission_issuer": {
+    "tests": 4,
+    "pass": 4
+   },
+   "positive": {
+    "tests": 1,
+    "pass": 1
+   },
+   "forgery": {
+    "tests": 5,
+    "pass": 5
+   },
+   "monetary": {
+    "tests": 4,
+    "pass": 4
+   },
+   "epoch": {
+    "tests": 1,
+    "pass": 1
+   },
+   "revocation": {
+    "tests": 5,
+    "pass": 5
+   },
+   "expiry": {
+    "tests": 1,
+    "pass": 1
+   },
+   "source": {
+    "tests": 3,
+    "pass": 3
+   },
+   "evidence": {
+    "tests": 8,
+    "pass": 8
+   },
+   "trust_anchor": {
+    "tests": 3,
+    "pass": 3
+   },
+   "rotation": {
+    "tests": 3,
+    "pass": 3
+   },
+   "worker": {
+    "tests": 2,
+    "pass": 2
+   },
+   "consumption": {
+    "tests": 4,
+    "pass": 4
+   }
+  },
+  "runtime": "BCh (QualifiedSources + consolidated worker + PreparedAdmission overlap)",
+  "scope": "TEST role keys in a temporary DPAPI store (environment TEST-AUTHORITY-005); conformance-only Core/CAGE/VEIP sources; FakePayPal",
+  "seconds": 16.1,
+  "python": "3.14.7 (tags/v3.14.7:823f032, Aug  5 2026, 10:51:32) [MSC v.1944 64 bit (AMD64)]",
+  "verdict": "PASS"
+ },
+ "results": [
+  {
+   "test": "store_files_are_dpapi_sealed_not_plain",
+   "category": "custody",
+   "expected": "PASS",
+   "actual": "PASS",
+   "pass": true
+  },
+  {
+   "test": "wrong_passphrase_refused",
+   "category": "custody",
+   "expected": "DENY:WRONG_PASSPHRASE_OR_TAMPERED_KEY",
+   "actual": "DENY:WRONG_PASSPHRASE_OR_TAMPERED_KEY",
+   "pass": true
+  },
+  {
+   "test": "cli_requires_interactive_console",
+   "category": "custody",
+   "expected": "DENY:INTERACTIVE_CUSTODIAN_CONSOLE_REQUIRED",
+   "actual": "DENY:INTERACTIVE_CUSTODIAN_CONSOLE_REQUIRED",
+   "pass": true
+  },
+  {
+   "test": "private_key_location_dropbox_refused",
+   "category": "custody",
+   "expected": "DENY:PRIVATE_KEY_LOCATION_FORBIDDEN",
+   "actual": "DENY:PRIVATE_KEY_LOCATION_FORBIDDEN",
+   "pass": true
+  },
+  {
+   "test": "cross_role_key_use_refused",
+   "category": "custody",
+   "expected": "DENY:CROSS_ROLE_KEY_USE",
+   "actual": "DENY:CROSS_ROLE_KEY_USE",
+   "pass": true
+  },
+  {
+   "test": "selftest_control",
+   "category": "signing",
+   "expected": "PASS",
+   "actual": "PASS",
+   "pass": true
+  },
+  {
+   "test": "selftest_admission",
+   "category": "signing",
+   "expected": "PASS",
+   "actual": "PASS",
+   "pass": true
+  },
+  {
+   "test": "selftest_acceptance",
+   "category": "signing",
+   "expected": "PASS",
+   "actual": "PASS",
+   "pass": true
+  },
+  {
+   "test": "trust_built_three_distinct_roles",
+   "category": "trust",
+   "expected": "PASS",
+   "actual": "PASS",
+   "pass": true
+  },
+  {
+   "test": "operational_trust_rejects_test_enrollments",
+   "category": "trust",
+   "expected": "DENY:ENROLLMENT_ENVIRONMENT",
+   "actual": "DENY:ENROLLMENT_ENVIRONMENT",
+   "pass": true
+  },
+  {
+   "test": "trust_rejects_shared_identity",
+   "category": "trust",
+   "expected": "DENY:ENROLLMENT_ROLE",
+   "actual": "DENY:ENROLLMENT_ROLE",
+   "pass": true
+  },
+  {
+   "test": "trust_rejects_acceptance_sharing_control_custody",
+   "category": "separation",
+   "expected": "DENY:ACCEPTANCE_CUSTODIAN_NOT_INDEPENDENT",
+   "actual": "DENY:ACCEPTANCE_CUSTODIAN_NOT_INDEPENDENT",
+   "pass": true
+  },
+  {
+   "test": "enrollment_without_proof_of_possession_rejected",
+   "category": "trust",
+   "expected": "DENY:INVALID_SIGNATURE",
+   "actual": "DENY:INVALID_SIGNATURE",
+   "pass": true
+  },
+  {
+   "test": "signer_refuses_control_signing_commerce.permit.v1",
+   "category": "cross_role",
+   "expected": "DENY:DOMAIN_NOT_PERMITTED_FOR_ROLE",
+   "actual": "DENY:DOMAIN_NOT_PERMITTED_FOR_ROLE",
+   "pass": true
+  },
+  {
+   "test": "signer_refuses_control_signing_commerce.a03.acceptance.v1",
+   "category": "cross_role",
+   "expected": "DENY:DOMAIN_NOT_PERMITTED_FOR_ROLE",
+   "actual": "DENY:DOMAIN_NOT_PERMITTED_FOR_ROLE",
+   "pass": true
+  },
+  {
+   "test": "signer_refuses_admission_signing_commerce.mission.v1",
+   "category": "cross_role",
+   "expected": "DENY:DOMAIN_NOT_PERMITTED_FOR_ROLE",
+   "actual": "DENY:DOMAIN_NOT_PERMITTED_FOR_ROLE",
+   "pass": true
+  },
+  {
+   "test": "signer_refuses_admission_signing_commerce.bridge.installation.v1",
+   "category": "cross_role",
+   "expected": "DENY:DOMAIN_NOT_PERMITTED_FOR_ROLE",
+   "actual": "DENY:DOMAIN_NOT_PERMITTED_FOR_ROLE",
+   "pass": true
+  },
+  {
+   "test": "signer_refuses_acceptance_signing_commerce.control.v1",
+   "category": "cross_role",
+   "expected": "DENY:DOMAIN_NOT_PERMITTED_FOR_ROLE",
+   "actual": "DENY:DOMAIN_NOT_PERMITTED_FOR_ROLE",
+   "pass": true
+  },
+  {
+   "test": "signer_refuses_acceptance_signing_commerce.permit.v1",
+   "category": "cross_role",
+   "expected": "DENY:DOMAIN_NOT_PERMITTED_FOR_ROLE",
+   "actual": "DENY:DOMAIN_NOT_PERMITTED_FOR_ROLE",
+   "pass": true
+  },
+  {
+   "test": "generic_sign_refuses_permit_without_issuer_path",
+   "category": "admission_issuer",
+   "expected": "DENY:DOMAIN_REQUIRES_DEDICATED_PATH",
+   "actual": "DENY:DOMAIN_REQUIRES_DEDICATED_PATH",
+   "pass": true
+  },
+  {
+   "test": "signer_refuses_payload_schema_mismatch",
+   "category": "signing",
+   "expected": "DENY:PAYLOAD_SCHEMA_DOMAIN_MISMATCH",
+   "actual": "DENY:PAYLOAD_SCHEMA_DOMAIN_MISMATCH",
+   "pass": true
+  },
+  {
+   "test": "positive_package_validates_bch",
+   "category": "positive",
+   "expected": "PASS",
+   "actual": "PASS",
+   "pass": true
+  },
+  {
+   "test": "issuer_signs_only_bound_eligible_request",
+   "category": "admission_issuer",
+   "expected": "PASS",
+   "actual": "PASS",
+   "pass": true
+  },
+  {
+   "test": "issuer_refuses_permit_not_bound_to_assessment",
+   "category": "admission_issuer",
+   "expected": "DENY:PERMIT_NOT_BOUND_TO_ASSESSMENT",
+   "actual": "DENY:PERMIT_NOT_BOUND_TO_ASSESSMENT",
+   "pass": true
+  },
+  {
+   "test": "issuer_refuses_when_assessment_denies",
+   "category": "admission_issuer",
+   "expected": "DENY:UNKNOWN_OR_MALFORMED_CORE_STATE",
+   "actual": "DENY:UNKNOWN_OR_MALFORMED_CORE_STATE",
+   "pass": true
+  },
+  {
+   "test": "forged_control_signature",
+   "category": "forgery",
+   "expected": "DENY:INVALID_SIGNATURE",
+   "actual": "DENY:INVALID_SIGNATURE",
+   "pass": true
+  },
+  {
+   "test": "forged_mission_signature",
+   "category": "forgery",
+   "expected": "DENY:INVALID_SIGNATURE",
+   "actual": "DENY:INVALID_SIGNATURE",
+   "pass": true
+  },
+  {
+   "test": "forged_admission_permit",
+   "category": "forgery",
+   "expected": "DENY:INVALID_SIGNATURE",
+   "actual": "DENY:INVALID_SIGNATURE",
+   "pass": true
+  },
+  {
+   "test": "forged_acceptance_signature",
+   "category": "forgery",
+   "expected": "DENY:INVALID_SIGNATURE",
+   "actual": "DENY:INVALID_SIGNATURE",
+   "pass": true
+  },
+  {
+   "test": "forged_installation_manifest",
+   "category": "forgery",
+   "expected": "DENY:INVALID_SIGNATURE",
+   "actual": "DENY:INVALID_SIGNATURE",
+   "pass": true
+  },
+  {
+   "test": "cross_role_commerce.permit.v1_signed_by_control",
+   "category": "cross_role",
+   "expected": "DENY:INVALID_SIGNATURE",
+   "actual": "DENY:INVALID_SIGNATURE",
+   "pass": true
+  },
+  {
+   "test": "cross_role_commerce.mission.v1_signed_by_admission",
+   "category": "cross_role",
+   "expected": "DENY:INVALID_SIGNATURE",
+   "actual": "DENY:INVALID_SIGNATURE",
+   "pass": true
+  },
+  {
+   "test": "cross_role_commerce.control.v1_signed_by_acceptance",
+   "category": "cross_role",
+   "expected": "DENY:INVALID_SIGNATURE",
+   "actual": "DENY:INVALID_SIGNATURE",
+   "pass": true
+  },
+  {
+   "test": "cross_role_commerce.a03.acceptance.v1_signed_by_control",
+   "category": "cross_role",
+   "expected": "DENY:INVALID_SIGNATURE",
+   "actual": "DENY:INVALID_SIGNATURE",
+   "pass": true
+  },
+  {
+   "test": "cross_role_commerce.a03.acceptance.v1_signed_by_admission",
+   "category": "cross_role",
+   "expected": "DENY:INVALID_SIGNATURE",
+   "actual": "DENY:INVALID_SIGNATURE",
+   "pass": true
+  },
+  {
+   "test": "cross_role_installation_manifest_signed_by_control",
+   "category": "cross_role",
+   "expected": "DENY:INVALID_SIGNATURE",
+   "actual": "DENY:INVALID_SIGNATURE",
+   "pass": true
+  },
+  {
+   "test": "modified_amount_in_permit",
+   "category": "monetary",
+   "expected": "DENY:ORIGINAL_INTENT_MISMATCH",
+   "actual": "DENY:ORIGINAL_INTENT_MISMATCH",
+   "pass": true
+  },
+  {
+   "test": "modified_merchant_in_permit",
+   "category": "monetary",
+   "expected": "DENY:ORIGINAL_INTENT_MISMATCH",
+   "actual": "DENY:ORIGINAL_INTENT_MISMATCH",
+   "pass": true
+  },
+  {
+   "test": "modified_mission_amount_resigned",
+   "category": "monetary",
+   "expected": "DENY:CONTROL_INACTIVE",
+   "actual": "DENY:CONTROL_INACTIVE",
+   "pass": true
+  },
+  {
+   "test": "modified_mission_merchant_resigned",
+   "category": "monetary",
+   "expected": "DENY:CONTROL_INACTIVE",
+   "actual": "DENY:CONTROL_INACTIVE",
+   "pass": true
+  },
+  {
+   "test": "stale_epoch",
+   "category": "epoch",
+   "expected": "DENY:STALE_EPOCH",
+   "actual": "DENY:STALE_EPOCH",
+   "pass": true
+  },
+  {
+   "test": "revoked_permit_in_control",
+   "category": "revocation",
+   "expected": "DENY:REVOKED_PERMIT",
+   "actual": "DENY:REVOKED_PERMIT",
+   "pass": true
+  },
+  {
+   "test": "expired_permit",
+   "category": "expiry",
+   "expected": "DENY:EXPIRED_PERMIT",
+   "actual": "DENY:EXPIRED_PERMIT",
+   "pass": true
+  },
+  {
+   "test": "changed_source_hash_in_acceptance",
+   "category": "source",
+   "expected": "DENY:BRIDGE_SOURCE_CORRESPONDENCE",
+   "actual": "DENY:BRIDGE_SOURCE_CORRESPONDENCE",
+   "pass": true
+  },
+  {
+   "test": "changed_adapter_source_hash",
+   "category": "source",
+   "expected": "DENY:A03_ADAPTER_CORRESPONDENCE",
+   "actual": "DENY:A03_ADAPTER_CORRESPONDENCE",
+   "pass": true
+  },
+  {
+   "test": "changed_evidence_file",
+   "category": "source",
+   "expected": "DENY:A03_EVIDENCE_HASH",
+   "actual": "DENY:A03_EVIDENCE_HASH",
+   "pass": true
+  },
+  {
+   "test": "missing_observation_evidence",
+   "category": "evidence",
+   "expected": "DENY:CORE_EVIDENCE_BUNDLE_HASH",
+   "actual": "DENY:CORE_EVIDENCE_BUNDLE_HASH",
+   "pass": true
+  },
+  {
+   "test": "missing_cage_evidence",
+   "category": "evidence",
+   "expected": "DENY:CORE_EVIDENCE_BUNDLE_HASH",
+   "actual": "DENY:CORE_EVIDENCE_BUNDLE_HASH",
+   "pass": true
+  },
+  {
+   "test": "missing_veip_evidence",
+   "category": "evidence",
+   "expected": "DENY:CORE_EVIDENCE_BUNDLE_HASH",
+   "actual": "DENY:CORE_EVIDENCE_BUNDLE_HASH",
+   "pass": true
+  },
+  {
+   "test": "missing_observation_evidence_rebound_permit",
+   "category": "evidence",
+   "expected": "FAILCLOSED",
+   "actual": "ERROR:KeyError",
+   "pass": true
+  },
+  {
+   "test": "missing_cage_evidence_rebound_permit",
+   "category": "evidence",
+   "expected": "FAILCLOSED",
+   "actual": "ERROR:KeyError",
+   "pass": true
+  },
+  {
+   "test": "missing_veip_evidence_rebound_permit",
+   "category": "evidence",
+   "expected": "FAILCLOSED",
+   "actual": "ERROR:KeyError",
+   "pass": true
+  },
+  {
+   "test": "missing_bridge_bundle",
+   "category": "evidence",
+   "expected": "DENY:CORE_EVIDENCE_BUNDLE_MISSING",
+   "actual": "DENY:CORE_EVIDENCE_BUNDLE_MISSING",
+   "pass": true
+  },
+  {
+   "test": "unknown_core_state_evidence",
+   "category": "evidence",
+   "expected": "DENY:CORE_EVIDENCE_BUNDLE_HASH",
+   "actual": "DENY:CORE_EVIDENCE_BUNDLE_HASH",
+   "pass": true
+  },
+  {
+   "test": "trust_anchor_replaced_in_package",
+   "category": "trust_anchor",
+   "expected": "DENY:PACKAGE_TRUST_SUBSTITUTION",
+   "actual": "DENY:PACKAGE_TRUST_SUBSTITUTION",
+   "pass": true
+  },
+  {
+   "test": "trust_anchor_with_wrong_operator_fingerprint",
+   "category": "trust_anchor",
+   "expected": "DENY:OPERATOR_TRUST_FINGERPRINT",
+   "actual": "DENY:OPERATOR_TRUST_FINGERPRINT",
+   "pass": true
+  },
+  {
+   "test": "attacker_trust_file_with_its_own_fingerprint",
+   "category": "trust_anchor",
+   "expected": "DENY:PACKAGE_TRUST_SUBSTITUTION",
+   "actual": "DENY:PACKAGE_TRUST_SUBSTITUTION",
+   "pass": true
+  },
+  {
+   "test": "private_key_file_in_package",
+   "category": "custody",
+   "expected": "DENY:PRIVATE_KEY_OR_LINK_IN_PACKAGE",
+   "actual": "DENY:PRIVATE_KEY_OR_LINK_IN_PACKAGE",
+   "pass": true
+  },
+  {
+   "test": "revocation_record_signed_by_control",
+   "category": "revocation",
+   "expected": "PASS",
+   "actual": "PASS",
+   "pass": true
+  },
+  {
+   "test": "revoked_key_cannot_sign",
+   "category": "revocation",
+   "expected": "DENY:KEY_NOT_ACTIVE",
+   "actual": "DENY:KEY_NOT_ACTIVE",
+   "pass": true
+  },
+  {
+   "test": "revoked_key_excluded_from_new_trust",
+   "category": "revocation",
+   "expected": "DENY:REVOKED_KEY_IN_TRUST",
+   "actual": "DENY:REVOKED_KEY_IN_TRUST",
+   "pass": true
+  },
+  {
+   "test": "rotated_trust_differs_only_in_admission",
+   "category": "rotation",
+   "expected": "PASS",
+   "actual": "PASS",
+   "pass": true
+  },
+  {
+   "test": "permit_signed_by_revoked_key_rejected_under_rotated_anchor",
+   "category": "revocation",
+   "expected": "DENY:INVALID_SIGNATURE",
+   "actual": "DENY:INVALID_SIGNATURE",
+   "pass": true
+  },
+  {
+   "test": "rotated_key_permit_validates",
+   "category": "rotation",
+   "expected": "PASS",
+   "actual": "PASS",
+   "pass": true
+  },
+  {
+   "test": "old_anchor_rejects_rotated_key_permit",
+   "category": "rotation",
+   "expected": "DENY:PACKAGE_TRUST_SUBSTITUTION",
+   "actual": "DENY:PACKAGE_TRUST_SUBSTITUTION",
+   "pass": true
+  },
+  {
+   "test": "operator_confirmation_of_rotated_anchor",
+   "category": "trust",
+   "expected": "PASS",
+   "actual": "PASS",
+   "pass": true
+  },
+  {
+   "test": "confirmation_requires_typed_fingerprint",
+   "category": "trust",
+   "expected": "DENY:OPERATOR_FINGERPRINT_CONFIRMATION_MISMATCH",
+   "actual": "DENY:OPERATOR_FINGERPRINT_CONFIRMATION_MISMATCH",
+   "pass": true
+  },
+  {
+   "test": "worker_crash_during_verification_denies",
+   "category": "worker",
+   "expected": "DENY:QUALIFIED_WORKER",
+   "actual": "DENY:QUALIFIED_WORKER_TIMEOUT_OR_PROTOCOL",
+   "pass": true
+  },
+  {
+   "test": "worker_restarted_next_request_allows",
+   "category": "worker",
+   "expected": "PASS",
+   "actual": "PASS",
+   "pass": true
+  },
+  {
+   "test": "first_effect_captured_once",
+   "category": "consumption",
+   "expected": "PASS",
+   "actual": "PASS",
+   "pass": true
+  },
+  {
+   "test": "consumed_permit_reuse_creates_no_new_effect",
+   "category": "consumption",
+   "expected": "PASS",
+   "actual": "PASS",
+   "pass": true
+  },
+  {
+   "test": "second_permit_for_same_effect_refused",
+   "category": "consumption",
+   "expected": "DENY:EFFECT_IDENTITY_CONFLICT",
+   "actual": "DENY:EFFECT_IDENTITY_CONFLICT",
+   "pass": true
+  },
+  {
+   "test": "captures_total_after_reuse_attempts",
+   "category": "consumption",
+   "expected": "PASS",
+   "actual": "PASS",
+   "pass": true
+  }
+ ]
+}

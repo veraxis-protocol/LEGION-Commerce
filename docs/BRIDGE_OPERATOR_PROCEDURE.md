@@ -1,3 +1,5 @@
+> **AUTHORITY-005 update (2026-11-06):** the owner authorized new, operator-controlled Ed25519 role keys. Provisioning, custody, rotation and revocation are now in `docs/AUTHORITY_CUSTODY.md` and `docs/PROVISIONING_PACKAGES.md` (`python -m commerce_authority`). The control key is enrolled; admission and acceptance remain undesignated. `commerce_bridge` now validates with the qualified BCh runtime by default (`--runtime bch`). Everything below about independent authority, real evidence and no substitute signatures still applies.
+
 # Existing-key operator procedure — no substitute authority
 
 The operator selected existing keys. No key paths/IDs or fingerprints have yet

@@ -1,0 +1,1 @@
+﻿{"status": "BLOCKED", "code": "EXISTING_OPERATOR_KEY_PATHS_AND_FINGERPRINTS_REQUIRED", "missing": ["trust.json", "a03-acceptance.json", "a03-evidence", "current-mission.json", "current-permit.json", "current-control.json", "bridge-policy.json", "bridge-evidence", "installation-manifest.json"], "transaction_calls": 0}

@@ -1,0 +1,19 @@
+{
+  "A03_passed": 13,
+  "A03_total": 13,
+  "alpha_matched_cases": 1000,
+  "alpha_mismatches": 0,
+  "architecture": "BCh",
+  "captures": 0,
+  "false_authorizations": 0,
+  "full_admission_p95_ms": 2.9924,
+  "go_to_a05": false,
+  "model_matched_cases": 1200,
+  "model_mismatches": 0,
+  "native_dispatches": 0,
+  "operational_acceptance": "BLOCKED_OWNER_KEYS_AND_INDEPENDENT_ACCEPTANCE_ABSENT",
+  "overall": "BLOCKED",
+  "performance": "PASS",
+  "source_unchanged": true,
+  "warm_negative_failures": 0
+}

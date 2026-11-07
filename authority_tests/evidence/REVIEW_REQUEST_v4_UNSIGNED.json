@@ -1,0 +1,264 @@
+{
+  "acceptance_must_bind": {
+    "bridge_source_hashes": {
+      "__init__.py": "a0da880a13feead9e47252ec193ae868b716b057602431a3a6e2af393f685ec5",
+      "__main__.py": "f3cb08980be23e38dc6955caed5e1a27d53b345dbb7968a37aa3e05396187e13",
+      "admission.py": "8acfc094ef31ccac498efa29ea8b337c0c4b795bd43fb0b843c71a40c7007a21",
+      "consolidated.py": "bf488d5c862fd4d5776f224da844827f67e9e4268dff4090a9c8e91fb78b9b31",
+      "consolidated_worker.py": "5e437b4a72993a2d8e3432c4b033b1581495b1b303a5e1fd01547161ecd130c3",
+      "core_worker.py": "e69f5c3f27e1e83f3523b282a70c9ebe998c42b1ed668f426c0f007106fd6c70",
+      "installation.py": "99dcad9dc930219f5b309daa18c9efc257d52b2bda95a8e4c2499a3ce6ba1d6b",
+      "locked_readiness.py": "38a01448f3f9802135a57c4d2eb775f06c6408890d13c702686f5ad86a5ece3a",
+      "prepared.py": "2b5344aab5c356b3dab01b8c0376b30c52d6789be6413cd602d17250d5f689ae",
+      "qualified.py": "5aae762b6ec2269c747f5d383e8964b2656acc16e89be5368097d0b06279e51b",
+      "qualified_worker.py": "67fd5a646d2ae9b80e62bd9b3846254d30df5f50b714de8aa1883f69a54ab8aa",
+      "runtime.py": "b18d78e145affaaa2e855ab019abfd301eb50cc222f03d2abe7e520c9662a10d",
+      "sources.py": "edf80bc01665f5b80b7147b771616d859885a8f1ef2aacdb09c2cddce494ea77",
+      "transport.py": "c6da9de63cdbe1ae888768a3f47ebcfb3e230080c03c49c28e46fc9960f2150b",
+      "witness.py": "75347919cdef4da6ea2a257632202292d3ce5b00695f3d8b6b51425cf26efa93"
+    },
+    "runtime_source_hashes": {
+      "__init__.py": "f4b5a6451c984786b82936c80f1a08bfe977219a1d9efd5674b089b166abb536",
+      "__main__.py": "8e72c9b3391fe6d79a9658ee42f6e1ebbcc1b6f10ea0b97137e568cb4a25dec5",
+      "approval.py": "03fd03bde61168bb9b0f6526824a18290ec5a57b53df27d8cb798fa3f0d10937",
+      "contracts.py": "ed44966830509ee97a28765eefd23a0f68f49be7b82129ad6dc49e8056c6fbac",
+      "gateway.py": "865928f3e48aff2afaa6d49b421046ad7a9f7a05050ef3d67e92a8f742473f3f",
+      "paypal.py": "9e0f582ce01e261fca18ab4b5273755f122ef33c52cf4754f5d6083d6c7dba4c",
+      "readback.py": "66c38645f5aadaa7447800b14d3245e8a4657d63ec0944643460ef0a09c5a5e7"
+    }
+  },
+  "admission_runtime": "BCh: QualifiedSources(immutable) + ConsolidatedSession + PreparedAdmission(overlap) [+ hot standby optional]",
+  "evidence_files": {
+    "authority_adversarial": {
+      "ADVERSARIAL_RESULTS.json": "1911c2dbc78bdc6a2b5c74f91e6bc7cd6d901315f379422e499e3d44abbde2cd",
+      "AUTHORITY_STATUS.json": "aa828a380a749386d876786dab73a5d6ac0151fb24a0bae8f7bc184faec92550",
+      "PREFLIGHT_OUTPUT.txt": "1a0656c989f53285ffe484421aab1b830c10b4922ac374475f4b47c438a83cef"
+    },
+    "latency_004_deposit_manifest_sha256": "e1109dad4b67de4e0c189909aeab0d40f5e9d59cc402044c36c66340108b3926",
+    "qualify_run": {
+      "A03_RAW_EVENTS.jsonl": "24835b57376335bf12fb2356c76bc1d39b3dd0e2dcc55e241415511f4845ac19",
+      "A03_RESULTS.json": "71049d2d2c7b7ebdd2dfa126d4db38f4cdd84c5fbe61366cc8243e023fbb48b3",
+      "A03_TEST_OUTPUT.txt": "05e0c7e8871d4d090fc470090f7e7ad8c717cfa5253a0beda1bd37e79958ed54",
+      "ALPHA_INPUTS.jsonl": "f1b7eee6e6661e87819d799df5aab95beca43dd566ebf072f18ca543b25aaf1d",
+      "ALPHA_RESULTS.jsonl": "a1014dd6a838ebe6814e20f89aa330889f3e55b992f1ba04322c375db628d3ce",
+      "COMMERCE_SOURCE_HASHES.json": "e5e484e891ad1a9be8fe62b68dcf235a5e86e977bd4f7bce1ac2ebbaf000e59f",
+      "EVIDENCE_HASHES.json": "9bf6df81053881ceb9e559e7af72353709105db04902b9f0edda5707ebd8a7b4",
+      "FROZEN_RUN.json": "f169bbbf980d41cbf2bbdcf9d5e510086724f2d5a9962d5a1d777975da66103d",
+      "LATENCY.json": "b56442349b3c8665bb3be1ab387c6550ef6d8fc453e0bed89c748db534d15073",
+      "MATCHED_INPUTS.jsonl": "0af5e931badbaf34c203e688751529699f27b07c1bc76cf1e1b8fcd996f012bb",
+      "MATCHED_RESULTS.jsonl": "15fb7d9edff361cd7944f07fe7577f014ee860b84ab0137649079ca1e1a26f88",
+      "NATIVE_SOURCE_MANIFEST.json": "79ff33b95d3d97c0efa387bd280e1f1656a4150a102e25f058dc1bbdcb598f23",
+      "SUMMARY.json": "7038030e6f147a3b020005c79af4168f10c696fe21a166db0abb9862cc8271f6",
+      "WARM_NEGATIVES.json": "d66c5aaab638f4b4deee850c69cf331a063ca202abb9829138c22954899ba055"
+    }
+  },
+  "frozen_interface_sha256": "adc2ff7f83d642b75ac5baf0865025369312891edda06a29ca0949e580086127",
+  "hot_path_files": {
+    "commerce_bridge/admission.py": {
+      "current_blob": "1a118ac99ca2545607b957645fa6c8257b276a3a",
+      "identical": true,
+      "measured_ca897f7_blob": "1a118ac99ca2545607b957645fa6c8257b276a3a",
+      "working_tree_sha256": "8acfc094ef31ccac498efa29ea8b337c0c4b795bd43fb0b843c71a40c7007a21"
+    },
+    "commerce_bridge/consolidated.py": {
+      "current_blob": "6270e1783846a3f0d793b3c8ed3fa1476ac19625",
+      "identical": true,
+      "measured_ca897f7_blob": "6270e1783846a3f0d793b3c8ed3fa1476ac19625",
+      "working_tree_sha256": "bf488d5c862fd4d5776f224da844827f67e9e4268dff4090a9c8e91fb78b9b31"
+    },
+    "commerce_bridge/consolidated_worker.py": {
+      "current_blob": "50cae73ba6faea509d196bbd07eb5bcca809d6a0",
+      "identical": true,
+      "measured_ca897f7_blob": "50cae73ba6faea509d196bbd07eb5bcca809d6a0",
+      "working_tree_sha256": "5e437b4a72993a2d8e3432c4b033b1581495b1b303a5e1fd01547161ecd130c3"
+    },
+    "commerce_bridge/core_worker.py": {
+      "current_blob": "aa78a727d64f6c0b2019cc9577887931aed0bd16",
+      "identical": true,
+      "measured_ca897f7_blob": "aa78a727d64f6c0b2019cc9577887931aed0bd16",
+      "working_tree_sha256": "e69f5c3f27e1e83f3523b282a70c9ebe998c42b1ed668f426c0f007106fd6c70"
+    },
+    "commerce_bridge/locked_readiness.py": {
+      "current_blob": "dc7989a7073cfac89e079e316f73825ba6d6bf46",
+      "identical": true,
+      "measured_ca897f7_blob": "dc7989a7073cfac89e079e316f73825ba6d6bf46",
+      "working_tree_sha256": "38a01448f3f9802135a57c4d2eb775f06c6408890d13c702686f5ad86a5ece3a"
+    },
+    "commerce_bridge/prepared.py": {
+      "current_blob": "57bb4ee13caae8d7a4bdefde7fb4a57b19335328",
+      "identical": true,
+      "measured_ca897f7_blob": "57bb4ee13caae8d7a4bdefde7fb4a57b19335328",
+      "working_tree_sha256": "2b5344aab5c356b3dab01b8c0376b30c52d6789be6413cd602d17250d5f689ae"
+    },
+    "commerce_bridge/qualified.py": {
+      "current_blob": "038dbf44de444603f910022b26c45ec94e064f18",
+      "identical": true,
+      "measured_ca897f7_blob": "038dbf44de444603f910022b26c45ec94e064f18",
+      "working_tree_sha256": "5aae762b6ec2269c747f5d383e8964b2656acc16e89be5368097d0b06279e51b"
+    },
+    "commerce_bridge/qualified_worker.py": {
+      "current_blob": "dabf7642daf2aabe57d5a44fd1463a838cff10eb",
+      "identical": true,
+      "measured_ca897f7_blob": "dabf7642daf2aabe57d5a44fd1463a838cff10eb",
+      "working_tree_sha256": "67fd5a646d2ae9b80e62bd9b3846254d30df5f50b714de8aa1883f69a54ab8aa"
+    },
+    "commerce_bridge/runtime.py": {
+      "current_blob": "54e419a285cb4002f0e6a807664235a7a817a6f9",
+      "identical": true,
+      "measured_ca897f7_blob": "54e419a285cb4002f0e6a807664235a7a817a6f9",
+      "working_tree_sha256": "b18d78e145affaaa2e855ab019abfd301eb50cc222f03d2abe7e520c9662a10d"
+    },
+    "commerce_bridge/sources.py": {
+      "current_blob": "ec42a3a61c77f0a6911668d9a7c1d16122dd9455",
+      "identical": true,
+      "measured_ca897f7_blob": "ec42a3a61c77f0a6911668d9a7c1d16122dd9455",
+      "working_tree_sha256": "edf80bc01665f5b80b7147b771616d859885a8f1ef2aacdb09c2cddce494ea77"
+    },
+    "commerce_bridge/transport.py": {
+      "current_blob": "8093bb7f38a05c9d3ffd6ac96fc590f4e7c11bd3",
+      "identical": true,
+      "measured_ca897f7_blob": "8093bb7f38a05c9d3ffd6ac96fc590f4e7c11bd3",
+      "working_tree_sha256": "c6da9de63cdbe1ae888768a3f47ebcfb3e230080c03c49c28e46fc9960f2150b"
+    },
+    "commerce_bridge/witness.py": {
+      "current_blob": "50af5b8eba670889876eb90e4ea687354cf8375a",
+      "identical": true,
+      "measured_ca897f7_blob": "50af5b8eba670889876eb90e4ea687354cf8375a",
+      "working_tree_sha256": "75347919cdef4da6ea2a257632202292d3ce5b00695f3d8b6b51425cf26efa93"
+    }
+  },
+  "hot_path_identical_to_measured": true,
+  "measured_admission_commit": "ca897f7badeea4f2b66a52bc684df18008bc4f4d",
+  "native_payment_dispatches": 0,
+  "not_an_execution_permit": true,
+  "qualification_profile": "design/QUALIFIED_CORE_PROFILE_v3.json",
+  "qualification_profile_sha256": "a689e626652ba3dfccd3362cc83d34b9ce8a94c6b40f57692ab801b3609d8031",
+  "qualified_core": "d9d38cd6fd9e93e002b0b5d5135377ce1d33d8c8",
+  "qualified_decider_sha256": "99cda684f29afba33e69b8f4811d754c499987c30c07ac1c67f19ec250ade73a",
+  "results": {
+    "authority_adversarial": {
+      "attacks": 58,
+      "by_category": {
+        "admission_issuer": {
+          "pass": 4,
+          "tests": 4
+        },
+        "consumption": {
+          "pass": 4,
+          "tests": 4
+        },
+        "cross_role": {
+          "pass": 12,
+          "tests": 12
+        },
+        "custody": {
+          "pass": 6,
+          "tests": 6
+        },
+        "epoch": {
+          "pass": 1,
+          "tests": 1
+        },
+        "evidence": {
+          "pass": 8,
+          "tests": 8
+        },
+        "expiry": {
+          "pass": 1,
+          "tests": 1
+        },
+        "forgery": {
+          "pass": 5,
+          "tests": 5
+        },
+        "monetary": {
+          "pass": 4,
+          "tests": 4
+        },
+        "positive": {
+          "pass": 1,
+          "tests": 1
+        },
+        "revocation": {
+          "pass": 5,
+          "tests": 5
+        },
+        "rotation": {
+          "pass": 3,
+          "tests": 3
+        },
+        "separation": {
+          "pass": 1,
+          "tests": 1
+        },
+        "signing": {
+          "pass": 4,
+          "tests": 4
+        },
+        "source": {
+          "pass": 3,
+          "tests": 3
+        },
+        "trust": {
+          "pass": 6,
+          "tests": 6
+        },
+        "trust_anchor": {
+          "pass": 3,
+          "tests": 3
+        },
+        "worker": {
+          "pass": 2,
+          "tests": 2
+        }
+      },
+      "cross_role_substitutions_accepted": 0,
+      "failed": [],
+      "incorrect_monetary_terms_accepted": 0,
+      "passed": 73,
+      "python": "3.14.7 (tags/v3.14.7:823f032, Aug  5 2026, 10:51:32) [MSC v.1944 64 bit (AMD64)]",
+      "revoked_permissions_accepted": 0,
+      "runtime": "BCh (QualifiedSources + consolidated worker + PreparedAdmission overlap)",
+      "scope": "TEST role keys in a temporary DPAPI store (environment TEST-AUTHORITY-005); conformance-only Core/CAGE/VEIP sources; FakePayPal",
+      "seconds": 16.1,
+      "tests": 73,
+      "unauthorized_admissions": 0,
+      "verdict": "PASS"
+    },
+    "qualification_BCh": {
+      "A03_passed": 13,
+      "A03_total": 13,
+      "alpha_matched_cases": 1000,
+      "alpha_mismatches": 0,
+      "architecture": "BCh",
+      "captures": 0,
+      "false_authorizations": 0,
+      "full_admission_p95_ms": 2.9924,
+      "go_to_a05": false,
+      "model_matched_cases": 1200,
+      "model_mismatches": 0,
+      "native_dispatches": 0,
+      "operational_acceptance": "BLOCKED_OWNER_KEYS_AND_INDEPENDENT_ACCEPTANCE_ABSENT",
+      "overall": "BLOCKED",
+      "performance": "PASS",
+      "source_unchanged": true,
+      "warm_negative_failures": 0
+    }
+  },
+  "reviewer_must_also_review": [
+    "compiler and axiom transcripts of the qualified Formal Core (FORMAL_CORE_001)",
+    "A01/A02 upstream acceptance evidence (not present on this host)",
+    "actual Core/CAGE/VEIP source provenance and key custody (not provisioned)",
+    "process and key custody (docs/AUTHORITY_CUSTODY.md, registry and enrollments)",
+    "latency disposition: GO under unthrottled host conditions only (COMMERCE_LATENCY_004)"
+  ],
+  "schema": "commerce.bridge.review-request.v4",
+  "signature": null,
+  "signers_required": {
+    "acceptance": "designated INDEPENDENT reviewer (not Claude, not the operator): A03 acceptance, A01/A02 upstream, installation manifest",
+    "admission": "designated admission issuer: commerce_authority sign-permit over a real eligible issuer request",
+    "control": "Veraxis operator: real mission, control, bridge policy (with real Core/CAGE/VEIP/reporter keys)"
+  },
+  "source_commit": "57f32fa9f66422f62855b34260621d33c4c63ca8",
+  "status": "UNSIGNED_REVIEW_REQUIRED"
+}

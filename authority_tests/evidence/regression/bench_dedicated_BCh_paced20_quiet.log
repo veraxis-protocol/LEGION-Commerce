@@ -1,0 +1,3 @@
+﻿BCh/repeat       p50   4.596 p95   7.279 p99   8.152 max  11.228 | fast p95 7.0496 (n=800) throttled p95 7.7973  {'ALLOW': 1000}
+BCh/fresh        p50   4.987 p95   7.845 p99   9.259 max  23.935 | fast p95 7.7524 (n=800) throttled p95 8.613  {'ALLOW': 1000}
+speed index per round: [120.56, 94.87, 112.54, 97.57, 106.05, 95.54, 130.54, 109.19, 93.44, 111.78] ONLINE_AC

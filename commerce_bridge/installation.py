@@ -35,7 +35,7 @@ def checked_trust(path,expected_sha256):
     return trust
 
 
-def validate_package(root,sources,trust_path,trust_sha256,clock=None):
+def validate_package(root,sources,trust_path,trust_sha256,clock=None,admission_class=None):
     root=Path(root).resolve()
     require(not any(p.is_symlink() for p in root.rglob("*")),"PACKAGE_SYMLINK")
     missing=[name for name in REQUIRED if not (root/name).exists()]
@@ -44,7 +44,10 @@ def validate_package(root,sources,trust_path,trust_sha256,clock=None):
     require(read(root/"trust.json")==trust,"PACKAGE_TRUST_SUBSTITUTION")
     pins=read(Path(__file__).resolve().parent.parent/"design/SOURCE_PINS.json")
     kwargs={} if clock is None else {"clock":clock}
-    admission=BridgeAdmission(trust,read(root/"a03-acceptance.json"),root/"a03-evidence",pins["a03_tdd_sha256"],pins["source_pins"],
+    # AUTHORITY-005: the qualified BCh runtime (QualifiedSources + PreparedAdmission) binds the
+    # qualified LEGION pin from the sources object; the v1 path keeps design/SOURCE_PINS.json.
+    source_pins=getattr(sources,"policy_pins",pins["source_pins"])
+    admission=(admission_class or BridgeAdmission)(trust,read(root/"a03-acceptance.json"),root/"a03-evidence",pins["a03_tdd_sha256"],source_pins,
         sources=sources,policy_envelope=read(root/"bridge-policy.json"),bundle_dir=root/"bridge-evidence",**kwargs)
     mission,permit,control=(read(root/name) for name in ("current-mission.json","current-permit.json","current-control.json"))
     current=admission.control(control)
@@ -67,8 +70,8 @@ def validate_package(root,sources,trust_path,trust_sha256,clock=None):
     return admission,mission,permit,control,manifest
 
 
-def gateway_for(root,sources,trust_path,trust_sha256,provider,clock=None):
-    admission,mission,permit,control,manifest=validate_package(root,sources,trust_path,trust_sha256,clock)
+def gateway_for(root,sources,trust_path,trust_sha256,provider,clock=None,admission_class=None):
+    admission,mission,permit,control,manifest=validate_package(root,sources,trust_path,trust_sha256,clock,admission_class)
     gateway=Gateway(Path(root)/"ledger.db",admission,provider)
     current=admission.control(control)
     with gateway.connect() as db:
@@ -96,10 +99,10 @@ def apply_external_control(root,trust_path,trust_sha256,envelope):
     return {"control":"APPLIED","mission_id":control["mission_id"],"sequence":control["sequence"],"transaction_calls":0}
 
 
-def install_package(package,destination,sources,trust_path,trust_sha256):
+def install_package(package,destination,sources,trust_path,trust_sha256,admission_class=None):
     package,destination=Path(package).resolve(),Path(destination).resolve()
     require(not any((package/name).exists() for name in LEDGER_FILES),"LEDGER_NOT_AN_INSTALL_INPUT")
-    validate_package(package,sources,trust_path,trust_sha256)
+    validate_package(package,sources,trust_path,trust_sha256,admission_class=admission_class)
     require(not destination.exists(),"INSTALLATION_ALREADY_EXISTS")
     destination.parent.mkdir(parents=True,exist_ok=True)
     # Copy only after full validation. No secrets/private keys are accepted.
@@ -120,7 +123,7 @@ def install_package(package,destination,sources,trust_path,trust_sha256):
             relative=p.relative_to(package)
             if p.is_dir(): (stage/relative).mkdir(exist_ok=True)
             elif p.is_file(): shutil.copyfile(p,stage/relative)
-        validate_package(stage,sources,trust_path,trust_sha256)
+        validate_package(stage,sources,trust_path,trust_sha256,admission_class=admission_class)
         os.rename(stage,destination)
     except BaseException:
         # Stage is a verified, task-created child of the exact destination parent.

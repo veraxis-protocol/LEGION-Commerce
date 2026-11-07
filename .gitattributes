@@ -4,3 +4,4 @@ evidence/** -text
 bridge_evidence/** -text
 qualify_evidence/** -text
 latency004/evidence/** -text
+authority_tests/evidence/** -text

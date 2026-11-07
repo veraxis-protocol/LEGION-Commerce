@@ -1,0 +1,29 @@
+﻿{
+ "keys": [
+  {
+   "created_at": 1794011937,
+   "custodian": "Veraxis Owner",
+   "custody": {
+    "acl": "custodian account, SYSTEM, Administrators",
+    "host": "E2D5C336J3",
+    "mechanism": "passphrase(scrypt)+ChaCha20-Poly1305 inside DPAPI CurrentUser",
+    "passphrase_gated": true,
+    "windows_account": "E2D5C336J3\\Administrator",
+    "windows_account_sid": "S-1-5-21-2699248888-2921309727-3234649026-500"
+   },
+   "enrolled_at": 1794011938,
+   "enrollment_sha256": "d2cce96d52aec2abdb1595ac185348e157627271c71971a46c6535b4ef48a59d",
+   "key_id": "fdaab34c5defcf9805c32bb5",
+   "public_key": "uHY+AZAKcPqxj43UmXfLNOYJ6t7uNPnNwuMYkKXulh0=",
+   "role": "control",
+   "status": "ACTIVE"
+  }
+ ],
+ "owners": {
+  "acceptance": "independently designated technical reviewer: qualification acceptance and installation manifests",
+  "admission": "separately authorized LEGION admission issuer: execution permits over an eligible issuer request only",
+  "control": "Veraxis operator: original purchasing mission, budget, policy, epochs, revocation"
+ },
+ "store": "C:\\Users\\Administrator\\AppData\\Local\\Veraxis\\LEGION-Commerce\\authority",
+ "store_acl": "C:\\Users\\Administrator\\AppData\\Local\\Veraxis\\LEGION-Commerce\\authority BUILTIN\\Administrators:(OI)(CI)(F)\n                                                                       NT AUTHORITY\\SYSTEM:(OI)(CI)(F)\n                                                                       E2D5C336J3\\Administrator:(OI)(CI)(F)\n\nSuccessfully processed 1 files; Failed processing 0 files\n"
+}
