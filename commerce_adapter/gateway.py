@@ -132,6 +132,10 @@ class Gateway:
         intent = json.loads(self.row(db, eid)["intent"])
         require(tx == id(db) and isinstance(att, dict) and att.get("lean_verdict") == "T"
                 and att.get("action_digest") == digest("commerce.intent.v1", intent), "LEAN_ADMISSION_REQUIRED")
+        # FORMAL-003: the attestation relied on is journaled in the same transaction as the dispatch it authorizes.
+        self.event(db, eid, "LEAN_ATTESTED", {"lean_verdict": "T", "action_digest": att["action_digest"],
+                                              "source": att.get("source"),
+                                              "evaluated_at": int(att["evaluated_at"]) if isinstance(att.get("evaluated_at"), (int, float)) else None})
 
     @logged_denial
     def reserve(self, mission, permit):

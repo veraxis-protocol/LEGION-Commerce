@@ -1,0 +1,456 @@
+{
+ "scenarios": [
+  {
+   "scenario": "normal",
+   "path": "C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmp_i5b7sjt\\normal.db",
+   "states": [
+    "APPROVAL_PENDING",
+    "CAPTURE_CONFIRMED",
+    "CAPTURE_CONFIRMED",
+    "CAPTURE_CONFIRMED",
+    "CAPTURE_CONFIRMED",
+    "CAPTURE_CONFIRMED"
+   ],
+   "provider_post_calls": [
+    [
+     "POST",
+     "/v2/checkout/orders"
+    ],
+    [
+     "POST",
+     "/v2/checkout/orders/ORDER1/capture"
+    ]
+   ],
+   "effects": [
+    {
+     "effect_id": "f9b56cec68cbcf956c7482fcccf128a030001b310328e09e71c51413c859ad89",
+     "final_state": "CAPTURE_CONFIRMED",
+     "violations": [],
+     "trace": [
+      [
+       "dispatchCreate",
+       true
+      ],
+      [
+       "readback",
+       "APPROVAL_PENDING"
+      ],
+      [
+       "readback",
+       "APPROVED"
+      ],
+      [
+       "dispatchCapture",
+       true
+      ],
+      [
+       "readback",
+       "APPROVAL_PENDING"
+      ],
+      [
+       "readback",
+       "CAPTURE_CONFIRMED"
+      ],
+      [
+       "readback",
+       "APPROVAL_PENDING"
+      ],
+      [
+       "readback",
+       "CAPTURE_CONFIRMED"
+      ]
+     ],
+     "gstep_final": [
+      "CAPTURE_CONFIRMED",
+      true,
+      1,
+      1
+     ]
+    }
+   ],
+   "pass": true
+  },
+  {
+   "scenario": "lost_create_reply",
+   "path": "C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmp_i5b7sjt\\lost_create_reply.db",
+   "states": [
+    "RECONCILIATION_PENDING",
+    "RECONCILIATION_PENDING",
+    "RECONCILIATION_PENDING",
+    "RECONCILIATION_PENDING",
+    "RECONCILIATION_PENDING",
+    "RECONCILIATION_PENDING"
+   ],
+   "provider_post_calls": [
+    [
+     "POST",
+     "/v2/checkout/orders"
+    ]
+   ],
+   "effects": [
+    {
+     "effect_id": "db67d7f65477a1f6603125465f381b7259ff4521b85a97a67c4c0a1afdc633e5",
+     "final_state": "RECONCILIATION_PENDING",
+     "violations": [],
+     "trace": [
+      [
+       "dispatchCreate",
+       true
+      ],
+      [
+       "readback",
+       "RECONCILIATION_PENDING"
+      ]
+     ],
+     "gstep_final": [
+      "RECONCILIATION_PENDING",
+      false,
+      1,
+      0
+     ]
+    }
+   ],
+   "pass": true
+  },
+  {
+   "scenario": "lost_capture_reply",
+   "path": "C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmp_i5b7sjt\\lost_capture_reply.db",
+   "states": [
+    "APPROVAL_PENDING",
+    "RECONCILIATION_PENDING",
+    "RECONCILIATION_PENDING",
+    "RECONCILIATION_PENDING",
+    "RECONCILIATION_PENDING",
+    "CAPTURE_CONFIRMED"
+   ],
+   "provider_post_calls": [
+    [
+     "POST",
+     "/v2/checkout/orders"
+    ],
+    [
+     "POST",
+     "/v2/checkout/orders/ORDER1/capture"
+    ]
+   ],
+   "effects": [
+    {
+     "effect_id": "6af43dba37093cf5c2c72a801b7f75dff72e5272d46d69a06513dfc8e12c0ab2",
+     "final_state": "CAPTURE_CONFIRMED",
+     "violations": [
+      "C1 more than one create or capture POST",
+      "C5 event NETWORK_ERROR (seq 13) not a gstep transition from APPROVED"
+     ],
+     "trace": [
+      [
+       "dispatchCreate",
+       true
+      ],
+      [
+       "readback",
+       "APPROVAL_PENDING"
+      ],
+      [
+       "readback",
+       "APPROVED"
+      ],
+      [
+       "dispatchCreate",
+       true
+      ]
+     ],
+     "gstep_final": [
+      "APPROVED",
+      false,
+      1,
+      0
+     ]
+    }
+   ],
+   "pass": false
+  },
+  {
+   "scenario": "capture_pending",
+   "path": "C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmp_i5b7sjt\\capture_pending.db",
+   "states": [
+    "APPROVAL_PENDING",
+    "RECONCILIATION_PENDING",
+    "RECONCILIATION_PENDING",
+    "RECONCILIATION_PENDING",
+    "RECONCILIATION_PENDING",
+    "RECONCILIATION_PENDING"
+   ],
+   "provider_post_calls": [
+    [
+     "POST",
+     "/v2/checkout/orders"
+    ],
+    [
+     "POST",
+     "/v2/checkout/orders/ORDER1/capture"
+    ]
+   ],
+   "effects": [
+    {
+     "effect_id": "7ee0f79e3dc8d4dbab3ad3308656e4d6062c4386a036f30859f978139c508c99",
+     "final_state": "RECONCILIATION_PENDING",
+     "violations": [],
+     "trace": [
+      [
+       "dispatchCreate",
+       true
+      ],
+      [
+       "readback",
+       "APPROVAL_PENDING"
+      ],
+      [
+       "readback",
+       "APPROVED"
+      ],
+      [
+       "dispatchCapture",
+       true
+      ],
+      [
+       "readback",
+       "RECONCILIATION_PENDING"
+      ],
+      [
+       "readback",
+       "RECONCILIATION_PENDING"
+      ]
+     ],
+     "gstep_final": [
+      "RECONCILIATION_PENDING",
+      true,
+      1,
+      1
+     ]
+    }
+   ],
+   "pass": true
+  },
+  {
+   "scenario": "capture_declined",
+   "path": "C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmp_i5b7sjt\\capture_declined.db",
+   "states": [
+    "APPROVAL_PENDING",
+    "FAILED_HELD",
+    "FAILED_HELD",
+    "FAILED_HELD",
+    "FAILED_HELD",
+    "FAILED_HELD"
+   ],
+   "provider_post_calls": [
+    [
+     "POST",
+     "/v2/checkout/orders"
+    ],
+    [
+     "POST",
+     "/v2/checkout/orders/ORDER1/capture"
+    ]
+   ],
+   "effects": [
+    {
+     "effect_id": "463cf3e1183de5c0120033be07f38459fed018595d62c00207f79964e94f5e21",
+     "final_state": "FAILED_HELD",
+     "violations": [],
+     "trace": [
+      [
+       "dispatchCreate",
+       true
+      ],
+      [
+       "readback",
+       "APPROVAL_PENDING"
+      ],
+      [
+       "readback",
+       "APPROVED"
+      ],
+      [
+       "dispatchCapture",
+       true
+      ],
+      [
+       "readback",
+       "RECONCILIATION_PENDING"
+      ],
+      [
+       "readback",
+       "FAILED_HELD"
+      ],
+      [
+       "readback",
+       "RECONCILIATION_PENDING"
+      ],
+      [
+       "readback",
+       "FAILED_HELD"
+      ]
+     ],
+     "gstep_final": [
+      "FAILED_HELD",
+      true,
+      1,
+      1
+     ]
+    }
+   ],
+   "pass": true
+  },
+  {
+   "scenario": "never_approved",
+   "path": "C:\\Users\\ADMINI~1\\AppData\\Local\\Temp\\tmp_i5b7sjt\\never_approved.db",
+   "states": [
+    "APPROVAL_PENDING",
+    "APPROVAL_PENDING",
+    "APPROVAL_PENDING",
+    "APPROVAL_PENDING",
+    "APPROVAL_PENDING",
+    "APPROVAL_PENDING"
+   ],
+   "provider_post_calls": [
+    [
+     "POST",
+     "/v2/checkout/orders"
+    ]
+   ],
+   "effects": [
+    {
+     "effect_id": "85772315664d07550be731ba54e1f4a57b0edb957290aeaca77d16b0a8871b03",
+     "final_state": "APPROVAL_PENDING",
+     "violations": [],
+     "trace": [
+      [
+       "dispatchCreate",
+       true
+      ],
+      [
+       "readback",
+       "APPROVAL_PENDING"
+      ],
+      [
+       "readback",
+       "APPROVAL_PENDING"
+      ],
+      [
+       "readback",
+       "APPROVAL_PENDING"
+      ],
+      [
+       "readback",
+       "APPROVAL_PENDING"
+      ]
+     ],
+     "gstep_final": [
+      "APPROVAL_PENDING",
+      false,
+      1,
+      0
+     ]
+    }
+   ],
+   "pass": true
+  }
+ ],
+ "recorded": [
+  {
+   "ledger": "demo006_runs/lmf007-20261107T162035Z/ledger.db",
+   "effects": [
+    {
+     "effect_id": "fe8cbb8b45f41a3e8fb045660961c42bd4052f6d02bab746d29a5b095a6b29b2",
+     "final_state": "APPROVAL_PENDING",
+     "violations": [],
+     "trace": [
+      [
+       "dispatchCreate",
+       true
+      ],
+      [
+       "readback",
+       "APPROVAL_PENDING"
+      ]
+     ],
+     "c2": "NOT_LOGGED (pre-closure ledger)",
+     "gstep_final": [
+      "APPROVAL_PENDING",
+      false,
+      1,
+      0
+     ]
+    },
+    {
+     "effect_id": "e593da5bd10a59d9facd2863622d16be5a0e974f8ebd2d8f7d834c2dcdc9946a",
+     "final_state": "APPROVAL_PENDING",
+     "violations": [],
+     "trace": [
+      [
+       "dispatchCreate",
+       true
+      ],
+      [
+       "readback",
+       "APPROVAL_PENDING"
+      ]
+     ],
+     "c2": "NOT_LOGGED (pre-closure ledger)",
+     "gstep_final": [
+      "APPROVAL_PENDING",
+      false,
+      1,
+      0
+     ]
+    },
+    {
+     "effect_id": "a6f912bedb4882c8f0f3a2b7974d50ca0eac22c6a5a7027a323e668e74504d72",
+     "final_state": "APPROVAL_PENDING",
+     "violations": [],
+     "trace": [
+      [
+       "dispatchCreate",
+       true
+      ],
+      [
+       "readback",
+       "APPROVAL_PENDING"
+      ]
+     ],
+     "c2": "NOT_LOGGED (pre-closure ledger)",
+     "gstep_final": [
+      "APPROVAL_PENDING",
+      false,
+      1,
+      0
+     ]
+    },
+    {
+     "effect_id": "83791fc9aef244b77f529b53d08521b6ead5c43c2657fac0f11fb26d978e7aee",
+     "final_state": "APPROVAL_PENDING",
+     "violations": [],
+     "trace": [
+      [
+       "dispatchCreate",
+       true
+      ],
+      [
+       "readback",
+       "APPROVAL_PENDING"
+      ]
+     ],
+     "c2": "NOT_LOGGED (pre-closure ledger)",
+     "gstep_final": [
+      "APPROVAL_PENDING",
+      false,
+      1,
+      0
+     ]
+    }
+   ],
+   "pass": true
+  }
+ ],
+ "verdict": "FAIL"
+}
