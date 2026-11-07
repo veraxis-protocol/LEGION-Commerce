@@ -57,7 +57,10 @@ def build_core_inputs(mission, final_lines, total_cents, runtime, sources, now):
                {"seq": 2, "kind": "ANALYSIS_RECORD", "agent_id": actor, "task_id": "analyze", "record_id": "analysis-final-plan",
                 "facts": {"amount_cents": total_cents}, "evidence_refs": ["obs-quotes"]}]
     mh = digest(MISSION_DOMAIN, mission)
-    intent = {"obligation_id": "pay", "effect_slot": "bundle-SVC-1-2-3", "actor": actor, "merchant_id": merchant,
+    # WO-LMF-007: one payer-specific effect per buyer line; the slot comes from the authorized plan line itself.
+    slot = (final_lines[0].get("effect_slot") if final_lines and len(final_lines) == 1 else None) or "bundle-SVC-1-2-3"
+    obligation = (final_lines[0].get("obligation_id") if final_lines and len(final_lines) == 1 else None) or "pay"
+    intent = {"obligation_id": obligation, "effect_slot": slot, "actor": actor, "merchant_id": merchant,
               "quote_hash": plan_hash(final_lines), "prerequisites_hash": digest("commerce.prerequisites.v1", records),
               "currency": "USD", "amount_cents": total_cents}
     core_sha = hashlib.sha256(b"LEGION-MISSION-CONTRACT-v1\0" + json.dumps(world, sort_keys=True, separators=(",", ":"), ensure_ascii=False).encode()).hexdigest()
@@ -162,7 +165,9 @@ class SandboxDemoAdmission:
         intent = p["intent"]
         cents(intent["amount_cents"])
         require(intent["amount_cents"] <= m["cap_cents"] and intent["merchant_id"] in m["merchant_ids"] and intent["currency"] == m["currency"]
-                and intent["actor"] == m["actor"] and intent["obligation_id"] == "pay", "INTENT_SCOPE_OR_BUDGET")
+                and intent["actor"] == m["actor"]
+                and (intent["obligation_id"] == "pay" or intent["obligation_id"] in m.get("payer_obligation_ids", [])),
+                "INTENT_SCOPE_OR_BUDGET")
         issued = verify(p["observation"], self.rt["core_observer"], OBS_DOMAIN)       # issue-time observation still authentic and bound
         require(issued["intent_hash"] == digest("commerce.intent.v1", intent) and issued["mission_hash"] == mh, "CORE_OBSERVATION_BINDING")
         current = self.observer(m, p, now) if self.observer is not None else p["observation"]
@@ -191,7 +196,8 @@ def issue_permit(adm, mission_env, runtime, final_lines, total_cents, sources, n
     obs_env = raw_sign(runtime["core_observer"], OBS_DOMAIN, observation)
     adm.check_observation(m, digest(MISSION_DOMAIN, m), obs_env, intent, now)
     decision = adm.evaluate(observation, policy, intent, now)
-    permit = {"schema": PERMIT_DOMAIN, "permit_id": f"{m['mission_id']}-PERMIT-1", "issued_at": now, "expires_at": now + PERMIT_TTL,
+    suffix = "1" if intent["obligation_id"] == "pay" else intent["obligation_id"]
+    permit = {"schema": PERMIT_DOMAIN, "permit_id": f"{m['mission_id']}-PERMIT-{suffix}", "issued_at": now, "expires_at": now + PERMIT_TTL,
               "epoch": m["epoch"], "mission_hash": digest(MISSION_DOMAIN, m), "intent": intent, "plan_lines": final_lines,
               "observation": obs_env, "policy": policy, "lean_decision_at_issue": decision,
               "profile": "sandbox-demo-v1", "scope": "paypal.sandbox.orders.create_capture"}

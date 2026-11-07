@@ -56,7 +56,8 @@ def main():
             ctx = {"now": now, "mission": mission, "control": control, "lines": copy.deepcopy(LINES), "total": TOTAL, "rt": rt}
             mutate("before", ctx)
             owner_pub = base64.b64encode(owner.public_key().public_bytes_raw()).decode()
-            adm = S.SandboxDemoAdmission(owner_pub, rt_pub, sources, clock=lambda: ctx["now"])
+            obs = ctx.get("observer") or S.fresh_observer(ctx["rt"], sources)   # per-gate re-observation (mission-1 fix)
+            adm = S.SandboxDemoAdmission(owner_pub, rt_pub, sources, clock=lambda: ctx["now"], observer=obs)
             m_env = raw_sign(owner, S.MISSION_DOMAIN, ctx["mission"])
             provider = FakePayPal()
             with tempfile.TemporaryDirectory() as tmp:
@@ -143,7 +144,9 @@ def main():
 
         def stale(stage, c):
             if stage == "after_issue": c["now"] += S.MAX_AGE + 5
-        case("stale_observation_blocks", "STALE_CORE_OBSERVATION", stale)
+        # Since the mission-1 fix every gate RE-OBSERVES, so an old issue-time observation is replaced by a fresh one and the
+        # action proceeds (within permit TTL). Staleness of the observation actually used is tested by stale_reobservation_blocks.
+        case("old_issue_time_observation_replaced_by_fresh_reobservation", "DISPATCH", stale)
 
         def expired(stage, c):
             if stage == "after_issue":
@@ -172,6 +175,51 @@ def main():
                 p = json.loads(json.dumps(c["p_env"]["payload"])); p["intent"]["merchant_id"] = "ATTACKER0001"
                 c["p_env"] = raw_sign(c["rt"]["sandbox_admission"], S.PERMIT_DOMAIN, p)
         case("wrong_payee_blocks", "INTENT_SCOPE_OR_BUDGET", wrong_payee)
+
+        # --- per-gate re-observation (DEMO-006 mission-1 fix) ---
+        def approval_delay_within_permit(stage, c):   # human takes 10 min to approve: still T on a FRESH observation
+            if stage == "after_reserve": c["now"] += 600
+        case("slow_buyer_approval_fresh_observation_dispatches", "DISPATCH", approval_delay_within_permit)
+
+        def observer_down(stage, c):
+            if stage == "before":
+                def boom(m, p, now): raise S.Denied("CORE_OBSERVER_UNAVAILABLE")
+                c["observer"] = boom
+        case("core_observer_unavailable_blocks", "CORE_OBSERVER_UNAVAILABLE", observer_down)
+
+        def observer_stale(stage, c):
+            if stage == "before":
+                fo = S.fresh_observer(c["rt"], sources)
+                c["observer"] = lambda m, p, now: fo(m, p, now - S.MAX_AGE - 30)
+        case("stale_reobservation_blocks", "STALE_CORE_OBSERVATION", observer_stale)
+
+        def state_changed(stage, c):   # current state no longer matches the permit (e.g. amount changed upstream)
+            if stage == "before":
+                fo = S.fresh_observer(c["rt"], sources)
+                def changed(m, p, now):
+                    p2 = dict(p, intent=dict(p["intent"], amount_cents=p["intent"]["amount_cents"] + 100))
+                    return fo(m, p2, now)
+                c["observer"] = changed
+        case("current_state_differs_from_permit_blocks", "CURRENT_STATE_DIFFERS_FROM_PERMIT", state_changed)
+
+        # --- WO-LMF-007 payer-specific slots ---
+        def payer_slot(stage, c):
+            if stage == "before":
+                c["mission"]["payer_obligation_ids"] = ["pay-b1"]
+                c["control"]["mission_hash"] = digest(S.MISSION_DOMAIN, c["mission"])
+                c["lines"] = [{"service_id": "LMF-B1", "supplier_id": "owner:f1", "quote_id": "contract-line-b1",
+                               "price_cents": 9900, "effect_slot": "payer-b1", "obligation_id": "pay-b1"}]
+                c["total"] = 9900
+        case("payer_specific_slot_dispatches", "DISPATCH", payer_slot)
+
+        def payer_slot_unlisted(stage, c):
+            if stage == "before":
+                c["mission"]["payer_obligation_ids"] = ["pay-b1"]
+                c["control"]["mission_hash"] = digest(S.MISSION_DOMAIN, c["mission"])
+                c["lines"] = [{"service_id": "LMF-B6", "supplier_id": "owner:f1", "quote_id": "contract-line-b6",
+                               "price_cents": 9900, "effect_slot": "payer-b6", "obligation_id": "pay-b6"}]
+                c["total"] = 9900
+        case("payer_not_in_mission_blocks", "INTENT_SCOPE_OR_BUDGET", payer_slot_unlisted)
     finally:
         sources.close()
     summary = {"tests": len(results), "passed": sum(r["pass"] for r in results), "failed": [r["test"] for r in results if not r["pass"]],
