@@ -114,6 +114,8 @@ def run(window_s=900):
     c_env = json.loads((d / "CONTROL_AUTHORIZED.json").read_text())
     owner = Store().active("control")
     mission = verify(m_env, owner["public_key"], S.MISSION_DOMAIN)
+    (d / "OWNER_CONTROL_PUBLIC.json").write_text(json.dumps({"key_id": owner["key_id"], "public_key": owner["public_key"],
+                                                             "custodian": owner.get("custodian")}))
     log = Log(d / "END_TO_END_EVENTS.jsonl", mission["mission_id"] + "-ATTEMPT-1")
     sources = QualifiedSources(ROOT / "runtime_sources", immutable=True)
     install(sources, hot_standby_seconds=60.0)

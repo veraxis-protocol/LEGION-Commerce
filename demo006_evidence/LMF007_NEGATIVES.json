@@ -1,0 +1,62 @@
+{
+ "summary": {
+  "tests": 6,
+  "passed": 6,
+  "forbidden_posts": 0,
+  "verdict": "PASS",
+  "not_covered_here": [
+   "lost capture response / malicious return URL: covered by the unchanged A04 gateway test suite (reconcile-only, callback state token) - see LEGION-Commerce tests/"
+  ]
+ },
+ "results": [
+  {
+   "test": "sixth_99_payment_beyond_cap_blocked",
+   "expected": "5 DISPATCHED then DENY BUDGET_EXCEEDED",
+   "actual": [
+    "DISPATCHED",
+    "DISPATCHED",
+    "DISPATCHED",
+    "DISPATCHED",
+    "DISPATCHED",
+    "DENY:BUDGET_EXCEEDED"
+   ],
+   "provider_calls": 5,
+   "pass": true
+  },
+  {
+   "test": "duplicate_effect_for_same_payer_no_new_post",
+   "expected": "DENY or idempotent, 0 new POST",
+   "actual": "DENY:EFFECT_IDENTITY_CONFLICT",
+   "provider_calls": 0,
+   "pass": true
+  },
+  {
+   "test": "changed_amount_10000_over_payer_cap_blocked",
+   "expected": "DENY",
+   "actual": "DENY:CORE_TOOL_PRECONDITIONS",
+   "provider_calls": 0,
+   "pass": true
+  },
+  {
+   "test": "wrong_payer_not_in_mission_blocked",
+   "expected": "DENY INTENT_SCOPE_OR_BUDGET",
+   "actual": "DENY:INTENT_SCOPE_OR_BUDGET",
+   "provider_calls": 0,
+   "pass": true
+  },
+  {
+   "test": "stale_contract_epoch_advanced_blocked",
+   "expected": "DENY STALE_EPOCH",
+   "actual": "DENY:STALE_EPOCH",
+   "provider_calls": 0,
+   "pass": true
+  },
+  {
+   "test": "missing_buyer_consent_blocked",
+   "expected": "DENY",
+   "actual": "DENY:INTENT_SCOPE_OR_BUDGET",
+   "provider_calls": 0,
+   "pass": true
+  }
+ ]
+}

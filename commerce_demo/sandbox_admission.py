@@ -175,7 +175,9 @@ class SandboxDemoAdmission:
         # Fresh qualified decision at every gate (reserve / create / capture) on the current observation; never a cached verdict.
         self.evaluate(obs, p["policy"], intent, now)
         # Gateway compatibility: it derives the effect key from these fields.
-        m = dict(m); m.setdefault("effects", [intent])
+        # WO-LMF-007 fix: the returned mission must not vary per intent (the Gateway hashes it for MISSION_IMMUTABLE);
+        # with several payer effects per mission the old per-intent value made every second reservation fail.
+        m = dict(m); m.setdefault("effects", [])
         return m, p, intent
 
 
