@@ -107,12 +107,31 @@ class Gateway:
             self.event(db, None, "CONTROL_APPLIED", {"mission_id": mission_id, "sequence": p["sequence"]})
 
     def check(self, db, mission, permit):
+        # FORMAL-001 (B-COM-1/2): forget any earlier decision BEFORE the admission runs; only the attestation produced
+        # by THIS check, inside THIS transaction, can authorize the next external POST.
+        self._lean = None
+        if hasattr(self.admission, "last_decision"):
+            self.admission.last_decision = None
         require(db.execute("SELECT 1 FROM flags WHERE key='SAFETY_STOP'").fetchone() is None, "SAFETY_STOP")
         mid = mission["payload"]["mission_id"]
         row = db.execute("SELECT envelope FROM controls WHERE mission_id=?", (mid,)).fetchone()
         require(row is not None, "CURRENT_CONTROL_MISSING")
         control = self.admission.control(json.loads(row[0]))
-        return self.admission.check(mission, permit, control)
+        result = self.admission.check(mission, permit, control)
+        self._lean = (id(db), getattr(self.admission, "last_decision", None))
+        return result
+
+    def require_lean(self, db, eid):
+        """FORMAL-001 mandatory Lean admission at the external-effect boundary. Every POST to a provider that is not a
+        MOCK_ONLY test double needs a qualified Lean verdict T computed by the admission check that ran immediately
+        before it in the SAME transaction, for EXACTLY this effect's intent. Admissions that do not compute
+        `admission .full` (A04 base Admission: signed claim only; v1 bridge: ZTL witness only) never produce one."""
+        if getattr(self.provider, "evidence_mode", None) == "MOCK_ONLY":
+            return
+        tx, att = getattr(self, "_lean", None) or (None, None)
+        intent = json.loads(self.row(db, eid)["intent"])
+        require(tx == id(db) and isinstance(att, dict) and att.get("lean_verdict") == "T"
+                and att.get("action_digest") == digest("commerce.intent.v1", intent), "LEAN_ADMISSION_REQUIRED")
 
     @logged_denial
     def reserve(self, mission, permit):
@@ -155,6 +174,9 @@ class Gateway:
     def call(self, db, eid, method, path, body=None, request_id=None):
         started = time.monotonic()
         # Persist a pre-dispatch marker separately in create/capture before here.
+        if method != "GET":
+            self.require_lean(db, eid)
+            self._lean = None  # single use
         try:
             result = self.provider.request(method, path, body, request_id)
             self.event(db, eid, "NETWORK", {"method": method, "operation": path.split("/")[-1],
@@ -183,6 +205,7 @@ class Gateway:
             self.recheck(db, r)
             if r["state"] != "RESERVED":
                 return r["state"]
+            self.require_lean(db, eid)  # FORMAL-001: refuse before any state change when no Lean T exists
             db.execute("UPDATE effects SET state='CREATE_IN_FLIGHT' WHERE id=?", (eid,))
             self.event(db, eid, "CREATE_INTENT", {"request_id": r["create_request_id"]})
         with self.transaction() as db:
@@ -317,6 +340,7 @@ class Gateway:
             if state != "APPROVED":
                 return state
             self.recheck(db, r)
+            self.require_lean(db, eid)  # FORMAL-001: refuse before capture_started when no Lean T exists
             db.execute("UPDATE effects SET state='CAPTURE_IN_FLIGHT',capture_started=1 WHERE id=?", (eid,))
             self.event(db, eid, "CAPTURE_INTENT", {"request_id": r["capture_request_id"]})
         with self.transaction() as db:

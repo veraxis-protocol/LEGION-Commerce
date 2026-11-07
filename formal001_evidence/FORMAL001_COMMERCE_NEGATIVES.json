@@ -1,0 +1,58 @@
+{
+ "summary": {
+  "tests": 6,
+  "passed": 6,
+  "forbidden_posts": 0,
+  "verdict": "PASS"
+ },
+ "results": [
+  {
+   "test": "B-COM-1_a04_signed_claim_without_lean_blocked",
+   "expected": "DENY LEAN_ADMISSION_REQUIRED, 0 POST, state RESERVED",
+   "actual": "DENY:LEAN_ADMISSION_REQUIRED",
+   "external_posts": 0,
+   "pass": true,
+   "state_after": "RESERVED"
+  },
+  {
+   "test": "B-COM-1_control_mock_only_double_exempt",
+   "expected": "APPROVAL_PENDING with MOCK_ONLY double (exemption is test-only)",
+   "actual": "STATE:APPROVAL_PENDING",
+   "external_posts": 1,
+   "pass": true
+  },
+  {
+   "test": "B-COM-2_v1_bridge_without_qualified_decider_no_attestation",
+   "expected": "None for v1, T bound to intent for qualified",
+   "actual": {
+    "v1": null,
+    "qualified_verdict": "T"
+   },
+   "external_posts": 0,
+   "pass": true
+  },
+  {
+   "test": "G-1_attestation_for_other_intent_rejected",
+   "expected": "DENY LEAN_ADMISSION_REQUIRED, 0 POST",
+   "actual": "DENY:LEAN_ADMISSION_REQUIRED",
+   "external_posts": 0,
+   "pass": true
+  },
+  {
+   "test": "G-2_stale_cached_attestation_not_reused",
+   "expected": "DENY LEAN_ADMISSION_REQUIRED, 0 POST",
+   "actual": "DENY:LEAN_ADMISSION_REQUIRED",
+   "external_posts": 0,
+   "pass": true
+  },
+  {
+   "test": "P-1_qualified_lean_T_dispatches_create_and_capture",
+   "expected": "APPROVAL_PENDING then CAPTURE_CONFIRMED, 2 POST",
+   "actual": "APPROVAL_PENDING->CAPTURE_CONFIRMED",
+   "external_posts": 2,
+   "pass": true,
+   "lean_verdict": "T",
+   "decider_sha256": "99cda684f29afba33e69b8f4811d754c499987c30c07ac1c67f19ec250ade73a"
+  }
+ ]
+}

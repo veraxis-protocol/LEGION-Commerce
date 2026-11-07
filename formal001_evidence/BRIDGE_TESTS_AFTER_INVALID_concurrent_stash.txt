@@ -1,0 +1,46 @@
+...............FE..
+======================================================================
+ERROR: test_revocation_independent_of_stale_acceptance_or_lean (bridge_integration_tests.test_packages.PackageTests.test_revocation_independent_of_stale_acceptance_or_lean)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Administrator\Documents\ChatGPT\Hackathons\LEGION-Commerce-Q002\bridge_integration_tests\test_packages.py", line 90, in test_revocation_independent_of_stale_acceptance_or_lean
+    gateway,mission,permit=gateway_for(self.package,self.f.sources,self.trust_file,self.trust_hash,provider)
+                           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\Documents\ChatGPT\Hackathons\LEGION-Commerce-Q002\commerce_bridge\installation.py", line 84, in gateway_for
+    gateway.check(db,mission,permit)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\Documents\ChatGPT\Hackathons\LEGION-Commerce-Q002\commerce_adapter\gateway.py", line 120, in check
+    result = self.admission.check(mission, permit, control)
+  File "C:\Users\Administrator\Documents\ChatGPT\Hackathons\LEGION-Commerce-Q002\commerce_bridge\admission.py", line 173, in check
+    mission,permit,intent=super().check(mission_envelope,permit_envelope,control)
+                          ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\Documents\ChatGPT\Hackathons\LEGION-Commerce-Q002\commerce_adapter\contracts.py", line 105, in check
+    acceptance = self.ready()
+  File "C:\Users\Administrator\Documents\ChatGPT\Hackathons\LEGION-Commerce-Q002\commerce_bridge\admission.py", line 152, in ready
+    a=super().ready()
+  File "C:\Users\Administrator\Documents\ChatGPT\Hackathons\LEGION-Commerce-Q002\commerce_adapter\contracts.py", line 85, in ready
+    require(a["adapter_schema"] == "commerce.a04.adapter.v1" and a["runtime_source_hashes"] == sources,
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            "A03_ADAPTER_CORRESPONDENCE")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\Documents\ChatGPT\Hackathons\LEGION-Commerce-Q002\commerce_adapter\contracts.py", line 16, in require
+    raise Denied(code)
+commerce_adapter.contracts.Denied: A03_ADAPTER_CORRESPONDENCE
+
+======================================================================
+FAIL: test_private_key_file_not_installable (bridge_integration_tests.test_packages.PackageTests.test_private_key_file_not_installable)
+----------------------------------------------------------------------
+commerce_adapter.contracts.Denied: A03_ADAPTER_CORRESPONDENCE
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Administrator\Documents\ChatGPT\Hackathons\LEGION-Commerce-Q002\bridge_integration_tests\test_packages.py", line 72, in test_private_key_file_not_installable
+    with self.assertRaisesRegex(Denied,"UNEXPECTED_PACKAGE_FILE"):
+         ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: "UNEXPECTED_PACKAGE_FILE" does not match "A03_ADAPTER_CORRESPONDENCE"
+
+----------------------------------------------------------------------
+Ran 19 tests in 110.611s
+
+FAILED (failures=1, errors=1)

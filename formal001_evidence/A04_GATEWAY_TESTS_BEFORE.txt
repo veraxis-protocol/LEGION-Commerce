@@ -1,0 +1,13 @@
+.................................C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\tempfile.py:484: ResourceWarning: Implicitly cleaning up <HTTPError 403: 'Forbidden'>
+  _warnings.warn(self.warn_message, ResourceWarning)
+......C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\tempfile.py:484: ResourceWarning: Implicitly cleaning up <HTTPError 401: 'sensitive-provider-error'>
+  _warnings.warn(self.warn_message, ResourceWarning)
+C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\tempfile.py:484: ResourceWarning: Implicitly cleaning up <HTTPError 403: 'sensitive-provider-error'>
+  _warnings.warn(self.warn_message, ResourceWarning)
+C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\tempfile.py:484: ResourceWarning: Implicitly cleaning up <HTTPError 500: 'sensitive-provider-error'>
+  _warnings.warn(self.warn_message, ResourceWarning)
+...
+----------------------------------------------------------------------
+Ran 42 tests in 14.922s
+
+OK

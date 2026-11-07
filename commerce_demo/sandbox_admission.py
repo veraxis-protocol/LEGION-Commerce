@@ -115,12 +115,15 @@ class SandboxDemoAdmission:
                     "directive": calc["directive"], "all_facts_true": calc["all_facts_true"], "predicate_truths": calc["predicate_truths"],
                     "submissions": calc["submissions"], "task_actor": calc["task_actor"], "parameter_status": calc["parameter_status"],
                     "native_preconditions_ok": calc["native_preconditions_ok"], "differential": calc["differential"],
-                    "profile_sha256": q.get("profile_sha256"), "evaluated_at": now}
+                    "profile_sha256": q.get("profile_sha256"), "evaluated_at": now,
+                    # FORMAL-001: binds the verdict to the exact action the Gateway is about to dispatch.
+                    "action_digest": digest("commerce.intent.v1", intent), "source": "commerce_demo.sandbox_admission"}
         require(all(s == "ACCEPTED_FOR_EVALUATION" for s in calc["submissions"]), "CORE_REPORT_SIGNATURE_OR_IDENTITY")
         require(calc["task_actor"] == intent["actor"] and calc["directive"]["directive"] == "ACT", "CORE_NOT_ACT")
         require(calc["parameter_status"] == 200 and calc["native_preconditions_ok"], "CORE_TOOL_PRECONDITIONS")
         require(calc["all_facts_true"] and all(calc["predicate_truths"]), "CORE_NOT_EARNED_TRUE")
         require(observation["claimed_directive"] == calc["directive"], "CORE_DIRECTIVE_MISMATCH")
+        self.last_decision = None
         require(decision["lean_verdict"] == "T", "QUALIFIED_LEAN_NOT_T")
         self.last_decision = decision
         return decision

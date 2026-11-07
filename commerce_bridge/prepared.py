@@ -42,7 +42,7 @@ from collections import OrderedDict
 from pathlib import Path
 from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PublicKey
 from commerce_adapter.contracts import Denied, canonical, cents, require
-from .admission import BridgeAdmission
+from .admission import BridgeAdmission, lean_attestation
 from .runtime import CoreRuntime
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -305,6 +305,8 @@ class PreparedAdmission(BridgeAdmission):
         assessment = self.assess(mission_envelope, control, bundle, intent)
         require(self.digest("commerce.bridge.assessment.v1", assessment) == permit["bridge_assessment_hash"], "BRIDGE_ASSESSMENT_BINDING")
         require(assessment["observation_hash"] == permit["core_observation_hash"], "PERMIT_CORE_OBSERVATION_BINDING")
+        # FORMAL-001: attestation the Gateway requires before any external POST (fresh, bound to this exact intent).
+        self.last_decision = lean_attestation(assessment, intent, self.clock())
         return mission, permit, intent
 
     # ------------------------------------------------------------------ Bridge

@@ -119,6 +119,17 @@ class Bridge:
                 "authority_checked":["control","core","cage","veip"],"dispatch_authorized":False}
 
 
+def lean_attestation(assessment,intent,now):
+    """FORMAL-001: the qualified (`admission .full`, legion_decide) verdict of THIS assessment, bound to the exact
+    intent. Only the qualified sources produce one; the v1 path (ZTL witness only) yields None, so the Gateway
+    refuses its external POSTs (closure B-COM-2)."""
+    q=(assessment.get("core") or {}).get("qualified") or {}
+    verdict=(q.get("lean") or {}).get("verdict")
+    if verdict is None: return None
+    return {"lean_verdict":verdict,"action_digest":digest("commerce.intent.v1",intent),"evaluated_at":now,
+            "alpha_payload_hash":q.get("payload_hash"),"source":"commerce_bridge.qualified"}
+
+
 class BridgeAdmission(Admission):
     """A04 composition seam; exact frozen A04 payloads remain compatible."""
     def __init__(self,*args,sources,policy_envelope,bundle_dir,**kwargs):
@@ -169,4 +180,6 @@ class BridgeAdmission(Admission):
         assessment=Bridge(self.trust,self.sources,self.clock).assess(mission_envelope,control,bundle,intent)
         require(digest("commerce.bridge.assessment.v1",assessment)==permit["bridge_assessment_hash"],"BRIDGE_ASSESSMENT_BINDING")
         require(assessment["observation_hash"]==permit["core_observation_hash"],"PERMIT_CORE_OBSERVATION_BINDING")
+        # FORMAL-001: attestation the Gateway requires before any external POST (fresh, bound to this exact intent).
+        self.last_decision=lean_attestation(assessment,intent,self.clock())
         return mission,permit,intent

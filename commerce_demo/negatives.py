@@ -225,7 +225,7 @@ def main():
     summary = {"tests": len(results), "passed": sum(r["pass"] for r in results), "failed": [r["test"] for r in results if not r["pass"]],
                "unauthorized_dispatches": sum(r["provider_calls"] for r in results if r["expected"] != "DISPATCH"),
                "profile": "sandbox-demo-v1", "runtime": "QualifiedSources + ConsolidatedSession (qualified Core d9d38cd + Lean decider 99cda684)",
-               "gateway": "unchanged A04 commerce_adapter.gateway.Gateway", "provider": "FakePayPal (no network)", "keys": "TEST keys only"}
+               "gateway": "A04 commerce_adapter.gateway.Gateway + FORMAL-001 Lean-attestation enforcement (MOCK_ONLY provider exempt)", "provider": "FakePayPal (no network)", "keys": "TEST keys only"}
     summary["verdict"] = "PASS" if not summary["failed"] else "FAIL"
     out.write_text(json.dumps({"summary": summary, "results": results}, indent=1) + "\n")
     print(json.dumps(summary, indent=1))

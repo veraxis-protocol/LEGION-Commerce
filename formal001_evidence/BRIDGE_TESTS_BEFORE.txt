@@ -1,0 +1,26 @@
+..................E
+======================================================================
+ERROR: test_verified_install_and_repeated_preflight_with_ledger (bridge_integration_tests.test_packages.PackageTests.test_verified_install_and_repeated_preflight_with_ledger)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Administrator\Documents\ChatGPT\Hackathons\LEGION-Commerce-Q002\bridge_integration_tests\test_packages.py", line 55, in test_verified_install_and_repeated_preflight_with_ledger
+    first,mission,permit=gateway_for(target,self.f.sources,self.trust_file,self.trust_hash,provider)
+                         ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\Documents\ChatGPT\Hackathons\LEGION-Commerce-Q002\commerce_bridge\installation.py", line 74, in gateway_for
+    admission,mission,permit,control,manifest=validate_package(root,sources,trust_path,trust_sha256,clock,admission_class)
+                                              ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\Documents\ChatGPT\Hackathons\LEGION-Commerce-Q002\commerce_bridge\installation.py", line 54, in validate_package
+    admission.check(mission,permit,current)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\Documents\ChatGPT\Hackathons\LEGION-Commerce-Q002\commerce_bridge\admission.py", line 169, in check
+    assessment=Bridge(self.trust,self.sources,self.clock).assess(mission_envelope,control,bundle,intent)
+  File "C:\Users\Administrator\Documents\ChatGPT\Hackathons\LEGION-Commerce-Q002\commerce_bridge\admission.py", line 100, in assess
+    calculated=self.runtime.calculate(observation,policy,now)
+  File "C:\Users\Administrator\Documents\ChatGPT\Hackathons\LEGION-Commerce-Q002\commerce_bridge\runtime.py", line 33, in calculate
+    raise Denied("CORE_RUNTIME_TIMEOUT") from None
+commerce_adapter.contracts.Denied: CORE_RUNTIME_TIMEOUT
+
+----------------------------------------------------------------------
+Ran 19 tests in 1059.308s
+
+FAILED (errors=1)

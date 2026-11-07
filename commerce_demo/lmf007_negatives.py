@@ -1,4 +1,4 @@
-"""WO-LMF-007 hard negatives on the qualified BCh runtime + UNCHANGED A04 Gateway + FakePayPal (no network, TEST keys).
+"""WO-LMF-007 hard negatives on the qualified BCh runtime + A04 Gateway (FORMAL-001 Lean-attestation enforcement; MOCK_ONLY exempt) + FakePayPal (no network, TEST keys).
 
 Usage: python -m commerce_demo.lmf007_negatives <out.json>
 """

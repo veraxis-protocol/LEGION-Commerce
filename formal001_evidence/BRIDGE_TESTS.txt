@@ -1,0 +1,33 @@
+EE
+======================================================================
+ERROR: test_conformance (unittest.loader._FailedTest.test_conformance)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: test_conformance
+Traceback (most recent call last):
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\unittest\loader.py", line 141, in loadTestsFromName
+    module = __import__(module_name)
+  File "C:\Users\Administrator\Documents\ChatGPT\Hackathons\LEGION-Commerce-Q002\bridge_tests\test_conformance.py", line 9, in <module>
+    from commerce_adapter.contracts import Denied,digest
+  File "C:\Users\Administrator\Documents\ChatGPT\Hackathons\LEGION-Commerce-Q002\commerce_adapter\contracts.py", line 7, in <module>
+    from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PublicKey
+ModuleNotFoundError: No module named 'cryptography'
+
+
+======================================================================
+ERROR: test_packages (unittest.loader._FailedTest.test_packages)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: test_packages
+Traceback (most recent call last):
+  File "C:\Users\Administrator\AppData\Local\Python\pythoncore-3.14-64\Lib\unittest\loader.py", line 141, in loadTestsFromName
+    module = __import__(module_name)
+  File "C:\Users\Administrator\Documents\ChatGPT\Hackathons\LEGION-Commerce-Q002\bridge_integration_tests\test_packages.py", line 9, in <module>
+    from commerce_adapter.contracts import Denied,digest
+  File "C:\Users\Administrator\Documents\ChatGPT\Hackathons\LEGION-Commerce-Q002\commerce_adapter\contracts.py", line 7, in <module>
+    from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PublicKey
+ModuleNotFoundError: No module named 'cryptography'
+
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.000s
+
+FAILED (errors=2)
