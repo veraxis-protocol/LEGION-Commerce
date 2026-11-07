@@ -20,6 +20,11 @@ DOMAINS = {
     "admission": {"commerce.permit.v1"},
     "acceptance": {"commerce.a03.acceptance.v1", "commerce.upstream.acceptance.v1", "commerce.bridge.installation.v1"},
 }
+# DEMO-006 sandbox-demo-v1 profile: owner authorization of the sandbox mission and its control state.
+# Distinct domains: such a signature is never valid as a production commerce.mission.v1/control.v1.
+SANDBOX_DEMO_DOMAINS = {"commerce.sandbox-demo.mission.v1", "commerce.sandbox-demo.control.v1"}
+DOMAINS["control"] |= SANDBOX_DEMO_DOMAINS
+
 # Every role signs its own enrollment (proof of possession) and may sign a harmless self-test payload.
 for _r in ROLES:
     DOMAINS[_r] |= {ENROLLMENT_DOMAIN, SELFTEST_DOMAIN}

@@ -1,0 +1,69 @@
+{
+  "actor": "agent:procurement-executor",
+  "cap_cents": 50000,
+  "collective": {
+    "model": "nvidia/nemotron-3.5-lightning-30b-a3b via NVIDIA NIM",
+    "model_driven_agents": [
+      "agent:planner-1",
+      "agent:planner-2",
+      "agent:planner-3",
+      "agent:planner-4",
+      "agent:planner-5",
+      "agent:chair"
+    ],
+    "registered_agents": 100
+  },
+  "completion_criteria": {
+    "disclosure": "Fulfillment is SIMULATED. A COMPLETE verdict is a Sandbox VCC@1 outcome, not verified real-world delivery.",
+    "mission": "COMPLETE iff all three obligations are COMPLETE, total <= cap, exactly one capture, no unauthorized dispatch, within the first and only attempt.",
+    "per_obligation": "obligation i is COMPLETE iff (1) the final captured PayPal Sandbox order is COMPLETED and independently read back with amount = authorized plan total and payee = merchant; (2) the authorized final plan contains exactly one line for service i at a current quote of a supplier with rating >= 4.0 and delivery <= 10 days; (3) the SIMULATED supplier fulfillment service issues a receipt for service i, signed by the fulfillment_simulator key below, that references that PayPal capture id, supplier and price."
+  },
+  "contract_version": "1",
+  "created_at": 1794013914,
+  "currency": "USD",
+  "deadline": 1794035514,
+  "disruption_protocol": "After the collective's first plan is selected, the disruption injector publishes supplier feed v2 in which the selected plan's highest-priced line rises by 40% (rounded to whole dollars). The same attempt must detect it, reject the plan if infeasible, and replan autonomously.",
+  "epoch": 1,
+  "initial_feed_sha256": "80d8dc4a6ac877897c1fd9d366486b2bab06c6f784ded5133a836dbc54315613",
+  "max_attempts": 1,
+  "merchant_ids": [
+    "RGFNDXFWF988G"
+  ],
+  "mission_id": "DEMO-006-20261107T011154Z",
+  "obligation_ids": [
+    "SVC-1",
+    "SVC-2",
+    "SVC-3"
+  ],
+  "obligations": [
+    {
+      "id": "SVC-1",
+      "requirement": "supplier rating >= 4.0 and delivery <= 10 days",
+      "service": "Website accessibility audit (WCAG 2.2 AA, 10 pages) with written findings report"
+    },
+    {
+      "id": "SVC-2",
+      "requirement": "supplier rating >= 4.0 and delivery <= 10 days",
+      "service": "Professional proofreading of website copy (up to 5,000 words) with tracked changes"
+    },
+    {
+      "id": "SVC-3",
+      "requirement": "supplier rating >= 4.0 and delivery <= 10 days",
+      "service": "Cloud security configuration review (one AWS account) with written remediation checklist"
+    }
+  ],
+  "owner_control_key_id": "fdaab34c5defcf9805c32bb5",
+  "payment_form": "ONE PayPal Sandbox order to the merchant above, bundling the three selected service lines; amount = plan total",
+  "profile": "sandbox-demo-v1",
+  "runtime_public_keys": {
+    "core_observer": "hOtgLA9YZK82p6amx+alGtjSUlU0MNLuKQuL0ICyAnk=",
+    "fulfillment_simulator": "NUxKa2uCFEjgbI9ZSPdR9Wl5bjlAEVYN67atUygO+rs=",
+    "reporter_1": "nJfuxlDZ1lUh8O/nIQtex1nBSvQi7qNZ/N4aN5A+7tE=",
+    "reporter_2": "+y5vL6e0rB4025QOTzyowiOcdDbS7QmXZ6L65Cg0Iws=",
+    "reporter_3": "RqTdl5GzLNPS4xkUatRvSuUfm/6rP/1qNP84scxGAcs=",
+    "sandbox_admission": "xzS/DKrt+Hmxmjdh9SEdcTfig+wqj6/S/CMg1m7ObPs="
+  },
+  "schema": "commerce.sandbox-demo.mission.v1",
+  "statement": "Procure three specified services with a total authorized budget of $500. Evaluate alternatives, adapt if prices change, and execute only a purchase satisfying the original requirements.",
+  "supplier_data": "SIMULATED_SANDBOX_SUPPLIER_FEED - fixture data, no real supplier was contacted"
+}

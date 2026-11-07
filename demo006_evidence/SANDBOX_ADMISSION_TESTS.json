@@ -1,0 +1,128 @@
+{
+ "summary": {
+  "tests": 16,
+  "passed": 16,
+  "failed": [],
+  "unauthorized_dispatches": 0,
+  "profile": "sandbox-demo-v1",
+  "runtime": "QualifiedSources + ConsolidatedSession (qualified Core d9d38cd + Lean decider 99cda684)",
+  "gateway": "unchanged A04 commerce_adapter.gateway.Gateway",
+  "provider": "FakePayPal (no network)",
+  "keys": "TEST keys only",
+  "verdict": "PASS"
+ },
+ "results": [
+  {
+   "test": "positive_lean_T_dispatches",
+   "expected": "DISPATCH",
+   "actual": "DISPATCHED",
+   "provider_calls": 1,
+   "pass": true
+  },
+  {
+   "test": "lean_F_verdict_blocks",
+   "expected": "QUALIFIED_LEAN_NOT_T",
+   "actual": "DENY@issue:QUALIFIED_LEAN_NOT_T",
+   "provider_calls": 0,
+   "pass": true
+  },
+  {
+   "test": "lean_Z_decider_unavailable_blocks",
+   "expected": "QUALIFIED_WORKER",
+   "actual": "DENY@issue:QUALIFIED_WORKER_UNAVAILABLE",
+   "provider_calls": 0,
+   "pass": true
+  },
+  {
+   "test": "unknown_core_state_blocks",
+   "expected": "CORE_",
+   "actual": "DENY@issue:UNKNOWN_OR_MALFORMED_CORE_STATE",
+   "provider_calls": 0,
+   "pass": true
+  },
+  {
+   "test": "changed_amount_after_lean_blocks",
+   "expected": "CORE_OBSERVATION_BINDING",
+   "actual": "DENY@reserve:CORE_OBSERVATION_BINDING",
+   "provider_calls": 0,
+   "pass": true
+  },
+  {
+   "test": "overspend_56400_blocked_by_lean_budget",
+   "expected": "CORE_TOOL_PRECONDITIONS",
+   "actual": "DENY@issue:CORE_TOOL_PRECONDITIONS",
+   "provider_calls": 0,
+   "pass": true
+  },
+  {
+   "test": "overspend_forged_permit_60000_blocked",
+   "expected": "INVALID_CENTS",
+   "actual": "DENY@reserve:INVALID_CENTS",
+   "provider_calls": 0,
+   "pass": true
+  },
+  {
+   "test": "revoked_authorization_blocks",
+   "expected": "REVOKED_PERMIT",
+   "actual": "DENY@reserve:REVOKED_PERMIT",
+   "provider_calls": 0,
+   "pass": true
+  },
+  {
+   "test": "authorization_withdrawn_after_reserve_blocks_dispatch",
+   "expected": "CONTROL_INACTIVE",
+   "actual": "DENY@create:CONTROL_INACTIVE",
+   "provider_calls": 0,
+   "pass": true
+  },
+  {
+   "test": "epoch_change_blocks",
+   "expected": "STALE_EPOCH",
+   "actual": "DENY@reserve:STALE_EPOCH",
+   "provider_calls": 0,
+   "pass": true
+  },
+  {
+   "test": "stale_observation_blocks",
+   "expected": "STALE_CORE_OBSERVATION",
+   "actual": "DENY@reserve:STALE_CORE_OBSERVATION",
+   "provider_calls": 0,
+   "pass": true
+  },
+  {
+   "test": "expired_permit_blocks",
+   "expected": "EXPIRED_PERMIT",
+   "actual": "DENY@reserve:EXPIRED_PERMIT",
+   "provider_calls": 0,
+   "pass": true
+  },
+  {
+   "test": "forged_permit_unverifiable_blocks",
+   "expected": "INVALID_SIGNATURE",
+   "actual": "DENY@reserve:INVALID_SIGNATURE",
+   "provider_calls": 0,
+   "pass": true
+  },
+  {
+   "test": "agent_self_authorized_permit_blocks",
+   "expected": "INVALID_SIGNATURE",
+   "actual": "DENY@reserve:INVALID_SIGNATURE",
+   "provider_calls": 0,
+   "pass": true
+  },
+  {
+   "test": "mission_not_signed_by_owner_blocks",
+   "expected": "INVALID_SIGNATURE",
+   "actual": "DENY@reserve:INVALID_SIGNATURE",
+   "provider_calls": 0,
+   "pass": true
+  },
+  {
+   "test": "wrong_payee_blocks",
+   "expected": "INTENT_SCOPE_OR_BUDGET",
+   "actual": "DENY@reserve:INTENT_SCOPE_OR_BUDGET",
+   "provider_calls": 0,
+   "pass": true
+  }
+ ]
+}

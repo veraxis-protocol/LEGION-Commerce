@@ -1,0 +1,11 @@
+{
+  "active": true,
+  "epoch": 1,
+  "expires_at": 1794035514,
+  "mission_hash": "bea8ee64b494ae6df5d4051c981aa1505f697528e6592f2c35bcd7470bca54ea",
+  "mission_id": "DEMO-006-20261107T011154Z",
+  "revoked_actors": [],
+  "revoked_permits": [],
+  "schema": "commerce.sandbox-demo.control.v1",
+  "sequence": 1
+}

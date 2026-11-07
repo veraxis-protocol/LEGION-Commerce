@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>LEGION Commerce Demo</title>
+<style>
+:root{--bg:#0f1218;--card:#171b24;--fg:#e6e9ef;--mut:#93a0b4;--ok:#3ecf8e;--bad:#ff6b6b;--warn:#f5b942;--acc:#6ea8ff}
+body{margin:0;background:var(--bg);color:var(--fg);font:14px/1.45 system-ui,Segoe UI,sans-serif}
+header{padding:14px 20px;border-bottom:1px solid #263042;display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+h1{font-size:18px;margin:0}.phase{padding:3px 10px;border-radius:12px;background:#22304a;color:var(--acc);font-weight:600}
+main{display:grid;grid-template-columns:repeat(auto-fit,minmax(360px,1fr));gap:14px;padding:16px}
+.card{background:var(--card);border:1px solid #263042;border-radius:10px;padding:12px 14px;overflow:auto;max-height:440px}
+.card h2{font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--mut);margin:0 0 8px}
+table{border-collapse:collapse;width:100%;font-size:12.5px}td,th{padding:3px 6px;border-bottom:1px solid #222b3a;text-align:left;vertical-align:top}
+.ok{color:var(--ok)}.bad{color:var(--bad)}.warn{color:var(--warn)}.mut{color:var(--mut)}.big{font-size:22px;font-weight:700}
+button{background:var(--acc);color:#081022;border:0;border-radius:8px;padding:10px 16px;font-weight:700;cursor:pointer}
+a{color:var(--acc)}.pill{display:inline-block;padding:1px 7px;border-radius:9px;font-size:11px;background:#263042;margin-right:4px}
+.wide{grid-column:1/-1}
+</style></head><body>
+<header><h1>LEGION Commerce: governed procurement demo</h1><span class="phase" id="phase">…</span><span class="mut" id="mid"></span>
+<span class="mut">Sandbox profile sandbox-demo-v1. PayPal Sandbox. Simulated suppliers and fulfillment.</span></header>
+<main>
+<section class="card"><h2>Mission and budget</h2><div id="mission"></div></section>
+<section class="card"><h2>Collective activity</h2><div id="collective"></div></section>
+<section class="card wide"><h2>Competing plans</h2><div id="plans"></div></section>
+<section class="card"><h2>Price shock and replanning</h2><div id="shock"></div></section>
+<section class="card"><h2>Lean authorization</h2><div id="lean"></div></section>
+<section class="card"><h2>Buyer approval and PayPal</h2><div id="pay"></div></section>
+<section class="card"><h2>Provider-confirmed receipt</h2><div id="receipt"></div></section>
+<section class="card"><h2>Independent Judge and VCC@1</h2><div id="judge"></div></section>
+<section class="card wide"><h2>Event chronology</h2><div id="events"></div></section>
+</main>
+<script>
+const $=id=>document.getElementById(id), esc=s=>String(s??"").replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+const usd=c=>c==null?"–":"$"+(c/100).toFixed(2);
+async function proceed(){await fetch("/api/proceed",{method:"POST"});}
+async function tick(){
+ let s; try{s=await (await fetch("/api/state")).json()}catch(e){return}
+ const F=s.files, ev=s.events; $("phase").textContent=s.phase;
+ const M=F["DEMO_MISSION.json"]?.authorized_envelope?.payload;
+ if(M){$("mid").textContent=M.mission_id;
+  $("mission").innerHTML=`<div class="big">${usd(M.cap_cents)} cap</div><p>${esc(M.statement)}</p><table>${M.obligations.map(o=>`<tr><td>${o.id}</td><td>${esc(o.service)}<br><span class="mut">${esc(o.requirement)}</span></td></tr>`).join("")}</table>
+  <p class="mut">Payee ${esc(M.merchant_ids[0])}. Signed by the owner's Control Key ${esc(F["DEMO_MISSION.json"].verified_with_owner_control_key)}. One attempt only.</p>`}
+ const R=F["AGENT_REGISTRY.json"]; const nim=ev.filter(e=>e.kind==="PLAN_PROPOSED"||e.kind==="PLAN_SELECTED");
+ if(R){const by={};R.forEach(a=>by[a.decider]=(by[a.decider]||0)+1);
+  $("collective").innerHTML=`<div class="big">${R.length} registered agents</div><p><span class="pill">nim ${by.nim}</span><span class="pill">scripted ${by.scripted}</span><span class="pill">standby ${by.standby}</span></p>
+  <table>${nim.slice(-12).map(e=>`<tr><td>${esc(e.agent)}</td><td>${e.kind==="PLAN_SELECTED"?"selected "+esc(e.data.plan_id):"proposed "+esc(e.data.plan_id)+" "+usd(e.data.total_cents)} <span class="mut">${esc(e.data.response_id||"")}</span></td></tr>`).join("")}</table>`}
+ const P=F["PROPOSALS.json"];
+ const planRows=(arr,label)=>arr.map(p=>{const e=p.evaluation;return `<tr><td>${label} ${esc(p.plan_id)}</td><td>${esc(p.agent)}</td><td>${(e.normalized_lines||[]).map(l=>esc(l.service_id+": "+l.supplier+" "+usd(l.price_cents))).join("<br>")}</td><td>${usd(e.total_cents)}</td><td class="${e.feasible?"ok":"bad"}">${e.feasible?"feasible":esc(e.reasons.join(", "))}</td><td class="mut">${esc((p.proposal||{}).rationale||"").slice(0,180)}</td></tr>`}).join("");
+ if(P){$("plans").innerHTML=`<table><tr><th>plan</th><th>agent</th><th>lines (simulated quotes)</th><th>total</th><th>check</th><th>model rationale</th></tr>${planRows(P.initial_round,"initial")}${planRows(P.replan_round||[],"replan")}</table>
+  <p>Initial selection: <b>${esc(P.selected_initial)}</b>. ${esc(P.chair_initial?.justification||"")}</p><p>Final plan: <b class="ok">${esc(P.final_plan_id)}</b>. ${esc(P.chair_replan?.justification||"")}</p>`}
+ const S=F["PRICE_SHOCK.json"];
+ if(S){$("shock").innerHTML=`<p class="warn">${esc(S.supplier_id)} (${esc(S.service_id)}): ${usd(S.old_price_cents)} to ${usd(S.new_price_cents)}</p>
+  <p>Plan ${esc(S.affected_plan)} rechecked at ${usd(S.recheck?.total_cents)}: <span class="${S.recheck?.total_cents>50000?"bad":"ok"}">${S.recheck?.total_cents>50000?"over budget, rejected":"still feasible"}</span></p>
+  <p>Autonomous replanning: <b>${S.replanned?"yes, same attempt":"not needed"}</b></p>`}
+ const L=F["LEAN_AUTHORIZATION.json"];
+ if(s.phase==="AWAITING_OWNER_PROCEED"){$("lean").innerHTML=`<p>The collective has a final plan. When you are ready to approve in PayPal within about 4 minutes, press:</p><button onclick="proceed()">Proceed to payment</button>`}
+ else if(L){$("lean").innerHTML=`<div class="big ${L.verdict==="T"?"ok":"bad"}">Lean verdict ${esc(L.verdict)}</div><p>Directive ${esc(L.decision.directive.directive)} for paypal.capture ${usd(L.action.params.amount_cents)} to ${esc(L.action.params.merchant_id)}</p>
+  <p class="mut">Qualified Core ${esc(L.core_commit.slice(0,7))}. Decider ${esc(L.decider_sha256.slice(0,12))}. Admission ${esc(L.admission_hot_path_commit.slice(0,7))}. Re-evaluated at reserve, create and capture.</p>
+  <p class="mut">Not in the sandbox profile: ${esc(L.production_controls_not_in_profile.join("; "))}</p>`}
+ if(s.approval_url){$("pay").innerHTML=`<p>Order created. <b>Approve as the Sandbox buyer:</b></p><p><a href="${esc(s.approval_url)}" target="_blank" rel="noopener">Open PayPal Sandbox approval</a></p><p class="mut">Effect ${esc(s.effect)}. Never enter buyer credentials anywhere except PayPal's own page.</p>`+
+  ev.filter(e=>["PAYMENT_STATE","ORDER_CREATED"].includes(e.kind)).map(e=>`<p>${esc(e.kind)}: ${esc(e.data.state||e.data.order_id)}</p>`).join("")}
+ const B=F["PAYPAL_NATIVE_READBACK.json"];
+ if(B){$("receipt").innerHTML=`<div class="big ok">${esc(B.capture.status)} ${esc(B.capture.amount.value)} ${esc(B.capture.amount.currency_code)}</div><p>Order ${esc(B.order.id)}<br>Capture ${esc(B.capture.id)}<br>Payee ${esc(B.order.payee_merchant_id)}</p><p class="mut">${esc(B.process)}. ${esc(B.environment)}.</p>`}
+ const J=F["JUDGE_VERDICT.json"], V=F["VCC_AT_1.json"];
+ if(J){$("judge").innerHTML=`<div class="big ${V?.vcc_at_1?"ok":"bad"}">VCC@1 = ${V?.vcc_at_1}</div><p>${esc(J.verdict)}</p><table>${J.checks.map(c=>`<tr><td class="${c.pass?"ok":"bad"}">${c.pass?"✔":"✘"}</td><td>${esc(c.check)}</td></tr>`).join("")}</table><p class="mut">${esc(J.disclosure)}</p>`}
+ $("events").innerHTML=`<table>${ev.slice(-60).reverse().map(e=>`<tr><td class="mut">${e.seq}</td><td>${esc(e.kind)}</td><td>${esc(e.agent||"")}</td><td class="mut">${esc(JSON.stringify(e.data).slice(0,200))}</td></tr>`).join("")}</table>`;
+}
+tick(); setInterval(tick,1500);
+</script></body></html>

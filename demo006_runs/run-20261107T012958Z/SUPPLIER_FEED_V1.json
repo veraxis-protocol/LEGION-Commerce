@@ -1,0 +1,140 @@
+{
+  "schema": "commerce.demo.supplier-feed.v1",
+  "version": 1,
+  "simulated": true,
+  "notice": "SIMULATED_SANDBOX_SUPPLIER_FEED - fixture data, no real supplier was contacted",
+  "quotes": [
+    {
+      "quote_id": "Q-SVC-1-SUP-A1-v1",
+      "service_id": "SVC-1",
+      "supplier_id": "SUP-A1",
+      "supplier": "Northwind Access (simulated)",
+      "price_cents": 14500,
+      "rating_x10": 46,
+      "delivery_days": 5,
+      "feed_version": 1,
+      "source": "SIMULATED_SANDBOX_SUPPLIER_FEED - fixture data, no real supplier was contacted"
+    },
+    {
+      "quote_id": "Q-SVC-1-SUP-A2-v1",
+      "service_id": "SVC-1",
+      "supplier_id": "SUP-A2",
+      "supplier": "Clearpath A11y (simulated)",
+      "price_cents": 12900,
+      "rating_x10": 42,
+      "delivery_days": 7,
+      "feed_version": 1,
+      "source": "SIMULATED_SANDBOX_SUPPLIER_FEED - fixture data, no real supplier was contacted"
+    },
+    {
+      "quote_id": "Q-SVC-1-SUP-A3-v1",
+      "service_id": "SVC-1",
+      "supplier_id": "SUP-A3",
+      "supplier": "Lumen Audit Co (simulated)",
+      "price_cents": 17900,
+      "rating_x10": 48,
+      "delivery_days": 3,
+      "feed_version": 1,
+      "source": "SIMULATED_SANDBOX_SUPPLIER_FEED - fixture data, no real supplier was contacted"
+    },
+    {
+      "quote_id": "Q-SVC-1-SUP-A4-v1",
+      "service_id": "SVC-1",
+      "supplier_id": "SUP-A4",
+      "supplier": "QuickCheck Labs (simulated)",
+      "price_cents": 9900,
+      "rating_x10": 36,
+      "delivery_days": 10,
+      "feed_version": 1,
+      "source": "SIMULATED_SANDBOX_SUPPLIER_FEED - fixture data, no real supplier was contacted"
+    },
+    {
+      "quote_id": "Q-SVC-2-SUP-B1-v1",
+      "service_id": "SVC-2",
+      "supplier_id": "SUP-B1",
+      "supplier": "Redline Editorial (simulated)",
+      "price_cents": 11900,
+      "rating_x10": 47,
+      "delivery_days": 2,
+      "feed_version": 1,
+      "source": "SIMULATED_SANDBOX_SUPPLIER_FEED - fixture data, no real supplier was contacted"
+    },
+    {
+      "quote_id": "Q-SVC-2-SUP-B2-v1",
+      "service_id": "SVC-2",
+      "supplier_id": "SUP-B2",
+      "supplier": "Plain Words (simulated)",
+      "price_cents": 8900,
+      "rating_x10": 41,
+      "delivery_days": 4,
+      "feed_version": 1,
+      "source": "SIMULATED_SANDBOX_SUPPLIER_FEED - fixture data, no real supplier was contacted"
+    },
+    {
+      "quote_id": "Q-SVC-2-SUP-B3-v1",
+      "service_id": "SVC-2",
+      "supplier_id": "SUP-B3",
+      "supplier": "Stet & Co (simulated)",
+      "price_cents": 14900,
+      "rating_x10": 49,
+      "delivery_days": 1,
+      "feed_version": 1,
+      "source": "SIMULATED_SANDBOX_SUPPLIER_FEED - fixture data, no real supplier was contacted"
+    },
+    {
+      "quote_id": "Q-SVC-2-SUP-B4-v1",
+      "service_id": "SVC-2",
+      "supplier_id": "SUP-B4",
+      "supplier": "BudgetProof (simulated)",
+      "price_cents": 6500,
+      "rating_x10": 34,
+      "delivery_days": 6,
+      "feed_version": 1,
+      "source": "SIMULATED_SANDBOX_SUPPLIER_FEED - fixture data, no real supplier was contacted"
+    },
+    {
+      "quote_id": "Q-SVC-3-SUP-C1-v1",
+      "service_id": "SVC-3",
+      "supplier_id": "SUP-C1",
+      "supplier": "Bastion Advisory (simulated)",
+      "price_cents": 18900,
+      "rating_x10": 48,
+      "delivery_days": 4,
+      "feed_version": 1,
+      "source": "SIMULATED_SANDBOX_SUPPLIER_FEED - fixture data, no real supplier was contacted"
+    },
+    {
+      "quote_id": "Q-SVC-3-SUP-C2-v1",
+      "service_id": "SVC-3",
+      "supplier_id": "SUP-C2",
+      "supplier": "Cumulus Secure (simulated)",
+      "price_cents": 15500,
+      "rating_x10": 44,
+      "delivery_days": 5,
+      "feed_version": 1,
+      "source": "SIMULATED_SANDBOX_SUPPLIER_FEED - fixture data, no real supplier was contacted"
+    },
+    {
+      "quote_id": "Q-SVC-3-SUP-C3-v1",
+      "service_id": "SVC-3",
+      "supplier_id": "SUP-C3",
+      "supplier": "Ironclad Cloud (simulated)",
+      "price_cents": 21900,
+      "rating_x10": 49,
+      "delivery_days": 2,
+      "feed_version": 1,
+      "source": "SIMULATED_SANDBOX_SUPPLIER_FEED - fixture data, no real supplier was contacted"
+    },
+    {
+      "quote_id": "Q-SVC-3-SUP-C4-v1",
+      "service_id": "SVC-3",
+      "supplier_id": "SUP-C4",
+      "supplier": "Patchwise (simulated)",
+      "price_cents": 11900,
+      "rating_x10": 38,
+      "delivery_days": 8,
+      "feed_version": 1,
+      "source": "SIMULATED_SANDBOX_SUPPLIER_FEED - fixture data, no real supplier was contacted"
+    }
+  ]
+}
