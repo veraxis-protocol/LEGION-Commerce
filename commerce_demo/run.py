@@ -111,14 +111,14 @@ def main():
         STATE["proceed"].wait()
         phase(log, "LEAN_AUTHORIZATION")
         runtime = load_runtime_keys(run.name)
-        adm = S.SandboxDemoAdmission(owner["public_key"], mission["runtime_public_keys"], sources)
+        adm = S.SandboxDemoAdmission(owner["public_key"], mission["runtime_public_keys"], sources, observer=S.fresh_observer(runtime, sources))
         p_env, decision, observation = S.issue_permit(adm, m_env, runtime, lines, total, sources)
         write(run, "LEAN_AUTHORIZATION.json", {"profile": "sandbox-demo-v1", "verdict": decision["lean_verdict"], "decision": decision,
               "permit_envelope": p_env, "core_commit": QUALIFIED, "decider_sha256": QUALIFIED_DECIDE_SHA256,
               "admission_hot_path_commit": "ca897f7badeea4f2b66a52bc684df18008bc4f4d", "action": observation["action"],
               "controls_exercised": ["owner Control-Key mission + control signatures", "control active/epoch/expiry/revocation", "permit signature/expiry",
                                      "amount<=cap, payee, actor, currency", "Core observation signature/binding/freshness/state/chronology/prerequisites",
-                                     "qualified Core ACT + Lean decider T for the exact action (re-evaluated at reserve, create and capture)",
+                                     "qualified Core ACT + Lean decider T for the exact action, re-evaluated on a FRESH Core observation at reserve, create and capture",
                                      "A04 durable budget, idempotency, revocation ledger, provider safety", "buyer approval in PayPal"],
               "production_controls_not_in_profile": ["independent A03 acceptance + installation manifest", "A01/A02 upstream acceptance",
                                                      "separately staffed admission issuer", "CAGE and VEIP authorizations"]})
@@ -132,7 +132,7 @@ def main():
         state = g.create(eid, CALLBACK_PORT)
         st = g.status(eid); STATE["approval_url"] = st.get("approval_url")
         log["events"].emit("ORDER_CREATED", "a04-gateway", effect_id=eid, state=state, order_id=st.get("order_id"), approval_url=st.get("approval_url"))
-        phase(log, "AWAITING_BUYER_APPROVAL", approval_url=st.get("approval_url"), approve_within_seconds=S.MAX_AGE - 30)
+        phase(log, "AWAITING_BUYER_APPROVAL", approval_url=st.get("approval_url"), permit_expires_at=p_env["payload"]["expires_at"])
         print(json.dumps({"approval_url": st.get("approval_url")}), flush=True)
         from commerce_adapter.approval import make_server
         cb = make_server(g, eid, CALLBACK_PORT); threading.Thread(target=cb.serve_forever, daemon=True).start()

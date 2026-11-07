@@ -1,0 +1,91 @@
+{
+  "attempt_id": "DEMO-006-20261107T012958Z-ATTEMPT-1",
+  "authorized_envelope": {
+    "payload": {
+      "actor": "agent:procurement-executor",
+      "cap_cents": 50000,
+      "collective": {
+        "model": "nvidia/nemotron-3.5-lightning-30b-a3b via NVIDIA NIM (enable_thinking=false)",
+        "model_driven_agents": [
+          "agent:planner-1",
+          "agent:planner-2",
+          "agent:planner-3",
+          "agent:planner-4",
+          "agent:planner-5",
+          "agent:chair"
+        ],
+        "registered_agents": 100
+      },
+      "completion_criteria": {
+        "disclosure": "Fulfillment is SIMULATED. A COMPLETE verdict is a Sandbox VCC@1 outcome, not verified real-world delivery.",
+        "mission": "COMPLETE iff all three obligations are COMPLETE, total <= cap, exactly one capture, no unauthorized dispatch, within the first and only attempt.",
+        "per_obligation": "obligation i is COMPLETE iff (1) the final captured PayPal Sandbox order is COMPLETED and independently read back with amount = authorized plan total and payee = merchant; (2) the authorized final plan contains exactly one line for service i at a current quote of a supplier with rating >= 4.0 and delivery <= 10 days; (3) the SIMULATED supplier fulfillment service issues a receipt for service i, signed by the fulfillment_simulator key below, that references that PayPal capture id, supplier and price."
+      },
+      "contract_version": "1",
+      "created_at": 1794014998,
+      "currency": "USD",
+      "deadline": 1794036598,
+      "disruption_protocol": "After the collective's first plan is selected, the disruption injector publishes supplier feed v2 in which the selected plan's highest-priced line rises so that the plan total exceeds the $500 cap by 10% of that line's price (rounded up to whole dollars). The same attempt must detect it, reject the plan and replan autonomously.",
+      "epoch": 1,
+      "initial_feed_sha256": "80d8dc4a6ac877897c1fd9d366486b2bab06c6f784ded5133a836dbc54315613",
+      "max_attempts": 1,
+      "merchant_ids": [
+        "RGFNDXFWF988G"
+      ],
+      "mission_id": "DEMO-006-20261107T012958Z",
+      "obligation_ids": [
+        "SVC-1",
+        "SVC-2",
+        "SVC-3"
+      ],
+      "obligations": [
+        {
+          "id": "SVC-1",
+          "requirement": "supplier rating >= 4.0 and delivery <= 10 days",
+          "service": "Website accessibility audit (WCAG 2.2 AA, 10 pages) with written findings report"
+        },
+        {
+          "id": "SVC-2",
+          "requirement": "supplier rating >= 4.0 and delivery <= 10 days",
+          "service": "Professional proofreading of website copy (up to 5,000 words) with tracked changes"
+        },
+        {
+          "id": "SVC-3",
+          "requirement": "supplier rating >= 4.0 and delivery <= 10 days",
+          "service": "Cloud security configuration review (one AWS account) with written remediation checklist"
+        }
+      ],
+      "owner_control_key_id": "fdaab34c5defcf9805c32bb5",
+      "payment_form": "ONE PayPal Sandbox order to the merchant above, bundling the three selected service lines; amount = plan total",
+      "profile": "sandbox-demo-v1",
+      "runtime_public_keys": {
+        "core_observer": "jDXFsuvmfwbhbfm0fcDKeMy6vZH5AHhoVDBvwAPxGgM=",
+        "fulfillment_simulator": "IXTyA7kbOqiuX63rsj+yWLrvM5FbrwdChAUTqFdyCTw=",
+        "reporter_1": "PSIPG8X7Zl2LArglyCMJcCv2WPMcDuYtKMrr18aGxdo=",
+        "reporter_2": "Hu9VguHpMP2Kmv6p37yriSufV1dB/i734pIz6DAnNHY=",
+        "reporter_3": "BS+MdJzcGqDBVf7FA/O7tOk5LF+nD4ZUsSsM0erUJwA=",
+        "sandbox_admission": "SF8PmrREjJOqZtjT1+py3TDmSUZ9IyecdDFa8WXCI+E="
+      },
+      "schema": "commerce.sandbox-demo.mission.v1",
+      "statement": "Procure three specified services with a total authorized budget of $500. Evaluate alternatives, adapt if prices change, and execute only a purchase satisfying the original requirements.",
+      "supplier_data": "SIMULATED_SANDBOX_SUPPLIER_FEED - fixture data, no real supplier was contacted"
+    },
+    "signature": "drsjLGe0gFuYhgxg8E4tTb1Y2evGX/DZyrZEnlyS18ILcSYvAXtuziRrHZ5GS4mNAfvXNYZXj+vTUVAtziZSBg=="
+  },
+  "control_envelope": {
+    "payload": {
+      "active": true,
+      "epoch": 1,
+      "expires_at": 1794036598,
+      "mission_hash": "5c00ac193fea0a76e785715dd78b5e41b2d5fc581d55a106249d7e1d43ab0620",
+      "mission_id": "DEMO-006-20261107T012958Z",
+      "revoked_actors": [],
+      "revoked_permits": [],
+      "schema": "commerce.sandbox-demo.control.v1",
+      "sequence": 1
+    },
+    "signature": "qXZaHi7jCjnfUAjx90HEPNWMXORWG8nQpkVXNNgnEOWVxTXd8O0TR1F1XPxx489/N4wn/YAdYWDxELM89TXmCg=="
+  },
+  "mission_hash": "5c00ac193fea0a76e785715dd78b5e41b2d5fc581d55a106249d7e1d43ab0620",
+  "verified_with_owner_control_key": "fdaab34c5defcf9805c32bb5"
+}

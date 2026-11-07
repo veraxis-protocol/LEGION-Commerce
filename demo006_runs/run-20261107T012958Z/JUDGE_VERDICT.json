@@ -1,0 +1,155 @@
+{
+ "schema": "commerce.demo.judge-verdict.v1",
+ "judge": "commerce_demo.judge (separate read-only process, no network)",
+ "mission_id": "DEMO-006-20261107T012958Z",
+ "verdict": "MISSION_INCOMPLETE",
+ "checks": [
+  {
+   "check": "all_evidence_present",
+   "pass": false,
+   "detail": "missing=['PAYPAL_NATIVE_READBACK.json', 'FULFILLMENT_RECEIPTS_SIMULATED.json']"
+  },
+  {
+   "check": "J1_mission_signed_by_owner_control_key",
+   "pass": true,
+   "detail": "DEMO-006-20261107T012958Z"
+  },
+  {
+   "check": "J1_original_three_obligations",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "J1_budget_cap_50000",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "J2_event_chain_intact",
+   "pass": true,
+   "detail": "OK"
+  },
+  {
+   "check": "J2_single_first_attempt_no_restart",
+   "pass": true,
+   "detail": "attempts=['DEMO-006-20261107T012958Z-ATTEMPT-1']"
+  },
+  {
+   "check": "J2_order_select_shock_reject_replan_lean_pay",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "J3_at_least_3_model_driven_agents",
+   "pass": true,
+   "detail": [
+    "agent:chair",
+    "agent:planner-1",
+    "agent:planner-2",
+    "agent:planner-3",
+    "agent:planner-4",
+    "agent:planner-5"
+   ]
+  },
+  {
+   "check": "J3_100_registered_agents",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "J3_at_least_5_distinct_complete_model_plans",
+   "pass": true,
+   "detail": "distinct=5"
+  },
+  {
+   "check": "J4_price_shock_made_selected_plan_exceed_cap",
+   "pass": true,
+   "detail": "over=51600"
+  },
+  {
+   "check": "J5_final_plan_model_authored_after_replan",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "J5_final_plan_feasible_against_current_quotes",
+   "pass": true,
+   "detail": []
+  },
+  {
+   "check": "J5_original_obligations_preserved",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "J6_budget_compliance",
+   "pass": true,
+   "detail": "total=43700"
+  },
+  {
+   "check": "J7_lean_T_before_dispatch",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "J7_authorization_bound_to_mission_amount_merchant_plan",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "J8_provider_readback_completed",
+   "pass": false,
+   "detail": ""
+  },
+  {
+   "check": "J8_provider_amount_payee_match_authorization",
+   "pass": false,
+   "detail": ""
+  },
+  {
+   "check": "J9_exactly_one_effect_one_capture",
+   "pass": false,
+   "detail": ""
+  },
+  {
+   "check": "J9_no_overspend_ledger",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "J9_no_unauthorized_dispatch",
+   "pass": true,
+   "detail": "posts=1"
+  },
+  {
+   "check": "J10_obligation_SVC-1_complete",
+   "pass": false,
+   "detail": ""
+  },
+  {
+   "check": "J10_obligation_SVC-2_complete",
+   "pass": false,
+   "detail": ""
+  },
+  {
+   "check": "J10_obligation_SVC-3_complete",
+   "pass": false,
+   "detail": ""
+  },
+  {
+   "check": "J11_no_agent_self_declared_completion_relied_on",
+   "pass": true,
+   "detail": "agent_claims_ignored=0"
+  }
+ ],
+ "failed": [
+  "all_evidence_present",
+  "J8_provider_readback_completed",
+  "J8_provider_amount_payee_match_authorization",
+  "J9_exactly_one_effect_one_capture",
+  "J10_obligation_SVC-1_complete",
+  "J10_obligation_SVC-2_complete",
+  "J10_obligation_SVC-3_complete"
+ ],
+ "disclosure": "Supplier data and fulfillment are SIMULATED; PayPal is the Sandbox (no real money). A pass is a Sandbox VCC@1, not real-world delivery."
+}

@@ -1,0 +1,328 @@
+{
+  "affected_plan": "INITIAL-P1",
+  "feed_v1": {
+    "notice": "SIMULATED_SANDBOX_SUPPLIER_FEED - fixture data, no real supplier was contacted",
+    "quotes": [
+      {
+        "delivery_days": 5,
+        "feed_version": 1,
+        "price_cents": 14500,
+        "quote_id": "Q-SVC-1-SUP-A1-v1",
+        "rating_x10": 46,
+        "service_id": "SVC-1",
+        "source": "SIMULATED_SANDBOX_SUPPLIER_FEED - fixture data, no real supplier was contacted",
+        "supplier": "Northwind Access (simulated)",
+        "supplier_id": "SUP-A1"
+      },
+      {
+        "delivery_days": 7,
+        "feed_version": 1,
+        "price_cents": 12900,
+        "quote_id": "Q-SVC-1-SUP-A2-v1",
+        "rating_x10": 42,
+        "service_id": "SVC-1",
+        "source": "SIMULATED_SANDBOX_SUPPLIER_FEED - fixture data, no real supplier was contacted",
+        "supplier": "Clearpath A11y (simulated)",
+        "supplier_id": "SUP-A2"
+      },
+      {
+        "delivery_days": 3,
+        "feed_version": 1,
+        "price_cents": 17900,
+        "quote_id": "Q-SVC-1-SUP-A3-v1",
+        "rating_x10": 48,
+        "service_id": "SVC-1",
+        "source": "SIMULATED_SANDBOX_SUPPLIER_FEED - fixture data, no real supplier was contacted",
+        "supplier": "Lumen Audit Co (simulated)",
+        "supplier_id": "SUP-A3"
+      },
+      {
+        "delivery_days": 10,
+        "feed_version": 1,
+        "price_cents": 9900,
+        "quote_id": "Q-SVC-1-SUP-A4-v1",
+        "rating_x10": 36,
+        "service_id": "SVC-1",
+        "source": "SIMULATED_SANDBOX_SUPPLIER_FEED - fixture data, no real supplier was contacted",
+        "supplier": "QuickCheck Labs (simulated)",
+        "supplier_id": "SUP-A4"
+      },
+      {
+        "delivery_days": 2,
+        "feed_version": 1,
+        "price_cents": 11900,
+        "quote_id": "Q-SVC-2-SUP-B1-v1",
+        "rating_x10": 47,
+        "service_id": "SVC-2",
+        "source": "SIMULATED_SANDBOX_SUPPLIER_FEED - fixture data, no real supplier was contacted",
+        "supplier": "Redline Editorial (simulated)",
+        "supplier_id": "SUP-B1"
+      },
+      {
+        "delivery_days": 4,
+        "feed_version": 1,
+        "price_cents": 8900,
+        "quote_id": "Q-SVC-2-SUP-B2-v1",
+        "rating_x10": 41,
+        "service_id": "SVC-2",
+        "source": "SIMULATED_SANDBOX_SUPPLIER_FEED - fixture data, no real supplier was contacted",
+        "supplier": "Plain Words (simulated)",
+        "supplier_id": "SUP-B2"
+      },
+      {
+        "delivery_days": 1,
+        "feed_version": 1,
+        "price_cents": 14900,
+        "quote_id": "Q-SVC-2-SUP-B3-v1",
+        "rating_x10": 49,
+        "service_id": "SVC-2",
+        "source": "SIMULATED_SANDBOX_SUPPLIER_FEED - fixture data, no real supplier was contacted",
+        "supplier": "Stet & Co (simulated)",
+        "supplier_id": "SUP-B3"
+      },
+      {
+        "delivery_days": 6,
+        "feed_version": 1,
+        "price_cents": 6500,
+        "quote_id": "Q-SVC-2-SUP-B4-v1",
+        "rating_x10": 34,
+        "service_id": "SVC-2",
+        "source": "SIMULATED_SANDBOX_SUPPLIER_FEED - fixture data, no real supplier was contacted",
+        "supplier": "BudgetProof (simulated)",
+        "supplier_id": "SUP-B4"
+      },
+      {
+        "delivery_days": 4,
+        "feed_version": 1,
+        "price_cents": 18900,
+        "quote_id": "Q-SVC-3-SUP-C1-v1",
+        "rating_x10": 48,
+        "service_id": "SVC-3",
+        "source": "SIMULATED_SANDBOX_SUPPLIER_FEED - fixture data, no real supplier was contacted",
+        "supplier": "Bastion Advisory (simulated)",
+        "supplier_id": "SUP-C1"
+      },
+      {
+        "delivery_days": 5,
+        "feed_version": 1,
+        "price_cents": 15500,
+        "quote_id": "Q-SVC-3-SUP-C2-v1",
+        "rating_x10": 44,
+        "service_id": "SVC-3",
+        "source": "SIMULATED_SANDBOX_SUPPLIER_FEED - fixture data, no real supplier was contacted",
+        "supplier": "Cumulus Secure (simulated)",
+        "supplier_id": "SUP-C2"
+      },
+      {
+        "delivery_days": 2,
+        "feed_version": 1,
+        "price_cents": 21900,
+        "quote_id": "Q-SVC-3-SUP-C3-v1",
+        "rating_x10": 49,
+        "service_id": "SVC-3",
+        "source": "SIMULATED_SANDBOX_SUPPLIER_FEED - fixture data, no real supplier was contacted",
+        "supplier": "Ironclad Cloud (simulated)",
+        "supplier_id": "SUP-C3"
+      },
+      {
+        "delivery_days": 8,
+        "feed_version": 1,
+        "price_cents": 11900,
+        "quote_id": "Q-SVC-3-SUP-C4-v1",
+        "rating_x10": 38,
+        "service_id": "SVC-3",
+        "source": "SIMULATED_SANDBOX_SUPPLIER_FEED - fixture data, no real supplier was contacted",
+        "supplier": "Patchwise (simulated)",
+        "supplier_id": "SUP-C4"
+      }
+    ],
+    "schema": "commerce.demo.supplier-feed.v1",
+    "simulated": true,
+    "version": 1
+  },
+  "feed_v1_sha256": "80d8dc4a6ac877897c1fd9d366486b2bab06c6f784ded5133a836dbc54315613",
+  "feed_v2": {
+    "notice": "SIMULATED_SANDBOX_SUPPLIER_FEED - fixture data, no real supplier was contacted",
+    "quotes": [
+      {
+        "delivery_days": 5,
+        "feed_version": 2,
+        "price_cents": 14500,
+        "quote_id": "Q-SVC-1-SUP-A1-v2",
+        "rating_x10": 46,
+        "service_id": "SVC-1",
+        "source": "SIMULATED_SANDBOX_SUPPLIER_FEED - fixture data, no real supplier was contacted",
+        "supplier": "Northwind Access (simulated)",
+        "supplier_id": "SUP-A1"
+      },
+      {
+        "delivery_days": 7,
+        "feed_version": 2,
+        "price_cents": 12900,
+        "quote_id": "Q-SVC-1-SUP-A2-v2",
+        "rating_x10": 42,
+        "service_id": "SVC-1",
+        "source": "SIMULATED_SANDBOX_SUPPLIER_FEED - fixture data, no real supplier was contacted",
+        "supplier": "Clearpath A11y (simulated)",
+        "supplier_id": "SUP-A2"
+      },
+      {
+        "delivery_days": 3,
+        "feed_version": 2,
+        "price_cents": 17900,
+        "quote_id": "Q-SVC-1-SUP-A3-v2",
+        "rating_x10": 48,
+        "service_id": "SVC-1",
+        "source": "SIMULATED_SANDBOX_SUPPLIER_FEED - fixture data, no real supplier was contacted",
+        "supplier": "Lumen Audit Co (simulated)",
+        "supplier_id": "SUP-A3"
+      },
+      {
+        "delivery_days": 10,
+        "feed_version": 2,
+        "price_cents": 9900,
+        "quote_id": "Q-SVC-1-SUP-A4-v2",
+        "rating_x10": 36,
+        "service_id": "SVC-1",
+        "source": "SIMULATED_SANDBOX_SUPPLIER_FEED - fixture data, no real supplier was contacted",
+        "supplier": "QuickCheck Labs (simulated)",
+        "supplier_id": "SUP-A4"
+      },
+      {
+        "delivery_days": 2,
+        "feed_version": 2,
+        "price_cents": 11900,
+        "quote_id": "Q-SVC-2-SUP-B1-v2",
+        "rating_x10": 47,
+        "service_id": "SVC-2",
+        "source": "SIMULATED_SANDBOX_SUPPLIER_FEED - fixture data, no real supplier was contacted",
+        "supplier": "Redline Editorial (simulated)",
+        "supplier_id": "SUP-B1"
+      },
+      {
+        "delivery_days": 4,
+        "feed_version": 2,
+        "price_cents": 8900,
+        "quote_id": "Q-SVC-2-SUP-B2-v2",
+        "rating_x10": 41,
+        "service_id": "SVC-2",
+        "source": "SIMULATED_SANDBOX_SUPPLIER_FEED - fixture data, no real supplier was contacted",
+        "supplier": "Plain Words (simulated)",
+        "supplier_id": "SUP-B2"
+      },
+      {
+        "delivery_days": 1,
+        "feed_version": 2,
+        "price_cents": 14900,
+        "quote_id": "Q-SVC-2-SUP-B3-v2",
+        "rating_x10": 49,
+        "service_id": "SVC-2",
+        "source": "SIMULATED_SANDBOX_SUPPLIER_FEED - fixture data, no real supplier was contacted",
+        "supplier": "Stet & Co (simulated)",
+        "supplier_id": "SUP-B3"
+      },
+      {
+        "delivery_days": 6,
+        "feed_version": 2,
+        "price_cents": 6500,
+        "quote_id": "Q-SVC-2-SUP-B4-v2",
+        "rating_x10": 34,
+        "service_id": "SVC-2",
+        "source": "SIMULATED_SANDBOX_SUPPLIER_FEED - fixture data, no real supplier was contacted",
+        "supplier": "BudgetProof (simulated)",
+        "supplier_id": "SUP-B4"
+      },
+      {
+        "delivery_days": 4,
+        "feed_version": 2,
+        "price_cents": 18900,
+        "quote_id": "Q-SVC-3-SUP-C1-v2",
+        "rating_x10": 48,
+        "service_id": "SVC-3",
+        "source": "SIMULATED_SANDBOX_SUPPLIER_FEED - fixture data, no real supplier was contacted",
+        "supplier": "Bastion Advisory (simulated)",
+        "supplier_id": "SUP-C1"
+      },
+      {
+        "delivery_days": 5,
+        "feed_version": 2,
+        "price_cents": 29800,
+        "quote_id": "Q-SVC-3-SUP-C2-v2",
+        "rating_x10": 44,
+        "service_id": "SVC-3",
+        "source": "SIMULATED_SANDBOX_SUPPLIER_FEED - fixture data, no real supplier was contacted",
+        "supplier": "Cumulus Secure (simulated)",
+        "supplier_id": "SUP-C2"
+      },
+      {
+        "delivery_days": 2,
+        "feed_version": 2,
+        "price_cents": 21900,
+        "quote_id": "Q-SVC-3-SUP-C3-v2",
+        "rating_x10": 49,
+        "service_id": "SVC-3",
+        "source": "SIMULATED_SANDBOX_SUPPLIER_FEED - fixture data, no real supplier was contacted",
+        "supplier": "Ironclad Cloud (simulated)",
+        "supplier_id": "SUP-C3"
+      },
+      {
+        "delivery_days": 8,
+        "feed_version": 2,
+        "price_cents": 11900,
+        "quote_id": "Q-SVC-3-SUP-C4-v2",
+        "rating_x10": 38,
+        "service_id": "SVC-3",
+        "source": "SIMULATED_SANDBOX_SUPPLIER_FEED - fixture data, no real supplier was contacted",
+        "supplier": "Patchwise (simulated)",
+        "supplier_id": "SUP-C4"
+      }
+    ],
+    "schema": "commerce.demo.supplier-feed.v1",
+    "simulated": true,
+    "version": 2
+  },
+  "feed_v2_sha256": "cd7fadeafd31636e3843bf8bf113ddb176e2d96fae6d5c067f6e7ddb8bd84bab",
+  "injector": "preregistered disruption protocol",
+  "new_price_cents": 29800,
+  "old_price_cents": 15500,
+  "published_at": 1794017395.2281175,
+  "quote_id_before": "Q-SVC-3-SUP-C2-v1",
+  "recheck": {
+    "feasible": false,
+    "normalized_lines": [
+      {
+        "price_cents": 12900,
+        "quote_id": "Q-SVC-1-SUP-A2-v2",
+        "service_id": "SVC-1",
+        "supplier": "Clearpath A11y (simulated)",
+        "supplier_id": "SUP-A2"
+      },
+      {
+        "price_cents": 8900,
+        "quote_id": "Q-SVC-2-SUP-B2-v2",
+        "service_id": "SVC-2",
+        "supplier": "Plain Words (simulated)",
+        "supplier_id": "SUP-B2"
+      },
+      {
+        "price_cents": 29800,
+        "quote_id": "Q-SVC-3-SUP-C2-v2",
+        "service_id": "SVC-3",
+        "supplier": "Cumulus Secure (simulated)",
+        "supplier_id": "SUP-C2"
+      }
+    ],
+    "reasons": [
+      "PRICE_NOT_CURRENT_QUOTE:Q-SVC-3-SUP-C2-v2:15500!=29800",
+      "STATED_TOTAL_WRONG:None!=51600",
+      "OVER_BUDGET:51600>50000"
+    ],
+    "total_cents": 51600,
+    "valid": true
+  },
+  "replanned": true,
+  "schema": "commerce.demo.price-shock.v1",
+  "service_id": "SVC-3",
+  "simulated": true,
+  "supplier_id": "SUP-C2"
+}

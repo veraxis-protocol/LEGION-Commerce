@@ -1,0 +1,3 @@
+﻿{"dashboard": "http://127.0.0.1:8770/", "attempt": "DEMO-006-20261107T012958Z-ATTEMPT-1"}
+{"awaiting": "press 'Proceed to payment' on the dashboard"}
+{"approval_url": "https://www.sandbox.paypal.com/checkoutnow?token=92H44398S9598814R"}

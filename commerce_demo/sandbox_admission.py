@@ -26,7 +26,9 @@ CONTROL_DOMAIN = "commerce.sandbox-demo.control.v1"
 PERMIT_DOMAIN = "commerce.sandbox-demo.permit.v1"
 OBS_DOMAIN = "commerce.sandbox-demo.core-observation.v1"
 MAX_AGE = 300
-PERMIT_TTL = 600
+# Sandbox-profile permit lifetime (production A04: 600 s). Freshness of the Core state is enforced separately:
+# every gate re-observes the current state and re-runs the qualified Lean decision (see fresh_observer).
+PERMIT_TTL = 900
 
 
 def b64pub(k):
@@ -88,8 +90,11 @@ def build_core_inputs(mission, final_lines, total_cents, runtime, sources, now):
 class SandboxDemoAdmission:
     """Implements the Admission interface the A04 Gateway calls: control(envelope), check(mission, permit, control)."""
 
-    def __init__(self, owner_public_key, runtime_public_keys, sources, clock=time.time):
+    def __init__(self, owner_public_key, runtime_public_keys, sources, clock=time.time, observer=None):
         self.owner, self.rt, self.sources, self.clock = owner_public_key, runtime_public_keys, sources, clock
+        # observer(mission, permit, now) -> signed Core observation of the CURRENT state (DEMO-006 fix after mission 1:
+        # a decision fixed at issue time went stale while a human approved in PayPal).
+        self.observer = observer
         self.trust = {"control": owner_public_key}
         self.last_decision = None
 
@@ -158,12 +163,24 @@ class SandboxDemoAdmission:
         cents(intent["amount_cents"])
         require(intent["amount_cents"] <= m["cap_cents"] and intent["merchant_id"] in m["merchant_ids"] and intent["currency"] == m["currency"]
                 and intent["actor"] == m["actor"] and intent["obligation_id"] == "pay", "INTENT_SCOPE_OR_BUDGET")
-        obs = self.check_observation(m, mh, p["observation"], intent, now)
-        # Fresh qualified decision at every gate (reserve / create / capture); never a cached verdict.
+        issued = verify(p["observation"], self.rt["core_observer"], OBS_DOMAIN)       # issue-time observation still authentic and bound
+        require(issued["intent_hash"] == digest("commerce.intent.v1", intent) and issued["mission_hash"] == mh, "CORE_OBSERVATION_BINDING")
+        current = self.observer(m, p, now) if self.observer is not None else p["observation"]
+        obs = self.check_observation(m, mh, current, intent, now)
+        # Fresh qualified decision at every gate (reserve / create / capture) on the current observation; never a cached verdict.
         self.evaluate(obs, p["policy"], intent, now)
         # Gateway compatibility: it derives the effect key from these fields.
         m = dict(m); m.setdefault("effects", [intent])
         return m, p, intent
+
+
+def fresh_observer(runtime, sources):
+    """Core observer service: re-observes the current state for the permitted action (fresh reporter attestations)."""
+    def observe(m, p, now):
+        _, _, intent, observation, policy = build_core_inputs(m, p["plan_lines"], p["intent"]["amount_cents"], runtime, sources, int(now))
+        require(intent == p["intent"] and policy == p["policy"], "CURRENT_STATE_DIFFERS_FROM_PERMIT")
+        return raw_sign(runtime["core_observer"], OBS_DOMAIN, observation)
+    return observe
 
 
 def issue_permit(adm, mission_env, runtime, final_lines, total_cents, sources, now=None):

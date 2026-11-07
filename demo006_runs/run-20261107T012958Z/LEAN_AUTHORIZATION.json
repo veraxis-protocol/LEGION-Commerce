@@ -1,0 +1,481 @@
+{
+  "action": {
+    "params": {
+      "amount_cents": 43700,
+      "merchant_id": "RGFNDXFWF988G"
+    },
+    "target": "RGFNDXFWF988G",
+    "tool": "paypal.capture"
+  },
+  "admission_hot_path_commit": "ca897f7badeea4f2b66a52bc684df18008bc4f4d",
+  "controls_exercised": [
+    "owner Control-Key mission + control signatures",
+    "control active/epoch/expiry/revocation",
+    "permit signature/expiry",
+    "amount<=cap, payee, actor, currency",
+    "Core observation signature/binding/freshness/state/chronology/prerequisites",
+    "qualified Core ACT + Lean decider T for the exact action (re-evaluated at reserve, create and capture)",
+    "A04 durable budget, idempotency, revocation ledger, provider safety",
+    "buyer approval in PayPal"
+  ],
+  "core_commit": "d9d38cd6fd9e93e002b0b5d5135377ce1d33d8c8",
+  "decider_sha256": "99cda684f29afba33e69b8f4811d754c499987c30c07ac1c67f19ec250ade73a",
+  "decision": {
+    "all_facts_true": true,
+    "alpha_payload_hash": "05714f596be2f4a3491e4248954e241f221f50399a5c3a3296d0ce63015d6c81",
+    "differential": [
+      {
+        "fact_id": "pay:deps_closed",
+        "fresh_reports": 3,
+        "lean": "T",
+        "runtime": "T",
+        "seats": [
+          "T",
+          "T",
+          "T"
+        ],
+        "stale_reports": 0,
+        "state": "ACCEPTED_TRUE"
+      }
+    ],
+    "directive": {
+      "command_id": "9f5a9e05a1726daef53921eeff4405685ad787e78eb359299e0d6b3bb5f75826",
+      "directive": "ACT",
+      "epoch": 1,
+      "task_id": "pay"
+    },
+    "evaluated_at": 1794017462,
+    "lean_grounds": [
+      [
+        "RUNNING",
+        "T"
+      ],
+      [
+        "IDENTITY",
+        "T"
+      ],
+      [
+        "OWNER",
+        "T"
+      ],
+      [
+        "TARGET",
+        "T"
+      ],
+      [
+        "PERMIT",
+        "T"
+      ],
+      [
+        "EPOCH",
+        "T"
+      ],
+      [
+        "NONCE",
+        "T"
+      ],
+      [
+        "FRESH_CMD",
+        "T"
+      ],
+      [
+        "ONCE",
+        "T"
+      ],
+      [
+        "DEPS",
+        "T"
+      ],
+      [
+        "CAPACITY",
+        "T"
+      ],
+      [
+        "ZTL",
+        "T"
+      ],
+      [
+        "CONTRACT",
+        "T"
+      ]
+    ],
+    "lean_verdict": "T",
+    "native_preconditions_ok": true,
+    "parameter_status": 200,
+    "predicate_truths": [
+      true
+    ],
+    "profile_sha256": "a689e626652ba3dfccd3362cc83d34b9ce8a94c6b40f57692ab801b3609d8031",
+    "runtime_verdict": "T",
+    "submissions": [
+      "ACCEPTED_FOR_EVALUATION",
+      "ACCEPTED_FOR_EVALUATION",
+      "ACCEPTED_FOR_EVALUATION"
+    ],
+    "task_actor": "agent:procurement-executor"
+  },
+  "permit_envelope": {
+    "payload": {
+      "epoch": 1,
+      "expires_at": 1794018062,
+      "intent": {
+        "actor": "agent:procurement-executor",
+        "amount_cents": 43700,
+        "currency": "USD",
+        "effect_slot": "bundle-SVC-1-2-3",
+        "merchant_id": "RGFNDXFWF988G",
+        "obligation_id": "pay",
+        "prerequisites_hash": "9a494accca53eafc26e75583f43694227782d2152e040ac0e11f1f5a7edb44be",
+        "quote_hash": "67a3d7ec99ac5ed08b0902b61ae7a92cbc5bc9f47d9eee9fce7ce7b27e6cd6b9"
+      },
+      "issued_at": 1794017462,
+      "lean_decision_at_issue": {
+        "all_facts_true": true,
+        "alpha_payload_hash": "05714f596be2f4a3491e4248954e241f221f50399a5c3a3296d0ce63015d6c81",
+        "differential": [
+          {
+            "fact_id": "pay:deps_closed",
+            "fresh_reports": 3,
+            "lean": "T",
+            "runtime": "T",
+            "seats": [
+              "T",
+              "T",
+              "T"
+            ],
+            "stale_reports": 0,
+            "state": "ACCEPTED_TRUE"
+          }
+        ],
+        "directive": {
+          "command_id": "9f5a9e05a1726daef53921eeff4405685ad787e78eb359299e0d6b3bb5f75826",
+          "directive": "ACT",
+          "epoch": 1,
+          "task_id": "pay"
+        },
+        "evaluated_at": 1794017462,
+        "lean_grounds": [
+          [
+            "RUNNING",
+            "T"
+          ],
+          [
+            "IDENTITY",
+            "T"
+          ],
+          [
+            "OWNER",
+            "T"
+          ],
+          [
+            "TARGET",
+            "T"
+          ],
+          [
+            "PERMIT",
+            "T"
+          ],
+          [
+            "EPOCH",
+            "T"
+          ],
+          [
+            "NONCE",
+            "T"
+          ],
+          [
+            "FRESH_CMD",
+            "T"
+          ],
+          [
+            "ONCE",
+            "T"
+          ],
+          [
+            "DEPS",
+            "T"
+          ],
+          [
+            "CAPACITY",
+            "T"
+          ],
+          [
+            "ZTL",
+            "T"
+          ],
+          [
+            "CONTRACT",
+            "T"
+          ]
+        ],
+        "lean_verdict": "T",
+        "native_preconditions_ok": true,
+        "parameter_status": 200,
+        "predicate_truths": [
+          true
+        ],
+        "profile_sha256": "a689e626652ba3dfccd3362cc83d34b9ce8a94c6b40f57692ab801b3609d8031",
+        "runtime_verdict": "T",
+        "submissions": [
+          "ACCEPTED_FOR_EVALUATION",
+          "ACCEPTED_FOR_EVALUATION",
+          "ACCEPTED_FOR_EVALUATION"
+        ],
+        "task_actor": "agent:procurement-executor"
+      },
+      "mission_hash": "5c00ac193fea0a76e785715dd78b5e41b2d5fc581d55a106249d7e1d43ab0620",
+      "observation": {
+        "payload": {
+          "action": {
+            "params": {
+              "amount_cents": 43700,
+              "merchant_id": "RGFNDXFWF988G"
+            },
+            "target": "RGFNDXFWF988G",
+            "tool": "paypal.capture"
+          },
+          "attempt_state": "RUNNING",
+          "claimed_directive": {
+            "command_id": "9f5a9e05a1726daef53921eeff4405685ad787e78eb359299e0d6b3bb5f75826",
+            "directive": "ACT",
+            "epoch": 1,
+            "task_id": "pay"
+          },
+          "contract_hash": "c896dda0964e3e64bb9935b5ec305f3c7e5a6b55596a0d363b056220ddd2f4e3",
+          "controller_state": {
+            "pay": {
+              "command_id": null,
+              "effect_id": null,
+              "epoch": 0,
+              "status": "PENDING",
+              "unknown": false
+            }
+          },
+          "core_boundary": {
+            "fenced": [],
+            "gate_records": [],
+            "permit": {
+              "actor": "agent:procurement-executor",
+              "attempt_uid": "DEMO-006-20261107T012958Z-ATTEMPT-1",
+              "command_id": "9f5a9e05a1726daef53921eeff4405685ad787e78eb359299e0d6b3bb5f75826",
+              "epoch": 1,
+              "mission": "3c846ddeff2c353f6cbcd4c262d0ef2426ce9facff7b97fda63ec1844e2c6272",
+              "nonce": "DEMO-006-20261107T012958Z-NONCE",
+              "permit_id": "DEMO-006-20261107T012958Z-CORE-PERMIT",
+              "target": "RGFNDXFWF988G",
+              "task_id": "pay",
+              "world_instance_id": "DEMO-006-20261107T012958Z-WORLD"
+            },
+            "permit_verified": true,
+            "readback_records": [],
+            "status": {
+              "attempt_uid": "DEMO-006-20261107T012958Z-ATTEMPT-1",
+              "contract_sha256": "3c846ddeff2c353f6cbcd4c262d0ef2426ce9facff7b97fda63ec1844e2c6272",
+              "contract_version": 0,
+              "epoch": 1,
+              "state": "RUNNING",
+              "world_instance_id": "DEMO-006-20261107T012958Z-WORLD"
+            },
+            "used_nonces": []
+          },
+          "effects": [],
+          "epoch": 1,
+          "intent_hash": "c8350ef4756358a204397cf9f0eb4f023d5ebb781d0f955b01a6caaa88a708c4",
+          "mission_hash": "5c00ac193fea0a76e785715dd78b5e41b2d5fc581d55a106249d7e1d43ab0620",
+          "observed_at": 1794017462,
+          "quote_hash": "67a3d7ec99ac5ed08b0902b61ae7a92cbc5bc9f47d9eee9fce7ce7b27e6cd6b9",
+          "records": [
+            {
+              "agent_id": "agent:procurement-executor",
+              "facts": {
+                "available_cents": 50000
+              },
+              "kind": "OBSERVATION",
+              "observation_id": "obs-quotes",
+              "seq": 1,
+              "task_id": "observe"
+            },
+            {
+              "agent_id": "agent:procurement-executor",
+              "evidence_refs": [
+                "obs-quotes"
+              ],
+              "facts": {
+                "amount_cents": 43700
+              },
+              "kind": "ANALYSIS_RECORD",
+              "record_id": "analysis-final-plan",
+              "seq": 2,
+              "task_id": "analyze"
+            }
+          ],
+          "reports": [
+            {
+              "agent": "agent:reporter-1",
+              "fact_id": "pay:deps_closed",
+              "observed_at": "2026-11-07T02:11:02Z",
+              "root": "root-1",
+              "sig": "4d8b288161af910d9d92d71e483efa6e3b1923c635fce3489f327e14869dca9202db760137f07a54eef7032eb838f2de571f22433f60422917dced9df9e80e03",
+              "value": true
+            },
+            {
+              "agent": "agent:reporter-2",
+              "fact_id": "pay:deps_closed",
+              "observed_at": "2026-11-07T02:11:02Z",
+              "root": "root-2",
+              "sig": "4517b510c2cd80f411527d9a6217ac83f2d2e9053b215d9a611a121e38bde509e016318b5770b1b9cc311c544df581320f45f56ec3ebbe6ed1cec7d892fb5708",
+              "value": true
+            },
+            {
+              "agent": "agent:reporter-3",
+              "fact_id": "pay:deps_closed",
+              "observed_at": "2026-11-07T02:11:02Z",
+              "root": "root-3",
+              "sig": "c50133c7e3c8b34f72b10e0eb4b76f2822692f262c7eef0dc766e3056f6aafe62799c3b6e4de07fec0952a57a6182be873ae2af284488c464796f45d6e53a602",
+              "value": true
+            }
+          ],
+          "schema": "commerce.sandbox-demo.core-observation.v1",
+          "task_id": "pay",
+          "world": {
+            "initial_state": {
+              "budget": {
+                "available_cents": 50000
+              }
+            },
+            "roles": [
+              {
+                "agent_id": "agent:procurement-executor",
+                "tasks": [
+                  {
+                    "depends_on": [],
+                    "kinds": [
+                      "READ"
+                    ],
+                    "task_id": "observe"
+                  },
+                  {
+                    "depends_on": [
+                      "observe"
+                    ],
+                    "kinds": [
+                      "ANALYZE"
+                    ],
+                    "task_id": "analyze"
+                  },
+                  {
+                    "depends_on": [
+                      "observe",
+                      "analyze"
+                    ],
+                    "expected_args": {
+                      "amount_cents": 43700,
+                      "merchant_id": "RGFNDXFWF988G"
+                    },
+                    "kinds": [
+                      "WRITE"
+                    ],
+                    "target": "RGFNDXFWF988G",
+                    "task_id": "pay",
+                    "write_tool": "paypal.capture"
+                  }
+                ]
+              }
+            ],
+            "schema_version": "legion.world.v1",
+            "tools": {
+              "paypal.capture": {
+                "kind": "write",
+                "native_preconditions": [],
+                "params": {
+                  "amount_cents": {
+                    "max": 50000,
+                    "min": 1,
+                    "type": "integer"
+                  },
+                  "merchant_id": {
+                    "enum": [
+                      "RGFNDXFWF988G"
+                    ],
+                    "type": "string"
+                  }
+                },
+                "target": "RGFNDXFWF988G"
+              }
+            },
+            "world_id": "DEMO-006-20261107T012958Z"
+          },
+          "world_state": {
+            "budget": {
+              "available_cents": 50000
+            }
+          }
+        },
+        "signature": "Tu/gNuPYfGCnA7wqn6dJVcpkdxpG3UIL7li7y7ey5MdkFQe1Hw2f+xnbtszQSXWJ8ji+3Sp1/mRHYeEjh9G5Dw=="
+      },
+      "permit_id": "DEMO-006-20261107T012958Z-PERMIT-1",
+      "plan_lines": [
+        {
+          "price_cents": 12900,
+          "quote_id": "Q-SVC-1-SUP-A2-v2",
+          "service_id": "SVC-1",
+          "supplier": "Clearpath A11y (simulated)",
+          "supplier_id": "SUP-A2"
+        },
+        {
+          "price_cents": 11900,
+          "quote_id": "Q-SVC-2-SUP-B1-v2",
+          "service_id": "SVC-2",
+          "supplier": "Redline Editorial (simulated)",
+          "supplier_id": "SUP-B1"
+        },
+        {
+          "price_cents": 18900,
+          "quote_id": "Q-SVC-3-SUP-C1-v2",
+          "service_id": "SVC-3",
+          "supplier": "Bastion Advisory (simulated)",
+          "supplier_id": "SUP-C1"
+        }
+      ],
+      "policy": {
+        "f": 1,
+        "max_age_seconds": 300,
+        "reporters": [
+          {
+            "agent": "agent:reporter-1",
+            "basis": "basis-1",
+            "public_key": "PSIPG8X7Zl2LArglyCMJcCv2WPMcDuYtKMrr18aGxdo=",
+            "root": "root-1",
+            "source_id": "DEMO-REPORTER-1"
+          },
+          {
+            "agent": "agent:reporter-2",
+            "basis": "basis-2",
+            "public_key": "Hu9VguHpMP2Kmv6p37yriSufV1dB/i734pIz6DAnNHY=",
+            "root": "root-2",
+            "source_id": "DEMO-REPORTER-2"
+          },
+          {
+            "agent": "agent:reporter-3",
+            "basis": "basis-3",
+            "public_key": "BS+MdJzcGqDBVf7FA/O7tOk5LF+nD4ZUsSsM0erUJwA=",
+            "root": "root-3",
+            "source_id": "DEMO-REPORTER-3"
+          }
+        ]
+      },
+      "profile": "sandbox-demo-v1",
+      "schema": "commerce.sandbox-demo.permit.v1",
+      "scope": "paypal.sandbox.orders.create_capture"
+    },
+    "signature": "Badw/n5HCpbPEyIj6qwhAxzesEEQeuQFzAaII7qwiU3kVc48bJH10mzj6N/p+hC8xRIvijuKzKmm2RtT1qpICQ=="
+  },
+  "production_controls_not_in_profile": [
+    "independent A03 acceptance + installation manifest",
+    "A01/A02 upstream acceptance",
+    "separately staffed admission issuer",
+    "CAGE and VEIP authorizations"
+  ],
+  "profile": "sandbox-demo-v1",
+  "verdict": "T"
+}

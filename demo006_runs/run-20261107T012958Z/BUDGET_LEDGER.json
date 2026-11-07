@@ -1,0 +1,72 @@
+{
+  "cap_cents": 50000,
+  "effects": [
+    {
+      "id": "b535d32ce8ec9d86e87a5f06c2810cb39f8952304da6c497899b22cdc621ce3b",
+      "mission_id": "DEMO-006-20261107T012958Z",
+      "obligation_id": "pay",
+      "permit_id": "DEMO-006-20261107T012958Z-PERMIT-1",
+      "amount": 43700,
+      "held": 1,
+      "state": "APPROVAL_PENDING",
+      "order_id": "92H44398S9598814R",
+      "capture_id": null,
+      "capture_started": 0
+    }
+  ],
+  "ledger_events": [
+    {
+      "seq": 1,
+      "at": 1794017463.3744397,
+      "effect_id": null,
+      "kind": "CONTROL_APPLIED",
+      "data": {
+        "mission_id": "DEMO-006-20261107T012958Z",
+        "sequence": 1
+      }
+    },
+    {
+      "seq": 2,
+      "at": 1794017463.387168,
+      "effect_id": "b535d32ce8ec9d86e87a5f06c2810cb39f8952304da6c497899b22cdc621ce3b",
+      "kind": "RESERVED",
+      "data": {
+        "amount_cents": 43700,
+        "budget_used_cents": 43700
+      }
+    },
+    {
+      "seq": 3,
+      "at": 1794017463.4045973,
+      "effect_id": "b535d32ce8ec9d86e87a5f06c2810cb39f8952304da6c497899b22cdc621ce3b",
+      "kind": "CREATE_INTENT",
+      "data": {
+        "request_id": "59b00c71-cda3-4d64-aedc-57369dd869ac"
+      }
+    },
+    {
+      "seq": 4,
+      "at": 1794017464.9426646,
+      "effect_id": "b535d32ce8ec9d86e87a5f06c2810cb39f8952304da6c497899b22cdc621ce3b",
+      "kind": "NETWORK",
+      "data": {
+        "duration_ms": 1525,
+        "http_status": 200,
+        "method": "POST",
+        "operation": "orders"
+      }
+    },
+    {
+      "seq": 5,
+      "at": 1794017464.9430528,
+      "effect_id": "b535d32ce8ec9d86e87a5f06c2810cb39f8952304da6c497899b22cdc621ce3b",
+      "kind": "ORDER_CREATED",
+      "data": {
+        "order_id": "92H44398S9598814R",
+        "provider_status": "PAYER_ACTION_REQUIRED"
+      }
+    }
+  ],
+  "held_total_cents": 43700,
+  "network_posts": 1
+}

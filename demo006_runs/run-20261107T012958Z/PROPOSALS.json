@@ -1,0 +1,1116 @@
+{
+  "chair_initial": {
+    "justification": "Cheapest valid combination under budget at $37,300 with all services rated >=4.0 and delivery <=10 days.",
+    "rejections": [
+      {
+        "plan_id": "INITIAL-P2",
+        "reason": "Exceeds budget at $43,700."
+      },
+      {
+        "plan_id": "INITIAL-P3",
+        "reason": "Exceeds budget at $45,300."
+      },
+      {
+        "plan_id": "INITIAL-P5",
+        "reason": "Exceeds budget at $40,300."
+      },
+      {
+        "plan_id": "INITIAL-P6",
+        "reason": "Exceeds budget at $48,300."
+      }
+    ],
+    "selected_plan_id": "INITIAL-P1"
+  },
+  "chair_replan": {
+    "justification": "REPLAN-P4 meets all requirements at 43700 cents, leaving 6300 cents headroom while selecting highest-rated compliant suppliers for each service.",
+    "rejections": [
+      {
+        "plan_id": "REPLAN-P1",
+        "reason": "Total 40700 uses cheaper but lower-rated SUP-B2 (rating 41) vs REPLAN-P4's SUP-B1 (rating 47)."
+      },
+      {
+        "plan_id": "REPLAN-P2",
+        "reason": "Total 46700 exceeds REPLAN-P4's 43700 by 3000 cents with only marginally higher aggregate rating."
+      },
+      {
+        "plan_id": "REPLAN-P7",
+        "reason": "Total 43700 same cost as REPLAN-P4 but uses lower-rated SUP-B2 (rating 41) instead of SUP-B1 (rating 47)."
+      }
+    ],
+    "selected_plan_id": "REPLAN-P4"
+  },
+  "final_plan_id": "REPLAN-P4",
+  "initial_round": [
+    {
+      "agent": "agent:planner-1",
+      "decider": "nim",
+      "duplicate": false,
+      "evaluation": {
+        "feasible": true,
+        "normalized_lines": [
+          {
+            "price_cents": 12900,
+            "quote_id": "Q-SVC-1-SUP-A2-v1",
+            "service_id": "SVC-1",
+            "supplier": "Clearpath A11y (simulated)",
+            "supplier_id": "SUP-A2"
+          },
+          {
+            "price_cents": 8900,
+            "quote_id": "Q-SVC-2-SUP-B2-v1",
+            "service_id": "SVC-2",
+            "supplier": "Plain Words (simulated)",
+            "supplier_id": "SUP-B2"
+          },
+          {
+            "price_cents": 15500,
+            "quote_id": "Q-SVC-3-SUP-C2-v1",
+            "service_id": "SVC-3",
+            "supplier": "Cumulus Secure (simulated)",
+            "supplier_id": "SUP-C2"
+          }
+        ],
+        "reasons": [],
+        "total_cents": 37300,
+        "valid": true
+      },
+      "feed_version": 1,
+      "key": [
+        [
+          "SVC-1",
+          "SUP-A2"
+        ],
+        [
+          "SVC-2",
+          "SUP-B2"
+        ],
+        [
+          "SVC-3",
+          "SUP-C2"
+        ]
+      ],
+      "model": "nvidia/nemotron-3.5-lightning-30b-a3b",
+      "plan_id": "INITIAL-P1",
+      "proposal": {
+        "lines": [
+          {
+            "price_cents": 12900,
+            "quote_id": "Q-SVC-1-SUP-A2-v1",
+            "service_id": "SVC-1",
+            "supplier_id": "SUP-A2"
+          },
+          {
+            "price_cents": 8900,
+            "quote_id": "Q-SVC-2-SUP-B2-v1",
+            "service_id": "SVC-2",
+            "supplier_id": "SUP-B2"
+          },
+          {
+            "price_cents": 15500,
+            "quote_id": "Q-SVC-3-SUP-C2-v1",
+            "service_id": "SVC-3",
+            "supplier_id": "SUP-C2"
+          }
+        ],
+        "rationale": "Cheapest valid combination: SVC-1 from Clearpath A11y ($12,900), SVC-2 from Plain Words ($8,900), SVC-3 from Cumulus Secure ($15,500). All have rating_x10 >= 40 and delivery_days <= 10. Total $37,300 under $50,000 cap.",
+        "rejected_alternatives": [
+          "> SVC-1 from QuickCheck Labs fails rating_x10 >= 40. > SVC-1 from Northwind Access costs $14,500 more than Clearpath A11y. > SVC-3 from Patchwise fails rating_x"
+        ],
+        "strategy": "cost minimizer",
+        "total_cents": 37300
+      },
+      "response_id": "chatcmpl-bba2bef3-6f8f-4a33-a8da-35b7c6f0e006",
+      "round": "initial"
+    },
+    {
+      "agent": "agent:planner-2",
+      "decider": "nim",
+      "duplicate": false,
+      "evaluation": {
+        "feasible": true,
+        "normalized_lines": [
+          {
+            "price_cents": 12900,
+            "quote_id": "Q-SVC-1-SUP-A2-v1",
+            "service_id": "SVC-1",
+            "supplier": "Clearpath A11y (simulated)",
+            "supplier_id": "SUP-A2"
+          },
+          {
+            "price_cents": 11900,
+            "quote_id": "Q-SVC-2-SUP-B1-v1",
+            "service_id": "SVC-2",
+            "supplier": "Redline Editorial (simulated)",
+            "supplier_id": "SUP-B1"
+          },
+          {
+            "price_cents": 18900,
+            "quote_id": "Q-SVC-3-SUP-C1-v1",
+            "service_id": "SVC-3",
+            "supplier": "Bastion Advisory (simulated)",
+            "supplier_id": "SUP-C1"
+          }
+        ],
+        "reasons": [],
+        "total_cents": 43700,
+        "valid": true
+      },
+      "feed_version": 1,
+      "key": [
+        [
+          "SVC-1",
+          "SUP-A2"
+        ],
+        [
+          "SVC-2",
+          "SUP-B1"
+        ],
+        [
+          "SVC-3",
+          "SUP-C1"
+        ]
+      ],
+      "model": "nvidia/nemotron-3.5-lightning-30b-a3b",
+      "plan_id": "INITIAL-P2",
+      "proposal": {
+        "lines": [
+          {
+            "price_cents": 12900,
+            "quote_id": "Q-SVC-1-SUP-A2-v1",
+            "service_id": "SVC-1",
+            "supplier_id": "SUP-A2"
+          },
+          {
+            "price_cents": 11900,
+            "quote_id": "Q-SVC-2-SUP-B1-v1",
+            "service_id": "SVC-2",
+            "supplier_id": "SUP-B1"
+          },
+          {
+            "price_cents": 18900,
+            "quote_id": "Q-SVC-3-SUP-C1-v1",
+            "service_id": "SVC-3",
+            "supplier_id": "SUP-C1"
+          }
+        ],
+        "rationale": "Selected highest-rated compliant suppliers within budget: SVC-1 Clearpath A11y (4.2), SVC-2 Bastion Advisory (4.7), SVC-3 Bastion Advisory (4.8); total $437 < $500.",
+        "rejected_alternatives": [
+          "SVC-1 SUP-A3 ($179) dropped for SVC-2 SUP-C3 ($219) exceed budget",
+          "SVC-1 SUP-A1 ($145) dropped for SVC-1 SUP-A2 ($129) lower rating"
+        ],
+        "strategy": "quality maximizer",
+        "total_cents": 43700
+      },
+      "response_id": "chatcmpl-387e28c4-802f-491d-a4f7-55838427290f",
+      "round": "initial"
+    },
+    {
+      "agent": "agent:planner-3",
+      "decider": "nim",
+      "duplicate": false,
+      "evaluation": {
+        "feasible": true,
+        "normalized_lines": [
+          {
+            "price_cents": 14500,
+            "quote_id": "Q-SVC-1-SUP-A1-v1",
+            "service_id": "SVC-1",
+            "supplier": "Northwind Access (simulated)",
+            "supplier_id": "SUP-A1"
+          },
+          {
+            "price_cents": 11900,
+            "quote_id": "Q-SVC-2-SUP-B1-v1",
+            "service_id": "SVC-2",
+            "supplier": "Redline Editorial (simulated)",
+            "supplier_id": "SUP-B1"
+          },
+          {
+            "price_cents": 18900,
+            "quote_id": "Q-SVC-3-SUP-C1-v1",
+            "service_id": "SVC-3",
+            "supplier": "Bastion Advisory (simulated)",
+            "supplier_id": "SUP-C1"
+          }
+        ],
+        "reasons": [],
+        "total_cents": 45300,
+        "valid": true
+      },
+      "feed_version": 1,
+      "key": [
+        [
+          "SVC-1",
+          "SUP-A1"
+        ],
+        [
+          "SVC-2",
+          "SUP-B1"
+        ],
+        [
+          "SVC-3",
+          "SUP-C1"
+        ]
+      ],
+      "model": "nvidia/nemotron-3.5-lightning-30b-a3b",
+      "plan_id": "INITIAL-P3",
+      "proposal": {
+        "lines": [
+          {
+            "price_cents": 14500,
+            "quote_id": "Q-SVC-1-SUP-A1-v1",
+            "service_id": "SVC-1",
+            "supplier_id": "SUP-A1"
+          },
+          {
+            "price_cents": 11900,
+            "quote_id": "Q-SVC-2-SUP-B1-v1",
+            "service_id": "SVC-2",
+            "supplier_id": "SUP-B1"
+          },
+          {
+            "price_cents": 18900,
+            "quote_id": "Q-SVC-3-SUP-C1-v1",
+            "service_id": "SVC-3",
+            "supplier_id": "SUP-C1"
+          }
+        ],
+        "rationale": "SUP-A1,SUP-B1,SUP-C1 all meet rating>=4.0 and delivery<=10 days, total 45300c under 50000c cap.",
+        "rejected_alternatives": [
+          "SUP-A2+SUP-B1+SUP-C1=43300c (lower cost)",
+          "SUP-A1+SUP-B2+SUP-C1=42900c (lower cost)"
+        ],
+        "strategy": "speed focused procurement",
+        "total_cents": 45300
+      },
+      "response_id": "chatcmpl-4891671e-dd97-485c-91d2-e48f0464eca8",
+      "round": "initial"
+    },
+    {
+      "agent": "agent:planner-4",
+      "decider": "nim",
+      "duplicate": true,
+      "evaluation": {
+        "feasible": true,
+        "normalized_lines": [
+          {
+            "price_cents": 12900,
+            "quote_id": "Q-SVC-1-SUP-A2-v1",
+            "service_id": "SVC-1",
+            "supplier": "Clearpath A11y (simulated)",
+            "supplier_id": "SUP-A2"
+          },
+          {
+            "price_cents": 11900,
+            "quote_id": "Q-SVC-2-SUP-B1-v1",
+            "service_id": "SVC-2",
+            "supplier": "Redline Editorial (simulated)",
+            "supplier_id": "SUP-B1"
+          },
+          {
+            "price_cents": 18900,
+            "quote_id": "Q-SVC-3-SUP-C1-v1",
+            "service_id": "SVC-3",
+            "supplier": "Bastion Advisory (simulated)",
+            "supplier_id": "SUP-C1"
+          }
+        ],
+        "reasons": [],
+        "total_cents": 43700,
+        "valid": true
+      },
+      "feed_version": 1,
+      "key": [
+        [
+          "SVC-1",
+          "SUP-A2"
+        ],
+        [
+          "SVC-2",
+          "SUP-B1"
+        ],
+        [
+          "SVC-3",
+          "SUP-C1"
+        ]
+      ],
+      "model": "nvidia/nemotron-3.5-lightning-30b-a3b",
+      "plan_id": "INITIAL-P4",
+      "proposal": {
+        "lines": [
+          {
+            "price_cents": 12900,
+            "quote_id": "Q-SVC-1-SUP-A2-v1",
+            "service_id": "SVC-1",
+            "supplier_id": "SUP-A2"
+          },
+          {
+            "price_cents": 11900,
+            "quote_id": "Q-SVC-2-SUP-B1-v1",
+            "service_id": "SVC-2",
+            "supplier_id": "SUP-B1"
+          },
+          {
+            "price_cents": 18900,
+            "quote_id": "Q-SVC-3-SUP-C1-v1",
+            "service_id": "SVC-3",
+            "supplier_id": "SUP-C1"
+          }
+        ],
+        "rationale": "Chose lowest-rated-qualified suppliers to keep total at 43700, leaving 6300 headroom under 50000 budget cap for price volatility",
+        "rejected_alternatives": [
+          "SVC-1 SUP-A1 14500 (higher cost, still qualified)",
+          "SVC-3 SUP-C3 21900 (exceeds headroom if combined with premium SVC-1/SVC-2)"
+        ],
+        "strategy": "risk balanced with headroom under budget for price changes",
+        "total_cents": 43700
+      },
+      "response_id": "chatcmpl-6c4e2d38-4fb6-4f89-81d4-d70e718fa2c7",
+      "round": "initial"
+    },
+    {
+      "agent": "agent:planner-5",
+      "decider": "nim",
+      "duplicate": false,
+      "evaluation": {
+        "feasible": true,
+        "normalized_lines": [
+          {
+            "price_cents": 12900,
+            "quote_id": "Q-SVC-1-SUP-A2-v1",
+            "service_id": "SVC-1",
+            "supplier": "Clearpath A11y (simulated)",
+            "supplier_id": "SUP-A2"
+          },
+          {
+            "price_cents": 11900,
+            "quote_id": "Q-SVC-2-SUP-B1-v1",
+            "service_id": "SVC-2",
+            "supplier": "Redline Editorial (simulated)",
+            "supplier_id": "SUP-B1"
+          },
+          {
+            "price_cents": 15500,
+            "quote_id": "Q-SVC-3-SUP-C2-v1",
+            "service_id": "SVC-3",
+            "supplier": "Cumulus Secure (simulated)",
+            "supplier_id": "SUP-C2"
+          }
+        ],
+        "reasons": [],
+        "total_cents": 40300,
+        "valid": true
+      },
+      "feed_version": 1,
+      "key": [
+        [
+          "SVC-1",
+          "SUP-A2"
+        ],
+        [
+          "SVC-2",
+          "SUP-B1"
+        ],
+        [
+          "SVC-3",
+          "SUP-C2"
+        ]
+      ],
+      "model": "nvidia/nemotron-3.5-lightning-30b-a3b",
+      "plan_id": "INITIAL-P5",
+      "proposal": {
+        "lines": [
+          {
+            "price_cents": 12900,
+            "quote_id": "Q-SVC-1-SUP-A2-v1",
+            "service_id": "SVC-1",
+            "supplier_id": "SUP-A2"
+          },
+          {
+            "price_cents": 11900,
+            "quote_id": "Q-SVC-2-SUP-B1-v1",
+            "service_id": "SVC-2",
+            "supplier_id": "SUP-B1"
+          },
+          {
+            "price_cents": 15500,
+            "quote_id": "Q-SVC-3-SUP-C2-v1",
+            "service_id": "SVC-3",
+            "supplier_id": "SUP-C2"
+          }
+        ],
+        "rationale": "SVC-1 SUP-A2: 42/12900=0.003255; SVC-2 SUP-B1: 47/11900=0.003949; SVC-3 SUP-C2: 44/15500=0.002839. Combined rating 141 over $403 staying under $500 budget cap.",
+        "rejected_alternatives": [
+          "SVC-1 SUP-A1 (46 rating, 14500 cents) lower value ratio; SVC-3 SUP-C1 (48 rating, 18900 cents) higher price for marginal rating gain; SVC-3 SUP-C3 (49 rating, 2"
+        ],
+        "strategy": "value optimizer - best rating per dollar across 3 services",
+        "total_cents": 40300
+      },
+      "response_id": "chatcmpl-7ae7b277-f00d-4dc6-b4b5-1625a1b39d25",
+      "round": "initial"
+    },
+    {
+      "agent": "agent:planner-4",
+      "decider": "nim",
+      "duplicate": false,
+      "evaluation": {
+        "feasible": true,
+        "normalized_lines": [
+          {
+            "price_cents": 17900,
+            "quote_id": "Q-SVC-1-SUP-A3-v1",
+            "service_id": "SVC-1",
+            "supplier": "Lumen Audit Co (simulated)",
+            "supplier_id": "SUP-A3"
+          },
+          {
+            "price_cents": 14900,
+            "quote_id": "Q-SVC-2-SUP-B3-v1",
+            "service_id": "SVC-2",
+            "supplier": "Stet & Co (simulated)",
+            "supplier_id": "SUP-B3"
+          },
+          {
+            "price_cents": 15500,
+            "quote_id": "Q-SVC-3-SUP-C2-v1",
+            "service_id": "SVC-3",
+            "supplier": "Cumulus Secure (simulated)",
+            "supplier_id": "SUP-C2"
+          }
+        ],
+        "reasons": [],
+        "total_cents": 48300,
+        "valid": true
+      },
+      "feed_version": 1,
+      "key": [
+        [
+          "SVC-1",
+          "SUP-A3"
+        ],
+        [
+          "SVC-2",
+          "SUP-B3"
+        ],
+        [
+          "SVC-3",
+          "SUP-C2"
+        ]
+      ],
+      "model": "nvidia/nemotron-3.5-lightning-30b-a3b",
+      "plan_id": "INITIAL-P6",
+      "proposal": {
+        "lines": [
+          {
+            "price_cents": 17900,
+            "quote_id": "Q-SVC-1-SUP-A3-v1",
+            "service_id": "SVC-1",
+            "supplier_id": "SUP-A3"
+          },
+          {
+            "price_cents": 14900,
+            "quote_id": "Q-SVC-2-SUP-B3-v1",
+            "service_id": "SVC-2",
+            "supplier_id": "SUP-B3"
+          },
+          {
+            "price_cents": 15500,
+            "quote_id": "Q-SVC-3-SUP-C2-v1",
+            "service_id": "SVC-3",
+            "supplier_id": "SUP-C2"
+          }
+        ],
+        "rationale": "Selects highest-rated available suppliers per service (48, 49, 44) while avoiding prohibited SUP-A2/SUP-B1/SUP-C1 combos; total 48300 leaves 1700 headroom under 50000 budget cap.",
+        "rejected_alternatives": [
+          "SVC-1 SUP-A1 (14500) + SVC-2 SUP-B3 (14900) + SVC-3 SUP-C2 (15500) = 44900 but violates must_differ_from_these_supplier_combinations",
+          "SVC-1 SUP-A2 (12900) + SVC-2 SUP-B3 (14900) + SVC-3 SUP-C2 (15500) = 43300 also violates prohibited combination rule"
+        ],
+        "strategy": "risk balanced with headroom under budget for price changes",
+        "total_cents": 48300
+      },
+      "response_id": "chatcmpl-d8a0888b-145e-47b9-8212-ee74b44e426c",
+      "round": "initial"
+    }
+  ],
+  "replan_round": [
+    {
+      "agent": "agent:planner-1",
+      "decider": "nim",
+      "duplicate": false,
+      "evaluation": {
+        "feasible": true,
+        "normalized_lines": [
+          {
+            "price_cents": 12900,
+            "quote_id": "Q-SVC-1-SUP-A2-v2",
+            "service_id": "SVC-1",
+            "supplier": "Clearpath A11y (simulated)",
+            "supplier_id": "SUP-A2"
+          },
+          {
+            "price_cents": 8900,
+            "quote_id": "Q-SVC-2-SUP-B2-v2",
+            "service_id": "SVC-2",
+            "supplier": "Plain Words (simulated)",
+            "supplier_id": "SUP-B2"
+          },
+          {
+            "price_cents": 18900,
+            "quote_id": "Q-SVC-3-SUP-C1-v2",
+            "service_id": "SVC-3",
+            "supplier": "Bastion Advisory (simulated)",
+            "supplier_id": "SUP-C1"
+          }
+        ],
+        "reasons": [],
+        "total_cents": 40700,
+        "valid": true
+      },
+      "feed_version": 2,
+      "key": [
+        [
+          "SVC-1",
+          "SUP-A2"
+        ],
+        [
+          "SVC-2",
+          "SUP-B2"
+        ],
+        [
+          "SVC-3",
+          "SUP-C1"
+        ]
+      ],
+      "model": "nvidia/nemotron-3.5-lightning-30b-a3b",
+      "plan_id": "REPLAN-P1",
+      "proposal": {
+        "lines": [
+          {
+            "price_cents": 12900,
+            "quote_id": "Q-SVC-1-SUP-A2-v2",
+            "service_id": "SVC-1",
+            "supplier_id": "SUP-A2"
+          },
+          {
+            "price_cents": 8900,
+            "quote_id": "Q-SVC-2-SUP-B2-v2",
+            "service_id": "SVC-2",
+            "supplier_id": "SUP-B2"
+          },
+          {
+            "price_cents": 18900,
+            "quote_id": "Q-SVC-3-SUP-C1-v2",
+            "service_id": "SVC-3",
+            "supplier_id": "SUP-C1"
+          }
+        ],
+        "rationale": "Selected lowest rated-qualified quotes: SVC-1 SUP-A2 ($12900), SVC-2 SUP-B2 ($8900), SVC-3 SUP-C1 ($18900). All meet rating_x10>=40 and delivery_days<=10. Sum 40700 <= 50000 budget.",
+        "rejected_alternatives": [
+          "SVC-1 SUP-A4 ($9900) rating 36 fails rating_x10>=40; SVC-2 SUP-B4 ($6500) rating 34 fails rating_x10>=40.",
+          "SVC-3 SUP-C4 ($11900) rating 38 fails rating_x10>=40; combination SVC-1 SUP-A2+SVC-2 SUP-B2+SVC-3 SUP-C4 total 33700 but SUP-C4 rating ineligible."
+        ],
+        "strategy": "cost minimizer",
+        "total_cents": 40700
+      },
+      "response_id": "chatcmpl-4435944a-08e9-47d6-baeb-8ca05ac4d5a5",
+      "round": "replan"
+    },
+    {
+      "agent": "agent:planner-2",
+      "decider": "nim",
+      "duplicate": false,
+      "evaluation": {
+        "feasible": true,
+        "normalized_lines": [
+          {
+            "price_cents": 12900,
+            "quote_id": "Q-SVC-1-SUP-A2-v2",
+            "service_id": "SVC-1",
+            "supplier": "Clearpath A11y (simulated)",
+            "supplier_id": "SUP-A2"
+          },
+          {
+            "price_cents": 11900,
+            "quote_id": "Q-SVC-2-SUP-B1-v2",
+            "service_id": "SVC-2",
+            "supplier": "Redline Editorial (simulated)",
+            "supplier_id": "SUP-B1"
+          },
+          {
+            "price_cents": 21900,
+            "quote_id": "Q-SVC-3-SUP-C3-v2",
+            "service_id": "SVC-3",
+            "supplier": "Ironclad Cloud (simulated)",
+            "supplier_id": "SUP-C3"
+          }
+        ],
+        "reasons": [],
+        "total_cents": 46700,
+        "valid": true
+      },
+      "feed_version": 2,
+      "key": [
+        [
+          "SVC-1",
+          "SUP-A2"
+        ],
+        [
+          "SVC-2",
+          "SUP-B1"
+        ],
+        [
+          "SVC-3",
+          "SUP-C3"
+        ]
+      ],
+      "model": "nvidia/nemotron-3.5-lightning-30b-a3b",
+      "plan_id": "REPLAN-P2",
+      "proposal": {
+        "lines": [
+          {
+            "price_cents": 12900,
+            "quote_id": "Q-SVC-1-SUP-A2-v2",
+            "service_id": "SVC-1",
+            "supplier_id": "SUP-A2"
+          },
+          {
+            "price_cents": 11900,
+            "quote_id": "Q-SVC-2-SUP-B1-v2",
+            "service_id": "SVC-2",
+            "supplier_id": "SUP-B1"
+          },
+          {
+            "price_cents": 21900,
+            "quote_id": "Q-SVC-3-SUP-C3-v2",
+            "service_id": "SVC-3",
+            "supplier_id": "SUP-C3"
+          }
+        ],
+        "rationale": "SVC-1 chose SUP-A2 at 12900 (rating 42, delivery 7d) over SUP-A3 17900; SVC-2 chose SUP-B1 at 11900 (rating 47, delivery 2d); SVC-3 chose SUP-C3 at 21900 (rating 49, delivery 2d); all meet rating >=4.0 and delivery <=10d; sum 46700 fits 50000 budget; maximizes aggregate rating 138 vs alternatives.",
+        "rejected_alternatives": [
+          "SUP-A3 for SVC-1 (17900) exceeds budget if combined with top SVC-2/SVC-3 choices",
+          "SUP-C2 for SVC-3 (29800) leaves insufficient room for SVC-1/SVC-2 minimum costs",
+          "SUP-B4 for SVC-2 (6500) fails rating >=4.0 requirement"
+        ],
+        "strategy": "quality maximizer",
+        "total_cents": 46700
+      },
+      "response_id": "chatcmpl-f04867a8-6ec8-4fa3-b417-c2d1cf2545f2",
+      "round": "replan"
+    },
+    {
+      "agent": "agent:planner-3",
+      "decider": "nim",
+      "duplicate": true,
+      "evaluation": {
+        "feasible": true,
+        "normalized_lines": [
+          {
+            "price_cents": 12900,
+            "quote_id": "Q-SVC-1-SUP-A2-v2",
+            "service_id": "SVC-1",
+            "supplier": "Clearpath A11y (simulated)",
+            "supplier_id": "SUP-A2"
+          },
+          {
+            "price_cents": 11900,
+            "quote_id": "Q-SVC-2-SUP-B1-v2",
+            "service_id": "SVC-2",
+            "supplier": "Redline Editorial (simulated)",
+            "supplier_id": "SUP-B1"
+          },
+          {
+            "price_cents": 21900,
+            "quote_id": "Q-SVC-3-SUP-C3-v2",
+            "service_id": "SVC-3",
+            "supplier": "Ironclad Cloud (simulated)",
+            "supplier_id": "SUP-C3"
+          }
+        ],
+        "reasons": [],
+        "total_cents": 46700,
+        "valid": true
+      },
+      "feed_version": 2,
+      "key": [
+        [
+          "SVC-1",
+          "SUP-A2"
+        ],
+        [
+          "SVC-2",
+          "SUP-B1"
+        ],
+        [
+          "SVC-3",
+          "SUP-C3"
+        ]
+      ],
+      "model": "nvidia/nemotron-3.5-lightning-30b-a3b",
+      "plan_id": "REPLAN-P3",
+      "proposal": {
+        "lines": [
+          {
+            "price_cents": 12900,
+            "quote_id": "Q-SVC-1-SUP-A2-v2",
+            "service_id": "SVC-1",
+            "supplier_id": "SUP-A2"
+          },
+          {
+            "price_cents": 11900,
+            "quote_id": "Q-SVC-2-SUP-B1-v2",
+            "service_id": "SVC-2",
+            "supplier_id": "SUP-B1"
+          },
+          {
+            "price_cents": 21900,
+            "quote_id": "Q-SVC-3-SUP-C3-v2",
+            "service_id": "SVC-3",
+            "supplier_id": "SUP-C3"
+          }
+        ],
+        "rationale": "SVC-1: Clearpath A11y (42 rating, 7d) lowest viable; SVC-2: Redline Editorial (47 rating, 2d) fastest qualified; SVC-3: Ironclad Cloud (49 rating, 2d) balances cost and speed. Total 46700 under 50000 cap.",
+        "rejected_alternatives": [
+          ": SVC-1 SUP-A2 12900 + SVC-2 SUP-B4 6500 + SVC-3 SUP-C3 21900 = 41300 (SUP-B4 rating 34 fails >=40); : SVC-1 SUP-A3 17900 + SVC-2 SUP-B1 11900 + SVC-3 SUP-C4 11"
+        ],
+        "strategy": "Speed focused",
+        "total_cents": 46700
+      },
+      "response_id": "chatcmpl-4ff25aa8-fb09-4f98-a5c6-7459a291118f",
+      "round": "replan"
+    },
+    {
+      "agent": "agent:planner-4",
+      "decider": "nim",
+      "duplicate": false,
+      "evaluation": {
+        "feasible": true,
+        "normalized_lines": [
+          {
+            "price_cents": 12900,
+            "quote_id": "Q-SVC-1-SUP-A2-v2",
+            "service_id": "SVC-1",
+            "supplier": "Clearpath A11y (simulated)",
+            "supplier_id": "SUP-A2"
+          },
+          {
+            "price_cents": 11900,
+            "quote_id": "Q-SVC-2-SUP-B1-v2",
+            "service_id": "SVC-2",
+            "supplier": "Redline Editorial (simulated)",
+            "supplier_id": "SUP-B1"
+          },
+          {
+            "price_cents": 18900,
+            "quote_id": "Q-SVC-3-SUP-C1-v2",
+            "service_id": "SVC-3",
+            "supplier": "Bastion Advisory (simulated)",
+            "supplier_id": "SUP-C1"
+          }
+        ],
+        "reasons": [],
+        "total_cents": 43700,
+        "valid": true
+      },
+      "feed_version": 2,
+      "key": [
+        [
+          "SVC-1",
+          "SUP-A2"
+        ],
+        [
+          "SVC-2",
+          "SUP-B1"
+        ],
+        [
+          "SVC-3",
+          "SUP-C1"
+        ]
+      ],
+      "model": "nvidia/nemotron-3.5-lightning-30b-a3b",
+      "plan_id": "REPLAN-P4",
+      "proposal": {
+        "lines": [
+          {
+            "price_cents": 12900,
+            "quote_id": "Q-SVC-1-SUP-A2-v2",
+            "service_id": "SVC-1",
+            "supplier_id": "SUP-A2"
+          },
+          {
+            "price_cents": 11900,
+            "quote_id": "Q-SVC-2-SUP-B1-v2",
+            "service_id": "SVC-2",
+            "supplier_id": "SUP-B1"
+          },
+          {
+            "price_cents": 18900,
+            "quote_id": "Q-SVC-3-SUP-C1-v2",
+            "service_id": "SVC-3",
+            "supplier_id": "SUP-C1"
+          }
+        ],
+        "rationale": "Chose lowest priced compliant supplier for each service to maximize headroom: SVC-1 SUP-A2 (42 rating, 7 days), SVC-2 SUP-B1 (47 rating, 2 days), SVC-3 SUP-C1 (48 rating, 4 days). Total 43700 under 50000 budget.",
+        "rejected_alternatives": [
+          "SVC-1 SUP-A1 (14500, 46 rating) and SVC-3 SUP-C3 (21900, 49 rating) exceed budget when combined with SVC-2 minimum compliant supplier",
+          "SVC-1 SUP-A3 (17900) and SVC-3 SUP-C3 (21900) leave only 10500 for SVC-2, insufficient for any compliant supplier"
+        ],
+        "strategy": "risk balanced",
+        "total_cents": 43700
+      },
+      "response_id": "chatcmpl-c009112e-0f16-45f1-9e09-2ffe470dd47f",
+      "round": "replan"
+    },
+    {
+      "agent": "agent:planner-5",
+      "decider": "nim",
+      "duplicate": true,
+      "evaluation": {
+        "feasible": true,
+        "normalized_lines": [
+          {
+            "price_cents": 12900,
+            "quote_id": "Q-SVC-1-SUP-A2-v2",
+            "service_id": "SVC-1",
+            "supplier": "Clearpath A11y (simulated)",
+            "supplier_id": "SUP-A2"
+          },
+          {
+            "price_cents": 11900,
+            "quote_id": "Q-SVC-2-SUP-B1-v2",
+            "service_id": "SVC-2",
+            "supplier": "Redline Editorial (simulated)",
+            "supplier_id": "SUP-B1"
+          },
+          {
+            "price_cents": 21900,
+            "quote_id": "Q-SVC-3-SUP-C3-v2",
+            "service_id": "SVC-3",
+            "supplier": "Ironclad Cloud (simulated)",
+            "supplier_id": "SUP-C3"
+          }
+        ],
+        "reasons": [],
+        "total_cents": 46700,
+        "valid": true
+      },
+      "feed_version": 2,
+      "key": [
+        [
+          "SVC-1",
+          "SUP-A2"
+        ],
+        [
+          "SVC-2",
+          "SUP-B1"
+        ],
+        [
+          "SVC-3",
+          "SUP-C3"
+        ]
+      ],
+      "model": "nvidia/nemotron-3.5-lightning-30b-a3b",
+      "plan_id": "REPLAN-P5",
+      "proposal": {
+        "lines": [
+          {
+            "price_cents": 12900,
+            "quote_id": "Q-SVC-1-SUP-A2-v2",
+            "service_id": "SVC-1",
+            "supplier_id": "SUP-A2"
+          },
+          {
+            "price_cents": 11900,
+            "quote_id": "Q-SVC-2-SUP-B1-v2",
+            "service_id": "SVC-2",
+            "supplier_id": "SUP-B1"
+          },
+          {
+            "price_cents": 21900,
+            "quote_id": "Q-SVC-3-SUP-C3-v2",
+            "service_id": "SVC-3",
+            "supplier_id": "SUP-C3"
+          }
+        ],
+        "rationale": "Selects lowest-priced rated-supplier per service: SVC-1 Clearpath 4.2\u2605/7d ($129), SVC-2 Redline 4.7\u2605/2d ($119), SVC-3 Ironclad 4.9\u2605/2d ($219). Total $467 under $500 budget.",
+        "rejected_alternatives": [
+          "]SVC-1 Lumen Audit 4.8\u2605/3d $179 (too expensive vs Clearpath 4.2\u2605/7d $129)",
+          "SVC-2 Plain Words 4.1\u2605/4d $89 (rejected due to lower rating 4.1 vs Redline 4.7\u2605)"
+        ],
+        "strategy": "value optimizer: best rating per dollar across three services; SVC-1: Clearpath A11y at 12900 cents (rating 4.2, 7 days,",
+        "total_cents": 46700
+      },
+      "response_id": "chatcmpl-405a2b9a-27a6-4a21-831e-3f56cc1a2ee7",
+      "round": "replan"
+    },
+    {
+      "agent": "agent:planner-3",
+      "decider": "nim",
+      "duplicate": false,
+      "evaluation": {
+        "feasible": false,
+        "normalized_lines": [
+          {
+            "price_cents": 17900,
+            "quote_id": "Q-SVC-1-SUP-A3-v2",
+            "service_id": "SVC-1",
+            "supplier": "Lumen Audit Co (simulated)",
+            "supplier_id": "SUP-A3"
+          },
+          {
+            "price_cents": 11900,
+            "quote_id": "Q-SVC-2-SUP-B1-v2",
+            "service_id": "SVC-2",
+            "supplier": "Redline Editorial (simulated)",
+            "supplier_id": "SUP-B1"
+          },
+          {
+            "price_cents": 21900,
+            "quote_id": "Q-SVC-3-SUP-C3-v2",
+            "service_id": "SVC-3",
+            "supplier": "Ironclad Cloud (simulated)",
+            "supplier_id": "SUP-C3"
+          }
+        ],
+        "reasons": [
+          "OVER_BUDGET:51700>50000"
+        ],
+        "total_cents": 51700,
+        "valid": true
+      },
+      "feed_version": 2,
+      "key": [
+        [
+          "SVC-1",
+          "SUP-A3"
+        ],
+        [
+          "SVC-2",
+          "SUP-B1"
+        ],
+        [
+          "SVC-3",
+          "SUP-C3"
+        ]
+      ],
+      "model": "nvidia/nemotron-3.5-lightning-30b-a3b",
+      "plan_id": "REPLAN-P6",
+      "proposal": {
+        "lines": [
+          {
+            "price_cents": 17900,
+            "quote_id": "Q-SVC-1-SUP-A3-v2",
+            "service_id": "SVC-1",
+            "supplier_id": "SUP-A3"
+          },
+          {
+            "price_cents": 11900,
+            "quote_id": "Q-SVC-2-SUP-B1-v2",
+            "service_id": "SVC-2",
+            "supplier_id": "SUP-B1"
+          },
+          {
+            "price_cents": 21900,
+            "quote_id": "Q-SVC-3-SUP-C3-v2",
+            "service_id": "SVC-3",
+            "supplier_id": "SUP-C3"
+          }
+        ],
+        "rationale": "Select cheapest compliant SVC-1 (SUP-A3 17900), SVC-2 (SUP-B1 11900), SVC-3 (SUP-C3 21900). Total 51700 exceeds budget but all satisfy rating>=40 and delivery<=10. No cheaper compliant SVC-3 exists.",
+        "rejected_alternatives": [
+          "SUP-A2+SUP-B1+SUP-C3=50600 (exceeds budget)",
+          "SUP-A3+SUP-B2+SUP-C3=51500 (exceeds budget)",
+          "SUP-A3+SUP-B1+SUP-C2=50600 (exceeds budget)"
+        ],
+        "strategy": "speed focused",
+        "total_cents": 51700
+      },
+      "response_id": "chatcmpl-b97dd783-797d-4d8d-9e4c-23212322df61",
+      "round": "replan"
+    },
+    {
+      "agent": "agent:planner-5",
+      "decider": "nim",
+      "duplicate": false,
+      "evaluation": {
+        "feasible": true,
+        "normalized_lines": [
+          {
+            "price_cents": 12900,
+            "quote_id": "Q-SVC-1-SUP-A2-v2",
+            "service_id": "SVC-1",
+            "supplier": "Clearpath A11y (simulated)",
+            "supplier_id": "SUP-A2"
+          },
+          {
+            "price_cents": 8900,
+            "quote_id": "Q-SVC-2-SUP-B2-v2",
+            "service_id": "SVC-2",
+            "supplier": "Plain Words (simulated)",
+            "supplier_id": "SUP-B2"
+          },
+          {
+            "price_cents": 21900,
+            "quote_id": "Q-SVC-3-SUP-C3-v2",
+            "service_id": "SVC-3",
+            "supplier": "Ironclad Cloud (simulated)",
+            "supplier_id": "SUP-C3"
+          }
+        ],
+        "reasons": [],
+        "total_cents": 43700,
+        "valid": true
+      },
+      "feed_version": 2,
+      "key": [
+        [
+          "SVC-1",
+          "SUP-A2"
+        ],
+        [
+          "SVC-2",
+          "SUP-B2"
+        ],
+        [
+          "SVC-3",
+          "SUP-C3"
+        ]
+      ],
+      "model": "nvidia/nemotron-3.5-lightning-30b-a3b",
+      "plan_id": "REPLAN-P7",
+      "proposal": {
+        "lines": [
+          {
+            "price_cents": 12900,
+            "quote_id": "Q-SVC-1-SUP-A2-v2",
+            "service_id": "SVC-1",
+            "supplier_id": "SUP-A2"
+          },
+          {
+            "price_cents": 8900,
+            "quote_id": "Q-SVC-2-SUP-B2-v2",
+            "service_id": "SVC-2",
+            "supplier_id": "SUP-B2"
+          },
+          {
+            "price_cents": 21900,
+            "quote_id": "Q-SVC-3-SUP-C3-v2",
+            "service_id": "SVC-3",
+            "supplier_id": "SUP-C3"
+          }
+        ],
+        "rationale": "SVC-1 SUP-A2 rating 42/price 12900=0.00326; SVC-2 SUP-B2 rating 41/price 8900=0.00461; SVC-3 SUP-C3 rating 49/price 21900=0.00224. All meet rating>=40 and delivery<=10. Total 43700 <= 50000.",
+        "rejected_alternatives": [
+          "SVC-1 SUP-A1 (14500), SVC-2 SUP-B1 (11900), SVC-3 SUP-C4 (11900)=38300 chosen but SUP-C4 rating 38<40 failed requirement",
+          "SVC-1 SUP-A3 (17900), SVC-2 SUP-B4 (6500), SVC-3 SUP-C3 (21900)=46300 failed SVC-2 rating 34<40"
+        ],
+        "strategy": "best rating per dollar across the three services",
+        "total_cents": 43700
+      },
+      "response_id": "chatcmpl-a8985325-c871-4cde-a7fe-0ba768b84729",
+      "round": "replan"
+    }
+  ],
+  "selected_initial": "INITIAL-P1",
+  "simulated_supplier_data": true
+}

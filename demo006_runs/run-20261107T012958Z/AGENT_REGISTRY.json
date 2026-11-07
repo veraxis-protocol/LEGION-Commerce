@@ -1,0 +1,502 @@
+[
+ {
+  "id": "agent:coordinator",
+  "decider": "scripted",
+  "role": "broadcasts mission, sequences phases"
+ },
+ {
+  "id": "agent:quote-collector-1",
+  "decider": "scripted",
+  "role": "reads the supplier feed for SVC-1"
+ },
+ {
+  "id": "agent:quote-collector-2",
+  "decider": "scripted",
+  "role": "reads the supplier feed for SVC-2"
+ },
+ {
+  "id": "agent:quote-collector-3",
+  "decider": "scripted",
+  "role": "reads the supplier feed for SVC-3"
+ },
+ {
+  "id": "agent:planner-1",
+  "decider": "nim",
+  "role": "planner: cost minimizer: the cheapest complete plan that still meets every requirement"
+ },
+ {
+  "id": "agent:planner-2",
+  "decider": "nim",
+  "role": "planner: quality maximizer: the highest supplier ratings that fit the budget"
+ },
+ {
+  "id": "agent:planner-3",
+  "decider": "nim",
+  "role": "planner: speed focused: the fastest total delivery that fits the budget"
+ },
+ {
+  "id": "agent:planner-4",
+  "decider": "nim",
+  "role": "planner: risk balanced: strong ratings with headroom under the budget for price changes"
+ },
+ {
+  "id": "agent:planner-5",
+  "decider": "nim",
+  "role": "planner: value optimizer: best rating per dollar across the three services"
+ },
+ {
+  "id": "agent:chair",
+  "decider": "nim",
+  "role": "selects one feasible plan and justifies selection/rejections"
+ },
+ {
+  "id": "agent:price-monitor",
+  "decider": "scripted",
+  "role": "re-reads quotes before authorization, detects changes"
+ },
+ {
+  "id": "agent:budget-auditor",
+  "decider": "scripted",
+  "role": "independently checks plans against current quotes and constraints"
+ },
+ {
+  "id": "agent:procurement-executor",
+  "decider": "scripted",
+  "role": "Core task actor: records observation/analysis, requests payment"
+ },
+ {
+  "id": "agent:reporter-1",
+  "decider": "scripted",
+  "role": "ZTL evidence reporter (independent basis 1)"
+ },
+ {
+  "id": "agent:reporter-2",
+  "decider": "scripted",
+  "role": "ZTL evidence reporter (independent basis 2)"
+ },
+ {
+  "id": "agent:reporter-3",
+  "decider": "scripted",
+  "role": "ZTL evidence reporter (independent basis 3)"
+ },
+ {
+  "id": "agent:standby-001",
+  "decider": "standby",
+  "role": "registered worker, standby"
+ },
+ {
+  "id": "agent:standby-002",
+  "decider": "standby",
+  "role": "registered worker, standby"
+ },
+ {
+  "id": "agent:standby-003",
+  "decider": "standby",
+  "role": "registered worker, standby"
+ },
+ {
+  "id": "agent:standby-004",
+  "decider": "standby",
+  "role": "registered worker, standby"
+ },
+ {
+  "id": "agent:standby-005",
+  "decider": "standby",
+  "role": "registered worker, standby"
+ },
+ {
+  "id": "agent:standby-006",
+  "decider": "standby",
+  "role": "registered worker, standby"
+ },
+ {
+  "id": "agent:standby-007",
+  "decider": "standby",
+  "role": "registered worker, standby"
+ },
+ {
+  "id": "agent:standby-008",
+  "decider": "standby",
+  "role": "registered worker, standby"
+ },
+ {
+  "id": "agent:standby-009",
+  "decider": "standby",
+  "role": "registered worker, standby"
+ },
+ {
+  "id": "agent:standby-010",
+  "decider": "standby",
+  "role": "registered worker, standby"
+ },
+ {
+  "id": "agent:standby-011",
+  "decider": "standby",
+  "role": "registered worker, standby"
+ },
+ {
+  "id": "agent:standby-012",
+  "decider": "standby",
+  "role": "registered worker, standby"
+ },
+ {
+  "id": "agent:standby-013",
+  "decider": "standby",
+  "role": "registered worker, standby"
+ },
+ {
+  "id": "agent:standby-014",
+  "decider": "standby",
+  "role": "registered worker, standby"
+ },
+ {
+  "id": "agent:standby-015",
+  "decider": "standby",
+  "role": "registered worker, standby"
+ },
+ {
+  "id": "agent:standby-016",
+  "decider": "standby",
+  "role": "registered worker, standby"
+ },
+ {
+  "id": "agent:standby-017",
+  "decider": "standby",
+  "role": "registered worker, standby"
+ },
+ {
+  "id": "agent:standby-018",
+  "decider": "standby",
+  "role": "registered worker, standby"
+ },
+ {
+  "id": "agent:standby-019",
+  "decider": "standby",
+  "role": "registered worker, standby"
+ },
+ {
+  "id": "agent:standby-020",
+  "decider": "standby",
+  "role": "registered worker, standby"
+ },
+ {
+  "id": "agent:standby-021",
+  "decider": "standby",
+  "role": "registered worker, standby"
+ },
+ {
+  "id": "agent:standby-022",
+  "decider": "standby",
+  "role": "registered worker, standby"
+ },
+ {
+  "id": "agent:standby-023",
+  "decider": "standby",
+  "role": "registered worker, standby"
+ },
+ {
+  "id": "agent:standby-024",
+  "decider": "standby",
+  "role": "registered worker, standby"
+ },
+ {
+  "id": "agent:standby-025",
+  "decider": "standby",
+  "role": "registered worker, standby"
+ },
+ {
+  "id": "agent:standby-026",
+  "decider": "standby",
+  "role": "registered worker, standby"
+ },
+ {
+  "id": "agent:standby-027",
+  "decider": "standby",
+  "role": "registered worker, standby"
+ },
+ {
+  "id": "agent:standby-028",
+  "decider": "standby",
+  "role": "registered worker, standby"
+ },
+ {
+  "id": "agent:standby-029",
+  "decider": "standby",
+  "role": "registered worker, standby"
+ },
+ {
+  "id": "agent:standby-030",
+  "decider": "standby",
+  "role": "registered worker, standby"
+ },
+ {
+  "id": "agent:standby-031",
+  "decider": "standby",
+  "role": "registered worker, standby"
+ },
+ {
+  "id": "agent:standby-032",
+  "decider": "standby",
+  "role": "registered worker, standby"
+ },
+ {
+  "id": "agent:standby-033",
+  "decider": "standby",
+  "role": "registered worker, standby"
+ },
+ {
+  "id": "agent:standby-034",
+  "decider": "standby",
+  "role": "registered worker, standby"
+ },
+ {
+  "id": "agent:standby-035",
+  "decider": "standby",
+  "role": "registered worker, standby"
+ },
+ {
+  "id": "agent:standby-036",
+  "decider": "standby",
+  "role": "registered worker, standby"
+ },
+ {
+  "id": "agent:standby-037",
+  "decider": "standby",
+  "role": "registered worker, standby"
+ },
+ {
+  "id": "agent:standby-038",
+  "decider": "standby",
+  "role": "registered worker, standby"
+ },
+ {
+  "id": "agent:standby-039",
+  "decider": "standby",
+  "role": "registered worker, standby"
+ },
+ {
+  "id": "agent:standby-040",
+  "decider": "standby",
+  "role": "registered worker, standby"
+ },
+ {
+  "id": "agent:standby-041",
+  "decider": "standby",
+  "role": "registered worker, standby"
+ },
+ {
+  "id": "agent:standby-042",
+  "decider": "standby",
+  "role": "registered worker, standby"
+ },
+ {
+  "id": "agent:standby-043",
+  "decider": "standby",
+  "role": "registered worker, standby"
+ },
+ {
+  "id": "agent:standby-044",
+  "decider": "standby",
+  "role": "registered worker, standby"
+ },
+ {
+  "id": "agent:standby-045",
+  "decider": "standby",
+  "role": "registered worker, standby"
+ },
+ {
+  "id": "agent:standby-046",
+  "decider": "standby",
+  "role": "registered worker, standby"
+ },
+ {
+  "id": "agent:standby-047",
+  "decider": "standby",
+  "role": "registered worker, standby"
+ },
+ {
+  "id": "agent:standby-048",
+  "decider": "standby",
+  "role": "registered worker, standby"
+ },
+ {
+  "id": "agent:standby-049",
+  "decider": "standby",
+  "role": "registered worker, standby"
+ },
+ {
+  "id": "agent:standby-050",
+  "decider": "standby",
+  "role": "registered worker, standby"
+ },
+ {
+  "id": "agent:standby-051",
+  "decider": "standby",
+  "role": "registered worker, standby"
+ },
+ {
+  "id": "agent:standby-052",
+  "decider": "standby",
+  "role": "registered worker, standby"
+ },
+ {
+  "id": "agent:standby-053",
+  "decider": "standby",
+  "role": "registered worker, standby"
+ },
+ {
+  "id": "agent:standby-054",
+  "decider": "standby",
+  "role": "registered worker, standby"
+ },
+ {
+  "id": "agent:standby-055",
+  "decider": "standby",
+  "role": "registered worker, standby"
+ },
+ {
+  "id": "agent:standby-056",
+  "decider": "standby",
+  "role": "registered worker, standby"
+ },
+ {
+  "id": "agent:standby-057",
+  "decider": "standby",
+  "role": "registered worker, standby"
+ },
+ {
+  "id": "agent:standby-058",
+  "decider": "standby",
+  "role": "registered worker, standby"
+ },
+ {
+  "id": "agent:standby-059",
+  "decider": "standby",
+  "role": "registered worker, standby"
+ },
+ {
+  "id": "agent:standby-060",
+  "decider": "standby",
+  "role": "registered worker, standby"
+ },
+ {
+  "id": "agent:standby-061",
+  "decider": "standby",
+  "role": "registered worker, standby"
+ },
+ {
+  "id": "agent:standby-062",
+  "decider": "standby",
+  "role": "registered worker, standby"
+ },
+ {
+  "id": "agent:standby-063",
+  "decider": "standby",
+  "role": "registered worker, standby"
+ },
+ {
+  "id": "agent:standby-064",
+  "decider": "standby",
+  "role": "registered worker, standby"
+ },
+ {
+  "id": "agent:standby-065",
+  "decider": "standby",
+  "role": "registered worker, standby"
+ },
+ {
+  "id": "agent:standby-066",
+  "decider": "standby",
+  "role": "registered worker, standby"
+ },
+ {
+  "id": "agent:standby-067",
+  "decider": "standby",
+  "role": "registered worker, standby"
+ },
+ {
+  "id": "agent:standby-068",
+  "decider": "standby",
+  "role": "registered worker, standby"
+ },
+ {
+  "id": "agent:standby-069",
+  "decider": "standby",
+  "role": "registered worker, standby"
+ },
+ {
+  "id": "agent:standby-070",
+  "decider": "standby",
+  "role": "registered worker, standby"
+ },
+ {
+  "id": "agent:standby-071",
+  "decider": "standby",
+  "role": "registered worker, standby"
+ },
+ {
+  "id": "agent:standby-072",
+  "decider": "standby",
+  "role": "registered worker, standby"
+ },
+ {
+  "id": "agent:standby-073",
+  "decider": "standby",
+  "role": "registered worker, standby"
+ },
+ {
+  "id": "agent:standby-074",
+  "decider": "standby",
+  "role": "registered worker, standby"
+ },
+ {
+  "id": "agent:standby-075",
+  "decider": "standby",
+  "role": "registered worker, standby"
+ },
+ {
+  "id": "agent:standby-076",
+  "decider": "standby",
+  "role": "registered worker, standby"
+ },
+ {
+  "id": "agent:standby-077",
+  "decider": "standby",
+  "role": "registered worker, standby"
+ },
+ {
+  "id": "agent:standby-078",
+  "decider": "standby",
+  "role": "registered worker, standby"
+ },
+ {
+  "id": "agent:standby-079",
+  "decider": "standby",
+  "role": "registered worker, standby"
+ },
+ {
+  "id": "agent:standby-080",
+  "decider": "standby",
+  "role": "registered worker, standby"
+ },
+ {
+  "id": "agent:standby-081",
+  "decider": "standby",
+  "role": "registered worker, standby"
+ },
+ {
+  "id": "agent:standby-082",
+  "decider": "standby",
+  "role": "registered worker, standby"
+ },
+ {
+  "id": "agent:standby-083",
+  "decider": "standby",
+  "role": "registered worker, standby"
+ },
+ {
+  "id": "agent:standby-084",
+  "decider": "standby",
+  "role": "registered worker, standby"
+ }
+]

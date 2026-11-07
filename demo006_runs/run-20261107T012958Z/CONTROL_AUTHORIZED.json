@@ -1,0 +1,14 @@
+{
+  "payload": {
+    "active": true,
+    "epoch": 1,
+    "expires_at": 1794036598,
+    "mission_hash": "5c00ac193fea0a76e785715dd78b5e41b2d5fc581d55a106249d7e1d43ab0620",
+    "mission_id": "DEMO-006-20261107T012958Z",
+    "revoked_actors": [],
+    "revoked_permits": [],
+    "schema": "commerce.sandbox-demo.control.v1",
+    "sequence": 1
+  },
+  "signature": "qXZaHi7jCjnfUAjx90HEPNWMXORWG8nQpkVXNNgnEOWVxTXd8O0TR1F1XPxx489/N4wn/YAdYWDxELM89TXmCg=="
+}

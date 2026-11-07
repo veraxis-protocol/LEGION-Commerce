@@ -1,0 +1,8 @@
+{
+ "schema": "commerce.demo.vcc-at-1.v1",
+ "mission_id": "DEMO-006-20261107T012958Z",
+ "attempts": 1,
+ "vcc_at_1": 0,
+ "verdict": "MISSION_INCOMPLETE",
+ "scope": "preregistered DEMO-006 Sandbox mission only"
+}
