@@ -40,12 +40,12 @@ function App() {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
       <Banner run={run} />
-      <div style={{ flex: 1, minHeight: 0 }}>
+      <div style={{ flex: 1, minHeight: 0, position: 'relative' }}><div style={{ position: 'absolute', inset: 0 }}>
         <AgStudioProvider licenseKey={license} modules={[AgStudioAiModule]}>
           <AgStudio ref={ref} data={data} initialState={dashboardState} mode="edit"
             ai={(params) => createAiHarness(params.api, { adapter, promptStarters: starters })} />
         </AgStudioProvider>
-      </div>
+      </div></div>
     </div>
   );
 }

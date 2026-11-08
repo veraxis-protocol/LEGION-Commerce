@@ -13,6 +13,7 @@
 No endpoint can admit, reserve, create or capture a payment.
 """
 import argparse
+import threading
 import json
 import mimetypes
 import time
@@ -30,6 +31,9 @@ HERE = Path(__file__).resolve().parent
 DIST = HERE / "web" / "dist"
 RUNS = HERE / "runs"
 TURNS = HERE / "ai_turns"
+# WO-COM-E2E-002: named journal sessions; mode "nim" (live) or "script" (deterministic responses, no model involved).
+SESSION = {"name": "AI_TURNS", "mode": "nim", "responses": [], "i": 0, "seq": 0}
+LOCK = threading.Lock()
 AG_KEY_FILE = r"C:\Users\Administrator\Desktop\AG_STUDIO_LICENSE_KEY.txt"
 
 
@@ -83,6 +87,23 @@ def to_chat(req):
     names = {t["name"] for t in req.get("tools") or []}
     hint = ("\n\nTool-call format: delegate_to takes {\"type\": {\"id\": \"<agent id>\"}, \"instructions\": \"...\"}; "
             "the agent id is one of data, page, planning, widget.") if "delegate_to" in names else ""
+    if "execute_query" in names:
+        # WO-COM-E2E-002: two argument objects verified valid by AG Studio's own executeQuery (GUIDANCE_EXAMPLES_PROBE.json),
+        # deliberately on the events table so they do not contain any task answer.
+        hint += ("\n\nexecute_query examples (the value of \"query\" is a JSON OBJECT, never a string; every field is an object "
+                 "{\"id\": ...}; aggregations go in measures, never in dimensions):\n"
+                 "projection: {\"query\": {\"variant\": \"projection\", \"kind\": \"apiQuery\", \"projection\": [{\"field\": {\"id\": \"events.seq\"}, \"as\": \"seq\"}, "
+                 "{\"field\": {\"id\": \"events.kind\"}, \"as\": \"kind\"}], \"filter\": {\"field\": {\"id\": \"events.agent\"}, \"operator\": \"equals\", "
+                 "\"value\": \"agent:chair\"}, \"sort\": [{\"field\": {\"id\": \"events.seq\"}, \"direction\": \"asc\"}], \"limit\": {\"count\": 5}}}\n"
+                 "aggregation: {\"query\": {\"variant\": \"aggregation\", \"kind\": \"apiQuery\", \"axes\": [{\"dimensions\": [{\"field\": {\"id\": \"events.agent\"}, "
+                 "\"as\": \"agent\"}]}], \"measures\": [{\"field\": {\"id\": \"events.seq\", \"aggregation\": \"count\"}, \"as\": \"events\"}, "
+                 "{\"field\": {\"id\": \"events.kind\", \"aggregation\": \"countd\"}, \"as\": \"kinds\"}]}}\n"
+                 "For a total over the whole table, omit axes. In an aggregation, sort/limit do not select the group with the "
+                 "lowest or highest value; to find which row has the lowest/highest value, use a projection query sorted by that field "
+                 "with limit, or read all aggregated rows and compare them.")
+    if names:
+        hint += ("\n\nGrounding: the dashboard data is only reachable through the tools. Never state a number, name or value "
+                 "that did not come from a tool result in this conversation. Tool arguments must match each tool's JSON schema exactly.")
     if req.get("instructions") or hint:
         msgs.append({"role": "system", "content": (req.get("instructions") or "") + hint})
     for it in req.get("input", []):
@@ -123,33 +144,34 @@ def nim_turn(req):
                                   headers={"Authorization": "Bearer " + key, "Content-Type": "application/json"})
     key = None
     t0 = time.time()
-    try:
-        with urllib.request.urlopen(http, timeout=180) as r:
-            resp = json.load(r)
-    except urllib.error.HTTPError as e:
-        detail = e.read()[:400].decode(errors="replace")
-        return {"id": "err-" + uuid.uuid4().hex, "createdAt": int(t0 * 1000), "status": "failed", "output": [],
-                "error": {"code": f"NIM_HTTP_{e.code}", "message": detail}}, body, None
+    transport_retries = []
+    # E2E-002 (after final1_T5 ended on NIM HTTP 429): rate-limit / unavailable responses are retried with backoff.
+    # Each retry is recorded in meta.transport_retries; the request body is identical on every retry.
+    for attempt in range(6):
+        try:
+            with urllib.request.urlopen(http, timeout=180) as r:
+                resp = json.load(r)
+            break
+        except urllib.error.HTTPError as e:
+            detail = e.read()[:400].decode(errors="replace")
+            if e.code in (429, 502, 503) and attempt < 5:
+                transport_retries.append({"attempt": attempt + 1, "status": e.code, "at": time.time()})
+                time.sleep(5 * (attempt + 1))
+                continue
+            return {"id": "err-" + uuid.uuid4().hex, "createdAt": int(t0 * 1000), "status": "failed", "output": [],
+                    "error": {"code": f"NIM_HTTP_{e.code}", "message": detail}}, body, {"transport_retries": transport_retries}
     choice = resp["choices"][0]
     msg = choice["message"]
+    nim_turn.last_raw = resp
     out = []
     if msg.get("content") and not msg.get("tool_calls"):
         out.append({"id": "msg_" + uuid.uuid4().hex, "kind": "output", "type": "message", "role": "assistant", "status": "completed",
                     "content": [{"type": "text", "text": msg["content"], "annotations": []}]})
     normalized = []
     for tc in msg.get("tool_calls") or []:
+        # WO-COM-E2E-002: model output is forwarded verbatim. The E2E-001 delegate_to string->object rewrite was removed;
+        # schema conformance is now enforced by validation + feedback in the browser adapter (llmAdapter.js).
         args = tc["function"].get("arguments") or "{}"
-        if tc["function"]["name"] == "delegate_to":
-            # Adapter normalisation (journaled): the model often sends type as a bare agent id string, while AG Studio's
-            # schema requires {"id": ...}. Only that exact shape is rewritten; anything else is passed through unchanged.
-            try:
-                a = json.loads(args)
-                if isinstance(a.get("type"), str):
-                    normalized.append({"call": tc["id"], "raw": args})
-                    a["type"] = {"id": a["type"]}
-                    args = json.dumps(a)
-            except ValueError:
-                pass
         out.append({"id": "fc_" + uuid.uuid4().hex, "kind": "output", "type": "function_call", "callId": tc["id"],
                     "name": tc["function"]["name"], "arguments": args, "status": "completed"})
     usage = resp.get("usage") or {}
@@ -158,7 +180,8 @@ def nim_turn(req):
            "usage": {"inputTokens": usage.get("prompt_tokens"), "outputTokens": usage.get("completion_tokens"), "totalTokens": usage.get("total_tokens")}}
     if choice.get("finish_reason") == "length":
         res["incompleteDetails"] = {"reason": "max_output_tokens"}
-    return res, body, {"latency_s": round(time.time() - t0, 2), "finish_reason": choice.get("finish_reason"), "normalized_tool_args": normalized}
+    return res, body, {"latency_s": round(time.time() - t0, 2), "finish_reason": choice.get("finish_reason"), "normalized_tool_args": normalized,
+                       "transport_retries": transport_retries}
 
 
 class Handler(BaseHTTPRequestHandler):
@@ -191,12 +214,31 @@ class Handler(BaseHTTPRequestHandler):
         if not self.local():
             return self.send(403, {"error": "local only"})
         req = json.loads(self.rfile.read(int(self.headers.get("Content-Length") or 0)) or b"{}")
+        if self.path == "/api/llm/session":
+            with LOCK:
+                SESSION.update({"name": str(req.get("name") or "AI_TURNS"), "mode": req.get("mode", "nim"),
+                                "responses": req.get("responses") or [], "i": 0, "seq": 0})
+            return self.send(200, {"session": SESSION["name"], "mode": SESSION["mode"], "scripted": len(SESSION["responses"])})
         if self.path == "/api/llm/turn":
-            res, body, meta = nim_turn(req)
+            with LOCK:
+                SESSION["seq"] += 1
+                seq, name, mode = SESSION["seq"], SESSION["name"], SESSION["mode"]
+                if mode == "script":
+                    if SESSION["i"] < len(SESSION["responses"]):
+                        res = dict(SESSION["responses"][SESSION["i"]]); SESSION["i"] += 1
+                    else:
+                        res = {"id": f"script-exhausted-{seq}", "createdAt": int(time.time() * 1000), "status": "failed", "output": [],
+                               "error": {"code": "SCRIPT_EXHAUSTED", "message": "no scripted response left"}}
+                    body, meta, raw = None, {"scripted_index": SESSION["i"] - 1}, None
+            if mode != "script":
+                nim_turn.last_raw = None
+                res, body, meta = nim_turn(req)
+                raw = nim_turn.last_raw
             TURNS.mkdir(exist_ok=True)
-            with (TURNS / "AI_TURNS.jsonl").open("a", encoding="utf-8", newline="\n") as f:
-                f.write(json.dumps({"at": time.time(), "model": nim.MODEL, "tools_offered": [t["function"]["name"] for t in body.get("tools", [])],
-                                    "messages": body["messages"], "response": res, "meta": meta}, default=str) + "\n")
+            with LOCK, (TURNS / f"{name}.jsonl").open("a", encoding="utf-8", newline="\n") as f:
+                f.write(json.dumps({"session": name, "seq": seq, "mode": mode, "at": time.time(), "model": None if mode == "script" else nim.MODEL,
+                                    "tools_offered": [t["name"] for t in req.get("tools") or []], "request": req, "body": body,
+                                    "raw_provider_response": raw, "response": res, "meta": meta}, default=str) + "\n")
             return self.send(200, res)
         if self.path == "/api/channel3/search":
             c3 = Channel3(TURNS / "CHANNEL3_RAW")
