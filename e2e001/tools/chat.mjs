@@ -15,8 +15,11 @@ const responses = scriptFile && scriptFile !== '-' ? JSON.parse(fs.readFileSync(
 const journal = `${process.cwd()}/ai_turns/${session}.jsonl`;
 if (fs.existsSync(journal)) throw new Error(`journal ${journal} exists: sessions are never overwritten`);
 
-await fetch(URL + 'api/llm/session', { method: 'POST', headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify({ name: session, mode, responses }) });
+// E2E-003: optional task contract (CONTRACT_FILE) and model override (MODEL) for the session; both journaled by the backend.
+const contract = process.env.CONTRACT_FILE ? JSON.parse(fs.readFileSync(process.env.CONTRACT_FILE, 'utf8')) : null;
+const sessionInfo = await (await fetch(URL + 'api/llm/session', { method: 'POST', headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ name: session, mode, responses, contract, model: process.env.MODEL || null }) })).json();
+const dataset = await (await fetch(URL + 'api/run')).json();
 const browser = await puppeteer.connect({ browserURL: 'http://127.0.0.1:9333', defaultViewport: { width: 1800, height: 1400 } });
 const page = await browser.newPage();
 const consoleLog = [];
@@ -57,12 +60,25 @@ const studio = await page.evaluate(async () => {
   const T = api.getAiTools();
   const ctx = { signal: new AbortController().signal, run: { threadId: 'verify', runId: 'verify' },
     success: (r, d) => ({ success: true, response: r, data: d }), error: (m) => ({ success: false, issues: [].concat(m).map((x) => ({ message: x })) }) };
-  const health = {};
+  const health = {}, view = {}, rendered = {};
+  // E2E-003: rendered value per widget, located independently of the adapter: AG Studio places each layout widget with
+  // inline top = yTrack*rowHeight and left = xTrack*(content width/columns).
+  const content = document.querySelector('.ag-studio-layout-content-container');
   for (const pg of state.pages) for (const id of Object.keys(pg.widgets || {})) {
     const v = await T.viewWidget({ pageId: pg.id }).execute({ toolCallId: 'v', name: 'viewWidget', args: { widgetId: id } }, ctx);
     health[id] = v.success ? (v.data.issues || []).map((i) => ({ code: i.code, score: i.score, description: i.description })) : v.issues;
+    view[id] = v.success ? { config: v.data.config, filters: v.data.filters } : null;
+    const pos = (pg.widgetLayout || {})[id];
+    if (content && pos) {
+      const colW = content.clientWidth / ((pg.layout || {}).columns || 12), rowH = (pg.layout || {}).rowHeight || 80;
+      const el = [...content.children].find((e) => e.classList.contains('ag-studio-layout-widget')
+        && Math.abs(parseFloat(e.style.top) - pos.yTrack * rowH) < 2 && Math.abs(parseFloat(e.style.left) - pos.xTrack * colW) < 4);
+      if (el) { el.scrollIntoView({ block: 'center' }); await new Promise((r) => setTimeout(r, 400)); }
+      const vc = el && el.querySelector('.ag-studio-value-widget-content');
+      rendered[id] = el ? { value_text: vc ? vc.textContent.trim() : null, text: el.innerText.replace(/\s+/g, ' ').trim().slice(0, 300) } : null;
+    }
   }
-  return { state, health };
+  return { state, health, view, rendered };
 });
 const domWidgetText = await page.evaluate(() => {
   const input = document.querySelector('[placeholder="Ask the AI Assistant..."]');
@@ -72,7 +88,7 @@ const domWidgetText = await page.evaluate(() => {
   return leaves.map((e) => e.textContent.trim()).join(' | ');
 });
 await page.screenshot({ path: `${outDir}/screenshot.png`, fullPage: false });
-const out = { session, mode, prompt, outcome, dom_widget_text: domWidgetText, seconds: Math.round((Date.now() - t0) / 1000), journal_turns: lines(), panelText, studio,
+const out = { session, mode, prompt, outcome, session_info: sessionInfo, dataset_checks: (dataset.sources.find((s) => s.id === 'checks') || {}).data, fixture: dataset.fixture || null, dom_widget_text: domWidgetText, seconds: Math.round((Date.now() - t0) / 1000), journal_turns: lines(), panelText, studio,
   console: consoleLog.slice(-40), at: new Date().toISOString() };
 fs.writeFileSync(`${outDir}/CHAT_RESULT.json`, JSON.stringify(out, null, 1));
 console.log(JSON.stringify({ session, outcome, seconds: out.seconds, turns: out.journal_turns, panelTail: panelText.slice(-600) }));

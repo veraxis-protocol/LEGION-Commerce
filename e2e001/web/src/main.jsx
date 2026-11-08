@@ -20,6 +20,7 @@ function Banner({ run }) {
       <strong style={{ fontSize: 15, marginRight: 12 }}>LEGION Commerce E2E</strong>
       {pill(run.run, '#555')}{pill(`Judge ${run.verdict}`, run.verdict.startsWith('PASS') ? '#2e7d32' : '#c62828')}
       {pill(`Lean ${run.lean_verdict}`, '#1565c0')}{pill(run.evidence_mode, '#ef6c00')}
+      {run.fixture ? pill(`TEST FIXTURE ${run.fixture.name}`, '#6a1b9a') : null}
       <span>Final: {run.final.title} from {run.final.seller}, ${(run.final.price_cents / 100).toFixed(2)} (cap $500). Changed offer: {run.changed_offer.change_type} {run.changed_offer.offer_key}, ${run.changed_offer.old_price} to ${run.changed_offer.new_price}. </span>
       <em>No native PayPal payment: the payment leg is MECHANISM_ONLY (synthetic provider) until A03 is independently signed.</em>
     </div>

@@ -32,7 +32,15 @@ DIST = HERE / "web" / "dist"
 RUNS = HERE / "runs"
 TURNS = HERE / "ai_turns"
 # WO-COM-E2E-002: named journal sessions; mode "nim" (live) or "script" (deterministic responses, no model involved).
-SESSION = {"name": "AI_TURNS", "mode": "nim", "responses": [], "i": 0, "seq": 0}
+SESSION = {"name": "AI_TURNS", "mode": "nim", "responses": [], "i": 0, "seq": 0, "contract": None}
+# WO-COM-E2E-003: optional, explicitly labelled test fixture applied on top of the genuine run dataset (--fixture).
+FIXTURE = {"name": None}
+FIXTURES = {
+    # Mixed-status checks: exactly one genuine PASS row (the last checks row) is overridden to FAIL, so that a KPI that
+    # counts all checks (31) and a KPI that counts PASS checks (30) are distinguishable. Offers/events are untouched.
+    "e2e003_mixed_checks": {"description": "checks: last row overridden PASS->FAIL (test fixture, not a genuine result); 30 PASS + 1 FAIL",
+                            "source": "checks", "override_index": -1, "field": "result", "new_value": "FAIL"},
+}
 LOCK = threading.Lock()
 AG_KEY_FILE = r"C:\Users\Administrator\Desktop\AG_STUDIO_LICENSE_KEY.txt"
 
@@ -75,10 +83,33 @@ def run_dataset():
     summary = [{"metric": "Budget cap (USD)", "value": 500.0}, {"metric": "Final price (USD)", "value": plan["final_line"]["price_cents"] / 100},
                {"metric": "Genuine Channel3 offers", "value": len(offers)}, {"metric": "Live price gates", "value": len(gate_rows)},
                {"metric": "Captures (MECHANISM_ONLY)", "value": sum(1 for e in events if e["kind"] == "PAYMENT_STATE")}]
-    return {"run": run.name, "verdict": judge["verdict"], "evidence_mode": judge["evidence_mode"], "lean_verdict": lean["verdict"],
+    out = {"run": run.name, "verdict": judge["verdict"], "evidence_mode": judge["evidence_mode"], "lean_verdict": lean["verdict"],
             "final": plan["final_line"], "changed_offer": plan["changed_offer"],
             "sources": [{"id": "offers", "data": offer_rows}, {"id": "events", "data": event_rows}, {"id": "price_gates", "data": gate_rows},
                         {"id": "checks", "data": check_rows}, {"id": "summary", "data": summary}]}
+    if FIXTURE["name"]:
+        fx = FIXTURES[FIXTURE["name"]]
+        rows = next(s for s in out["sources"] if s["id"] == fx["source"])["data"]
+        row = rows[fx["override_index"]]
+        out["fixture"] = {"name": FIXTURE["name"], "description": fx["description"], "overridden_row": dict(row)}
+        row[fx["field"]] = fx["new_value"]
+        row["detail"] = f"FIXTURE {FIXTURE['name']}: {fx['field']} overridden to {fx['new_value']} (genuine value was PASS)"
+    return out
+
+
+def contract_with_ground_truth(contract):
+    """WO-COM-E2E-003: compute a task contract's ground truth directly from the served dataset (independent of AG Studio)."""
+    if not contract:
+        return None
+    ds = run_dataset()
+    rows = next(s for s in ds["sources"] if s["id"] == contract["source"])["data"]
+    pred = contract["predicate"]
+    col = pred["field"].split(".", 1)[1]
+    if pred["operator"] != "equals":
+        raise ValueError("unsupported predicate operator")
+    matching = [r for r in rows if r.get(col) == pred["value"]]
+    return {**contract, "ground_truth": {"count": len(matching), "rows_total": len(rows), "computed_by": "server.py contract_with_ground_truth",
+                                          "dataset_run": ds["run"], "fixture": (ds.get("fixture") or {}).get("name")}}
 
 
 def to_chat(req):
@@ -120,7 +151,7 @@ def to_chat(req):
                 msgs.append({"role": "assistant", "content": None, "tool_calls": [call]})
         elif t == "function_call_output":
             msgs.append({"role": "tool", "tool_call_id": it["callId"], "content": it.get("output", "")})
-    body = {"model": nim.MODEL, "messages": msgs, "max_tokens": 4000, "temperature": 0.3,
+    body = {"model": SESSION.get("model") or nim.MODEL, "messages": msgs, "max_tokens": 4000, "temperature": 0.3,
             "chat_template_kwargs": {"enable_thinking": False}}
     tools = req.get("tools") or []
     if tools:
@@ -203,6 +234,8 @@ class Handler(BaseHTTPRequestHandler):
         path = self.path.split("?")[0]
         if path == "/api/run":
             return self.send(200, run_dataset())
+        if path == "/api/contract":
+            return self.send(200, {"contract": contract_with_ground_truth(SESSION.get("contract"))})
         if path == "/api/ag-license":
             return self.send(200, {"licenseKey": open(AG_KEY_FILE, encoding="utf-8").read().strip()})
         f = (DIST / ("index.html" if path == "/" else path.lstrip("/"))).resolve()
@@ -217,8 +250,16 @@ class Handler(BaseHTTPRequestHandler):
         if self.path == "/api/llm/session":
             with LOCK:
                 SESSION.update({"name": str(req.get("name") or "AI_TURNS"), "mode": req.get("mode", "nim"),
-                                "responses": req.get("responses") or [], "i": 0, "seq": 0})
-            return self.send(200, {"session": SESSION["name"], "mode": SESSION["mode"], "scripted": len(SESSION["responses"])})
+                                "responses": req.get("responses") or [], "i": 0, "seq": 0, "contract": req.get("contract"),
+                                "model": req.get("model")})
+            return self.send(200, {"session": SESSION["name"], "mode": SESSION["mode"], "scripted": len(SESSION["responses"]), "model": SESSION.get("model") or nim.MODEL,
+                                   "contract": contract_with_ground_truth(SESSION["contract"])})
+        if self.path == "/api/llm/gate":
+            # WO-COM-E2E-003: completion-gate decisions from the browser adapter, journaled next to the session's turns.
+            TURNS.mkdir(exist_ok=True)
+            with LOCK, (TURNS / f"{SESSION['name']}.gate.jsonl").open("a", encoding="utf-8", newline="\n") as f:
+                f.write(json.dumps({"session": SESSION["name"], "at": time.time(), **req}, default=str) + "\n")
+            return self.send(200, {"ok": True})
         if self.path == "/api/llm/turn":
             with LOCK:
                 SESSION["seq"] += 1
@@ -236,7 +277,7 @@ class Handler(BaseHTTPRequestHandler):
                 raw = nim_turn.last_raw
             TURNS.mkdir(exist_ok=True)
             with LOCK, (TURNS / f"{name}.jsonl").open("a", encoding="utf-8", newline="\n") as f:
-                f.write(json.dumps({"session": name, "seq": seq, "mode": mode, "at": time.time(), "model": None if mode == "script" else nim.MODEL,
+                f.write(json.dumps({"session": name, "seq": seq, "mode": mode, "at": time.time(), "model": None if mode == "script" else (body or {}).get("model"),
                                     "tools_offered": [t["name"] for t in req.get("tools") or []], "request": req, "body": body,
                                     "raw_provider_response": raw, "response": res, "meta": meta}, default=str) + "\n")
             return self.send(200, res)
@@ -249,9 +290,11 @@ class Handler(BaseHTTPRequestHandler):
 
 
 def main():
-    ap = argparse.ArgumentParser(); ap.add_argument("--port", type=int, default=8790); a = ap.parse_args()
+    ap = argparse.ArgumentParser(); ap.add_argument("--port", type=int, default=8790)
+    ap.add_argument("--fixture", choices=sorted(FIXTURES)); a = ap.parse_args()
+    FIXTURE["name"] = a.fixture
     srv = ThreadingHTTPServer(("127.0.0.1", a.port), Handler)
-    print(json.dumps({"dashboard": f"http://127.0.0.1:{a.port}/"}), flush=True)
+    print(json.dumps({"dashboard": f"http://127.0.0.1:{a.port}/", "fixture": a.fixture}), flush=True)
     srv.serve_forever()
 
 

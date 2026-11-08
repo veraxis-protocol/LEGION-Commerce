@@ -9,7 +9,21 @@
 //     backend call (request.x_adapter). If no valid reply is produced, the adapter returns an explicit failure message.
 //  3. Empty replies (no text, no tool call) are retried with an explicit instruction.
 // Model output is never rewritten: a call is either forwarded verbatim or not forwarded at all.
+//
+// WO-COM-E2E-003 additions (adapter only; Formal Core, model and Judge untouched):
+//  4. Widget-state feedback: when AG Studio returns the result of a widget-changing tool (add_widget, configure_widget,
+//     add/remove_widget_filter, add/remove_page_filter, position_widget), the adapter observes the widget AFTER the change
+//     settled (stored dataMapping, stored widget/page filters, AG's fresh viewWidget health issues, the rendered value) and
+//     appends it, with a plain-language statement of what the widget computes, to that tool result as sent to the model.
+//     AG Studio's own tool result text is kept unchanged in front of it. Observations are cached per callId (made once).
+//  5. Completion gate (only when the session carries a task contract): a completion (complete_task from an agent that can
+//     change widgets, or the lead agent's final text) is accepted only if a new widget satisfies the contract: the required
+//     predicate is present in the stored widget/page filters AND the rendered value equals the ground truth the backend
+//     computed from the dataset. Otherwise the completion is not delivered; the observed failures are fed back. If the
+//     attempts run out, the lead's final answer is replaced by an explicit ADAPTER gate failure (never a false completion).
+//     Every gate decision is journaled through /api/llm/gate.
 import Ajv from 'ajv';
+import { observeWidget, verifyContract } from './observe.js';
 
 const ATTEMPTS = 4;
 const ajv = new Ajv({ allErrors: true, strict: false, validateFormats: false, logger: false });
@@ -76,14 +90,73 @@ async function post(body, signal) {
   return r.json();
 }
 
+// Feedback is scoped to what the calling tool controls (E2E-003 fix after nimA_T4: the page agent, which by its own
+// instructions cannot touch data mappings, was told on every position_widget result that the widget "computes nothing yet"
+// and repositioned it 49 times). Data/semantics/health feedback goes only to the tools that change a widget's data
+// (configure_widget, add/remove_widget_filter); layout tools get the stored layout only.
+const DATA_TOOLS = new Set(['configure_widget', 'add_widget_filter', 'remove_widget_filter']);
+const LAYOUT_TOOLS = new Set(['add_widget', 'position_widget']);
+const WIDGET_TOOLS = new Set([...DATA_TOOLS, ...LAYOUT_TOOLS]);
+const BASE_WIDGETS = new Set(['bar1', 'grid_offers', 'pie_checks', 'grid_events', 'grid_checks']);
+const observations = new Map(); // callId -> observation text (made once, right after the call's result first appears)
+
+async function withObservations(input) {
+  const calls = Object.fromEntries(input.filter((i) => i.type === 'function_call').map((i) => [i.callId, i]));
+  const out = [];
+  for (const it of input) {
+    const call = it.type === 'function_call_output' && calls[it.callId];
+    if (!call || !WIDGET_TOOLS.has(call.name)) { out.push(it); continue; }
+    if (!observations.has(it.callId)) {
+      let wid = null; try { wid = JSON.parse(call.arguments || '{}').widgetId; } catch (e) { /* invalid JSON never reaches AG */ }
+      let obs;
+      try {
+        if (!wid) obs = { note: 'no widgetId' };
+        else if (DATA_TOOLS.has(call.name)) obs = await observeWidget(wid);
+        else {
+          const st = window.__studio.current.api.getState();
+          const pg = st.pages.find((x) => (x.widgets || {})[wid]);
+          obs = pg ? { widgetId: wid, exists: true, type: pg.widgets[wid].type, stored_layout: (pg.widgetLayout || {})[wid] }
+            : { widgetId: wid, exists: false };
+        }
+      } catch (e) { obs = { error: String(e) }; }
+      observations.set(it.callId, DATA_TOOLS.has(call.name)
+        ? '\n\nADAPTER_OBSERVED_STATE (read from AG Studio after this call settled; the health results inside the tool response above may be stale, fresh_health_issues are current): ' + JSON.stringify(obs)
+        : '\n\nADAPTER_OBSERVED_LAYOUT (stored in AG Studio after this call): ' + JSON.stringify(obs));
+    }
+    out.push({ ...it, output: (it.output || '') + observations.get(it.callId) });
+  }
+  return out;
+}
+
+async function contract() {
+  try { return (await (await fetch('/api/contract')).json()).contract; } catch (e) { return null; }
+}
+
+function gateLog(entry) {
+  fetch('/api/llm/gate', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(entry) }).catch(() => {});
+}
+
+function gateFeedbackText(c, v, lead) {
+  const lines = v.candidates.length ? v.candidates.map((x) => `- widget ${x.widgetId} (${x.type}): ${x.semantics}; displays ${x.rendered && x.rendered.value_text}. Problems: ${x.reasons.join('; ')}`)
+    : ['- no new widget exists on the dashboard'];
+  return `COMPLETION REJECTED by the adapter's verification gate: the task is not done yet, so this completion was not delivered. `
+    + `Required: a new ${c.widget_types.join(' or ')} widget on the ${c.source} data whose stored filters contain the predicate ${c.predicate.field} ${c.predicate.operator} ${JSON.stringify(c.predicate.value)}, `
+    + `and whose displayed value equals the count computed independently from the data. Observed now:\n${lines.join('\n')}\n`
+    + (lead ? `Delegate the fix to the widget agent (delegate_to with {"type": {"id": "widget", "widgetId": "<id>", "widgetType": "<type>"}, "instructions": "..."}) and state exactly which predicate must be added.`
+      : `A widget-level predicate is added with add_widget_filter (op "append", widgetId, value {field: {id}, model: {operator, value}}); check the result with view_widget before completing.`);
+}
+
 export async function completeTurn(request, signal) {
   const turnId = Math.random().toString(36).slice(2);
   const sentTools = (request.tools || []).map((t) => ({ ...t, parameters: inlineRefs(t.parameters) }));
+  const toolNames = new Set((request.tools || []).map((t) => t.name));
+  const observedInput = await withObservations(request.input);
+  const observedIds = observedInput.filter((i, k) => i !== request.input[k]).map((i) => i.callId);
   const feedback = [];
   const history = [];
   for (let attempt = 1; attempt <= ATTEMPTS; attempt++) {
-    const res = await post({ ...request, tools: sentTools, input: [...request.input, ...feedback],
-      x_adapter: { turnId, attempt, maxAttempts: ATTEMPTS, inlinedRefs: true, previous: history } }, signal);
+    const res = await post({ ...request, tools: sentTools, input: [...observedInput, ...feedback],
+      x_adapter: { turnId, attempt, maxAttempts: ATTEMPTS, inlinedRefs: true, observedOutputs: observedIds, previous: history } }, signal);
     if (res.status === 'failed') return res;
     const calls = (res.output || []).filter((o) => o.type === 'function_call');
     const texts = (res.output || []).filter((o) => o.type === 'message');
@@ -104,7 +177,37 @@ export async function completeTurn(request, signal) {
       continue;
     }
     const bad = checkCalls(request, res);
-    if (!bad.length) return res;
+    if (!bad.length) {
+      // Completion gate (E2E-003). Completions: complete_task by an agent that can change widgets; final text of the lead.
+      const completes = calls.some((o) => o.name === 'complete_task') && (toolNames.has('configure_widget') || toolNames.has('add_widget_filter'));
+      const leadFinal = !calls.length && texts.length > 0 && toolNames.has('delegate_to');
+      const c = (completes || leadFinal) ? await contract() : null;
+      if (!c) return res;
+      const v = await verifyContract(c, BASE_WIDGETS);
+      const kind = completes ? 'complete_task' : 'lead_final_text';
+      gateLog({ turnId, attempt, kind, pass: v.pass, verification: v, contract: c });
+      if (v.pass) return res;
+      history.push({ attempt, rejected: 'GATE', kind, reasons: v.candidates.map((x) => ({ widgetId: x.widgetId, reasons: x.reasons })) });
+      const text = gateFeedbackText(c, v, leadFinal);
+      if (attempt === ATTEMPTS) {
+        if (leadFinal) return { id: `adapter-gate-${turnId}`, createdAt: Date.now(), status: 'completed',
+          output: [{ id: `msg_gate_${turnId}`, kind: 'output', type: 'message', role: 'assistant', status: 'completed',
+            content: [{ type: 'text', text: `ADAPTER: task NOT completed; the verification gate rejected the final answer ${ATTEMPTS} times. ${text}`, annotations: [] }] }] };
+        return res; // a sub-agent's complete_task is forwarded unchanged; the lead's final answer remains gated
+      }
+      if (leadFinal) {
+        feedback.push({ ...texts[0] });
+        feedback.push({ id: `fbgate_${turnId}_${attempt}`, kind: 'input', type: 'message', role: 'system', status: 'completed', content: [{ type: 'text', text }] });
+      } else {
+        for (const o of calls) {
+          feedback.push({ ...o, id: `fbgc_${turnId}_${attempt}_${o.callId}` });
+          feedback.push({ type: 'function_call_output', callId: o.callId, status: 'completed',
+            output: JSON.stringify(o.name === 'complete_task' ? { success: false, adapter_gate: text }
+              : { success: false, adapter_gate: 'NOT EXECUTED because the completion in the same reply was rejected; repeat it if still needed.' }) });
+        }
+      }
+      continue;
+    }
     history.push({ attempt, rejected: 'SCHEMA', calls: bad.map((b) => ({ name: b.call.name, issues: b.issues })) });
     for (const o of calls) {
       const b = bad.find((x) => x.call === o);

@@ -11,12 +11,27 @@ PASS requires ALL of:
   * widget tasks: a NEW widget of an allowed type exists in the Studio state with the required mapping, and AG Studio's
     own health check reports no data_mapping_complete / data_present issue for it (it renders data).
 Adapter rejections (model calls that failed validation and were never executed) are counted and reported, not hidden.
+
+WO-COM-E2E-003 additions (stricter only; nothing above is relaxed):
+  * outputs carrying "adapter_gate" (completions rejected by the adapter gate, never executed) count as adapter rejections;
+  * widget tasks with a "predicate": the qualifying widget must hold that predicate in its STORED filters
+    (pages[].filter.widget[id] or page filters, from getState), AND its rendered value (read from the DOM by chat.mjs)
+    must equal the ground truth this checker computes itself from the dataset captured in CHAT_RESULT.json.
+    A correct number without the predicate fails (NO-GO condition of E2E-003).
 """
 import json
+import os
+import re
 import sys
 
 MAX_TURNS = 80
 BASE_WIDGETS = {"bar1", "grid_offers", "pie_checks", "grid_events", "grid_checks"}
+
+
+def md_plain(s):
+    s = re.sub(r"(\*\*|__|`)", "", s)
+    s = re.sub(r"(?m)^\s*(#{1,6}\s+|[-*+]\s+|\d+\.\s+)", "", s)
+    return re.sub(r"\s+", " ", s).strip()
 
 
 def main():
@@ -33,8 +48,13 @@ def main():
         xa = t["request"].get("x_adapter") or {}
         if xa.get("turnId"):
             last_attempt[xa["turnId"]] = max(last_attempt.get(xa["turnId"], 0), xa.get("attempt", 0))
-    accepted = lambda t: not (t["request"].get("x_adapter") or {}).get("turnId") or \
-        t["request"]["x_adapter"]["attempt"] == last_attempt[t["request"]["x_adapter"]["turnId"]]
+    # E2E-003: a reply the adapter's completion gate rejected was never delivered (journal: <session>.gate.jsonl).
+    gate_path = journal[:-len(".jsonl")] + ".gate.jsonl"
+    gate = [json.loads(l) for l in open(gate_path, encoding="utf-8")] if os.path.exists(gate_path) else []
+    gate_rejected = {(g["turnId"], g["attempt"]) for g in gate if not g["pass"]}
+    xa_of = lambda t: t["request"].get("x_adapter") or {}
+    accepted = lambda t: (not xa_of(t).get("turnId") or xa_of(t)["attempt"] == last_attempt[xa_of(t)["turnId"]]) and \
+        (xa_of(t).get("turnId"), xa_of(t).get("attempt")) not in gate_rejected
     for t in turns:
         for it in t["request"].get("input", []):
             if it.get("type") != "function_call_output" or it["callId"] in seen_outputs:
@@ -45,7 +65,7 @@ def main():
                 parsed = json.loads(out)
             except ValueError:
                 parsed = {"raw": out}
-            if isinstance(parsed, dict) and "adapter_validation" in parsed:
+            if isinstance(parsed, dict) and ("adapter_validation" in parsed or "adapter_gate" in parsed):
                 adapter_rejections.append(parsed.get("issues"))
                 continue
             executed.append(out)
@@ -61,9 +81,14 @@ def main():
         "no_loop": len(turns) <= MAX_TURNS,
         "zero_schema_violations_at_ag": not validation_failures,
         "final_answer_present": bool(final) and not final.startswith("ADAPTER:"),
-        "final_answer_visible_in_chat": bool(final) and final.strip()[:60] in (chat.get("panelText") or ""),
+        # E2E-003 v3 (frozen before run nimC): the chat panel renders markdown, so "**microcenter.com**" is displayed as
+        # "microcenter.com" (nimB_T3). Both sides are compared after removing markdown markup and collapsing whitespace.
+        # Answer correctness and grounding still use the raw final text; nothing else changed.
+        "final_answer_visible_in_chat": bool(final) and md_plain(final)[:60] in md_plain(chat.get("panelText") or ""),
     }
-    detail = {"turns": len(turns), "executed_tool_results": len(executed), "adapter_rejections": len(adapter_rejections),
+    if not final and "ADAPTER: task NOT completed" in (chat.get("panelText") or ""):
+        final = "ADAPTER: task NOT completed (gate)"  # the adapter replaced the final answer; the model's text was never shown
+    detail = {"turns": len(turns), "gate_decisions": [{"kind": g["kind"], "attempt": g["attempt"], "pass": g["pass"]} for g in gate], "executed_tool_results": len(executed), "adapter_rejections": len(adapter_rejections),
               "ag_validation_failures": validation_failures[:5], "final_answer": final[:800]}
     if task["kind"] == "answer":
         low = final.lower()
@@ -87,6 +112,33 @@ def main():
         detail["new_widgets"] = ok
         checks["widget_created_with_correct_mapping"] = any(x["type_ok"] and x["mapping_ok"] for x in ok)
         checks["widget_renders_data"] = any(x["type_ok"] and x["mapping_ok"] and not x["health_issues"] for x in ok)
+        if task.get("predicate"):
+            pr = task["predicate"]
+            col = pr["field"].split(".", 1)[1]
+            truth = sum(1 for r in (chat.get("dataset_checks") or []) if r.get(col) == pr["value"])
+            detail["ground_truth_count"] = truth
+            rendered = (chat.get("studio") or {}).get("rendered") or {}
+            ev = []
+            for x in ok:
+                stored = []
+                for p in state["pages"]:
+                    if x["widget"] in (p.get("widgets") or {}):
+                        flt = p.get("filter") or {}
+                        stored = list((flt.get("widget") or {}).get(x["widget"]) or []) + list(flt.get("page") or [])
+                has_pred = any((f.get("field") or {}).get("id") == pr["field"] and (
+                    ((f.get("model") or {}).get("operator") == "equals" and f["model"].get("value") == pr["value"]) or
+                    ((f.get("model") or {}).get("operator") == "isIn" and f["model"].get("value") == [pr["value"]])) for f in stored)
+                vt = (rendered.get(x["widget"]) or {}).get("value_text")
+                try:
+                    shown = float(str(vt).replace(",", ""))
+                except (TypeError, ValueError):
+                    shown = None
+                ev.append({"widget": x["widget"], "qualifies": x["type_ok"] and x["mapping_ok"], "stored_filters": stored,
+                           "predicate_present": has_pred, "rendered_value": vt, "matches_ground_truth": shown == truth})
+            detail["predicate_evidence"] = ev
+            good = [e for e in ev if e["qualifies"]]
+            checks["predicate_in_widget_state"] = any(e["predicate_present"] for e in good)
+            checks["displayed_value_matches_ground_truth"] = any(e["predicate_present"] and e["matches_ground_truth"] for e in good)
         if task.get("expect_dom"):
             checks["dom_shows_expected"] = all(tok in [x.strip() for x in (chat.get("dom_widget_text") or "").split("|")] for tok in task["expect_dom"])
     result = {"task": tid, "prompt": task["prompt"], "pass": all(checks.values()), "checks": checks, "detail": detail}
