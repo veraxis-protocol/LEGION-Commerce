@@ -1,0 +1,297 @@
+{
+  "acceptance_must_bind": {
+    "bridge_source_hashes": {
+      "__init__.py": "a0da880a13feead9e47252ec193ae868b716b057602431a3a6e2af393f685ec5",
+      "__main__.py": "f3cb08980be23e38dc6955caed5e1a27d53b345dbb7968a37aa3e05396187e13",
+      "admission.py": "caee3fcda3ce24f7ebbd9a6cdf97ffc3daac47e1649ed9c795b4f7597d4514d1",
+      "consolidated.py": "bf488d5c862fd4d5776f224da844827f67e9e4268dff4090a9c8e91fb78b9b31",
+      "consolidated_worker.py": "5e437b4a72993a2d8e3432c4b033b1581495b1b303a5e1fd01547161ecd130c3",
+      "core_worker.py": "e69f5c3f27e1e83f3523b282a70c9ebe998c42b1ed668f426c0f007106fd6c70",
+      "installation.py": "99dcad9dc930219f5b309daa18c9efc257d52b2bda95a8e4c2499a3ce6ba1d6b",
+      "locked_readiness.py": "38a01448f3f9802135a57c4d2eb775f06c6408890d13c702686f5ad86a5ece3a",
+      "prepared.py": "b50dd67e564334500f75a91359abca62183e98684b93b8ff42dd7c92a55a04f2",
+      "qualified.py": "5aae762b6ec2269c747f5d383e8964b2656acc16e89be5368097d0b06279e51b",
+      "qualified_worker.py": "67fd5a646d2ae9b80e62bd9b3846254d30df5f50b714de8aa1883f69a54ab8aa",
+      "runtime.py": "b18d78e145affaaa2e855ab019abfd301eb50cc222f03d2abe7e520c9662a10d",
+      "sources.py": "edf80bc01665f5b80b7147b771616d859885a8f1ef2aacdb09c2cddce494ea77",
+      "transport.py": "c6da9de63cdbe1ae888768a3f47ebcfb3e230080c03c49c28e46fc9960f2150b",
+      "witness.py": "75347919cdef4da6ea2a257632202292d3ce5b00695f3d8b6b51425cf26efa93"
+    },
+    "runtime_source_hashes": {
+      "__init__.py": "f4b5a6451c984786b82936c80f1a08bfe977219a1d9efd5674b089b166abb536",
+      "__main__.py": "8e72c9b3391fe6d79a9658ee42f6e1ebbcc1b6f10ea0b97137e568cb4a25dec5",
+      "approval.py": "03fd03bde61168bb9b0f6526824a18290ec5a57b53df27d8cb798fa3f0d10937",
+      "contracts.py": "ed44966830509ee97a28765eefd23a0f68f49be7b82129ad6dc49e8056c6fbac",
+      "gateway.py": "164b414ccf782e73819065fed0f1fbe067e7925f6bbfeb79fcd633a19950f9ea",
+      "paypal.py": "9e0f582ce01e261fca18ab4b5273755f122ef33c52cf4754f5d6083d6c7dba4c",
+      "readback.py": "66c38645f5aadaa7447800b14d3245e8a4657d63ec0944643460ef0a09c5a5e7"
+    }
+  },
+  "admission_runtime": "BCh: QualifiedSources(immutable) + ConsolidatedSession + PreparedAdmission(overlap) [+ hot standby optional]",
+  "before_production": [
+    "independent reviewer (not Claude, not the operator) signs commerce.a03.acceptance.v1 binding acceptance_must_bind with the trusted acceptance key",
+    "operator signs mission/control/policy, admission issuer signs permit; install + preflight",
+    "independent payment test with confirmed result (operator approves the buyer step in a browser), then owner decides production activation"
+  ],
+  "decider_reproducibility": "99cda684 reproduced bit-exactly from R2 3c612b5 (formal_closure/pin_repro, R2 commit f2a1ed6; private runtime)",
+  "evidence_files": {
+    "a03_reaccept": {
+      "evidence/A03_qualify_BCh.log": "fe348d017dca47dfd352777052d2e5bc4dd1a0fdb5806abaa42b6cd9f7c3f0fb",
+      "evidence/A03_v1_conformance.log": "cadad14cc9fb9c348e6ee959b229cd2a0d9efb0f1e2f453ff27b10dc868a6e3a",
+      "evidence/A04_unittest.log": "320c5370891903df37911156a28bd1fc9e6845edde8ac93291429446e0d0bf81",
+      "evidence/FORMAL001_NEGATIVES.json": "918b727b7c3cf9f97b7645215495dbbbf4d6140c1000edab113b5c07cabcaa1e",
+      "evidence/adversarial.log": "38f863178a02f4780a380ffc93579cff65a8a368ab0deb57e428b50c76c6b193",
+      "evidence/adversarial/ADVERSARIAL_RESULTS.json": "31acb594d64ba2110ad600d5b10ff27a48f7b1950fed2ec855aa7afdf1a9b645",
+      "evidence/formal001_negatives.log": "c7fd15a69c94986abd3e9233af697ab92ee674e64f42381f050e9c46587f190c"
+    },
+    "authority_adversarial": {
+      "ADVERSARIAL_RESULTS.json": "31acb594d64ba2110ad600d5b10ff27a48f7b1950fed2ec855aa7afdf1a9b645"
+    },
+    "latency_004_deposit_manifest_sha256": "e1109dad4b67de4e0c189909aeab0d40f5e9d59cc402044c36c66340108b3926",
+    "qualify_run": {
+      "A03_RAW_EVENTS.jsonl": "8ef5469e4360e07dc85896894ad31a3e54e1a59d65649bc4f8770dc67cd7ea5d",
+      "A03_RESULTS.json": "8ce6cb1777f7f31995449ba28de1a9835a5d7f0122230a5de973912c1f3a182d",
+      "A03_TEST_OUTPUT.txt": "39cb0549d131a1927f110702bba95774eae1312b8f74f835a2467ff14c353334",
+      "ALPHA_INPUTS.jsonl": "318354c55b5fec57c3ff3c92c2a7303b9d2b046f2b70208510a3dd330e2a9951",
+      "ALPHA_RESULTS.jsonl": "a1014dd6a838ebe6814e20f89aa330889f3e55b992f1ba04322c375db628d3ce",
+      "COMMERCE_SOURCE_HASHES.json": "51bc74c410bcc40b8744848bae411d28ffdf9220615347b19e6f3c8864cd2dc1",
+      "EVIDENCE_HASHES.json": "62dc84f501ef9cfa8d933b911bb68bb8b858f13d4d0dd502d8c3ecaf3c157d1e",
+      "FROZEN_RUN.json": "b026f5d374e526d70673d421eeb6af9bd88a3fc429b27b646cbcfeef81227714",
+      "LATENCY.json": "07c6c8ca6732394ded1136f579e5f7dadc2bf065f3b2b792528f074aff705a4b",
+      "MATCHED_INPUTS.jsonl": "0af5e931badbaf34c203e688751529699f27b07c1bc76cf1e1b8fcd996f012bb",
+      "MATCHED_RESULTS.jsonl": "15fb7d9edff361cd7944f07fe7577f014ee860b84ab0137649079ca1e1a26f88",
+      "NATIVE_SOURCE_MANIFEST.json": "79ff33b95d3d97c0efa387bd280e1f1656a4150a102e25f058dc1bbdcb598f23",
+      "SUMMARY.json": "67652fd6783b0fb51960442944e66647ed94c4ac82ccef16b43185de91d44a3e",
+      "WARM_NEGATIVES.json": "d66c5aaab638f4b4deee850c69cf331a063ca202abb9829138c22954899ba055"
+    }
+  },
+  "frozen_interface_sha256": "adc2ff7f83d642b75ac5baf0865025369312891edda06a29ca0949e580086127",
+  "generated_by": "tools/prepare_bch_review.py (v4 format) + a03_reaccept supplement; never signs",
+  "hot_path_files": {
+    "commerce_bridge/admission.py": {
+      "current_blob": "5bae45321553ee59836ce6747c91ec8ab2069fa2",
+      "identical": false,
+      "measured_ca897f7_blob": "1a118ac99ca2545607b957645fa6c8257b276a3a",
+      "working_tree_sha256": "caee3fcda3ce24f7ebbd9a6cdf97ffc3daac47e1649ed9c795b4f7597d4514d1"
+    },
+    "commerce_bridge/consolidated.py": {
+      "current_blob": "6270e1783846a3f0d793b3c8ed3fa1476ac19625",
+      "identical": true,
+      "measured_ca897f7_blob": "6270e1783846a3f0d793b3c8ed3fa1476ac19625",
+      "working_tree_sha256": "bf488d5c862fd4d5776f224da844827f67e9e4268dff4090a9c8e91fb78b9b31"
+    },
+    "commerce_bridge/consolidated_worker.py": {
+      "current_blob": "50cae73ba6faea509d196bbd07eb5bcca809d6a0",
+      "identical": true,
+      "measured_ca897f7_blob": "50cae73ba6faea509d196bbd07eb5bcca809d6a0",
+      "working_tree_sha256": "5e437b4a72993a2d8e3432c4b033b1581495b1b303a5e1fd01547161ecd130c3"
+    },
+    "commerce_bridge/core_worker.py": {
+      "current_blob": "aa78a727d64f6c0b2019cc9577887931aed0bd16",
+      "identical": true,
+      "measured_ca897f7_blob": "aa78a727d64f6c0b2019cc9577887931aed0bd16",
+      "working_tree_sha256": "e69f5c3f27e1e83f3523b282a70c9ebe998c42b1ed668f426c0f007106fd6c70"
+    },
+    "commerce_bridge/locked_readiness.py": {
+      "current_blob": "dc7989a7073cfac89e079e316f73825ba6d6bf46",
+      "identical": true,
+      "measured_ca897f7_blob": "dc7989a7073cfac89e079e316f73825ba6d6bf46",
+      "working_tree_sha256": "38a01448f3f9802135a57c4d2eb775f06c6408890d13c702686f5ad86a5ece3a"
+    },
+    "commerce_bridge/prepared.py": {
+      "current_blob": "18cc71149a5ec3cb2838e825595bd01d5c929f18",
+      "identical": false,
+      "measured_ca897f7_blob": "57bb4ee13caae8d7a4bdefde7fb4a57b19335328",
+      "working_tree_sha256": "b50dd67e564334500f75a91359abca62183e98684b93b8ff42dd7c92a55a04f2"
+    },
+    "commerce_bridge/qualified.py": {
+      "current_blob": "038dbf44de444603f910022b26c45ec94e064f18",
+      "identical": true,
+      "measured_ca897f7_blob": "038dbf44de444603f910022b26c45ec94e064f18",
+      "working_tree_sha256": "5aae762b6ec2269c747f5d383e8964b2656acc16e89be5368097d0b06279e51b"
+    },
+    "commerce_bridge/qualified_worker.py": {
+      "current_blob": "dabf7642daf2aabe57d5a44fd1463a838cff10eb",
+      "identical": true,
+      "measured_ca897f7_blob": "dabf7642daf2aabe57d5a44fd1463a838cff10eb",
+      "working_tree_sha256": "67fd5a646d2ae9b80e62bd9b3846254d30df5f50b714de8aa1883f69a54ab8aa"
+    },
+    "commerce_bridge/runtime.py": {
+      "current_blob": "54e419a285cb4002f0e6a807664235a7a817a6f9",
+      "identical": true,
+      "measured_ca897f7_blob": "54e419a285cb4002f0e6a807664235a7a817a6f9",
+      "working_tree_sha256": "b18d78e145affaaa2e855ab019abfd301eb50cc222f03d2abe7e520c9662a10d"
+    },
+    "commerce_bridge/sources.py": {
+      "current_blob": "ec42a3a61c77f0a6911668d9a7c1d16122dd9455",
+      "identical": true,
+      "measured_ca897f7_blob": "ec42a3a61c77f0a6911668d9a7c1d16122dd9455",
+      "working_tree_sha256": "edf80bc01665f5b80b7147b771616d859885a8f1ef2aacdb09c2cddce494ea77"
+    },
+    "commerce_bridge/transport.py": {
+      "current_blob": "8093bb7f38a05c9d3ffd6ac96fc590f4e7c11bd3",
+      "identical": true,
+      "measured_ca897f7_blob": "8093bb7f38a05c9d3ffd6ac96fc590f4e7c11bd3",
+      "working_tree_sha256": "c6da9de63cdbe1ae888768a3f47ebcfb3e230080c03c49c28e46fc9960f2150b"
+    },
+    "commerce_bridge/witness.py": {
+      "current_blob": "50af5b8eba670889876eb90e4ea687354cf8375a",
+      "identical": true,
+      "measured_ca897f7_blob": "50af5b8eba670889876eb90e4ea687354cf8375a",
+      "working_tree_sha256": "75347919cdef4da6ea2a257632202292d3ce5b00695f3d8b6b51425cf26efa93"
+    }
+  },
+  "hot_path_identical_to_measured": false,
+  "latency_note": "hot_path_identical_to_measured=false: LATENCY_004 numbers apply to ca897f7 only; this run full_admission_p95_ms=8.69 (FUNCTIONAL_PASS_PERFORMANCE_FAIL vs 5 ms target)",
+  "measured_admission_commit": "ca897f7badeea4f2b66a52bc684df18008bc4f4d",
+  "native_payment_dispatches": 0,
+  "not_an_execution_permit": true,
+  "owner_decision_20261108": "A03 conditional GO: verify payment contract, re-sign with trusted key, independent payment test with confirmed result; production stays inactive until then",
+  "qualification_profile": "design/QUALIFIED_CORE_PROFILE_v3.json",
+  "qualification_profile_sha256": "a689e626652ba3dfccd3362cc83d34b9ce8a94c6b40f57692ab801b3609d8031",
+  "qualified_core": "d9d38cd6fd9e93e002b0b5d5135377ce1d33d8c8",
+  "qualified_decider_sha256": "99cda684f29afba33e69b8f4811d754c499987c30c07ac1c67f19ec250ade73a",
+  "results": {
+    "authority_adversarial": {
+      "attacks": 58,
+      "by_category": {
+        "admission_issuer": {
+          "pass": 4,
+          "tests": 4
+        },
+        "consumption": {
+          "pass": 4,
+          "tests": 4
+        },
+        "cross_role": {
+          "pass": 12,
+          "tests": 12
+        },
+        "custody": {
+          "pass": 6,
+          "tests": 6
+        },
+        "epoch": {
+          "pass": 1,
+          "tests": 1
+        },
+        "evidence": {
+          "pass": 8,
+          "tests": 8
+        },
+        "expiry": {
+          "pass": 1,
+          "tests": 1
+        },
+        "forgery": {
+          "pass": 5,
+          "tests": 5
+        },
+        "monetary": {
+          "pass": 4,
+          "tests": 4
+        },
+        "positive": {
+          "pass": 1,
+          "tests": 1
+        },
+        "revocation": {
+          "pass": 5,
+          "tests": 5
+        },
+        "rotation": {
+          "pass": 3,
+          "tests": 3
+        },
+        "separation": {
+          "pass": 1,
+          "tests": 1
+        },
+        "signing": {
+          "pass": 4,
+          "tests": 4
+        },
+        "source": {
+          "pass": 3,
+          "tests": 3
+        },
+        "trust": {
+          "pass": 6,
+          "tests": 6
+        },
+        "trust_anchor": {
+          "pass": 3,
+          "tests": 3
+        },
+        "worker": {
+          "pass": 2,
+          "tests": 2
+        }
+      },
+      "cross_role_substitutions_accepted": 0,
+      "failed": [],
+      "incorrect_monetary_terms_accepted": 0,
+      "passed": 73,
+      "python": "3.14.7 (tags/v3.14.7:823f032, Aug  5 2026, 10:51:32) [MSC v.1944 64 bit (AMD64)]",
+      "revoked_permissions_accepted": 0,
+      "runtime": "BCh (QualifiedSources + consolidated worker + PreparedAdmission overlap)",
+      "scope": "TEST role keys in a temporary DPAPI store (environment TEST-AUTHORITY-005); conformance-only Core/CAGE/VEIP sources; FakePayPal",
+      "seconds": 19.8,
+      "tests": 73,
+      "unauthorized_admissions": 0,
+      "verdict": "PASS"
+    },
+    "qualification_BCh": {
+      "A03_passed": 13,
+      "A03_total": 13,
+      "alpha_matched_cases": 1000,
+      "alpha_mismatches": 0,
+      "architecture": "BCh",
+      "captures": 0,
+      "false_authorizations": 0,
+      "full_admission_p95_ms": 8.6892,
+      "go_to_a05": false,
+      "model_matched_cases": 1200,
+      "model_mismatches": 0,
+      "native_dispatches": 0,
+      "operational_acceptance": "BLOCKED_OWNER_KEYS_AND_INDEPENDENT_ACCEPTANCE_ABSENT",
+      "overall": "BLOCKED",
+      "performance": "FUNCTIONAL_PASS_PERFORMANCE_FAIL",
+      "source_unchanged": true,
+      "warm_negative_failures": 0
+    },
+    "reaccept_suites_61dd814": {
+      "A03_v1_conformance": "13/13 OK",
+      "A04_unittest": "42/42 OK",
+      "authority_adversarial": "73/73, 58 attacks, 0 unauthorized admissions",
+      "formal001_negatives": "6/6, 0 forbidden POSTs",
+      "qualification_BCh": "A03 13/13, model mismatches 0/1200, alpha mismatches 0/1000, false authorizations 0"
+    }
+  },
+  "reviewer_must_also_review": [
+    "compiler and axiom transcripts of the qualified Formal Core (FORMAL_CORE_001)",
+    "A01/A02 upstream acceptance evidence (not present on this host)",
+    "actual Core/CAGE/VEIP source provenance and key custody (not provisioned)",
+    "process and key custody (docs/AUTHORITY_CUSTODY.md, registry and enrollments)",
+    "latency disposition: GO under unthrottled host conditions only (COMMERCE_LATENCY_004)"
+  ],
+  "schema": "commerce.bridge.review-request.v5",
+  "signature": null,
+  "signers_required": {
+    "acceptance": "designated INDEPENDENT reviewer (not Claude, not the operator): A03 acceptance, A01/A02 upstream, installation manifest",
+    "admission": "designated admission issuer: commerce_authority sign-permit over a real eligible issuer request",
+    "control": "Veraxis operator: real mission, control, bridge policy (with real Core/CAGE/VEIP/reporter keys)"
+  },
+  "source_commit": "61dd8146e642766118f27d22c3896048b0d5e850",
+  "status": "UNSIGNED_REVIEW_REQUIRED",
+  "supersedes": {
+    "changed_bound_files": [
+      "commerce_adapter/gateway.py",
+      "commerce_bridge/admission.py",
+      "commerce_bridge/prepared.py"
+    ],
+    "contract_review": "a03_reaccept/CONTRACT_REVIEW.md",
+    "review_request": "authority_tests/evidence/REVIEW_REQUEST_v4_UNSIGNED.json",
+    "source_commit": "57f32fa9f66422f62855b34260621d33c4c63ca8"
+  }
+}
