@@ -1,0 +1,7 @@
+web/node_modules/
+web/dist/
+# run evidence holds Channel3 buy URLs with account attribution ids and the A04 ledgers: deposited to Dropbox, not GitHub
+runs/
+ai_turns/
+probe_raw/
+evidence/
