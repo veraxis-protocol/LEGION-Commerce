@@ -34,8 +34,13 @@ def main():
         require(len(captures) == 1 and order["status"] == "COMPLETED", "NONFINAL_OR_DUPLICATE")
         cid = provider_id(captures[0]["id"])
         detail = provider.request("GET", f"/v2/payments/captures/{cid}")[1]
+        # Money is compared as (currency_code, value). PayPal returns the order's purchase-unit amount with an
+        # extra (here empty) "breakdown" object, so whole-object equality failed on a real COMPLETED $99.00 capture
+        # (2026-11-09, READBACK_MISMATCH x2 preserved as evidence). Amount, currency, IDs and statuses stay exact.
+        money = lambda a: (a["currency_code"], a["value"])
         require(detail["id"] == cid and detail["status"] == captures[0]["status"] == "COMPLETED"
-                and detail["amount"] == captures[0]["amount"] == unit["amount"]
+                and money(detail["amount"]) == money(captures[0]["amount"]) == money(unit["amount"])
+                and money(detail["amount"]) == ("USD", f"{r['amount'] // 100}.{r['amount'] % 100:02d}")
                 and detail["supplementary_data"]["related_ids"]["order_id"] == r["order_id"], "READBACK_MISMATCH")
         out = {"schema": "commerce.demo.paypal-readback.v1", "process": "separate (python -m commerce_demo.readback)", "source": provider.evidence_mode,
                "environment": "PAYPAL_SANDBOX (no real money)", "effect_id": eid, "ledger_effects": n_effects,
