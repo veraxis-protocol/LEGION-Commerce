@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LEGION Deal Rescue</title>
+<style>
+:root{--bg:#f6f7f9;--card:#fff;--ink:#14181f;--mut:#5b6472;--line:#e3e6eb;--acc:#1f4fd1;--acc2:#e8eefc;--ok:#106b3a;--okbg:#e6f4ec;--bad:#a3261b;--badbg:#fbeae8;--warn:#8a5a00;--warnbg:#fdf3dc;--z:#4b5563;--zbg:#eef0f3}
+*{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+button{font:inherit;cursor:pointer}
+header{background:#fff;border-bottom:1px solid var(--line);padding:14px 28px;display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+.brand{font-weight:700;font-size:18px;letter-spacing:-.01em}.brand small{display:block;font-weight:400;color:var(--mut);font-size:13px}
+.spacer{flex:1}
+select{font:inherit;padding:6px 8px;border:1px solid var(--line);border-radius:8px;background:#fff}
+.badges{display:flex;gap:8px;flex-wrap:wrap;padding:10px 28px;background:#fff;border-bottom:1px solid var(--line)}
+.b{font-size:12px;font-weight:600;padding:3px 8px;border-radius:999px;border:1px solid transparent;white-space:nowrap}
+.b.sim{background:var(--warnbg);color:var(--warn);border-color:#f0dcae}.b.ok{background:var(--okbg);color:var(--ok)}.b.bad{background:var(--badbg);color:var(--bad)}.b.z{background:var(--zbg);color:var(--z)}.b.acc{background:var(--acc2);color:var(--acc)}
+nav.steps{display:flex;gap:4px;padding:14px 28px 0;flex-wrap:wrap}
+nav.steps button{border:0;background:transparent;padding:8px 12px;border-radius:8px 8px 0 0;color:var(--mut);font-weight:600;border-bottom:3px solid transparent}
+nav.steps button.on{color:var(--ink);border-bottom-color:var(--acc)}
+main{max-width:1240px;margin:0 auto;padding:22px 28px 60px}
+h1{font-size:28px;letter-spacing:-.02em;margin:4px 0 6px}h2{font-size:19px;margin:22px 0 10px}h3{font-size:15px;margin:0 0 6px}
+.lead{color:var(--mut);margin:0 0 18px;max-width:860px}
+.grid{display:grid;gap:14px}.g5{grid-template-columns:repeat(5,minmax(0,1fr))}.g3{grid-template-columns:repeat(3,minmax(0,1fr))}.g2{grid-template-columns:repeat(2,minmax(0,1fr))}.g4{grid-template-columns:repeat(4,minmax(0,1fr))}
+@media(max-width:1100px){.g5{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:760px){.g5,.g3,.g2,.g4{grid-template-columns:1fr}header,main,.badges,nav.steps{padding-left:16px;padding-right:16px}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px}
+.card.tight{padding:12px}
+.kv{display:flex;justify-content:space-between;gap:10px;font-size:14px;padding:3px 0}.kv span:first-child{color:var(--mut)}
+.num{font-variant-numeric:tabular-nums;font-weight:650;border-bottom:1px dotted #9aa3b2;cursor:help}
+.big{font-size:26px;font-weight:700;letter-spacing:-.02em}
+.st{display:inline-block;font-size:12px;font-weight:700;padding:2px 7px;border-radius:6px}
+.st.ok{background:var(--okbg);color:var(--ok)}.st.bad{background:var(--badbg);color:var(--bad)}.st.z{background:var(--zbg);color:var(--z)}.st.warn{background:var(--warnbg);color:var(--warn)}
+.cta{display:flex;gap:10px;margin-top:20px;flex-wrap:wrap}
+.btn{border:1px solid var(--acc);background:var(--acc);color:#fff;border-radius:9px;padding:9px 16px;font-weight:600}
+.btn.sec{background:#fff;color:var(--acc)}.btn[disabled]{background:#eef0f3;color:#8a93a3;border-color:#d8dce3;cursor:not-allowed}
+.ver{border-left:4px solid var(--line)}.ver.ok{border-left-color:var(--ok)}.ver.bad{border-left-color:var(--bad)}.ver.warn{border-left-color:#d9a63a}
+.dots{display:flex;gap:4px;flex-wrap:wrap;margin-top:8px}.dot{font-size:11px;padding:2px 6px;border-radius:5px;background:var(--zbg);cursor:pointer}
+.dot.ACCEPT{background:var(--okbg);color:var(--ok)}.dot.REJECT{background:var(--badbg);color:var(--bad)}
+.strip{display:flex;gap:18px;align-items:center;flex-wrap:wrap;background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin-top:16px}
+table{width:100%;border-collapse:collapse;font-size:13.5px}th,td{text-align:left;padding:7px 8px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--mut);font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.03em}
+td.mono,.mono{font-family:ui-monospace,Consolas,monospace;font-size:12px}
+.tl{max-height:430px;overflow:auto;border:1px solid var(--line);border-radius:12px;background:#fff}
+.tl .row{display:grid;grid-template-columns:86px 1fr 120px;gap:10px;padding:7px 12px;border-bottom:1px solid var(--line);font-size:13.5px;cursor:pointer}
+.tl .row.future{opacity:.28}.tl .row.cur{background:var(--acc2)}
+.tl .row .t{color:var(--mut);font-variant-numeric:tabular-nums}
+.ctrl{display:flex;gap:8px;align-items:center;margin:8px 0;flex-wrap:wrap}
+.ctrl button{border:1px solid var(--line);background:#fff;border-radius:8px;padding:5px 11px}
+.drawer{position:fixed;inset:0 0 0 auto;width:min(620px,100%);background:#fff;border-left:1px solid var(--line);box-shadow:-8px 0 30px rgba(0,0,0,.08);transform:translateX(100%);transition:transform .2s;z-index:20;display:flex;flex-direction:column}
+.drawer.open{transform:none}.drawer header{padding:12px 16px}.drawer pre{margin:0;padding:14px 16px;overflow:auto;flex:1;font-size:12px;background:#fafbfc}
+.modal{position:fixed;inset:0;background:rgba(20,24,31,.45);display:none;z-index:30;padding:30px 16px;overflow:auto}.modal.open{display:block}
+.modal .inner{max-width:1100px;margin:0 auto;background:#fff;border-radius:14px;padding:22px}
+.note{font-size:13px;color:var(--mut)}
+.pill-row{display:flex;gap:6px;flex-wrap:wrap}
+.who{font-weight:650}
+.hidden{display:none}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand">LEGION Deal Rescue<small>Turn customer requests you cannot fulfill into verified business opportunities.</small></div>
+  <div class="spacer"></div>
+  <label class="note">Evidence run&nbsp;<select id="runSel" aria-label="evidence run"></select></label>
+</header>
+<div class="badges" id="badges"></div>
+<nav class="steps" id="steps"></nav>
+<main id="main"><p class="note">Loading evidence…</p></main>
+
+<aside class="drawer" id="drawer" aria-live="polite">
+  <header style="display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--line)"><b id="drTitle">Evidence</b><span class="spacer" style="flex:1"></span><button class="btn sec" onclick="closeDrawer()">Close</button></header>
+  <pre id="drBody"></pre>
+</aside>
+<div class="modal" id="modal"><div class="inner" id="modalBody"></div></div>
+
+<script>
+const S = { run: null, d: null, ctx: null, step: 0, replay: { i: -1, playing: false, speed: 1, timer: null } };
+const STEPS = ["1 Unfulfilled demand", "2 Opportunity found", "3 Agreement & terms", "4 Verified execution", "5 Outcome & PayPal"];
+const $ = (s) => document.querySelector(s);
+const esc = (x) => String(x ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const usd = (c) => "$" + (c / 100).toLocaleString("en-US", { minimumFractionDigits: c % 100 ? 2 : 0, maximumFractionDigits: 2 });
+
+// F(): every material number is rendered from a figure id that carries its evidence reference.
+function F(id, fmt) {
+  const f = S.d.figures[id];
+  if (!f) return `<span class="num" data-fig="${esc(id)}" data-missing="1">EVIDENCE UNAVAILABLE</span>`;
+  const v = fmt ? fmt(f.value) : f.value;
+  const ref = f.ref ? `${f.ref.file}${f.ref.seq != null ? "#" + f.ref.seq : "@" + f.ref.line}` : "";
+  return `<span class="num" tabindex="0" data-fig="${esc(id)}" data-ref="${esc(ref)}" title="${esc(ref || "derived from " + (f.derived_from || []).join(", "))}">${esc(v)}</span>`;
+}
+// R(): a link to the exact retained record.
+const R = (ref, text) => `<a href="#" class="mono" data-ref="${esc(ref)}">${esc(text || ref)}</a>`;
+
+document.addEventListener("click", (e) => {
+  const a = e.target.closest("[data-ref]");
+  if (a && a.dataset.ref) { e.preventDefault(); openRecord(a.dataset.ref, a.dataset.fig); }
+});
+async function openRecord(ref, fig) {
+  $("#drTitle").textContent = `${S.run} · ${ref}`;
+  $("#drBody").textContent = "Loading…";
+  $("#drawer").classList.add("open");
+  try {
+    const r = await (await fetch(`/api/record?run=${encodeURIComponent(S.run)}&ref=${encodeURIComponent(ref)}`)).json();
+    const f = fig ? S.d.figures[fig] : null;
+    $("#drBody").textContent = (f ? `figure ${fig} = ${JSON.stringify(f.value)}\npath ${JSON.stringify(f.ref.path)}\nevidence_mode ${f.evidence_mode}\n\n` : "") + JSON.stringify(r.record ?? r, null, 1);
+  } catch (err) { $("#drBody").textContent = "EVIDENCE UNAVAILABLE: " + err; }
+}
+function closeDrawer() { $("#drawer").classList.remove("open"); }
+function openModal(html) { $("#modalBody").innerHTML = html; $("#modal").classList.add("open"); }
+$("#modal").addEventListener("click", (e) => { if (e.target.id === "modal" || e.target.dataset.close) $("#modal").classList.remove("open"); });
+
+async function load(run) {
+  S.run = run;
+  S.d = await (await fetch(`/api/dossier?run=${encodeURIComponent(run)}`)).json();
+  S.ctx = S.ctx || await (await fetch("/api/context")).json();
+  S.replay.i = -1;
+  renderChrome(); go(S.step);
+}
+function renderChrome() {
+  const d = S.d, b = d.badges;
+  $("#badges").innerHTML = [
+    `<span class="b acc">run ${esc(d.run_id)}</span>`,
+    `<span class="b ${d.evidence_mode === "HISTORIC_REPLAY" ? "z" : "acc"}">${esc(b.replay)}</span>`,
+    `<span class="b sim">${esc(b.requests)}</span>`, `<span class="b sim">${esc(b.world)}</span>`,
+    `<span class="b bad">${esc(b.paypal)}</span>`, `<span class="b warn sim">${esc(b.economics)}</span>`,
+    `<span class="b z">source ${esc((d.source_commit || "uncommitted").slice(0, 7))}</span>`].join("");
+  $("#steps").innerHTML = STEPS.map((s, i) => `<button class="${i === S.step ? "on" : ""}" onclick="go(${i})">${s}</button>`).join("") +
+    `<button onclick="showDossier()">Deal Dossier</button><button onclick="showPassport()">Execution Passport</button>`;
+}
+function go(i) { S.step = i; stopReplay(); renderChrome(); $("#main").innerHTML = [s1, s2, s3, s4, s5][i](); window.scrollTo(0, 0); if (i === 3) paintReplay(); }
+
+// ---------- Screen 1
+function s1() {
+  const d = S.d;
+  return `<h1>${F("req.count_unfulfillable")} customer requests you couldn't accept</h1>
+  <p class="lead">Each customer asked for a small batch of the same qualified sensor module. Your factory only takes orders of ${F("contract.moq")} units or more, so none of these orders could be placed on its own.
+  <span class="b sim">DEMO REQUESTS — SYNTHETIC</span> The storefront here is a demonstration merchant (merchant-of-record candidate), not a signing party.</p>
+  <div class="grid g5">${d.requests.map((r) => { const L = r.customer.slice(-1); return `<div class="card">
+    <h3>${esc(r.customer)}</h3>
+    <div class="kv"><span>Wants</span><span>${F(`req.${L}.units`)} sensor modules</span></div>
+    <div class="kv"><span>Pays at most</span><span>${F(`req.${L}.cap`, usd)}</span></div>
+    <div class="kv"><span>Why refused</span><span>${F(`req.${L}.reason`)}</span></div>
+    <div style="margin-top:8px"><span class="st bad">CANNOT FULFILL ALONE</span> <span class="note">(feasible alone: ${F(`req.${L}.alone`, (v) => (v ? "yes" : "no"))})</span></div>
+    <div class="note" style="margin-top:8px">Published intent ${R(r.publication_ref, r.intent_id)}</div></div>`; }).join("")}</div>
+  <div class="strip"><b>Factory minimum order: ${F("contract.moq")} units.</b><span class="note">Individual request: ${F("req.A.units")} units. Direct orders from each customer to the factory were refused 5/5 in the baseline (A0) — see ${R("NEGOTIATION_TRACE.jsonl#" + d.events.find((e) => e.kind === "DISCOVERY").ref.split("#")[1], "the refusal record")}.</span></div>
+  <div class="cta"><button class="btn" onclick="go(1)">Rescue these requests</button></div>`;
+}
+// ---------- Screen 2
+function s2() {
+  const o = S.d.opportunity, cf = S.ctx["COUNTERFACTUAL_A0_A1_A2_A3.json"];
+  return `<h1>Opportunity found: 5 compatible buyers → ${F("opp.sum_units")} units → factory minimum reached (${F("opp.meets_moq", (v) => (v ? "yes" : "no"))})</h1>
+  <p class="lead">LEGION's marketplace read only what each party chose to publish (${o.discovery_live_intents} live intents: ${Object.entries(o.intents_by_kind).map(([k, v]) => v + " " + k).join(", ")}). It found one group whose combined order meets the factory minimum. <b>Finding a match is not permission:</b> the proposal carries authorization “${F("opp.authorization")}”. Every party still has to sign its own commitment.</p>
+  <div class="grid g3">
+   <div class="card"><h3>Buyers (5 independent owners)</h3>${S.d.requests.map((r) => `<div class="kv"><span>${esc(r.customer)}</span><span>20 units · cap ${usd(r.max_cents)}</span></div>`).join("")}</div>
+   <div class="card"><h3>Manufacturer (independent owner)</h3><p class="note">owner:f1 — minimum order ${F("contract.moq")}, private prices and costs stay inside its own process. Delivers only qualified designs.</p>
+     <h3 style="margin-top:12px">Qualification engineer (independent owner)</h3><p class="note">owner:e1 — certifies the lot against the QF-7 fixture; never certifies an untested variant.</p></div>
+   <div class="card"><h3>Why these parties match</h3>
+     <div class="kv"><span>Same specification</span><span class="st ${o.spec_match ? "ok" : "bad"}">${o.spec_match ? "YES" : "NO"}</span></div>
+     <div class="kv"><span>Distinct owners</span><span class="st ${o.distinct_owners ? "ok" : "bad"}">${o.distinct_owners ? "YES" : "NO"}</span></div>
+     <div class="kv"><span>Combined units</span><span>${F("opp.sum_units")}</span></div>
+     <div class="kv"><span>Within factory capacity</span><span class="st ${o.within_capacity ? "ok" : "bad"}">${o.within_capacity ? "YES" : "NO"}</span></div>
+     <div class="note" style="margin-top:6px">Match record ${R(o.match_ref)}</div></div>
+  </div>
+  <h2>Compared with alternatives</h2>
+  <div class="grid g4">
+   <div class="card tight"><h3>A0 · each customer alone</h3><span class="st bad">5/5 REFUSED</span><p class="note">Direct 20-unit orders fail the factory minimum.</p></div>
+   <div class="card tight"><h3>A3 · central matcher, same public data</h3><span class="st z">SAME MATCH (PARITY)</span><p class="note">LEGION does not claim better matching. Its difference: per-owner signed consent, private terms and verified execution.</p></div>
+   <div class="card tight"><h3>A1 · peers known in advance</h3><span class="st ok">${esc(cf?.A1?.judge?.verdict || "Z")}</span><p class="note">No discovery claim.</p></div>
+   <div class="card tight"><h3>A4 · real group-buying intermediary</h3><span class="st z">NOT TESTED (Z)</span><p class="note">Market superiority is unproven.</p></div>
+  </div>
+  <div class="cta"><button class="btn" onclick="go(2)">Review a proposed deal</button><button class="btn sec" onclick="go(0)">Back</button></div>`;
+}
+// ---------- Screen 3
+function verCard(v) {
+  const n = v.version, ok = v.final_state === "FULFILLED", bad = v.final_state === "FAILED";
+  const fr = v.failure;
+  return `<div class="card ver ${ok ? "ok" : bad ? (n === 2 ? "bad" : "warn") : ""}">
+   <div style="display:flex;justify-content:space-between;align-items:baseline"><h3>Version ${F(`v${n}.version`)} · design ${F(`v${n}.design`)}</h3><span class="st ${ok ? "ok" : "bad"}">${ok ? "ACCEPTED & EXECUTED" : n === 2 ? "DENIED (budget)" : "WITHDRAWN"}</span></div>
+   <div class="big">${F(`v${n}.total`, usd)} <span class="note" style="font-size:14px;font-weight:400">= ${F(`v${n}.per_buyer`, usd)} per buyer</span></div>
+   <div class="kv"><span>Factory</span><span>${F(`v${n}.factory`, usd)}</span></div>
+   <div class="kv"><span>Qualification (engineer)</span><span>${F(`v${n}.qual`, usd)}</span></div>
+   <div class="kv"><span>Shipping</span><span>${F(`v${n}.ship`, usd)}</span></div>
+   <div class="kv"><span>Contract state</span><span>${F(`v${n}.final_state`)}</span></div>
+   ${fr ? `<div class="kv"><span>Why</span><span>${F(`v${n}.fail_reason`)}</span></div>` : ""}
+   <div class="note" style="margin-top:6px">Signatures: ${F(`v${n}.accepts`)} of ${v.commitments.length} accepted · contract ${R(v.ref, v.contract_hash.slice(0, 12))}</div>
+   <div class="dots">${v.commitments.map((k) => `<span class="dot ${k.decision}" data-ref="${esc(k.ref)}" title="${esc(k.owner_id)} ${k.decision} (failed checks: ${esc(k.failed_checks)})">${esc(k.owner_id.replace("owner:", ""))} ${k.decision}</span>`).join("")}</div>
+  </div>`;
+}
+function s3() {
+  const d = S.d, v = d.terms_versions, rd = d.rejected_designs;
+  return `<h1>Agreement & terms</h1>
+  <p class="lead">Three versions of the same deal. The original requirements (20 units each, $100 cap each, same specification) never changed; every price change needed fresh signatures from every party.</p>
+  <div class="grid g3">${v.map(verCard).join("")}</div>
+  <div class="grid g2" style="margin-top:14px">
+   <div class="card"><h3>Why version 2 was denied</h3><p>After the price shock <span class="b sim">INJECTED / TEST</span> (${R(d.price_shock.ref, "environment event")}), the factory's price rose to ${F("v2.factory", usd)}. Each customer's share would have been ${F("v2.per_buyer", usd)}, above its own ${F("req.A.cap", usd)} cap, so all five customers refused independently (failed check: <b>payment_within_my_cap</b>). The total ${F("v2.total", usd)} also exceeds the combined ${F("econ.max_at_caps", usd)}.</p>
+   <p class="note">Version 1 had been signed by all seven parties, but the shock made the factory's commitment inactive, so the coordinator withdrew it rather than execute stale terms.</p></div>
+   <div class="card"><h3>Why the cheaper design was refused</h3>${rd.map((r) => `<p>Design <b>${esc(r.design)}</b> was cheaper at ${F(`qual.${r.design}.factory`, usd)}, but the independent engineer's qualification was ${F(`qual.${r.design}.pass`, (x) => (x ? "PASS" : "FAIL"))}. It was not offered (${R(r.ref, "qualification record")}).</p>`).join("")}
+   <p class="note">Version 3 uses design D-B, which passed qualification at ${F("v3.total", usd)}, i.e. ${F("v3.per_buyer", usd)} per customer, within every individual cap.</p></div>
+  </div>
+  <div class="strip"><b>Economics at version 3</b><span>Buyers pay ${F("econ.proceeds", usd)}</span><span>Costs passed through ${F("v3.total", usd)}</span><span>Pass-through contribution <b>${F("econ.contribution", usd)}</b> before overhead</span><span class="st warn">PROFITABILITY NOT ESTABLISHED</span></div>
+  <div class="cta"><button class="btn" onclick="go(3)">See verified execution</button><button class="btn sec" onclick="go(1)">Back</button></div>`;
+}
+// ---------- Screen 4 (replay of actual timestamped events)
+function s4() {
+  const d = S.d, j = d.judge, cf = S.ctx["COUNTERFACTUAL_A0_A1_A2_A3.json"];
+  const hist = cf?.A2_historic?.attempts || [];
+  return `<h1>Verified execution</h1>
+  <p class="lead">A time-ordered replay of the run's recorded events: manufacture, qualification, five shipments and five ledger payments. <b>All of these are SIMULATED world effects</b> inside each owner's own process; nothing physical was made or shipped. ${F("exec.simulated_receipts")} signed receipts; ${F("exec.non_simulated_receipts")} non-simulated.</p>
+  <div class="grid" style="grid-template-columns:2fr 1fr">
+   <div>
+    <div class="ctrl"><button onclick="playReplay()" id="playBtn">Play</button><button onclick="stopReplay()">Pause</button><button onclick="stepReplay()">Step</button><button onclick="S.replay.i=-1;paintReplay()">Reset</button>
+      <label class="note">speed <select id="spd" onchange="S.replay.speed=+this.value"><option value="1">1×</option><option value="4">4×</option><option value="16">16×</option></select></label>
+      <span class="b ${d.evidence_mode === "HISTORIC_REPLAY" ? "z" : "acc"}">${d.evidence_mode === "HISTORIC_REPLAY" ? "HISTORICAL REPLAY" : "REPLAY OF FRESH RUN"}</span><span class="note" id="rpos"></span></div>
+    <div class="tl" id="tl">${d.events.map((e, i) => `<div class="row" id="ev${i}" data-ref="${esc(e.ref.includes("@") || e.ref.includes("#") ? e.ref : "")}"><span class="t">+${(e.t - d.events[0].t).toFixed(2)}s</span><span>${esc(e.label)}</span><span class="note mono">${esc(e.event_id.split(":")[1])} · ${esc(e.scope)}</span></div>`).join("")}</div>
+   </div>
+   <div>
+    <div class="card"><h3>Independent Judge</h3><div class="big"><span class="st ${j.verdict === "PASS_COMPLETED" ? "ok" : "bad"}" style="font-size:16px">${esc(j.verdict)}</span></div>
+     <div class="kv"><span>Checks</span><span>${j.checks_passed}/${j.checks_total}</span></div>
+     <div class="kv"><span>Scope</span><span>SYNTHETIC</span></div>
+     <div class="kv"><span>Tamper tests detected</span><span>${Object.values(j.tamper_mutants || {}).filter((x) => x.detected).length}/${Object.keys(j.tamper_mutants || {}).length}</span></div>
+     <div class="kv"><span>Evidence hashes match</span><span class="st ${j.evidence_hashes_match_rendered_files ? "ok" : "bad"}">${j.evidence_hashes_match_rendered_files ? "YES" : "NO"}</span></div>
+     <p class="note">Read-only process with its own key; read each owner's world state live. Its verdict is never set by the UI or by the coordinator.</p></div>
+    <div class="card" style="margin-top:12px"><h3>Why this is trusted: earlier attempts</h3>
+     ${hist.map((a, i) => `<div class="kv"><span>A2 attempt ${i + 1}</span><span class="st ${a.judge.verdict === "PASS_COMPLETED" ? "ok" : "bad"}">${esc(a.outcome)} · Judge ${esc(a.judge.verdict)}</span></div>${a.cause ? `<div class="note" style="margin:-2px 0 6px">${esc(a.cause)}</div>` : ""}`).join("")}
+     <div class="kv"><span>Historic first-attempt success</span><span class="st bad">0/1</span></div>
+     ${cf?.A2_fresh_WO004 ? `<div class="kv"><span>WO-004 fresh first attempt</span><span class="st ${cf.A2_fresh_WO004.first_attempt_pass ? "ok" : "bad"}">${esc(cf.A2_fresh_WO004.outcome)} · ${esc(cf.A2_fresh_WO004.judge.verdict)}</span></div>` : ""}
+     <p class="note">Attempt 2 shows the Judge catching a confidentiality leak; it is kept as a negative example.</p></div>
+   </div>
+  </div>
+  <div class="cta"><button class="btn" onclick="go(4)">See outcome & PayPal status</button><button class="btn sec" onclick="showPassport()">Open evidence passport</button><button class="btn sec" onclick="go(2)">Back</button></div>`;
+}
+function paintReplay() {
+  const n = S.d.events.length, i = S.replay.i;
+  S.d.events.forEach((_, k) => { const el = document.getElementById("ev" + k); if (el) { el.classList.toggle("future", i >= 0 && k > i); el.classList.toggle("cur", k === i); } });
+  const p = $("#rpos"); if (p) p.textContent = i < 0 ? `${n} recorded events` : `event ${i + 1}/${n} · ${S.d.events[i].event_id}`;
+  const c = document.getElementById("ev" + i); if (c) c.scrollIntoView({ block: "nearest" });
+}
+function stepReplay() { if (S.replay.i < S.d.events.length - 1) { S.replay.i++; paintReplay(); return true; } return false; }
+function playReplay() {
+  stopReplay(); S.replay.playing = true;
+  const tick = () => {
+    if (!stepReplay()) return stopReplay();
+    const e = S.d.events, i = S.replay.i;
+    const dt = i + 1 < e.length ? Math.min(2.5, Math.max(0.05, e[i + 1].t - e[i].t)) : 0;
+    S.replay.timer = setTimeout(tick, (dt * 1000) / S.replay.speed);   // gaps derived from the recorded timestamps (capped at 2.5 s)
+  };
+  tick();
+}
+function stopReplay() { clearTimeout(S.replay.timer); S.replay.playing = false; }
+// ---------- Screen 5
+function s5() {
+  const d = S.d, p = d.paypal, e = d.economics, pre = S.ctx["PAYPAL_AUTHORITY_PREFLIGHT.json"];
+  return `<h1>Outcome & PayPal</h1>
+  <p class="lead">What changed for the merchant <b>in this demonstration scenario</b>, and exactly what has, and has not, happened with money.</p>
+  <div class="grid g4">
+   <div class="card"><div class="note">Before</div><div class="big">${F("req.count_unfulfillable")}</div><div>individually unfulfillable requests</div></div>
+   <div class="card"><div class="note">After (simulated)</div><div class="big">${d.judge.verdict === "PASS_COMPLETED" ? 1 : 0}</div><div>Judge-verified synthetic deal · 5 conditional orders · ${F("opp.sum_units")} simulated units</div></div>
+   <div class="card"><div class="note">Proposed deal value <span class="b sim">SYNTHETIC WORLD VALUE</span></div><div class="big">${F("econ.proceeds", usd)}</div><div>${F("v3.per_buyer", usd)} per customer</div></div>
+   <div class="card"><div class="note">PayPal Sandbox captures confirmed <span class="b bad">REAL SANDBOX</span></div><div class="big">${usd(p.provider_confirmed_cents)}</div><div>${p.readback_confirmed_captures}/${p.slots_total} payers · real incremental TPV: <b>unknown</b></div></div>
+  </div>
+  <h2>Five individual payers</h2>
+  <div class="card" style="padding:0"><table><thead><tr><th>Payer</th><th>Amount</th><th>Payee</th><th>Status (exact)</th><th>Evidence</th></tr></thead><tbody>
+   ${p.slots.map((s) => `<tr><td class="who">${esc(s.customer)}</td><td>${usd(s.amount_cents)} ${esc(s.currency)}</td><td>${esc(s.payee)}</td>
+     <td><span class="st ${s.state.startsWith("NOT_AUTH") ? "z" : "warn"}">${esc(s.state)}</span>${s.order_id_masked ? `<div class="note">order ${esc(s.order_id_masked)} · captures ${s.captures}</div>` : ""}</td>
+     <td class="note">${esc(s.evidence_mode)}<br>${esc(s.status_source)}</td></tr>`).join("")}
+  </tbody></table></div>
+  <div class="grid g2" style="margin-top:14px">
+   <div class="card"><h3>Why no payment can be taken now</h3><p class="note">A PayPal order is only created when all eight authority checks are true. Current read-only result: <b>${esc(pre?.admission || "Z")}</b>. No new PayPal request was sent.</p>
+    <table><tbody>${(pre?.checks || []).map((c) => `<tr><td>${c.n}</td><td>${esc(c.check)}</td><td><span class="st ${c.verdict === "T" ? "ok" : c.verdict === "F" ? "bad" : "z"}">${c.verdict}</span></td></tr>`).join("")}</tbody></table></div>
+   <div class="card"><h3>Did anyone make a profit?</h3><p><b>No profit is established.</b> At version 3 the customers pay ${F("econ.proceeds", usd)} and the factory, engineer and shipping cost ${F("v3.total", usd)}: contribution ${F("econ.contribution", usd)} before payment fees, AI inference, verification and support (all unknown). Even at the customers' caps, headroom is only ${F("econ.headroom", usd)}.</p>
+    <span class="st warn">${esc(e.verdict)}</span><p class="note">Factory price is a quote paid to the factory; its own margin is unknown.</p></div>
+  </div>
+  <div class="cta"><button class="btn" onclick="showDossier()">Deal Dossier</button><button class="btn sec" onclick="go(3);playReplay()">Replay</button>
+   <button class="btn sec" disabled title="No PayPal readback exists for this run: payment not authorized">Inspect PayPal Readback — none (not authorized)</button></div>`;
+}
+// ---------- Dossier & passport
+function showDossier() {
+  const d = S.d, c = d.contract, cf = S.ctx["COUNTERFACTUAL_A0_A1_A2_A3.json"];
+  openModal(`<div style="display:flex;gap:10px;align-items:center"><h1 style="margin:0">Deal Dossier</h1><span class="spacer" style="flex:1"></span>
+    <a class="btn" href="/api/download?run=${encodeURIComponent(d.run_id)}" download>Download JSON</a><button class="btn sec" data-close="1">Close</button></div>
+   <p class="note">${esc(c.deal_id)} · run ${esc(d.run_id)} · ${esc(d.evidence_mode)} · built ${esc(d.built_at)} · source ${esc(d.source_commit)}</p>
+   <div class="grid g2">
+    <div class="card"><h3>1 · Original demand & refusals</h3>${d.requests.map((r) => `<div class="kv"><span>${esc(r.customer)}</span><span>${r.units} units ≤ ${usd(r.max_cents)} · ${esc(r.refusal_reason)}</span></div>`).join("")}</div>
+    <div class="card"><h3>2 · Disclosure boundary</h3><p class="note">Only published projections reached the marketplace. Private costs, customer IDs and rationale text stay inside each owner process; the Judge checks this (J8). The historic attempt 2 failed on exactly this check.</p></div>
+    <div class="card"><h3>3 · Parties (7 independent owners)</h3>${c.parties.map((p) => `<div class="kv"><span>${esc(p.owner_id)}</span><span>${esc(p.role)}</span></div>`).join("")}<div class="kv"><span>Merchant</span><span>${esc(c.merchant_role)}</span></div></div>
+    <div class="card"><h3>4 · Contract versions</h3>${d.terms_versions.map((v) => `<div class="kv"><span>v${v.version} ${v.design}</span><span>${usd(v.total_cents)} (${usd(v.per_buyer_cents)}/buyer) · ${v.final_state}</span></div>`).join("")}</div>
+    <div class="card"><h3>5 · Payment & payee map</h3>${c.payer_payee_map.map((x) => `<div class="kv"><span>${esc(x.payer)}</span><span>${usd(x.amount_cents)} → ${esc(x.payee)}</span></div>`).join("")}<p class="note">Merchant of record: ${esc(c.merchant_of_record_status)}</p></div>
+    <div class="card"><h3>6 · Judge</h3><div class="kv"><span>Verdict</span><span>${esc(d.judge.verdict)}</span></div><div class="kv"><span>Judgement id</span><span class="mono">${esc(d.judge.judgement_id)}</span></div><div class="kv"><span>Scope</span><span>${esc(d.judge.scope)}</span></div></div>
+    <div class="card"><h3>7 · Economics</h3><div class="kv"><span>Contribution before overhead</span><span>${usd(d.economics.pass_through_contribution_cents)}</span></div>${Object.keys(d.economics.unknown_cost_lines).map((k) => `<div class="kv"><span>${esc(k)}</span><span>Z</span></div>`).join("")}<div class="kv"><span>Verdict</span><span>${esc(d.economics.verdict)}</span></div></div>
+    <div class="card"><h3>8 · Blockers & next action</h3><p class="note">PayPal: ${esc(d.paypal.badge)}. Real demand, incumbent cost (A4), physical delivery and merchant-of-record are not established. Next: owner-signed A03 and new mission; one $99 Sandbox payer slot with provider readback.</p>
+     <p class="note">Baselines: A0 5/5 refused · A3 parity · historic A2 first-attempt ${cf?.A2_historic?.VCC_at_1 ?? "Z"}/1${cf?.A2_fresh_WO004 ? " · WO-004 fresh first attempt " + esc(cf.A2_fresh_WO004.judge.verdict) : ""}.</p></div>
+   </div>`);
+}
+function showPassport() {
+  const d = S.d;
+  openModal(`<div style="display:flex;gap:10px;align-items:center"><h1 style="margin:0">Execution Passport</h1><span class="spacer" style="flex:1"></span><button class="btn sec" data-close="1">Close</button></div>
+   <p class="note">Every consequential effect with its authority and receipt. Click a row to open the retained record. run ${esc(d.run_id)} · ${esc(d.evidence_mode)}</p>
+   <table><thead><tr><th>Actor</th><th>Obligation</th><th>Action</th><th>Admitted</th><th>Authorization</th><th>Effect / receipt</th><th>Contract</th><th>Epoch</th><th>Scope</th></tr></thead><tbody>
+   ${d.passport.map((x) => `<tr data-ref="${esc(x.ref)}" style="cursor:pointer"><td>${esc(x.actor_id)}</td><td class="mono">${esc(x.obligation_id)}</td><td>${esc(x.action)}</td><td><span class="st ${x.admission_verdict === "T" ? "ok" : "bad"}">${esc(x.admission_verdict)}</span></td><td class="mono">${esc(x.permit_id || "Z")}</td><td class="mono">${esc(x.effect_id)}<br>${esc(x.receipt_id)}</td><td class="mono">v${x.contract_version} ${esc(x.contract_hash.slice(0, 10))}</td><td>${x.epoch ?? "Z"}</td><td><span class="st warn">${esc(x.effect_scope)}</span></td></tr>`).join("")}
+   </tbody></table>
+   <h2>Denied acts</h2><table><tbody>${d.denied_actions.map((x) => `<tr data-ref="${esc(x.ref)}" style="cursor:pointer"><td>${esc(x.actor_id)}</td><td>v${x.contract_version}</td><td><span class="st bad">${esc(x.decision)}</span></td><td>${esc(x.grounds)}</td></tr>`).join("")}</tbody></table>`);
+}
+(async () => {
+  const runs = await (await fetch("/api/runs")).json();
+  const sel = $("#runSel");
+  sel.innerHTML = runs.map((r) => `<option value="${esc(r.run_id)}">${esc(r.run_id)} — ${r.evidence_mode === "HISTORIC_REPLAY" ? "historical replay" : "fresh synthetic run"}</option>`).join("");
+  const q = new URLSearchParams(location.search).get("run");
+  sel.value = q && runs.some((r) => r.run_id === q) ? q : runs[0].run_id;
+  sel.onchange = () => load(sel.value);
+  const st = +(new URLSearchParams(location.search).get("step") || 0); S.step = st;
+  await load(sel.value);
+})();
+</script>
+</body>
+</html>
