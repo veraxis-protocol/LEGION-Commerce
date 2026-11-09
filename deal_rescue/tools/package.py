@@ -77,7 +77,7 @@ def main(ev):
     for p in sorted(ev.rglob("*")):
         if p.is_file() and p.name != "SHA256SUMS":
             lines.append(f"{sha(p)}  {str(p.relative_to(ev)).replace(chr(92), '/')}")
-    (ev / "SHA256SUMS").write_text("\n".join(lines) + "\n")
+    (ev / "SHA256SUMS").write_text("\n".join(lines) + "\n", newline="\n")  # LF so `sha256sum -c` works on any host
     print(json.dumps({"files": len(lines), "fresh_inference": manifest["runs"]["A2-fresh-1"]["inference"]}))
 
 
