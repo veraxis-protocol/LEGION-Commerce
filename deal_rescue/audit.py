@@ -103,6 +103,9 @@ def claims(d, ui_text=""):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--evidence", required=True)
+    ap.add_argument("--counted", default="WO004-A2-fresh-1", help="run_id of the counted fresh run")
+    ap.add_argument("--replay", default="LMF006-A2-attempt-3", help="run_id of the historic replay run")
+    ap.add_argument("--negatives", default="fresh/negatives", help="dir (relative to evidence) holding NEGATIVE_RESULTS.json")
     ap.add_argument("--ui-text", help="JSON file {run_id: visible text of all screens} captured by tools/ui_check.mjs")
     a = ap.parse_args()
     ev = Path(a.evidence)
@@ -117,9 +120,9 @@ def main():
     (ev / "UI_PROVENANCE_AUDIT.json").write_text(json.dumps(report, indent=1))
 
     # ---------- negative matrix (fresh run is the counted one)
-    fd, frun = dossiers["WO004-A2-fresh-1"]
-    hd, _ = dossiers["LMF006-A2-attempt-3"]
-    harness = {c["case_id"]: c for c in json.loads((ev / "fresh" / "negatives" / "NEGATIVE_RESULTS.json").read_text())["cases"]}
+    fd, frun = dossiers[a.counted]
+    hd, _ = dossiers[a.replay]
+    harness = {c["case_id"]: c for c in json.loads((ev / a.negatives / "NEGATIVE_RESULTS.json").read_text())["cases"]}
     mut = fd["judge"]["tamper_mutants"]
     H = lambda *ids: [{"case": i, "desc": harness[i]["description"], "pass": harness[i]["pass"], "forbidden_effects": harness[i]["forbidden_effects"]} for i in ids]
     J = lambda t: {"judge_tamper_mutant": t, "verdict": mut[t]["verdict"], "detected": mut[t]["detected"]}
@@ -150,7 +153,7 @@ def main():
                                                        aud_mutant("historic PayPal state on fresh run", lambda m: m["paypal"]["slots"][0].__setitem__("evidence_mode", "REAL_SANDBOX (historic)"), lambda m: claims(m)["pass"]),
                                                        {"run_observation": "fresh run PayPal slots bound to historic mission: %s" % fd["paypal"]["historic_mission_bound_to_this_contract"], "pass": not fd["paypal"]["historic_mission_bound_to_this_contract"]}]),
         ("N13", "caps met but contribution <= 0 -> no PROFITABLE claim", [aud_mutant("badge says PROFITABLE", lambda m: m["badges"].__setitem__("economics", "PROFITABLE"), lambda m: claims(m)["pass"]),
-                                                                           {"run_observation": "contribution %d cents; claims check %s" % (fd["economics"]["pass_through_contribution_cents"], report["WO004-A2-fresh-1"]["claims"]["pass"]), "pass": report["WO004-A2-fresh-1"]["claims"]["pass"]}]),
+                                                                           {"run_observation": "contribution %d cents; claims check %s" % (fd["economics"]["pass_through_contribution_cents"], report[a.counted]["claims"]["pass"]), "pass": report[a.counted]["claims"]["pass"]}]),
         ("N14", "callback navigation without provider APPROVED -> no capture", [{"paypal_leg": "BLOCKED: not exercised (no authority)", "pass": None}]),
         ("N15", "replay event without source record", [aud_mutant("fabricated event", lambda m: m["events"].append({**m["events"][-1], "event_id": "x:999", "ref": "RECEIPTS.jsonl#999", "label": "SIMULATED: fake"}), lambda m: provenance(m, frun)["pass"])]),
     ]
@@ -168,8 +171,8 @@ def main():
         out.append({"id": cid, "attack": desc, "status": status + (" (synthetic leg; PayPal leg BLOCKED)" if partial else ""), "evidence": items})
     summ = {"attempted": sum(1 for c in out if not c["status"].startswith("BLOCKED")), "passed": sum(1 for c in out if c["status"].startswith("PASS")),
             "blocked": [c["id"] for c in out if c["status"].startswith("BLOCKED")], "failed": [c["id"] for c in out if c["status"].startswith("FAIL")],
-            "harness": json.loads((ev / "fresh" / "negatives" / "NEGATIVE_RESULTS.json").read_text())["summary"]}
-    (ev / "NEGATIVE_TESTS.json").write_text(json.dumps({"counted_run": "WO004-A2-fresh-1", "summary": summ, "cases": out}, indent=1))
+            "harness": json.loads((ev / a.negatives / "NEGATIVE_RESULTS.json").read_text())["summary"]}
+    (ev / "NEGATIVE_TESTS.json").write_text(json.dumps({"counted_run": a.counted, "summary": summ, "cases": out}, indent=1))
     print(json.dumps({"audit": {k: {"coverage": v["provenance"]["coverage_pct"], "prov": v["provenance"]["pass"], "mission": v["mission_status"], "claims": v["claims"]["pass"]} for k, v in report.items()},
                       "negatives": summ}, indent=1))
 

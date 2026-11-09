@@ -22,7 +22,7 @@ def judge_of(d):
 def main(ev):
     ev = Path(ev)
     b = json.loads((LMF6 / "comparators" / "BASELINE_RESULTS.json").read_text())
-    fresh = ev / "runs" / "A2-fresh-1"
+    fresh_runs = sorted(p for p in (ev / "runs").glob("A2-fresh-*") if p.is_dir())
     out = {
         "source": {"file": str(LMF6 / "comparators" / "BASELINE_RESULTS.json"), "sha256": sha(LMF6 / "comparators" / "BASELINE_RESULTS.json")},
         "A0": {"label": "five isolated 20-unit buyers, direct unilateral factory probes", "verdict": "T: NO_DEAL, 5/5 refused (quantity_meets_moq)",
@@ -33,11 +33,15 @@ def main(ev):
                                      {"run": "A2-attempt-2", "outcome": "FULFILLED", "cause": "owner agents echoed private data in commitment rationale (disclosure leak)", "judge": judge_of(LMF6 / "A2-attempt-2")},
                                      {"run": "A2-attempt-3", "outcome": "FULFILLED", "judge": judge_of(LMF6 / "A2-attempt-3")}],
                         "VCC_at_1": 0, "passes_over_attempts": "1/3"},
-        "A2_fresh_WO004": {"label": "fresh first attempt in WO-004, same frozen scenario, scorer frozen before run (FREEZE_BEFORE_FRESH_RUN.json)",
-                           "outcome": json.loads((fresh / "HUB_RESULT.json").read_text())["outcome"], "judge": judge_of(fresh),
-                           "first_attempt_pass": judge_of(fresh)["verdict"] == "PASS_COMPLETED"},
+        "A2_fresh_WO004_runs": [{"run": f.name, "outcome": json.loads((f / "HUB_RESULT.json").read_text())["outcome"], "judge": judge_of(f),
+                                 "first_attempt_pass": judge_of(f)["verdict"] == "PASS_COMPLETED"} for f in fresh_runs],
+        "A2_fresh_WO004": {"label": "fresh first attempts in WO-004 (each its own preregistered first attempt, same frozen scenario)",
+                           "outcome": json.loads((fresh_runs[-1] / "HUB_RESULT.json").read_text())["outcome"], "judge": judge_of(fresh_runs[-1]),
+                           "first_attempt_pass": judge_of(fresh_runs[-1])["verdict"] == "PASS_COMPLETED",
+                           "VCC_at_1": f"{sum(judge_of(f)['verdict'] == 'PASS_COMPLETED' for f in fresh_runs)}/{len(fresh_runs)}"},
         "A3": {"label": "centralized matcher, identical public intents", **b["arms"]["A3"], "claim": "PARITY on matching; LEGION claims no matching uplift"},
-        "A4": {"label": "realistic incumbent group-purchasing intermediary / distributor", "status": "Z — not sourced or priced; market superiority UNPROVEN"},
+        "A4": {"label": "realistic incumbent group-purchasing intermediary / distributor", "status": "Z — not sourced or priced; market superiority UNPROVEN",
+               "candidates_named_in_MARKET_ORIGIN_001": "Candex, Upwork, Fairmarkit, ORO (named, not priced for this request)"},
     }
     (ev / "COUNTERFACTUAL_A0_A1_A2_A3.json").write_text(json.dumps(out, indent=1))
     (ev / "ECONOMIC_COUNTERFACTUAL_A4.json").write_text(json.dumps({"status": "Z", "name": "A4 incumbent intermediary", "blocking_prerequisite": "sourced, dated quote from a real aggregator/distributor for 5x20 SM-2 units incl. fees", "remedy": "obtain and preregister before claiming economic advantage"}, indent=1))

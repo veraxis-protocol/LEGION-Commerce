@@ -63,14 +63,15 @@ class H(BaseHTTPRequestHandler):
             if u.path == "/api/dossier":
                 return self.send(200, (RUNS[q["run"]][1] / "DEAL_DOSSIER.json").read_bytes())
             if u.path == "/api/download":
-                return self.send(200, (RUNS[q["run"]][1] / "DEAL_DOSSIER.json").read_bytes(), "application/json",
-                                 {"Content-Disposition": f'attachment; filename="DEAL_DOSSIER_{q["run"]}.json"'})
+                name = "EXECUTION_PASSPORT.json" if q.get("kind") == "passport" else "DEAL_DOSSIER.json"
+                return self.send(200, (RUNS[q["run"]][1] / name).read_bytes(), "application/json",
+                                 {"Content-Disposition": f'attachment; filename="{name[:-5]}_{q["run"]}.json"'})
             if u.path == "/api/record":
                 return self.send(200, {"run_id": q["run"], "ref": q["ref"], "record": resolve_ref(RUNS[q["run"]][0], q["ref"])})
             if u.path == "/api/context":
                 ctx = {}
                 for n in ["PAYPAL_AUTHORITY_PREFLIGHT.json", "OLD_HOLDS_RECONCILIATION_READ_ONLY.json", "LICENSE_GATE.json",
-                          "COUNTERFACTUAL_A0_A1_A2_A3.json", "NEGATIVE_TESTS.json"]:
+                          "COUNTERFACTUAL_A0_A1_A2_A3.json", "NEGATIVE_TESTS.json", "ECONOMIC_CASE.json"]:
                     p = EV / n
                     ctx[n] = json.loads(p.read_text()) if p.exists() else {"status": "Z", "note": "evidence file not produced"}
                 return self.send(200, ctx)

@@ -74,7 +74,7 @@ td.mono,.mono{font-family:ui-monospace,Consolas,monospace;font-size:12px}
 
 <script>
 const S = { run: null, d: null, ctx: null, step: 0, replay: { i: -1, playing: false, speed: 1, timer: null } };
-const STEPS = ["1 Unfulfilled demand", "2 Opportunity found", "3 Agreement & terms", "4 Verified execution", "5 Outcome & PayPal"];
+const STEPS = ["1 Lost orders", "2 Opportunity", "3 Deal & approval", "4 Work & verification", "5 Payment & outcome"];
 const $ = (s) => document.querySelector(s);
 const esc = (x) => String(x ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 const usd = (c) => "$" + (c / 100).toLocaleString("en-US", { minimumFractionDigits: c % 100 ? 2 : 0, maximumFractionDigits: 2 });
@@ -101,7 +101,9 @@ async function openRecord(ref, fig) {
   try {
     const r = await (await fetch(`/api/record?run=${encodeURIComponent(S.run)}&ref=${encodeURIComponent(ref)}`)).json();
     const f = fig ? S.d.figures[fig] : null;
-    $("#drBody").textContent = (f ? `figure ${fig} = ${JSON.stringify(f.value)}\npath ${JSON.stringify(f.ref.path)}\nevidence_mode ${f.evidence_mode}\n\n` : "") + JSON.stringify(r.record ?? r, null, 1);
+    const file = ref.split(/[#@]/)[0];
+    const head = `run ${S.run}\nfile ${file}\nfile_sha256 ${S.d.run_files_sha256[file] || "EVIDENCE UNAVAILABLE"}\nrecord ${ref.includes("#") ? "seq " + ref.split("#")[1] : "line " + ref.split("@")[1]}\nrecord_hash ${(r.record && r.record.hash) || "(trace line, no record hash)"}\n`;
+    $("#drBody").textContent = head + (f ? `figure ${fig} = ${JSON.stringify(f.value)}\njson_path ${JSON.stringify(f.ref.path)}\nevidence_mode ${f.evidence_mode}\n` : "") + "\n" + JSON.stringify(r.record ?? r, null, 1);
   } catch (err) { $("#drBody").textContent = "EVIDENCE UNAVAILABLE: " + err; }
 }
 function closeDrawer() { $("#drawer").classList.remove("open"); }
@@ -124,7 +126,7 @@ function renderChrome() {
     `<span class="b bad">${esc(b.paypal)}</span>`, `<span class="b warn sim">${esc(b.economics)}</span>`,
     `<span class="b z">source ${esc((d.source_commit || "uncommitted").slice(0, 7))}</span>`].join("");
   $("#steps").innerHTML = STEPS.map((s, i) => `<button class="${i === S.step ? "on" : ""}" onclick="go(${i})">${s}</button>`).join("") +
-    `<button onclick="showDossier()">Deal Dossier</button><button onclick="showPassport()">Execution Passport</button>`;
+    `<button onclick="showBuyer('A')">Customer offer view</button><button onclick="showDossier()">Deal Dossier</button><button onclick="showPassport()">Execution Passport</button>`;
 }
 function go(i) { S.step = i; stopReplay(); renderChrome(); $("#main").innerHTML = [s1, s2, s3, s4, s5][i](); window.scrollTo(0, 0); if (i === 3) paintReplay(); }
 
@@ -197,6 +199,8 @@ function s3() {
    <p class="note">Version 3 uses design D-B, which passed qualification at ${F("v3.total", usd)}, i.e. ${F("v3.per_buyer", usd)} per customer, within every individual cap.</p></div>
   </div>
   <div class="strip"><b>Economics at version 3</b><span>Buyers pay ${F("econ.proceeds", usd)}</span><span>Costs passed through ${F("v3.total", usd)}</span><span>Pass-through contribution <b>${F("econ.contribution", usd)}</b> before overhead</span><span class="st warn">PROFITABILITY NOT ESTABLISHED</span></div>
+  ${(() => { const ec = S.ctx["ECONOMIC_CASE.json"]; return ec && ec.paypal_fee_assumption ? `<div class="strip"><b>If PayPal standard fees applied</b><span>5 × ${usd(ec.paypal_fee_assumption.per_transaction_cents)} = ${usd(ec.known_cents.paypal_fees_assumed)}</span><span>Net contribution at most <b>-${usd(-ec.net_contribution_upper_bound_cents)}</b> (inference, verification, support unknown)</span><span class="st bad">${esc(ec.verdict)}</span><span class="note">Fee rate is an assumption from PayPal's published US fee page; Sandbox charges no fees.</span></div>` : ""; })()}
+  <div class="strip"><b>Who gets paid?</b><span>Merchant of record: <b>${esc(S.d.contract.merchant_of_record_status)}</b></span><span class="note">${esc(S.d.contract.merchant_role)}. Each customer pays its own line; there is no pooled payer and no hidden platform fee.</span></div>
   <div class="cta"><button class="btn" onclick="go(3)">See verified execution</button><button class="btn sec" onclick="go(1)">Back</button></div>`;
 }
 // ---------- Screen 4 (replay of actual timestamped events)
@@ -257,6 +261,7 @@ function s5() {
    <div class="card"><div class="note">Proposed deal value <span class="b sim">SYNTHETIC WORLD VALUE</span></div><div class="big">${F("econ.proceeds", usd)}</div><div>${F("v3.per_buyer", usd)} per customer</div></div>
    <div class="card"><div class="note">PayPal Sandbox captures confirmed <span class="b bad">REAL SANDBOX</span></div><div class="big">${usd(p.provider_confirmed_cents)}</div><div>${p.readback_confirmed_captures}/${p.slots_total} payers · real incremental TPV: <b>unknown</b></div></div>
   </div>
+  <div class="strip"><b>Two separate states</b><span>FULFILLMENT_WORLD = <span class="st warn">SIMULATED</span></span><span>PAYPAL = <span class="st bad">${p.slots.some((s) => s.order_id_masked) ? "BLOCKED (historic orders CREATED, never APPROVED or CAPTURED)" : "UNAUTHORIZED (no order created)"}</span></span><span class="note">A simulated delivery never advances a payment, and a payment would never prove a delivery.</span></div>
   <h2>Five individual payers</h2>
   <div class="card" style="padding:0"><table><thead><tr><th>Payer</th><th>Amount</th><th>Payee</th><th>Status (exact)</th><th>Evidence</th></tr></thead><tbody>
    ${p.slots.map((s) => `<tr><td class="who">${esc(s.customer)}</td><td>${usd(s.amount_cents)} ${esc(s.currency)}</td><td>${esc(s.payee)}</td>
@@ -290,9 +295,25 @@ function showDossier() {
      <p class="note">Baselines: A0 5/5 refused · A3 parity · historic A2 first-attempt ${cf?.A2_historic?.VCC_at_1 ?? "Z"}/1${cf?.A2_fresh_WO004 ? " · WO-004 fresh first attempt " + esc(cf.A2_fresh_WO004.judge.verdict) : ""}.</p></div>
    </div>`);
 }
+function showBuyer(L) {
+  const d = S.d, r = d.requests.find((x) => x.customer.endsWith(L)), o = r.owner_id, v3 = d.terms_versions[d.terms_versions.length - 1];
+  const k = v3.commitments.find((c) => c.owner_id === o), slot = d.paypal.slots.find((s) => s.owner_id === o);
+  const k2 = d.terms_versions[1].commitments.find((c) => c.owner_id === o);
+  openModal(`<div style="display:flex;gap:10px;align-items:center"><h1 style="margin:0">Offer for ${esc(r.customer)}</h1><span class="spacer" style="flex:1"></span>
+    <select onchange="showBuyer(this.value)" aria-label="customer">${"ABCDE".split("").map((x) => `<option ${x === L ? "selected" : ""}>${x}</option>`).join("")}</select><button class="btn sec" data-close="1">Close</button></div>
+   <p class="note">What this customer sees. <span class="b sim">DEMO REQUEST — SYNTHETIC</span> run ${esc(d.run_id)}</p>
+   <div class="grid g3">
+    <div class="card"><h3>You asked for</h3><div class="kv"><span>Units</span><span>${F("req." + L + ".units")}</span></div><div class="kv"><span>Your maximum</span><span>${F("req." + L + ".cap", usd)}</span></div><div class="kv"><span>Alone</span><span>${F("req." + L + ".reason")}</span></div></div>
+    <div class="card"><h3>Offer (version ${v3.version})</h3><div class="big">${F("v3.per_buyer", usd)}</div><p class="note">Your share of a 100-unit order, qualified design ${esc(v3.design)}. Earlier version 2 at ${F("v2.per_buyer", usd)}: you signed ${esc(k2 ? k2.decision : "Z")}${k2 && k2.failed_checks !== "none" ? " (" + esc(k2.failed_checks) + ")" : ""}.</p></div>
+    <div class="card"><h3>Your decision</h3><span class="st ${k && k.decision === "ACCEPT" ? "ok" : "bad"}">${esc(k ? k.decision : "Z")}</span><p class="note">Signed with your own key ${esc(k ? k.signer_key_id : "")} (${R(k ? k.ref : "", "commitment record")}). Signing is consent to the terms, not a payment approval.</p></div>
+   </div>
+   <div class="card" style="margin-top:14px"><h3>Pay your ${usd(v3.per_buyer_cents)} with PayPal</h3><p>Status: <span class="st ${slot.state.startsWith("NOT_AUTH") ? "z" : "warn"}">${esc(slot.state)}</span></p>
+    <button class="btn" disabled title="PayPal admission is F: no current mission/permit, owner pause, unsigned A03">Pay with PayPal — unavailable (not authorized)</button>
+    <p class="note">A PayPal order would be created only for you, for exactly your amount, after the owner's authority checks pass; you would then approve it on PayPal's own page.</p></div>`);
+}
 function showPassport() {
   const d = S.d;
-  openModal(`<div style="display:flex;gap:10px;align-items:center"><h1 style="margin:0">Execution Passport</h1><span class="spacer" style="flex:1"></span><button class="btn sec" data-close="1">Close</button></div>
+  openModal(`<div style="display:flex;gap:10px;align-items:center"><h1 style="margin:0">Execution Passport</h1><span class="spacer" style="flex:1"></span><a class="btn" href="/api/download?kind=passport&run=${encodeURIComponent(d.run_id)}" download>Download JSON</a><button class="btn sec" data-close="1">Close</button></div>
    <p class="note">Every consequential effect with its authority and receipt. Click a row to open the retained record. run ${esc(d.run_id)} · ${esc(d.evidence_mode)}</p>
    <table><thead><tr><th>Actor</th><th>Obligation</th><th>Action</th><th>Admitted</th><th>Authorization</th><th>Effect / receipt</th><th>Contract</th><th>Epoch</th><th>Scope</th></tr></thead><tbody>
    ${d.passport.map((x) => `<tr data-ref="${esc(x.ref)}" style="cursor:pointer"><td>${esc(x.actor_id)}</td><td class="mono">${esc(x.obligation_id)}</td><td>${esc(x.action)}</td><td><span class="st ${x.admission_verdict === "T" ? "ok" : "bad"}">${esc(x.admission_verdict)}</span></td><td class="mono">${esc(x.permit_id || "Z")}</td><td class="mono">${esc(x.effect_id)}<br>${esc(x.receipt_id)}</td><td class="mono">v${x.contract_version} ${esc(x.contract_hash.slice(0, 10))}</td><td>${x.epoch ?? "Z"}</td><td><span class="st warn">${esc(x.effect_scope)}</span></td></tr>`).join("")}
