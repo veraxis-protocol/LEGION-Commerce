@@ -1,3 +1,8 @@
+> **Terms used in this specification.** *A03* is the independent acceptance review of the payment adapter; *A04* is this
+> payment adapter; *A05* is an independent payment judge. *Mission*, *control* and *permit* are the signed authorization
+> records the adapter requires. These names also appear in the signature domains (for example `commerce.a03.acceptance.v1`),
+> so they are kept verbatim below.
+
 # A03 → A04 interface, v1
 
 All envelopes are `{"payload": <object>, "signature": <base64 Ed25519 signature>}`.
